@@ -1,6 +1,5 @@
 package gui;
 
-import javax.swing.*;
 import java.awt.event.*;
 
 public class Transitioner implements ActionListener{
