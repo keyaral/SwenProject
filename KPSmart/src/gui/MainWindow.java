@@ -3,6 +3,7 @@ import javax.swing.*;
 
 import java.awt.event.*;
 import java.awt.Color;
+
 import javax.swing.GroupLayout.Alignment;
 
 public class MainWindow extends JFrame{
@@ -17,10 +18,12 @@ public class MainWindow extends JFrame{
 	private TransportCost transportCostUpdate;
 	private RouteModification routeModification;
 	private CreateNewUser createNewUser;
+	private EventLogger eventLogger;
 	
 	private JMenuItem menuItemTransportCostUpdate;
 	private JMenuItem transaction;
 	private JMenuItem mntmCreateNewUser;
+	private JMenuItem viewLog;
 	private JMenuItem logOut;
 	private JMenuItem exit;
 	private JMenuItem createNewRoute;
@@ -61,7 +64,7 @@ public class MainWindow extends JFrame{
 		transaction=new JMenuItem("Transaction");
 		
 		createNewRoute=new JMenuItem("Route Modification");
-		JMenuItem viewLog=new JMenuItem("View Log");
+		viewLog=new JMenuItem("View Log");
 		jMailMenu.add(transaction);
 		
 		menuItemMailDelivery = new JMenuItem("Mail Delivery");
@@ -236,6 +239,7 @@ public class MainWindow extends JFrame{
 			}
 			
 		});
+		
 		menuItemTransportCostUpdate.addActionListener(new ActionListener(){
 
 			@Override
@@ -263,6 +267,20 @@ public class MainWindow extends JFrame{
 			}
 			
 		});
+		
+		viewLog.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if (eventLogger==null || eventLogger.isClosable()){ //only one instance to managerWindow
+					eventLogger= new EventLogger();
+					desktopPane.add(eventLogger);
+					eventLogger.show();
+				}
+			}
+			
+		});
+		
 		//This action is fired when the user clicks the Create New User menu item from the menu bar
 		mntmCreateNewUser.addActionListener(new ActionListener(){
 
