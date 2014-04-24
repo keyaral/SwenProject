@@ -10,8 +10,14 @@ public class Logic {
 		
 	System.out.print(details);	
 	}
-	
-	
+	public String getdetails(){
+		
+		return " Candy";
+	}
+public String getStatistics(){
+		
+		return " math0 math1 math2 math3  math4  math5 math6 ";
+	}
 	
 	
 	
