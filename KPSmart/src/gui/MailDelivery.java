@@ -21,15 +21,16 @@ import java.text.SimpleDateFormat;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.swing.JTextField;
+
+import Logic.Logic;
+
 public class MailDelivery extends JInternalFrame {
 	
 	private static final long serialVersionUID = 1L;
 	private JButton btnClose;
-	private JButton btnAdd;
+	private JButton btnClearFields;
 	private JButton btnSave;
-	private JButton btnDelete;
-	private JButton btnUpdate;
-	private JButton btnCancel;
 	private JFormattedTextField txtVolume;
 	private JFormattedTextField txtWeight;
 	private JFormattedTextField txtDate;
@@ -41,6 +42,7 @@ public class MailDelivery extends JInternalFrame {
 	private JComboBox comboBoxDay;
 	@SuppressWarnings("rawtypes")
 	private JComboBox comboBoxPriority;
+	private JTextField txtMailId;
 	 
 	/**
 	 * Launch the application.
@@ -56,7 +58,7 @@ public class MailDelivery extends JInternalFrame {
 	public MailDelivery() {
 		setClosable(true);
 		setTitle("Mail Delivery");
-		setBounds(100, 100, 513, 356);
+		setBounds(100, 100, 558, 356);
 		setLocation(400,150);
 		JPanel DataInputPanel = new JPanel();
 		
@@ -81,17 +83,17 @@ public class MailDelivery extends JInternalFrame {
 					.addContainerGap())
 		);
 		
-		btnAdd = new JButton("Add");
-		btnAdd.addActionListener(new ActionListener(){
+		btnClearFields = new JButton("Clear Fields");
+		btnClearFields.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				txtMailId.setText("");
 				txtWeight.setText("");
 				txtVolume.setText("");
 				txtDate.setText("");
 				comboBoxOrigin.setSelectedIndex(0);
 				comboBoxDestination.setSelectedIndex(0);;
-
 				comboBoxDay.setSelectedIndex(0);;
 				comboBoxPriority.setSelectedIndex(0);
 				
@@ -99,37 +101,18 @@ public class MailDelivery extends JInternalFrame {
 			
 		});
 		
-		btnSave = new JButton("Save");
+		btnSave = new JButton("Send/Save");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null,"Clicking on this button will save new mail delivery details entered to data logger",null, 1);
-			}
-		});
-		
-		btnDelete = new JButton("Delete");
-		btnDelete.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null,"Clicking on this button will delete existing mail delivery details in data logger",null, 1);
-			}
-		});
-		
-		btnUpdate = new JButton("Update");
-		btnUpdate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null,"Clicking on this button will update existing mail delivery details in data logger",null, 1);
-			}
-		});
-		
-		btnCancel = new JButton("Cancel");
-		btnCancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null,"Clicking on this button will cancel the current operation",null, 1);
+				JOptionPane.showMessageDialog(null,"Save Details : " + MainWindow.logic.getdetails(),null, 1);
 			}
 		});
 		
 		btnClose = new JButton("Close");
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Logic logic=new Logic();
+				logic.processform("\nClosing Mail Delivery Form");
 				dispose();
 			}
 		});
@@ -138,30 +121,21 @@ public class MailDelivery extends JInternalFrame {
 			gl_btnPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_btnPanel.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(btnAdd, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnClearFields)
+					.addGap(5)
 					.addComponent(btnSave)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(btnDelete)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnUpdate)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnCancel)
-					.addGap(27)
+					.addGap(224)
 					.addComponent(btnClose)
-					.addContainerGap(35, Short.MAX_VALUE))
+					.addContainerGap(80, Short.MAX_VALUE))
 		);
 		gl_btnPanel.setVerticalGroup(
 			gl_btnPanel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_btnPanel.createSequentialGroup()
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addGroup(gl_btnPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnAdd)
-						.addComponent(btnSave)
-						.addComponent(btnDelete)
-						.addComponent(btnUpdate)
-						.addComponent(btnCancel)
-						.addComponent(btnClose))
+						.addComponent(btnClearFields)
+						.addComponent(btnClose)
+						.addComponent(btnSave))
 					.addContainerGap())
 		);
 		btnPanel.setLayout(gl_btnPanel);
@@ -219,7 +193,7 @@ public class MailDelivery extends JInternalFrame {
 		txtDate.setToolTipText("Enter Date");
 		//Define Mail Priority
 		
-		String [] mailPriority={"","Domestic Air","Internal Air","Domestic Standard","Internation Standard Priority"};
+		String [] mailPriority={"","Domestic Air","International Air","Domestic Standard","Internation Standard Priority"};
 		comboBoxPriority = new JComboBox(mailPriority);
 		
 		JLabel lblDeliveryId = new JLabel("Delivery ID");
@@ -227,9 +201,6 @@ public class MailDelivery extends JInternalFrame {
 		JLabel lblDeliveryID = new JLabel("");
 		lblDeliveryID.setBackground(Color.PINK);
 		lblDeliveryID.setForeground(Color.BLACK);
-		
-		JLabel lblNewLabel = new JLabel("Delivery ID");
-		lblNewLabel.setBackground(Color.GREEN);
 		//Format Weight Text Box to allow numbers only
 		txtWeight = new JFormattedTextField();
 		txtWeight.addKeyListener(new KeyAdapter() { 
@@ -255,6 +226,9 @@ public class MailDelivery extends JInternalFrame {
 	              }  
 	         }  
 	   });  
+		
+		txtMailId = new JTextField();
+		txtMailId.setColumns(10);
 		GroupLayout gl_DataInputPanel = new GroupLayout(DataInputPanel);
 		gl_DataInputPanel.setHorizontalGroup(
 			gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
@@ -286,10 +260,10 @@ public class MailDelivery extends JInternalFrame {
 								.addComponent(txtDate, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE))
 							.addComponent(comboBoxDestination, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 						.addComponent(lblDeliveryID)
-						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.TRAILING, false)
 							.addComponent(txtVolume, Alignment.LEADING)
-							.addComponent(txtWeight, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)))
+							.addComponent(txtWeight, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))
+						.addComponent(txtMailId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(132, Short.MAX_VALUE))
 		);
 		gl_DataInputPanel.setVerticalGroup(
@@ -300,7 +274,7 @@ public class MailDelivery extends JInternalFrame {
 						.addGroup(gl_DataInputPanel.createSequentialGroup()
 							.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblDeliveryId)
-								.addComponent(lblNewLabel))
+								.addComponent(txtMailId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 							.addGap(15))
 						.addGroup(gl_DataInputPanel.createSequentialGroup()
 							.addComponent(lblDeliveryID)

@@ -12,6 +12,8 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
 import javax.swing.JList;
 
+import Logic.Logic;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
@@ -23,8 +25,9 @@ public class RouteModification extends JInternalFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField txtRouteNumber;
-	private JTextField txtOriginationPort;
+	private JTextField txtOriginPort;
 	private JTextField txtDestinationPort;
+	private JFormattedTextField txtPrice;
 
 	/**
 	 * Launch the application.
@@ -68,44 +71,51 @@ public class RouteModification extends JInternalFrame {
 					.addContainerGap())
 		);
 		
-		JButton btnAdd = new JButton("Add");
-		btnAdd .addActionListener(new ActionListener() {
+		JButton btnClearFields = new JButton("Clear Fields");
+		btnClearFields .addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null,"Clicking on this button will clear fields for data entry",null, 1);
+				JOptionPane.showMessageDialog(null,"Clear Fields" + MainWindow.logic.getdetails(),null, 1);
+				txtRouteNumber.setText("");
+				txtOriginPort.setText("");
+				txtDestinationPort.setText("");
+				txtPrice.setText("");
+				
 			}
 		});
-		JButton btnUpdate = new JButton("Update");
-		btnUpdate.addActionListener(new ActionListener() {
+		JButton btnSave = new JButton("Send/Save");
+		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null,"Clicking on this button will update existing route",null, 1);
+				
+				if(txtRouteNumber.getText().equals("") || txtOriginPort.getText().equals("") || txtDestinationPort.getText().equals("") || txtPrice.getText().equals("")){
+					JOptionPane.showMessageDialog(null,"Please enter all details",null, 1);
+				}else{
+					String values=MainWindow.logic.getDetailsFromMailDeliver(1, txtRouteNumber.getText(), txtOriginPort.getText(), txtDestinationPort.getText(),Double.parseDouble(txtPrice.getText()));
+					JOptionPane.showMessageDialog(null, MainWindow.logic.getdetails() + values,null, 1);
+				}
+				
 			}
 		});
 		
 		JButton btnDisable = new JButton("Disable");
 		btnDisable.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null,"Clicking on this button will disable existing route",null, 1);
+				JOptionPane.showMessageDialog(null,"Disable Route! "+MainWindow.logic.getdetails(),null, 1);
 			}
 		});
 		
 		JButton btnEnable = new JButton("Enable");
 		btnEnable.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null,"Clicking on this button will enable routes that are disabled in the system",null, 1);
+				JOptionPane.showMessageDialog(null,"Enables Route! " + MainWindow.logic.getdetails(),null, 1);
 			}
 		});
 		
 		JButton btnClose = new JButton("Close");
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Logic logic=new Logic();
+				logic.processform("Closing Route Modification Form");
 				dispose();
-			}
-		});
-		
-		JButton btnDelete = new JButton("Delete");
-		btnDelete.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null,"Clicking on this button will Delete routes in the system",null, 1);
 			}
 		});
 		GroupLayout gl_btnPanel = new GroupLayout(btnPanel);
@@ -113,29 +123,26 @@ public class RouteModification extends JInternalFrame {
 			gl_btnPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_btnPanel.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(btnAdd)
+					.addComponent(btnClearFields)
 					.addGap(10)
-					.addComponent(btnUpdate)
+					.addComponent(btnSave)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnDisable)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(btnEnable)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnDelete)
 					.addPreferredGap(ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
 					.addComponent(btnClose)
 					.addGap(19))
 		);
 		gl_btnPanel.setVerticalGroup(
-			gl_btnPanel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_btnPanel.createSequentialGroup()
+			gl_btnPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_btnPanel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_btnPanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnDisable)
-						.addComponent(btnUpdate)
-						.addComponent(btnAdd)
+						.addComponent(btnSave)
+						.addComponent(btnClearFields)
 						.addComponent(btnEnable)
-						.addComponent(btnDelete)
 						.addComponent(btnClose))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
@@ -150,8 +157,8 @@ public class RouteModification extends JInternalFrame {
 		
 		JLabel lblDestinationPort = new JLabel("Destination Port");
 		
-		txtOriginationPort = new JTextField();
-		txtOriginationPort.setColumns(10);
+		txtOriginPort = new JTextField();
+		txtOriginPort.setColumns(10);
 		
 		txtDestinationPort = new JTextField();
 		txtDestinationPort.setText("");
@@ -159,7 +166,7 @@ public class RouteModification extends JInternalFrame {
 		
 		JLabel lblPrice = new JLabel("Price");
 		
-		JFormattedTextField txtPrice = new JFormattedTextField();
+		txtPrice = new JFormattedTextField();
 		//Format text box to accept digits only
 		txtPrice.addKeyListener(new KeyAdapter() { 
 			         public void keyTyped(KeyEvent e) {  
@@ -185,7 +192,7 @@ public class RouteModification extends JInternalFrame {
 								.addComponent(lblRouteNumber, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(txtOriginationPort, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtOriginPort, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addComponent(txtRouteNumber, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(gl_DataInputPanel.createSequentialGroup()
 							.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
@@ -209,7 +216,7 @@ public class RouteModification extends JInternalFrame {
 					.addGap(18)
 					.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblOriginatingPort)
-						.addComponent(txtOriginationPort))
+						.addComponent(txtOriginPort))
 					.addGap(18)
 					.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblDestinationPort)

@@ -66,27 +66,32 @@ public class ManagerWindow extends JInternalFrame {
 		JButton btnCreateNewShipment = new JButton("Create New Shipment");
 		btnCreateNewShipment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null,"Clicking on this button will load CreateNewShipment entry form",null, 1);
+				JOptionPane.showMessageDialog(null,"New Shipment Window !" + MainWindow.logic.getdetails(),null, 1);
 			}
 		});
 		
 		JButton btnCheckExistingShipment = new JButton("Check Existing Shipment");
 		btnCheckExistingShipment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null,"Clicking on this button will load CheckExistingShipment  form",null, 1);
+				JOptionPane.showMessageDialog(null,"Existing Shipment Window !" + MainWindow.logic.getdetails(),null, 1);
 			}
 		});
 		
 		JButton btnRouteModification = new JButton("Route Modification");
 		btnRouteModification.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null,"Clicking on this button will load Route Modification  form",null, 1);
+				JOptionPane.showMessageDialog(null,"Route Modification Window !" + MainWindow.logic.getdetails(),null, 1);
 			}
 		});
 
 	
 		
 		JButton btnViewEventLog = new JButton("View Event Log");
+		btnViewEventLog.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JOptionPane.showMessageDialog(null,"Log View Window !" + MainWindow.logic.getdetails(),null, 1);
+			}
+		});
 		GroupLayout gl_btnPanel = new GroupLayout(btnPanel);
 		gl_btnPanel.setHorizontalGroup(
 			gl_btnPanel.createParallelGroup(Alignment.LEADING)
