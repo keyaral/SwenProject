@@ -1,3 +1,4 @@
+package Logic;
 
 public class Logic {
 
@@ -16,7 +17,7 @@ public class Logic {
 	}
 public String getStatistics(){
 		
-		return " math0 math1 math2 math3  math4  math5 math6 ";
+		return "math1 math2 math3 math4 math5 math6";
 	}
 	
 	

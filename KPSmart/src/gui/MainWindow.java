@@ -6,6 +6,8 @@ import java.awt.Color;
 
 import javax.swing.GroupLayout.Alignment;
 
+import Logic.Logic;
+
 public class MainWindow extends JFrame{
 
 	/**
@@ -28,6 +30,9 @@ public class MainWindow extends JFrame{
 	private JMenuItem exit;
 	private JMenuItem createNewRoute;
 	public JDesktopPane desktopPane;
+	
+	public static final Logic logic = new Logic();
+	
 	public MainWindow() {
 		super("KPSmart");
 		this.setExtendedState(MAXIMIZED_BOTH);
@@ -275,6 +280,7 @@ public class MainWindow extends JFrame{
 				if (eventLogger==null || eventLogger.isClosable()){ //only one instance to managerWindow
 					eventLogger= new EventLogger();
 					desktopPane.add(eventLogger);
+					eventLogger.update();
 					eventLogger.show();
 				}
 			}
