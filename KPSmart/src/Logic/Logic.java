@@ -15,7 +15,9 @@ public class Logic {
 		
 		return " Candy";
 	}
-public String getStatistics(){
+	
+	// TODO Marian >> The text returned will be splited by a single space; that is " "
+	public String getStatistics(){
 		
 		return "math1 math2 math3 math4 math5 math6";
 	}
