@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Log">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element maxOccurs="unbounded" name="cost">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="company" type="xs:string" />
+                <xs:element name="to" type="xs:string" />
+                <xs:element name="from" type="xs:string" />
+                <xs:element name="type" type="xs:string" />
+                <xs:element name="weightcost" type="xs:unsignedByte" />
+                <xs:element name="volumecost" type="xs:unsignedByte" />
+                <xs:element name="maxWeight" type="xs:unsignedShort" />
+                <xs:element name="maxVolume" type="xs:unsignedShort" />
+                <xs:element name="duration" type="xs:unsignedByte" />
+                <xs:element name="frequency" type="xs:unsignedByte" />
+                <xs:element name="day" type="xs:string" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" name="price">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="to" type="xs:string" />
+                <xs:element name="from" type="xs:string" />
+                <xs:element name="priority" type="xs:string" />
+                <xs:element name="weightcost" type="xs:unsignedByte" />
+                <xs:element name="volumecost" type="xs:unsignedByte" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element maxOccurs="unbounded" name="mail">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="day" type="xs:string" />
+                <xs:element name="to" type="xs:string" />
+                <xs:element name="from" type="xs:string" />
+                <xs:element name="weight" type="xs:unsignedShort" />
+                <xs:element name="volume" type="xs:unsignedByte" />
+                <xs:element name="priority" type="xs:string" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="timelimit">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="to" type="xs:string" />
+                <xs:element name="from" type="xs:string" />
+                <xs:element name="priority" type="xs:string" />
+                <xs:element name="maxDeliveryTime" type="xs:unsignedByte" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="discontinue">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="company" type="xs:string" />
+                <xs:element name="to" type="xs:string" />
+                <xs:element name="from" type="xs:string" />
+                <xs:element name="type" type="xs:string" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
