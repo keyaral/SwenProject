@@ -1,15 +1,17 @@
 package Logic;
 
 public class Logic {
+	
+	final EventProcesser eventProcessor;
 
 	public Logic() {
-		
+		eventProcessor = new EventProcesser();
 	}
 	
 	
-	public void processform(String details){
-		
-	System.out.print(details);	
+	public String processform(String details){
+		System.out.println("call evnent");			
+		return eventProcessor.proccess(details);
 	}
 	public String getdetails(){
 		
@@ -18,7 +20,6 @@ public class Logic {
 	
 	// TODO Marian >> The text returned will be splited by a single space; that is " "
 	public String getStatistics(){
-		
 		return "math1 math2 math3 math4 math5 math6";
 	}
 	/**
@@ -40,8 +41,12 @@ public class Logic {
 				"\nTo :" + to +"\nFrom: " +from +"\nPriority :" + priorityType + "\nWeight Cost: "+ weightCost +
 				"\nVolume Cost : " + "\nMax Weight :" + maxWeight + "\nMax Volume :" + maxVolume +
 				"\n Duration : " + duration + "\nFrequency : " + frequency + "\nDate: " + date;
-		return values;
-		
+		return values;	
+	}
+	public static void main(String[] args){
+	  	Logic l = new Logic();
+	  	l.processform("1a	4	Auckland	Wellington	10	15	200	200	1	Thursday	2	3	TylerCorp");
+	  	System.out.println(l.eventProcessor.events.size());
 	}
 
 }
