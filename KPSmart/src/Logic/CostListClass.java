@@ -43,6 +43,11 @@ public class CostListClass {
 		if(found == true){ return true;}
 		else return false; 
 	}
+
+	public Cost findValidCost(Mail m) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }

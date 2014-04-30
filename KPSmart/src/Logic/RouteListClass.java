@@ -50,6 +50,11 @@ public class RouteListClass {
 
 		return null;
 	}
+
+	public Route findValidRoute(Mail m) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }

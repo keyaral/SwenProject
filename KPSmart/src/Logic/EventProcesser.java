@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class EventProcesser {
 	
+	MailDelivery mailbag;
 	RouteListClass routes;
 	CostListClass costs;
 	ArrayList<KPEvent> events = new ArrayList<KPEvent>();
@@ -11,6 +12,7 @@ public class EventProcesser {
 	public EventProcesser(){
 		routes = new RouteListClass();
 		costs = new CostListClass();
+		mailbag = new MailDelivery();
 	}
 	
 	public String proccess(String details) {
@@ -64,8 +66,13 @@ public class EventProcesser {
 	 
 	 if (type.equals("3a")) {// call Mail
 		Mail m = new Mail(details);
+		Route r = routes.findValidRoute(m);
+		Cost c = costs.findValidCost(m);
+		Boolean sent = 	mailbag.deliverMail(m,r,c);
 		//TODO ShipMail
-		 KPEvent e = new KPEvent("Send", m,true);
+		if ( sent ) {type = type + " Mail has been sent";}
+		else  {type = type + " Could not be sent, no valid Route"; } 
+		 KPEvent e = new KPEvent("Send", m,sent);
 		//e.addStats;
 		 events.add(e);
 	 } 
