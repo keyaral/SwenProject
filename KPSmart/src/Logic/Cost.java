@@ -16,7 +16,7 @@ public class Cost {
 		this.weight = Integer.parseInt(values[1]);
 		this.volume = Integer.parseInt(values[2]);
 		this.destination = (values[3]);
-		this.destination = (values[4]);
+		this.origin = (values[4]);
 		this.priority = Integer.parseInt(values[5]);
 	}
 	

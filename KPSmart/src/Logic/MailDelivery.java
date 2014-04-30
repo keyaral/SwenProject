@@ -26,6 +26,13 @@ public class MailDelivery {
 	public boolean deliverMail(Mail m, Route r, Cost c){
 		if ( r ==null || c == null ) return false;
 	
+		
+		// add c to income
+		// add r to revenue
+		// add weight and volume
+		
+		
+		
 		else
 			// update mailbad figures
 			return true;
