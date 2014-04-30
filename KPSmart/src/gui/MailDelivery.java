@@ -35,13 +35,13 @@ public class MailDelivery extends JInternalFrame {
 	private JFormattedTextField txtWeight;
 	private JFormattedTextField txtDate;
 	@SuppressWarnings("rawtypes")
-	private JComboBox comboBoxOrigin;
+	private JComboBox cmbOrigin;
 	@SuppressWarnings("rawtypes")
-	private JComboBox comboBoxDestination;
+	private JComboBox cmbDestination;
 	@SuppressWarnings("rawtypes")
-	private JComboBox comboBoxDay;
+	private JComboBox cmbDay;
 	@SuppressWarnings("rawtypes")
-	private JComboBox comboBoxPriority;
+	private JComboBox cmbPriority;
 	private JTextField txtMailId;
 	 
 	/**
@@ -92,19 +92,40 @@ public class MailDelivery extends JInternalFrame {
 				txtWeight.setText("");
 				txtVolume.setText("");
 				txtDate.setText("");
-				comboBoxOrigin.setSelectedIndex(0);
-				comboBoxDestination.setSelectedIndex(0);;
-				comboBoxDay.setSelectedIndex(0);;
-				comboBoxPriority.setSelectedIndex(0);
+				cmbOrigin.setSelectedIndex(0);
+				cmbDestination.setSelectedIndex(0);;
+				cmbDay.setSelectedIndex(0);;
+				cmbPriority.setSelectedIndex(0);
+				MainWindow.logic.processform("Mail Delivery Form--> All fields cleared...");
 				
 			}
 			
 		});
 		
-		btnSave = new JButton("Send/Save");
+		btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null,"Save Details : " + MainWindow.logic.getdetails(),null, 1);
+				String destination=(String)cmbDestination.getSelectedItem();
+				String origin=(String)cmbOrigin.getSelectedItem();
+				String day=(String)cmbDay.getSelectedItem();
+				String priority=(String)cmbPriority.getSelectedItem();
+				if (txtMailId.getText().equals("")|| destination.equals("") 
+						|| origin.equals("")
+						|| day.equals("")
+						|| txtWeight.getText().equals("")
+						|| txtVolume.getText().equals("")
+						|| txtDate.getText().equals("")){
+					
+					JOptionPane.showMessageDialog(null,"Please enter all details",null, 1);
+					MainWindow.logic.processform("Mail Delivery Form-->Some data input fields are empty...");
+				}else{
+					String details=txtMailId.getText() + "\t" + destination + "\t" +
+									origin+"\t" + txtWeight.getText() + "\t" +
+									txtVolume.getText()+"\t" + day + "\t" + txtDate.getText() +"\t" + priority  ;
+					MainWindow.logic.processform(details);
+					JOptionPane.showMessageDialog(null,"Save Details : " + MainWindow.logic.getdetails(),null, 1);
+				}
+				
 			}
 		});
 		
@@ -154,8 +175,8 @@ public class MailDelivery extends JInternalFrame {
 		
 		//Define Distribution Centers
 		String[] distributionCenters={"","Auckland","Hamilton","Rotorua","Palmerston North","Wellington","Christ Church","Dunedin"};
-		comboBoxOrigin = new JComboBox(distributionCenters);
-		comboBoxOrigin.addItemListener(new ItemListener(){
+		cmbOrigin = new JComboBox(distributionCenters);
+		cmbOrigin.addItemListener(new ItemListener(){
 
 			@Override
 			public void itemStateChanged(ItemEvent ie) {
@@ -169,7 +190,7 @@ public class MailDelivery extends JInternalFrame {
 		
 		
 		
-		comboBoxOrigin.addActionListener(new ActionListener() {
+		cmbOrigin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 			}
@@ -179,12 +200,12 @@ public class MailDelivery extends JInternalFrame {
 		
 		String[] destinations={"","Rome","Sydney","London","New York","Singapore","Japan","Manila","Fiji","Hawaii","Moscow"};
 
-		comboBoxDestination = new JComboBox(destinations);
+		cmbDestination = new JComboBox(destinations);
 		
-		//Define Days of the week and loads them inot the combo box
+		//Define Days of the week and loads them into the combo box
 		String[] days={"","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
 
-		comboBoxDay = new JComboBox(days);
+		cmbDay = new JComboBox(days);
 		
 		
 		//Format date field to accept 'dd-mm-yyyy' format
@@ -194,7 +215,7 @@ public class MailDelivery extends JInternalFrame {
 		//Define Mail Priority
 		
 		String [] mailPriority={"","Domestic Air","International Air","Domestic Standard","Internation Standard Priority"};
-		comboBoxPriority = new JComboBox(mailPriority);
+		cmbPriority = new JComboBox(mailPriority);
 		
 		JLabel lblDeliveryId = new JLabel("Delivery ID");
 		
@@ -252,13 +273,13 @@ public class MailDelivery extends JInternalFrame {
 							.addPreferredGap(ComponentPlacement.RELATED)))
 					.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING, false)
-							.addComponent(comboBoxOrigin, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(comboBoxPriority, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(cmbOrigin, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(cmbPriority, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addGroup(gl_DataInputPanel.createSequentialGroup()
-								.addComponent(comboBoxDay, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+								.addComponent(cmbDay, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
 								.addGap(18)
 								.addComponent(txtDate, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE))
-							.addComponent(comboBoxDestination, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addComponent(cmbDestination, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 						.addComponent(lblDeliveryID)
 						.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.TRAILING, false)
 							.addComponent(txtVolume, Alignment.LEADING)
@@ -281,11 +302,11 @@ public class MailDelivery extends JInternalFrame {
 							.addPreferredGap(ComponentPlacement.UNRELATED)))
 					.addGap(11)
 					.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.TRAILING)
-						.addComponent(comboBoxOrigin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(cmbOrigin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblOrigin))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(comboBoxDestination, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(cmbDestination, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblDestination))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
@@ -297,12 +318,12 @@ public class MailDelivery extends JInternalFrame {
 						.addComponent(lblVolume))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(comboBoxDay, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(cmbDay, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(txtDate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblTimeOfEntry))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(comboBoxPriority, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(cmbPriority, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblPriority))
 					.addContainerGap(40, Short.MAX_VALUE))
 		);

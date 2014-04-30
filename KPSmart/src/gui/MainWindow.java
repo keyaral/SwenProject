@@ -18,17 +18,17 @@ public class MainWindow extends JFrame{
 	private ManagerWindow managerWindow;
 	private MailDelivery mailDelivery;
 	private TransportCost transportCostUpdate;
-	private RouteModification routeModification;
+	private CostModification costModification;
 	private CreateNewUser createNewUser;
 	private EventLogger eventLogger;
 	
-	private JMenuItem menuItemTransportCostUpdate;
+	private JMenuItem menuItemTransportRoute;
 	private JMenuItem transaction;
 	private JMenuItem mntmCreateNewUser;
 	private JMenuItem viewLog;
 	private JMenuItem logOut;
 	private JMenuItem exit;
-	private JMenuItem createNewRoute;
+	private JMenuItem mnuItemCostModification;
 	public JDesktopPane desktopPane;
 	
 	public static final Logic logic = new Logic();
@@ -68,7 +68,7 @@ public class MainWindow extends JFrame{
 		JMenu jMailMenu=new JMenu("Mail Processing");
 		transaction=new JMenuItem("Transaction");
 		
-		createNewRoute=new JMenuItem("Route Modification");
+		mnuItemCostModification=new JMenuItem("Cost Modification");
 		viewLog=new JMenuItem("View Log");
 		jMailMenu.add(transaction);
 		
@@ -80,9 +80,9 @@ public class MainWindow extends JFrame{
 		});
 		jMailMenu.add(menuItemMailDelivery);
 		
-		menuItemTransportCostUpdate = new JMenuItem("Transport Cost Update");
-		jMailMenu.add(menuItemTransportCostUpdate);
-		jMailMenu.add(createNewRoute);
+		menuItemTransportRoute = new JMenuItem("Transport Route");
+		jMailMenu.add(menuItemTransportRoute);
+		jMailMenu.add(mnuItemCostModification);
 		jMailMenu.add(viewLog);
 		menuBar.add(jMailMenu);
 		
@@ -91,17 +91,6 @@ public class MainWindow extends JFrame{
 		
 		mntmCreateNewUser = new JMenuItem("Create New User");
 		mnTools.add(mntmCreateNewUser);
-		
-		//Create menu for Windows
-		JMenu jWindowMenu=new JMenu("Window");
-		JMenuItem cascade=new JMenuItem("Cascade");
-
-		JMenuItem tile=new JMenuItem("Tile");
-		JMenuItem closeAll=new JMenuItem("Close All Child Windows");
-		jWindowMenu.add(cascade);
-		jWindowMenu.add(tile);
-		jWindowMenu.add(closeAll);
-		menuBar.add(jWindowMenu);
 		
 		//Create menu for Help
 		JMenu jHelpMenu=new JMenu("Help");
@@ -245,7 +234,7 @@ public class MainWindow extends JFrame{
 			
 		});
 		
-		menuItemTransportCostUpdate.addActionListener(new ActionListener(){
+		menuItemTransportRoute.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -259,14 +248,14 @@ public class MainWindow extends JFrame{
 			
 		});
 		
-		createNewRoute.addActionListener(new ActionListener(){
+		mnuItemCostModification.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			if (routeModification==null || routeModification.isClosable()){ //only one instance to managerWindow
-				routeModification= new RouteModification();
-				desktopPane.add(routeModification);
-				routeModification.show();
+			if (costModification==null || costModification.isClosable()){ //only one instance to managerWindow
+				costModification= new CostModification();
+				desktopPane.add(costModification);
+				costModification.show();
 			}
 				
 			}
