@@ -117,12 +117,21 @@ public class CreateNewUser extends JInternalFrame {
 		JButton btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (txtUserName.getText()==""){
-					JOptionPane.showMessageDialog(null,"The User Name field cannot be empty",null, 1);
+				String pwd= txtConfirmPassword.getText();
+				String confirmPwd= txtPassword.getText();
+				
+				if (txtUserName.getText().equals("")){
+					JOptionPane.showMessageDialog(null,"The User Name and Password fields cannot be empty",null, 1);
 				}
-				if (txtConfirmPassword.getText()!=txtUserName.getText()){
+				if (pwd.equals("") && confirmPwd.equals("")){
+					JOptionPane.showMessageDialog(null,"The password fields cannot be empty",null, 1);
+				}
+				if (!pwd.equals(confirmPwd)){
 					JOptionPane.showMessageDialog(null,"The passwords you entered do not match. Please try again",null, 1);
+				}else{
+					JOptionPane.showMessageDialog(null,"Passwords matched!",null, 1);
 				}
+				
 			}
 		});
 		
