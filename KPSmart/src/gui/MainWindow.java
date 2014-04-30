@@ -39,17 +39,7 @@ public class MainWindow extends JFrame{
 		setTitle("KPSmart Postal Services");
 		initComponents();
 		CreateEvent();
-		
-	
 	}
-
-	@SuppressWarnings("unused")
-	private static void setMenu(JMenuBar menuBar, JMenu menu, JMenuItem[] menuItems) {
-		for (JMenuItem menuItem: menuItems)
-			menu.add(menuItem);
-		menuBar.add(menu);
-	}
-	
 
 	private void initComponents(){
 		setLocation(350,250);
