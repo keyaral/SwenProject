@@ -14,12 +14,13 @@ public class EventProcesser {
 		costs = new CostListClass();
 	}
 	
-	public String proccess(String details) throws Exception {
+	public String proccess(String details)  {
 
 	String type = details.substring(0, 2);
 	Boolean safe = false;
 	if(type.equals("1a") ||type.equals("1b") ||type.equals("1c") ||type.equals("2a") ||type.equals("2b") ||type.equals("2c") ||type.equals("3a")) safe = true;
-	if (safe == false) throw new Exception("Error in Input: Can't detect type.");
+//	if (safe == false) throw new Exception("Error in Input: Can't detect type.");
+	if (safe == false) return "Error not a valid event";
 	details = details.substring(3);
 	 if (type.equals("1a")) {// call routes
 		if(!checkDetails(details,type));

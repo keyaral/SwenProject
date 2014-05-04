@@ -11,6 +11,8 @@ public class Mail {
 	public double volume;
 	public int priority;
 	public Date date;
+	public double cost;
+	
 	
 	public Mail(int i, String de, String o, double w, double v, int p, Date da){
 		this.ID = i;
@@ -32,5 +34,10 @@ public class Mail {
 		this.priority = Integer.parseInt(values[5]);
 		this.date = new Date();
 		this.date.parse(values[6]);
+	}
+	
+	public void addCost(double c){
+		
+		this.cost= c;
 	}
 }

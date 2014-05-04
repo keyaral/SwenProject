@@ -9,9 +9,10 @@ public class Logic {
 	}
 	
 	
-	public String processform(String details){
+	public String processform(String details) {
 		System.out.println("call evnent");			
-		return eventProcessor.proccess(details);
+		return " processed";
+				//eventProcessor.proccess(details);
 	}
 	public String getdetails(){
 		
@@ -45,8 +46,12 @@ public class Logic {
 	}
 	public static void main(String[] args){
 	  	Logic l = new Logic();
-	  	l.processform("1a	4	Auckland	Wellington	10	15	200	200	1	Thursday	2	3	TylerCorp");
-	  	System.out.println(l.eventProcessor.events.size());
+	  	// TODO Load File for previous Events.
+	  	
+	  	
+	  	
+	  //	l.processform("1a	4	Auckland	Wellington	10	15	200	200	1	Thursday	2	3	TylerCorp");
+	//  	System.out.println(l.eventProcessor.events.size());
 	}
 
 }
