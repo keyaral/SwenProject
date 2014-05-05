@@ -11,8 +11,12 @@ public class Logic {
 	
 	public String processform(String details) {
 		System.out.println("call evnent");			
-		return " processed";
-				//eventProcessor.proccess(details);
+				try {
+					return eventProcessor.proccess(details);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				return null;
 	}
 	public String getdetails(){
 		

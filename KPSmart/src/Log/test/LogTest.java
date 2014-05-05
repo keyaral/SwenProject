@@ -1,8 +1,9 @@
-package log.test;
+package Log.test;
 
 import java.util.ArrayList;
 
 import org.junit.Test;
+
 import log.reader.*;
 import log.writer.XmlWriter;
 import Log.Log;

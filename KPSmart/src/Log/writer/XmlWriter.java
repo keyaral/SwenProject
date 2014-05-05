@@ -1,4 +1,4 @@
-package log.writer;
+package Log.writer;
 
 import java.io.File;
 import java.util.ArrayList;

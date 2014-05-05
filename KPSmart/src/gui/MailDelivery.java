@@ -25,6 +25,7 @@ import javax.swing.JTextField;
 
 import Logic.Logic;
 
+
 public class MailDelivery extends JInternalFrame {
 	
 	private static final long serialVersionUID = 1L;
