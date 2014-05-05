@@ -1,4 +1,4 @@
-package log.writer;
+package Log.writer;
 
 import Log.*;
 import Log.Log.*;

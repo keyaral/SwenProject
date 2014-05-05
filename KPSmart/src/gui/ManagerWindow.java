@@ -11,6 +11,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.LayoutStyle.ComponentPlacement;
+import log.reader.*;
+import Log.Log;
+import log.writer.*;
 
 public class ManagerWindow extends JInternalFrame {
 
@@ -67,6 +70,13 @@ public class ManagerWindow extends JInternalFrame {
 		btnCreateNewShipment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null,"New Shipment Window !" + MainWindow.logic.getdetails(),null, 1);
+				Log.Cost cost = new Log.Cost();
+				XmlReader reader = new XmlReader("file.xml");
+				reader.FindAll();
+				reader.FindCost();
+				
+				XmlWriter writer = new XmlWriter("file.xml");
+				writer.InsertCost(cost);
 			}
 		});
 		

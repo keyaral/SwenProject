@@ -1,4 +1,4 @@
-package log.test;
+package Log.test;
 
 import java.util.ArrayList;
 

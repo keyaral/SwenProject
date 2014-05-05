@@ -1,4 +1,6 @@
 package Logic;
+import Log.Log;
+import log.reader.*;
 
 public class Logic {
 	
@@ -33,6 +35,9 @@ public class Logic {
 	 * @return
 	 */
 	public String getDetailsFromMailDeliver(long mailId,String routeNo,String originatingPort,String destinationPort,Double cost){
+		XmlReader reader = new XmlReader("Log.xml");
+		
+		
 		String values= "\nMail ID: " + mailId +"\n"+"Route No: " + routeNo+"\n"+ "Originating Port: " +originatingPort+"\nDestination: "+destinationPort+"\nRoute Cost: " + cost;
 		return values;
 	}
