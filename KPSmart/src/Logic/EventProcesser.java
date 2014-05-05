@@ -7,13 +7,13 @@ public class EventProcesser {
 
 	RouteListClass routes;
 	CostListClass costs;
-	ArrayList<KPEvent> events = new ArrayList<KPEvent>();
+	private ArrayList<KPEvent> events = new ArrayList<KPEvent>();
 
 	public EventProcesser(){
 		routes = new RouteListClass();
 		costs = new CostListClass();
 	}
-	
+
 	public String proccess(String details)  {
 
 	String type = details.substring(0, 2);
@@ -154,6 +154,13 @@ public class EventProcesser {
 			}catch(Exception e){ throw new Exception("Error in creating a new mail");}
 		}
 		return true;
+	}
+
+	/**
+	 * @return the events
+	 */
+	public ArrayList<KPEvent> getEvents() {
+		return events;
 	}
 
 }
