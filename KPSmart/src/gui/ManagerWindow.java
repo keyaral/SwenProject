@@ -11,9 +11,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.LayoutStyle.ComponentPlacement;
-import log.reader.*;
+import Log.reader.*;
 import Log.Log;
-import log.writer.*;
+import Log.writer.*;
 
 public class ManagerWindow extends JInternalFrame {
 

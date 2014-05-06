@@ -18,6 +18,9 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Random;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -51,7 +54,51 @@ public class MailDelivery extends JInternalFrame {
 	public static void main(String[] args) {
 
 	}
-
+	//Generate Random ID
+	private void generateRandomId(int rnd){
+		Random random=new Random();
+		int id=random.nextInt(rnd);
+		txtMailId.setText(Integer.toString(id));
+	}
+	private void randomDestinationSelection(int item){
+		Random random=new Random();
+		int id=random.nextInt(item);
+		cmbDestination.setSelectedIndex(id);
+	}
+	private void randomOriginSelection(int item){
+		Random random=new Random();
+		int id=random.nextInt(item);
+		cmbOrigin.setSelectedIndex(id);
+	}
+	private void randomDaySelection(int item){
+		Random random=new Random();
+		int id=random.nextInt(item);
+		Calendar calendar = Calendar.getInstance();
+		//int day = calendar.get(Calendar.DAY_OF_WEEK);
+		//for (int i=0;i<cmbDay.getItemCount();i++){
+		//if (day==i){
+			cmbDay.setSelectedIndex(id);
+		//}else{
+		//	cmbDay.setSelectedIndex(id);
+		//}
+		}
+	
+	private void randomPrioritySelection(int item){
+		Random random=new Random();
+		int id=random.nextInt(item);
+		cmbPriority.setSelectedIndex(id);
+	}
+	private void generateRandWeightAndVolume(){
+		Random random=new Random();
+		double number=random.nextDouble();
+		txtWeight.setText(Double.toString(Math.round(number*100)));
+		txtVolume.setText(Double.toString(Math.round(number*50)));
+	}
+	private void generateRandomDate(){
+		DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
+		Date date = new Date();
+		txtDate.setText(dateFormat.format(date));
+	}
 	/**
 	 * Create the frame.
 	 */
@@ -93,17 +140,17 @@ public class MailDelivery extends JInternalFrame {
 				txtWeight.setText("");
 				txtVolume.setText("");
 				txtDate.setText("");
-				cmbOrigin.setSelectedIndex(0);
-				cmbDestination.setSelectedIndex(0);;
-				cmbDay.setSelectedIndex(0);;
-				cmbPriority.setSelectedIndex(0);
+				cmbDay.setSelectedIndex(-1);
+				cmbDestination.setSelectedIndex(-1);
+				cmbOrigin.setSelectedIndex(-1);
+				cmbPriority.setSelectedIndex(-1);
 				MainWindow.logic.processform("Mail Delivery Form--> All fields cleared...");
 				
 			}
 			
 		});
 		
-		btnSave = new JButton("Save");
+		btnSave = new JButton("Send");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String destination=(String)cmbDestination.getSelectedItem();
@@ -138,6 +185,19 @@ public class MailDelivery extends JInternalFrame {
 				dispose();
 			}
 		});
+		
+		JButton btnLoadTestData = new JButton("Load Test Data");
+		btnLoadTestData.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				 generateRandomId(1000);
+				 randomDestinationSelection(cmbDestination.getItemCount());
+				 randomOriginSelection(cmbOrigin.getItemCount());
+				 randomDaySelection(cmbDay.getItemCount());
+				 randomPrioritySelection(cmbPriority.getItemCount());
+				 generateRandWeightAndVolume();
+				 generateRandomDate();
+			}
+		});
 		GroupLayout gl_btnPanel = new GroupLayout(btnPanel);
 		gl_btnPanel.setHorizontalGroup(
 			gl_btnPanel.createParallelGroup(Alignment.LEADING)
@@ -146,7 +206,9 @@ public class MailDelivery extends JInternalFrame {
 					.addComponent(btnClearFields)
 					.addGap(5)
 					.addComponent(btnSave)
-					.addGap(224)
+					.addGap(59)
+					.addComponent(btnLoadTestData, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
+					.addGap(58)
 					.addComponent(btnClose)
 					.addContainerGap(80, Short.MAX_VALUE))
 		);
@@ -157,7 +219,8 @@ public class MailDelivery extends JInternalFrame {
 					.addGroup(gl_btnPanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnClearFields)
 						.addComponent(btnClose)
-						.addComponent(btnSave))
+						.addComponent(btnSave)
+						.addComponent(btnLoadTestData))
 					.addContainerGap())
 		);
 		btnPanel.setLayout(gl_btnPanel);
@@ -175,16 +238,16 @@ public class MailDelivery extends JInternalFrame {
 		JLabel lblPriority = new JLabel("Priority");
 		
 		//Define Distribution Centers
-		String[] distributionCenters={"","Auckland","Hamilton","Rotorua","Palmerston North","Wellington","Christ Church","Dunedin"};
+		String[] distributionCenters={"Auckland","Hamilton","Rotorua","Palmerston North","Wellington","Christ Church","Dunedin"};
 		cmbOrigin = new JComboBox(distributionCenters);
 		cmbOrigin.addItemListener(new ItemListener(){
 
 			@Override
 			public void itemStateChanged(ItemEvent ie) {
-				String itemSelected=ie.getItem().toString();
-				if (itemSelected==""){
-					JOptionPane.showMessageDialog(null,"Please select port of orgin from the list.",null, 1);
-				}
+				//String itemSelected=ie.getItem().toString();
+				//if (itemSelected==""){
+				//	JOptionPane.showMessageDialog(null,"Please select port of orgin from the list.",null, 1);
+				//}
 			}
 			
 		});
@@ -199,12 +262,12 @@ public class MailDelivery extends JInternalFrame {
 		
 		//Define the destinations
 		
-		String[] destinations={"","Rome","Sydney","London","New York","Singapore","Japan","Manila","Fiji","Hawaii","Moscow"};
+		String[] destinations={"Rome","Sydney","London","New York","Singapore","Japan","Manila","Fiji","Hawaii","Moscow"};
 
 		cmbDestination = new JComboBox(destinations);
 		
 		//Define Days of the week and loads them into the combo box
-		String[] days={"","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
+		String[] days={"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
 
 		cmbDay = new JComboBox(days);
 		
@@ -215,7 +278,7 @@ public class MailDelivery extends JInternalFrame {
 		txtDate.setToolTipText("Enter Date");
 		//Define Mail Priority
 		
-		String [] mailPriority={"","Domestic Air","International Air","Domestic Standard","Internation Standard Priority"};
+		String [] mailPriority={"Domestic Air","International Air","Domestic Standard","Internation Standard Priority"};
 		cmbPriority = new JComboBox(mailPriority);
 		
 		JLabel lblDeliveryId = new JLabel("Delivery ID");
@@ -330,6 +393,11 @@ public class MailDelivery extends JInternalFrame {
 		);
 		DataInputPanel.setLayout(gl_DataInputPanel);
 		getContentPane().setLayout(groupLayout);
+		//Clear combo Boxes on startup.
+		cmbDay.setSelectedIndex(-1);
+		cmbDestination.setSelectedIndex(-1);
+		cmbOrigin.setSelectedIndex(-1);
+		cmbPriority.setSelectedIndex(-1);
 
 	}
 }
