@@ -1,4 +1,7 @@
 package Logic;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Logic {
 	
@@ -37,6 +40,7 @@ public class Logic {
 	 * @return
 	 */
 	public String getDetailsFromMailDeliver(long mailId,String routeNo,String originatingPort,String destinationPort,Double cost){
+		
 		String values= "\nMail ID: " + mailId +"\n"+"Route No: " + routeNo+"\n"+ "Originating Port: " +originatingPort+"\nDestination: "+destinationPort+"\nRoute Cost: " + cost;
 		return values;
 	}
