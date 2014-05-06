@@ -1,4 +1,4 @@
-package log.reader;
+package Log.reader;
 
 import java.util.ArrayList;
 

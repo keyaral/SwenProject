@@ -1,4 +1,4 @@
-package log.event;
+package Log.event;
 
 public enum Event {
 	PriceEvent,

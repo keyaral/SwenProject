@@ -14,7 +14,7 @@ public class EventProcesser {
 		costs = new CostListClass();
 	}
 	
-	public String proccess(String details)  {
+	public String proccess(String details) throws Exception  {
 
 	String type = details.substring(0, 2);
 	Boolean safe = false;

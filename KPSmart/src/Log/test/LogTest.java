@@ -1,13 +1,16 @@
-package log.test;
+package Log.test;
 
 import java.util.ArrayList;
 
-import org.junit.Test;
-import log.reader.*;
-import log.writer.XmlWriter;
-import Log.Log;
+import Log.writer.XmlWriter;
 
-public class LogTest {
+import org.junit.Test;
+
+import Log.reader.*;
+import Log.Log;
+import Log.writer.*;
+
+public class LogTest{
 	
 	@Test
 	public void FindAllTest(){
