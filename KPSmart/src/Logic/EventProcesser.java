@@ -190,5 +190,9 @@ public class EventProcesser {
 		}
 		return true;
 	}
+	
+	public ArrayList<KPEvent> getEvents() {
+		return events;
+		}
 
 }
