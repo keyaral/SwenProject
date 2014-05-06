@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Logic {
 	
-	final EventProcesser eventProcessor;
+	public final EventProcesser eventProcessor;
 
 	public Logic() {
 		eventProcessor = new EventProcesser();

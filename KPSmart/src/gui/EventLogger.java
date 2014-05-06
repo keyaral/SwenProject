@@ -1,13 +1,15 @@
 package gui;
 
+import java.util.*;
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
-
 import java.awt.event.*;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.Font;
+import Log.event.*;
+
 
 public class EventLogger extends JInternalFrame{
 	
@@ -17,20 +19,22 @@ public class EventLogger extends JInternalFrame{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private EventLogManager manager = new EventLogManager();
+	private List<String> amountOfMail = new ArrayList<String>();
+	private List<String> averageDeliveryTimes = new ArrayList<String>();
+	private List<String> crticalRoutes = new ArrayList<String>();
+	
 	private JTextArea textLog;
 	private JLabel lblRevenue;
 	private JLabel lblExpenditure;
 	private JLabel lblEventsReported;
-	private JLabel lblAmountOfMail;
-	private JLabel lblAverageDeliveryTimes;
-	private JLabel lblCriticalRoutes;
 	private JTextField textField;
 	
 	public EventLogger() {
 		setTitle("Event Log");
 		setIconifiable(true);
 		setClosable(true);
-		setBounds(0,0,532,336);
+		setBounds(0,0,568,337);
 		setLocation(400,150);
 		JScrollPane scroller = new JScrollPane();
 		
@@ -45,19 +49,19 @@ public class EventLogger extends JInternalFrame{
 			layout.createParallelGroup(Alignment.CENTER)
 				.addGroup(layout.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(layout.createParallelGroup(Alignment.LEADING)
+					.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
 						.addComponent(bottomLeftPane, 0, 0, Short.MAX_VALUE)
-						.addComponent(scroller, GroupLayout.PREFERRED_SIZE, 286, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(rightPane, GroupLayout.PREFERRED_SIZE, 204, GroupLayout.PREFERRED_SIZE)
+						.addComponent(scroller, GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(rightPane, GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		layout.setVerticalGroup(
 			layout.createParallelGroup(Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup()
+				.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(layout.createParallelGroup(Alignment.LEADING)
-						.addComponent(rightPane, GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
+					.addGroup(layout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(rightPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addGroup(layout.createSequentialGroup()
 							.addComponent(scroller, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
@@ -72,77 +76,67 @@ public class EventLogger extends JInternalFrame{
 			}
 		});
 		
-		JLabel lblTitle = new JLabel("Stats:");
-		lblTitle.setFont(new Font("Tahoma", Font.BOLD, 15));
+		JTabbedPane bussinessPanel = new JTabbedPane(JTabbedPane.TOP);
+		GroupLayout gl_rightPane = new GroupLayout(rightPane);
+		gl_rightPane.setHorizontalGroup(
+			gl_rightPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_rightPane.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_rightPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(bussinessPanel, GroupLayout.PREFERRED_SIZE, 198, Short.MAX_VALUE)
+						.addComponent(btnClose, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap())
+		);
+		gl_rightPane.setVerticalGroup(
+			gl_rightPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_rightPane.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(bussinessPanel, GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(btnClose)
+					.addContainerGap())
+		);
+		
+		JPanel statsPanel = new JPanel();
+		bussinessPanel.addTab("Statistics", null, statsPanel, null);
 		
 		lblRevenue = new JLabel("Revenue:");
 		
 		lblExpenditure = new JLabel("Expenditure:");
 		
 		lblEventsReported = new JLabel("Events Reported:");
-		
-		lblAmountOfMail = new JLabel("Amount of Mail:");
-		
-		lblAverageDeliveryTimes = new JLabel("Average Delivery Times:");
-		
-		lblCriticalRoutes = new JLabel("Critical Routes:");
-		GroupLayout gl_rightPane = new GroupLayout(rightPane);
-		gl_rightPane.setHorizontalGroup(
-			gl_rightPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_rightPane.createSequentialGroup()
+		GroupLayout gl_statsPanel = new GroupLayout(statsPanel);
+		gl_statsPanel.setHorizontalGroup(
+			gl_statsPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_statsPanel.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblTitle)
-					.addContainerGap(148, Short.MAX_VALUE))
-				.addGroup(gl_rightPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblRevenue)
-					.addContainerGap(145, Short.MAX_VALUE))
-				.addGroup(gl_rightPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblExpenditure)
-					.addContainerGap(130, Short.MAX_VALUE))
-				.addGroup(gl_rightPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblEventsReported)
-					.addContainerGap(107, Short.MAX_VALUE))
-				.addGroup(gl_rightPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblAmountOfMail)
-					.addContainerGap(117, Short.MAX_VALUE))
-				.addGroup(gl_rightPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblAverageDeliveryTimes)
-					.addContainerGap(75, Short.MAX_VALUE))
-				.addGroup(gl_rightPane.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblCriticalRoutes)
-					.addContainerGap(119, Short.MAX_VALUE))
-				.addGroup(gl_rightPane.createSequentialGroup()
-					.addContainerGap(119, Short.MAX_VALUE)
-					.addComponent(btnClose, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
+					.addGroup(gl_statsPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblRevenue)
+						.addComponent(lblExpenditure)
+						.addComponent(lblEventsReported))
+					.addContainerGap(122, Short.MAX_VALUE))
 		);
-		gl_rightPane.setVerticalGroup(
-			gl_rightPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_rightPane.createSequentialGroup()
+		gl_statsPanel.setVerticalGroup(
+			gl_statsPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_statsPanel.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblTitle)
-					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblRevenue)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblExpenditure)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblEventsReported)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblAmountOfMail)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblAverageDeliveryTimes)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblCriticalRoutes)
-					.addPreferredGap(ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
-					.addComponent(btnClose)
-					.addContainerGap())
+					.addContainerGap(138, Short.MAX_VALUE))
 		);
+		statsPanel.setLayout(gl_statsPanel);
+		
+		JList amountOfMailList = new JList();
+		bussinessPanel.addTab("Amount Of Mail", null, amountOfMailList, null);
+		
+		JList averageDeliveryTimesList = new JList();
+		bussinessPanel.addTab("Average Delivery Times", null, averageDeliveryTimesList, null);
+		
+		JList criticalRoutesList = new JList();
+		bussinessPanel.addTab("Critical Routes", null, criticalRoutesList, null);
 		rightPane.setLayout(gl_rightPane);
 		
 		textLog = new JTextArea();
@@ -207,13 +201,10 @@ public class EventLogger extends JInternalFrame{
 	 * Updates the log
 	 */
 	public void update() {
-		textLog.append(MainWindow.logic.getdetails());
-		String[] statistics = MainWindow.logic.getStatistics().split(" ");
-		lblRevenue.setText("Revenue: " + statistics[0]);
-		lblExpenditure.setText("Expenditure: " + statistics[1]);
-		lblEventsReported.setText("Events Reported: " + statistics[2]);
-		lblAmountOfMail.setText("Amount of Mail: " + statistics[3]);
-		lblAverageDeliveryTimes.setText("Average Delivery Times: " + statistics[4]);
-		lblCriticalRoutes.setText("Critical Routes: " + statistics[5]);
+		textLog.setText(manager.getDetails());
+//		String[] statistics = MainWindow.logic.getStatistics().split(" ");
+//		lblRevenue.setText("Revenue: " + statistics[0]);
+//		lblExpenditure.setText("Expenditure: " + statistics[1]);
+//		lblEventsReported.setText("Events Reported: " + statistics[2]);
 	}
 }
