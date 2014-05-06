@@ -17,6 +17,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Random;
 
 import javax.swing.JTextField;
 
@@ -49,6 +51,7 @@ public class TransportCost extends JInternalFrame {
 	private JFormattedTextField txtDate;
 	private JFormattedTextField txtMaxVolume;
 	private JFormattedTextField txtWeightCost_1;
+	private JFormattedTextField txtWeightCost_1_1;
 	/**
 	 * Launch the application.
 	 */
@@ -59,12 +62,61 @@ public class TransportCost extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
+	//Generate Random integers numbers
+		private  void generateRandomNumber(int number){
+			 Random randomNumerGenerator = new Random();
+			 int randomNumber=randomNumerGenerator.nextInt(number);
+		     txtCostId.setText(Integer.toString(randomNumber));
+		  }
+		private  void generateRandomDurationAndFrequency(int number){
+			 Random randomNumerGenerator = new Random();
+			 int randomNumber=randomNumerGenerator.nextInt(number);
+		     txtDuration.setText(Integer.toString(randomNumber));
+		     txtFrequency.setText(Integer.toString(randomNumber));
+	
+		  }
+		  //Generate Random Weight
+		private  void generateRandomWeighCost(int number){
+			 Random randomNumerGenerator = new Random();
+			 double randomNumber=randomNumerGenerator.nextDouble();
+			 double wCost=Math.round(randomNumber*100.0)/100.0;
+		     txtWeightCost_1_1.setText(Double.toString(wCost*2));
+		     txtVolumeCost.setText(Double.toString(wCost*5));
+		     txtMaxWeight.setText(Double.toString(wCost*10));
+		     txtMaxVolume.setText(Double.toString(wCost*10));
+		     
+		  }
+	private void randomSelectionFromComboBox(int nmb){
+		Random rand=new Random();
+		int  randNumber=rand.nextInt(nmb);
+		cmbFrom.setSelectedIndex(randNumber);
+		cmbTo.setSelectedIndex(randNumber);
+		cmbDay.setSelectedIndex(randNumber);
+		
+	}
+	private void randomSelectionOfPriority(int nmb){
+		Random rand=new Random();
+		int  randNumber=rand.nextInt(nmb);
+		cmbType.setSelectedIndex(randNumber);
+		
+	}
+	private void randomSelectionOfCompany(int nmb){
+		Random rand=new Random();
+		int  randNumber=rand.nextInt(nmb);
+		cmbCompany.setSelectedIndex(randNumber);
+		
+	}
+	private void generateDate(){
+		DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
+		Date date = new Date();
+		txtDate.setText(dateFormat.format(date));
+	}
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public TransportCost() {
 		super("Transport Cost Update");
 		setTitle("Transport Route");
 		setClosable(true);
-		setBounds(100, 100, 532, 391);
+		setBounds(100, 100, 569, 411);
 		setLocation(400,150);
 		JPanel DataInputPanel = new JPanel();
 		
@@ -76,39 +128,39 @@ public class TransportCost extends JInternalFrame {
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(DataInputPanel, GroupLayout.PREFERRED_SIZE, 497, GroupLayout.PREFERRED_SIZE))
+							.addComponent(DataInputPanel, GroupLayout.PREFERRED_SIZE, 533, GroupLayout.PREFERRED_SIZE))
 						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
 							.addGap(9)
-							.addComponent(btnPanel, GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)))
+							.addComponent(btnPanel, GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addComponent(DataInputPanel, GroupLayout.PREFERRED_SIZE, 297, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(btnPanel, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-					.addGap(37))
+					.addGap(29))
 		);
 		
 		JButton btnClearFields = new JButton("Clear Fields");
 		btnClearFields.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 						txtCostId.setText("");
-						cmbCompany.setSelectedItem("");
-						cmbTo.setSelectedItem("");
-						cmbFrom.setSelectedItem("");
-						cmbType.setSelectedItem("");
+						cmbCompany.setSelectedIndex(-1);
+						cmbTo.setSelectedIndex(-1);
+						cmbFrom.setSelectedIndex(-1);
+						cmbType.setSelectedIndex(-1);
 						txtWeightCost_1.setText("");
 						txtVolumeCost.setText("");
 						txtMaxWeight.setText("");
 						txtMaxVolume.setText("");
 						txtDuration.setText("");
 						txtFrequency.setText("");
-						cmbDay.setSelectedItem("");
+						cmbDay.setSelectedIndex(-1);
 						txtDate.setText("");
 				MainWindow.logic.processform("Transport Route Form --> Fields Cleared.");
-				JOptionPane.showMessageDialog(null,"Clear Fields!",null, 1);
+				//JOptionPane.showMessageDialog(null,"Clear Fields!",null, 1);
 			}
 		});
 		
@@ -138,17 +190,17 @@ public class TransportCost extends JInternalFrame {
 			{
 					String values=
 						txtCostId.getText()+"\t"+
-						cmbCompany.getSelectedItem().toString()+"\t"+
-						cmbTo.getSelectedItem().toString()+"\t"+
-						cmbFrom.getSelectedItem().toString()+"\t"+
-						cmbType.getSelectedItem().toString()+"\t"+
+						(String)cmbCompany.getSelectedItem().toString()+"\t"+
+						(String)cmbTo.getSelectedItem().toString()+"\t"+
+						(String)cmbFrom.getSelectedItem().toString()+"\t"+
+						(String)cmbType.getSelectedItem().toString()+"\t"+
 						txtWeightCost_1.getText()+"\t"+
 						txtVolumeCost.getText()+"\t"+
 						txtMaxWeight.getText()+"\t"+
 						txtMaxVolume.getText()+"\t"+
 						txtDuration.getText()+"\t"+
 						txtFrequency.getText()+"\t"+
-						cmbDay.getSelectedItem().toString() +"\t"+
+						(String)cmbDay.getSelectedItem().toString() +"\t"+
 						txtDate.getText();
 				
 				JOptionPane.showMessageDialog(null,"Route Form: Save Details !",null, 1);
@@ -166,6 +218,34 @@ public class TransportCost extends JInternalFrame {
 				dispose();
 			}
 		});
+		
+		JButton btnLoadTestData = new JButton("Load Test Data");
+		btnLoadTestData.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				generateRandomNumber(1000);
+				generateRandomWeighCost(1000);
+				randomSelectionFromComboBox(5);
+				randomSelectionOfPriority(cmbType.getItemCount());
+				randomSelectionOfCompany(cmbCompany.getItemCount());
+				generateDate();
+				generateRandomDurationAndFrequency(70);
+				String preLoadedData= txtCostId.getText()+"\t"+
+						(String)cmbCompany.getSelectedItem().toString()+"\t"+
+						(String)cmbTo.getSelectedItem().toString()+"\t"+
+						(String)cmbFrom.getSelectedItem().toString()+"\t"+
+						(String)cmbType.getSelectedItem().toString()+"\t"+
+						txtWeightCost_1.getText()+"\t"+
+						txtVolumeCost.getText()+"\t"+
+						txtMaxWeight.getText()+"\t"+
+						txtMaxVolume.getText()+"\t"+
+						txtDuration.getText()+"\t"+
+						txtFrequency.getText()+"\t"+
+						(String)cmbDay.getSelectedItem().toString() +"\t"+
+						txtDate.getText();
+				MainWindow.logic.processform(preLoadedData);
+				
+			}
+		});
 		GroupLayout gl_btnPanel = new GroupLayout(btnPanel);
 		gl_btnPanel.setHorizontalGroup(
 			gl_btnPanel.createParallelGroup(Alignment.LEADING)
@@ -174,18 +254,21 @@ public class TransportCost extends JInternalFrame {
 					.addComponent(btnClearFields)
 					.addGap(10)
 					.addComponent(btnSave)
-					.addGap(95)
+					.addPreferredGap(ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+					.addComponent(btnLoadTestData, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
+					.addGap(28)
 					.addComponent(btnClose)
-					.addContainerGap(178, Short.MAX_VALUE))
+					.addGap(43))
 		);
 		gl_btnPanel.setVerticalGroup(
-			gl_btnPanel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_btnPanel.createSequentialGroup()
+			gl_btnPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_btnPanel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_btnPanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnSave)
 						.addComponent(btnClearFields)
-						.addComponent(btnClose))
+						.addComponent(btnClose)
+						.addComponent(btnLoadTestData))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		btnPanel.setLayout(gl_btnPanel);
@@ -212,14 +295,14 @@ public class TransportCost extends JInternalFrame {
 		
 		JLabel lblDay = new JLabel("Day");
 		
-		String[] company={"","Test Company"};
+		String[] company={"Test Company"};
 		cmbCompany = new JComboBox(company);
 		
-		String[] destinations={"","Rome","Sydney","London","New York","Singapore","Japan","Manila","Fiji","Hawaii","Moscow"};
+		String[] destinations={"Rome","Sydney","London","New York","Singapore","Japan","Manila","Fiji","Hawaii","Moscow"};
 		cmbTo = new JComboBox(destinations);
-		String[] distributionCenters={"","Auckland","Hamilton","Rotorua","Palmerston North","Wellington","Christ Church","Dunedin"};
+		String[] distributionCenters={"Auckland","Hamilton","Rotorua","Palmerston North","Wellington","Christ Church","Dunedin"};
 		cmbFrom = new JComboBox(distributionCenters);
-		String [] priority={"","Domestic Air","International Air","Domestic Standard","Internation Standard Priority"};
+		String [] priority={"Domestic Air","International Air","Domestic Standard","Internation Standard Priority"};
 		cmbType = new JComboBox(priority);
 		
 		txtWeightCost_1=new JFormattedTextField();
@@ -282,7 +365,7 @@ public class TransportCost extends JInternalFrame {
 	   });  
 		
 		txtFrequency = new JFormattedTextField();
-		String[] days={"","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
+		String[] days={"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
 		cmbDay = new JComboBox(days);
 		DateFormat dateFormat=new SimpleDateFormat("dd-mm-yyyy");
 		 //txtDate = new JFormattedTextField(dateFormat);
@@ -304,161 +387,156 @@ public class TransportCost extends JInternalFrame {
 		txtCostId = new JTextField();
 		txtCostId.setColumns(10);
 		
-		JLabel lblTransportCostId = new JLabel("Transport Cost ID");
+		JLabel lblTransportCostId = new JLabel("Route ID");
 		
-		txtWeightCost_1 = new JFormattedTextField();
+		txtWeightCost_1_1 = new JFormattedTextField();
+		getContentPane().setLayout(groupLayout);
+		//Clear all Combox Boxes on startup preloaded with data
+		cmbCompany.setSelectedIndex(-1);
+		cmbTo.setSelectedIndex(-1);
+		cmbFrom.setSelectedIndex(-1);
+		cmbType.setSelectedIndex(-1);
+		cmbDay.setSelectedIndex(-1);
 		GroupLayout gl_DataInputPanel = new GroupLayout(DataInputPanel);
 		gl_DataInputPanel.setHorizontalGroup(
 			gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_DataInputPanel.createSequentialGroup()
+					.addGap(10)
 					.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_DataInputPanel.createSequentialGroup()
-							.addGap(10)
-							.addComponent(lblTransportCostId)
-							.addGap(18)
-							.addComponent(txtCostId, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE))
+							.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblCompany)
+								.addComponent(lblTransportCostId))
+							.addGap(55)
+							.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(txtCostId)
+								.addComponent(cmbCompany, 0, 163, Short.MAX_VALUE)))
 						.addGroup(gl_DataInputPanel.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_DataInputPanel.createSequentialGroup()
-									.addGap(10)
-									.addComponent(lblType))
-								.addGroup(gl_DataInputPanel.createSequentialGroup()
-									.addGap(10)
-									.addComponent(lblTo, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_DataInputPanel.createSequentialGroup()
-									.addGap(10)
-									.addComponent(lblCompany))
-								.addGroup(gl_DataInputPanel.createSequentialGroup()
-									.addContainerGap()
-									.addComponent(lblWeightCost)))
-							.addGap(39)
-							.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_DataInputPanel.createSequentialGroup()
-									.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.TRAILING, false)
-										.addComponent(cmbType, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(cmbTo, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(cmbCompany, 0, 140, Short.MAX_VALUE))
-									.addGap(18)
-									.addComponent(lblFrom))
-								.addComponent(txtMaxWeight, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(gl_DataInputPanel.createSequentialGroup()
-							.addGap(10)
-							.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblMaxWeight)
+								.addComponent(lblWeightCost)
 								.addComponent(lblDuration)
+								.addComponent(lblMaxWeight)
 								.addComponent(lblDay, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE))
-							.addGap(43)
+							.addGap(44)
 							.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_DataInputPanel.createSequentialGroup()
-									.addGap(3)
-									.addComponent(txtWeightCost_1, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(txtWeightCost_1_1, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE)
 									.addGap(18)
+									.addComponent(lblVolumeCost)
+									.addGap(18)
+									.addComponent(txtVolumeCost, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_DataInputPanel.createSequentialGroup()
+									.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
+										.addComponent(txtMaxWeight, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
+										.addComponent(txtDuration, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
+										.addComponent(cmbDay, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
+									.addGap(25)
 									.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
 										.addGroup(gl_DataInputPanel.createSequentialGroup()
 											.addComponent(lblMaxVolume)
-											.addGap(18)
+											.addPreferredGap(ComponentPlacement.UNRELATED)
 											.addComponent(txtMaxVolume, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE))
-										.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.TRAILING)
-											.addComponent(cmbFrom, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)
+										.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.TRAILING, false)
 											.addGroup(gl_DataInputPanel.createSequentialGroup()
-												.addComponent(lblVolumeCost)
+												.addComponent(lblDate)
+												.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(txtDate, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE))
+											.addGroup(gl_DataInputPanel.createSequentialGroup()
+												.addComponent(lblFrequency)
 												.addGap(18)
-												.addComponent(txtVolumeCost, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)))))
+												.addComponent(txtFrequency, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)))))))
+						.addGroup(gl_DataInputPanel.createSequentialGroup()
+							.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.TRAILING, false)
 								.addGroup(gl_DataInputPanel.createSequentialGroup()
-									.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
-										.addGroup(gl_DataInputPanel.createSequentialGroup()
-											.addComponent(txtDuration, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
-											.addGap(28)
-											.addComponent(lblFrequency))
-										.addGroup(gl_DataInputPanel.createSequentialGroup()
-											.addComponent(cmbDay, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
-											.addGap(28)
-											.addComponent(lblDate)))
-									.addGap(18)
-									.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(txtDate)
-										.addComponent(txtFrequency, GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))))))
-					.addGap(16))
+									.addComponent(lblType)
+									.addGap(39)
+									.addComponent(cmbType, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+								.addGroup(Alignment.LEADING, gl_DataInputPanel.createSequentialGroup()
+									.addComponent(lblTo, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(cmbTo, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE)))
+							.addGap(34)
+							.addComponent(lblFrom)
+							.addGap(18)
+							.addComponent(cmbFrom, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)))
+					.addGap(33))
 		);
 		gl_DataInputPanel.setVerticalGroup(
 			gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_DataInputPanel.createSequentialGroup()
-					.addGap(13)
+					.addGap(16)
 					.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblTransportCostId)
 						.addComponent(txtCostId, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(11)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblCompany)
 						.addComponent(cmbCompany, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_DataInputPanel.createSequentialGroup()
-							.addGap(9)
-							.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_DataInputPanel.createSequentialGroup()
-									.addGap(3)
-									.addComponent(lblTo))
-								.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.BASELINE)
-									.addComponent(lblFrom)
-									.addComponent(cmbFrom, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-						.addGroup(gl_DataInputPanel.createSequentialGroup()
 							.addGap(3)
-							.addComponent(cmbTo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-					.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
+								.addComponent(cmbTo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_DataInputPanel.createSequentialGroup()
+									.addGap(6)
+									.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.BASELINE)
+										.addComponent(cmbFrom, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblFrom)))))
 						.addGroup(gl_DataInputPanel.createSequentialGroup()
 							.addGap(12)
-							.addComponent(lblType))
+							.addComponent(lblTo)))
+					.addGap(6)
+					.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.TRAILING, false)
 						.addGroup(gl_DataInputPanel.createSequentialGroup()
 							.addGap(6)
-							.addComponent(cmbType, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-					.addGap(16)
-					.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.TRAILING)
+							.addComponent(lblType)
+							.addGap(24)
+							.addComponent(lblWeightCost)
+							.addPreferredGap(ComponentPlacement.RELATED))
 						.addGroup(gl_DataInputPanel.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(cmbType, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblVolumeCost)
+								.addComponent(txtWeightCost_1_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addComponent(txtVolumeCost, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addGap(18))
-						.addGroup(gl_DataInputPanel.createSequentialGroup()
-							.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblWeightCost)
-								.addComponent(txtWeightCost_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.UNRELATED)))
+							.addGap(14)))
 					.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_DataInputPanel.createSequentialGroup()
-							.addGap(3)
-							.addComponent(lblMaxWeight))
-						.addGroup(gl_DataInputPanel.createSequentialGroup()
-							.addGap(3)
-							.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblMaxVolume)
-								.addComponent(txtMaxVolume, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-						.addComponent(txtMaxWeight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_DataInputPanel.createSequentialGroup()
-							.addGap(3)
+							.addGap(34)
 							.addComponent(lblDuration))
 						.addGroup(gl_DataInputPanel.createSequentialGroup()
-							.addGap(3)
+							.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_DataInputPanel.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.BASELINE)
+										.addComponent(txtMaxWeight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblMaxWeight)
+										.addComponent(lblMaxVolume)))
+								.addGroup(gl_DataInputPanel.createSequentialGroup()
+									.addGap(4)
+									.addComponent(txtMaxVolume, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(txtDuration, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addComponent(lblFrequency)
-								.addComponent(txtFrequency, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-						.addComponent(txtDuration, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_DataInputPanel.createSequentialGroup()
-							.addGap(3)
-							.addComponent(lblDay))
-						.addGroup(gl_DataInputPanel.createSequentialGroup()
-							.addGap(3)
-							.addComponent(lblDate))
-						.addComponent(cmbDay, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtDate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(28))
+								.addComponent(txtFrequency, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_DataInputPanel.createSequentialGroup()
+									.addGap(18)
+									.addComponent(lblDay))
+								.addGroup(gl_DataInputPanel.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.BASELINE)
+										.addComponent(txtDate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(lblDate)
+										.addComponent(cmbDay, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))))
+					.addGap(39))
 		);
 		DataInputPanel.setLayout(gl_DataInputPanel);
-		getContentPane().setLayout(groupLayout);
 
 	}
-	
 }

@@ -18,19 +18,22 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Random;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JTextField;
 
 import Logic.Logic;
+import Logic.Mail;
 
 public class MailDelivery extends JInternalFrame {
 	
 	private static final long serialVersionUID = 1L;
 	private JButton btnClose;
 	private JButton btnClearFields;
-	private JButton btnSave;
+	private JButton btnSend;
 	private JFormattedTextField txtVolume;
 	private JFormattedTextField txtWeight;
 	private JFormattedTextField txtDate;
@@ -42,7 +45,9 @@ public class MailDelivery extends JInternalFrame {
 	private JComboBox cmbDay;
 	@SuppressWarnings("rawtypes")
 	private JComboBox cmbPriority;
-	private JTextField txtMailId;
+	private static JTextField txtMailId;
+	private JButton btnLoadTestData;
+	private Random aRandom;
 	 
 	/**
 	 * Launch the application.
@@ -50,7 +55,40 @@ public class MailDelivery extends JInternalFrame {
 	public static void main(String[] args) {
 
 	}
-
+	//Generate Random integers numbers
+	private  void generateRandomNumber(int number){
+		 Random randomNumerGenerator = new Random();
+		 int randomNumber=randomNumerGenerator.nextInt(number);
+	     txtMailId.setText(Integer.toString(randomNumber));
+	  }
+	  //Generate Random Weight
+	private  void generateRandomWeighCost(int number){
+		 Random randomNumerGenerator = new Random();
+		 double randomNumber=randomNumerGenerator.nextDouble();
+		 double wCost=Math.round(randomNumber*100.0)/100.0;
+	     txtWeight.setText(Double.toString(wCost*2));
+	     txtVolume.setText(Double.toString(wCost*5));
+	     
+	  }
+	private void randomSelectionFromComboBox(int nmb){
+		Random rand=new Random();
+		int  randNumber=rand.nextInt(nmb);
+		cmbOrigin.setSelectedIndex(randNumber);
+		cmbDestination.setSelectedIndex(randNumber);
+		cmbDay.setSelectedIndex(randNumber);
+		
+	}
+	private void randomSelectionOfPriority(int nmb){
+		Random rand=new Random();
+		int  randNumber=rand.nextInt(nmb);
+		cmbPriority.setSelectedIndex(randNumber);
+		
+	}
+	private void generateDate(){
+		DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
+		Date date = new Date();
+		txtDate.setText(dateFormat.format(date));
+	}
 	/**
 	 * Create the frame.
 	 */
@@ -61,8 +99,8 @@ public class MailDelivery extends JInternalFrame {
 		setBounds(100, 100, 558, 356);
 		setLocation(400,150);
 		JPanel DataInputPanel = new JPanel();
-		
 		JPanel btnPanel = new JPanel();
+		
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -92,18 +130,20 @@ public class MailDelivery extends JInternalFrame {
 				txtWeight.setText("");
 				txtVolume.setText("");
 				txtDate.setText("");
-				cmbOrigin.setSelectedIndex(0);
-				cmbDestination.setSelectedIndex(0);;
-				cmbDay.setSelectedIndex(0);;
-				cmbPriority.setSelectedIndex(0);
+				cmbOrigin.setSelectedIndex(-1);
+				cmbDestination.setSelectedIndex(-1);
+				cmbDay.setSelectedIndex(-1);
+				cmbPriority.setSelectedIndex(-1);
+				
+				
 				MainWindow.logic.processform("Mail Delivery Form--> All fields cleared...");
 				
 			}
 			
 		});
 		
-		btnSave = new JButton("Save");
-		btnSave.addActionListener(new ActionListener() {
+		btnSend = new JButton("Send");
+		btnSend.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String destination=(String)cmbDestination.getSelectedItem();
 				String origin=(String)cmbOrigin.getSelectedItem();
@@ -137,6 +177,28 @@ public class MailDelivery extends JInternalFrame {
 				dispose();
 			}
 		});
+		
+		btnLoadTestData = new JButton("Load Test Data");
+		btnLoadTestData.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				generateRandomNumber(1000);
+				generateRandomWeighCost(1000);
+				randomSelectionFromComboBox(5);
+				randomSelectionOfPriority(cmbPriority.getItemCount());
+				generateDate();
+				
+				String preLoadedData=txtMailId.getText()+"\t"
+						+(String)cmbOrigin.getSelectedItem().toString()+"\t"
+						+(String)cmbDestination.getSelectedItem()+"\t"
+						+"\t"+ txtWeight.getText()+"\t" 
+						+ txtVolume.getText()+"\t"
+						+(String)cmbDay.getSelectedItem()+"\t"
+						+ txtDate.getText()+"\t"
+						+ (String)cmbPriority.getSelectedItem();
+				MainWindow.logic.processform(preLoadedData);
+				
+			}
+		});
 		GroupLayout gl_btnPanel = new GroupLayout(btnPanel);
 		gl_btnPanel.setHorizontalGroup(
 			gl_btnPanel.createParallelGroup(Alignment.LEADING)
@@ -144,10 +206,12 @@ public class MailDelivery extends JInternalFrame {
 					.addContainerGap()
 					.addComponent(btnClearFields)
 					.addGap(5)
-					.addComponent(btnSave)
-					.addGap(224)
+					.addComponent(btnSend)
+					.addGap(91)
+					.addComponent(btnLoadTestData, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
 					.addComponent(btnClose)
-					.addContainerGap(80, Short.MAX_VALUE))
+					.addGap(32))
 		);
 		gl_btnPanel.setVerticalGroup(
 			gl_btnPanel.createParallelGroup(Alignment.TRAILING)
@@ -155,8 +219,9 @@ public class MailDelivery extends JInternalFrame {
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addGroup(gl_btnPanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnClearFields)
-						.addComponent(btnClose)
-						.addComponent(btnSave))
+						.addComponent(btnSend)
+						.addComponent(btnLoadTestData)
+						.addComponent(btnClose))
 					.addContainerGap())
 		);
 		btnPanel.setLayout(gl_btnPanel);
@@ -174,22 +239,21 @@ public class MailDelivery extends JInternalFrame {
 		JLabel lblPriority = new JLabel("Priority");
 		
 		//Define Distribution Centers
-		String[] distributionCenters={"","Auckland","Hamilton","Rotorua","Palmerston North","Wellington","Christ Church","Dunedin"};
+		String[] distributionCenters={"Auckland","Hamilton","Rotorua","Palmerston North","Wellington","Christ Church","Dunedin"};
 		cmbOrigin = new JComboBox(distributionCenters);
 		cmbOrigin.addItemListener(new ItemListener(){
 
 			@Override
 			public void itemStateChanged(ItemEvent ie) {
-				String itemSelected=ie.getItem().toString();
-				if (itemSelected==""){
-					JOptionPane.showMessageDialog(null,"Please select port of orgin from the list.",null, 1);
-				}
+				//String itemSelected=ie.getItem().toString();
+				//if (itemSelected==""){
+				//	JOptionPane.showMessageDialog(null,"Please select port of orgin from the list.",null, 1);
+				//}
 			}
 			
 		});
 		
-		
-		
+	
 		cmbOrigin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -198,12 +262,12 @@ public class MailDelivery extends JInternalFrame {
 		
 		//Define the destinations
 		
-		String[] destinations={"","Rome","Sydney","London","New York","Singapore","Japan","Manila","Fiji","Hawaii","Moscow"};
+		String[] destinations={"Rome","Sydney","London","New York","Singapore","Japan","Manila","Fiji","Hawaii","Moscow"};
 
 		cmbDestination = new JComboBox(destinations);
 		
 		//Define Days of the week and loads them into the combo box
-		String[] days={"","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
+		String[] days={"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
 
 		cmbDay = new JComboBox(days);
 		
@@ -214,7 +278,7 @@ public class MailDelivery extends JInternalFrame {
 		txtDate.setToolTipText("Enter Date");
 		//Define Mail Priority
 		
-		String [] mailPriority={"","Domestic Air","International Air","Domestic Standard","Internation Standard Priority"};
+		String [] mailPriority={"Domestic Air","International Air","Domestic Standard","Internation Standard Priority"};
 		cmbPriority = new JComboBox(mailPriority);
 		
 		JLabel lblDeliveryId = new JLabel("Delivery ID");
@@ -329,6 +393,11 @@ public class MailDelivery extends JInternalFrame {
 		);
 		DataInputPanel.setLayout(gl_DataInputPanel);
 		getContentPane().setLayout(groupLayout);
-
+		//Clear fields in combox boxes on startup
+		cmbOrigin.setSelectedIndex(-1);
+		cmbDestination.setSelectedIndex(-1);
+		cmbDay.setSelectedIndex(-1);
+		cmbPriority.setSelectedIndex(-1);
 	}
+	
 }

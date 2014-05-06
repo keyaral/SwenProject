@@ -21,14 +21,12 @@ public class MainWindow extends JFrame{
 	private CostModification costModification;
 	private CreateNewUser createNewUser;
 	private EventLogger eventLogger;
-	
-	private JMenuItem menuItemTransportRoute;
-	private JMenuItem transaction;
-	private JMenuItem mntmCreateNewUser;
-	private JMenuItem viewLog;
+	public JMenuItem menuItemTransportRoute;
+	public JMenuItem mntmCreateNewUser;
+	public JMenuItem viewLog;
 	private JMenuItem logOut;
 	private JMenuItem exit;
-	private JMenuItem mnuItemCostModification;
+	public JMenuItem mnuItemCostModification;
 	public JDesktopPane desktopPane;
 	
 	public static final Logic logic = new Logic();
@@ -56,11 +54,9 @@ public class MainWindow extends JFrame{
 		//Create menu for Transactions
 		//JFrame jtransactionFrame=new JFrame("Transaction");
 		JMenu jMailMenu=new JMenu("Mail Processing");
-		transaction=new JMenuItem("Transaction");
 		
 		mnuItemCostModification=new JMenuItem("Cost Modification");
 		viewLog=new JMenuItem("View Log");
-		jMailMenu.add(transaction);
 		
 		menuItemMailDelivery = new JMenuItem("Mail Delivery");
 		menuItemMailDelivery.addActionListener(new ActionListener() {
@@ -137,20 +133,6 @@ public class MainWindow extends JFrame{
 			}
 			
 		});
-		/**
-		 * Add action listener to each time in the menu
-		 */
-
-		
-		//This event is fired when the user clicks on the Transaction Menu Item
-		transaction.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-
-			} 
-			
-		});
 		menuItemMailDelivery.addActionListener(new ActionListener(){
 
 			@Override
@@ -208,20 +190,6 @@ public class MainWindow extends JFrame{
 					mailDelivery.show();
 				}
 			}
-		}); 
-		
-		transaction.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-			if (managerWindow==null || managerWindow.isClosable()){ //only one instance to managerWindow
-				managerWindow= new ManagerWindow();
-				desktopPane.add(managerWindow);
-				managerWindow.show();
-			}
-				
-			}
-			
 		});
 		
 		menuItemTransportRoute.addActionListener(new ActionListener(){

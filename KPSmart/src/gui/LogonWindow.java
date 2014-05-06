@@ -80,11 +80,25 @@ public class LogonWindow extends JFrame {
 		String password = txtPassword.getText();
 		
 		//Statically assigned username and password. Need to validate from a file
-		if(username.equals("test") && password.equals("12345")) {
-		MainWindow mWindow =new MainWindow();
-		UserName=username;
-		mWindow.setVisible(true);
-		dispose();
+		if(username.equals("clerk") && password.equals("12345")) {
+			MainWindow mWindow =new MainWindow();
+			mWindow.menuItemTransportRoute.setEnabled(false);
+			mWindow.mntmCreateNewUser.setEnabled(false);
+			mWindow.mnuItemCostModification.setEnabled(false);
+			mWindow.viewLog.setEnabled(false);
+			//UserName=username;
+			mWindow.setVisible(true);
+			dispose();
+		}
+			else if (username.equals("manager") && password.equals("manager1")){
+				MainWindow mWindow =new MainWindow();
+				mWindow.menuItemTransportRoute.setEnabled(true);
+				mWindow.mntmCreateNewUser.setEnabled(true);
+				mWindow.mnuItemCostModification.setEnabled(true);
+				mWindow.viewLog.setEnabled(true);
+				//UserName=username;
+				mWindow.setVisible(true);
+				dispose();
 		} else {
 		JOptionPane.showMessageDialog(null,"Wrong Password / Username");
 		txtUserId.setText("");
