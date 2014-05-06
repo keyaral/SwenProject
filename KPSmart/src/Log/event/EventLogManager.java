@@ -1,5 +1,6 @@
 package Log.event;
 
+import gui.MainWindow;
 import Logic.*;
 
 public class EventLogManager {
@@ -9,7 +10,7 @@ public class EventLogManager {
 	private EventProcesser eventProcesser;
 
 	public EventLogManager() {
-		eventProcesser = new EventProcesser();
+		eventProcesser = MainWindow.logic.eventProcessor;
 		index = 0;
 		maxIndex = eventProcesser.getEvents().size()-1;
 	}
