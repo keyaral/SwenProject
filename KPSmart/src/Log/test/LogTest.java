@@ -4,9 +4,10 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import log.reader.*;
-import log.writer.XmlWriter;
+import Log.reader.*;
+import Log.writer.XmlWriter;
 import Log.Log;
+import Log.reader.XmlReader;
 
 public class LogTest {
 	
