@@ -18,17 +18,34 @@ public class EventLogManager {
 	public String getDetails() {
 		KPEvent e = eventProcesser.getEvents().get(index);
 		String details = "Event " + index + "/" + maxIndex + "\n\n";
+		
 		if (e.object instanceof Route) {
 			Route r = (Route)(e.object);
-			details += "Route " + r.ID + " ";
+			details += "Route no. " + r.ID + " ";
 		}
 		else if (e.object instanceof Cost) {
 			Cost c = (Cost)(e.object);
-			details += "Cost " + c.ID + " ";
+			details += "Cost no. " + c.ID + " ";
 		}
 		else if (e.object instanceof Mail) {
 			Mail m = (Mail)(e.object);
+			details += "Mail no. " + m.ID + " ";
 		}
+		
+		if (e.type.equals("Add")) {
+			details += "was added.";
+		}
+		else if (e.type.equals("Change")) {
+			details += "was modified.";
+		}
+		else if (e.type.equals("Delete")) {
+			details += "was removed.";
+		}
+		else if (e.type.equals("Send")) {
+			details += "was sent.";
+		}
+		
+		
 		return details;
 	}
 
@@ -38,20 +55,20 @@ public class EventLogManager {
 		return stats;
 	}
 
-	public void next() throws TransitionError {
-		if (index == maxIndex)
-			throw new TransitionError("Event index already at end!");
-		else {
-			index++;
-		}
+	public void next()  {
+		index++;
 	}
 
-	public void previous() throws TransitionError {
-		if (index == 0)
-			throw new TransitionError("Event index already at start!");
-		else {
-			index--;
-		}
+	public void previous() {
+		index--;
+	}
+	
+	public boolean atStart() {
+		return index == 0;
+	}
+	
+	public boolean atEnd() {
+		return index == maxIndex;
 	}
 
 	public void goTo(int num) throws TransitionError {
