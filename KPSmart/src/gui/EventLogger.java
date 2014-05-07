@@ -1,13 +1,18 @@
 package gui;
 
 import java.util.*;
+
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
+
 import java.awt.event.*;
+
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.LineBorder;
+
 import java.awt.Color;
 import java.awt.Font;
+
 import Log.event.*;
 
 
@@ -29,6 +34,8 @@ public class EventLogger extends JInternalFrame{
 	private JLabel lblExpenditure;
 	private JLabel lblEventsReported;
 	private JTextField textField;
+	private JButton btnPrevious = new JButton("Previous");
+	private JButton btnNext;
 
 	public EventLogger() {
 		setTitle("Event Log");
@@ -143,15 +150,18 @@ public class EventLogger extends JInternalFrame{
 		textLog.setEditable(false);
 		scroller.setViewportView(textLog);
 
-		JButton btnPrevious = new JButton("Previous");
 		btnPrevious.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				manager.previous();
+				update();
 			}
 		});
 
-		JButton btnNext = new JButton("Next");
+		btnNext = new JButton("Next");
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				manager.next();
+				update();
 			}
 		});
 
@@ -159,6 +169,18 @@ public class EventLogger extends JInternalFrame{
 		JButton btnGoTo = new JButton("Go To");
 		btnGoTo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				String text = textField.getText();
+				for (int i = 0; i < text.length(); i++) {
+					if(!Character.isDigit(text.charAt(i))) {
+						displayErrorMessage("Only numbers are permitted.");
+					}
+				}
+				try {
+					manager.goTo(Integer.parseInt(text));
+					update();
+				} catch (TransitionError e) {
+					displayErrorMessage("Number exceeds highest possible event index.");
+				}
 			}
 		});
 
@@ -206,5 +228,15 @@ public class EventLogger extends JInternalFrame{
 		lblRevenue.setText("Revenue: " + statistics[0]);
 		lblExpenditure.setText("Expenditure: " + statistics[1]);
 		lblEventsReported.setText("Events Reported: " + statistics[2]);
+		
+		if (manager.atStart()) btnPrevious.setEnabled(false);
+		else btnPrevious.setEnabled(true);
+		
+		if (manager.atEnd()) btnNext.setEnabled(false);
+		else btnNext.setEnabled(true);
+	}
+	
+	public void displayErrorMessage(String message) {
+		JOptionPane.showInternalMessageDialog(this, message, "Message", JOptionPane.PLAIN_MESSAGE);
 	}
 }
