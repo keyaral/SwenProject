@@ -7,9 +7,10 @@ public class KPEvent {
 	public Statistics statistics;
 	public Object object;
 
-	public KPEvent(String t, Object o, Boolean d){
+	public KPEvent(String t, Object o, Boolean d, Statistics s){
 	this.type = t;
 	this.object = o;
 	this.success = d;
+	this.statistics = s;
 	}
 }

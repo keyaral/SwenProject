@@ -62,10 +62,10 @@ switch (type) {
 		return null;
 	}
 
-		private String deliverMail(String[] details) {
+		private String deliverMail(String[] details) throws CloneNotSupportedException {
 			Mail m = new Mail(details);
 			// TODO ShipMail
-			KPEvent e = new KPEvent("Send", m, true);
+			KPEvent e = new KPEvent("Send", m, true, (Statistics)Logic.stats.clone());
 			// e.addStats;
 			events.add(e);
 			
@@ -73,11 +73,11 @@ switch (type) {
 		return null;
 	}
 
-		private String changeCost(String[] details) {
+		private String changeCost(String[] details) throws CloneNotSupportedException {
 			
 			Cost c = new Cost(details);
 			Boolean success = costs.changeCost(c);
-			KPEvent e = new KPEvent("Change", c, success);
+			KPEvent e = new KPEvent("Change", c, success, (Statistics)Logic.stats.clone());
 			// e.addStats;
 			events.add(e);	
 			
@@ -85,10 +85,10 @@ switch (type) {
 		return null;
 	}
 
-		private String addCost(String[] details) {
+		private String addCost(String[] details) throws CloneNotSupportedException {
 			Cost c = new Cost(details);
 			Boolean success = costs.addCost(c);
-			KPEvent e = new KPEvent("Add", c, success);
+			KPEvent e = new KPEvent("Add", c, success , (Statistics)Logic.stats.clone());
 			// e.addStats;
 			events.add(e);
 			
@@ -100,10 +100,10 @@ switch (type) {
 		
 		
 		
-		private String discontineRoute(String[] details) {
+		private String discontineRoute(String[] details) throws CloneNotSupportedException {
 			Route r = new Route(details);
 			Boolean success = routes.deleteRoute(r);
-			KPEvent e = new KPEvent("Delete", r, success);
+			KPEvent e = new KPEvent("Delete", r, success,  (Statistics)Logic.stats.clone());
 			// e.addStats;
 			events.add(e);
 			
@@ -112,11 +112,11 @@ switch (type) {
 		return null;
 	}
 
-		private String changeRoute(String[] details) {
+		private String changeRoute(String[] details) throws CloneNotSupportedException {
 			
 			Route r = new Route(details);
 			Boolean success = routes.changeRoute(r);
-			KPEvent e = new KPEvent("Change", r, success);
+			KPEvent e = new KPEvent("Change", r, success,  (Statistics)Logic.stats.clone());
 			// e.addStats;
 			events.add(e);
 			// TODO Auto-generated method stub
@@ -125,12 +125,12 @@ switch (type) {
 		
 	}
 
-		private String addRoute(String[] details) {
+		private String addRoute(String[] details) throws CloneNotSupportedException {
 			Route r = new Route(details);
 			Boolean success = routes.addRoute(r);
-			KPEvent e = new KPEvent("Add", r, success);
+			KPEvent e = new KPEvent("Add", r, success, (Statistics)Logic.stats.clone());
 			// e.addStats;
-			events.add(e);
+			events.add(e);	
 		
 			// TODO Auto-generated method stub
 			return null;
