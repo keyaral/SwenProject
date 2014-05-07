@@ -13,7 +13,7 @@ public class Logic {
 	}
 
 
-	public String processform(String details) {
+	public String processform(String[] details) {
 		System.out.println("call evnent");
 				try {
 					return eventProcessor.proccess(details);
@@ -24,12 +24,12 @@ public class Logic {
 	}
 	public String getdetails(){
 
-		return " Candy";
+		return " DONT RETURN THIS ANYMORE calll process form";
 	}
 
 	// TODO Marian >> The text returned will be splited by a single space; that is " "
 	public String getStatistics(){
-		return "math1 math2 math3 math4 math5 math6";
+		return " Modify this method, or use a different one";
 	}
 	/**
 	 *

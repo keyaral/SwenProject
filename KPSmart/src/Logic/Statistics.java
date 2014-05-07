@@ -50,7 +50,7 @@ public class Statistics implements Cloneable{
 		List<String> amounts = new ArrayList<String>();
 		for (Mail mail: mails) {
 			if (amounts.isEmpty()) {
-				amounts.add(mail.origin + " " + mail.destination.getName() + " " + mail.volume + " " + mail.weight + "  1");
+				amounts.add(mail.origin + " " + mail.destination + " " + mail.volume + " " + mail.weight + "  1");
 			}
 			else {
 

@@ -26,8 +26,8 @@ public class Mail {
 
 
 
-	public Mail(String details) {
-		String[] values = details.split("\t");
+	public Mail(String[] values) {
+	
 		this.ID = Integer.parseInt(values[0]);
 		this.destination = (values[1]);
 		this.origin = (values[2]);

@@ -16,10 +16,10 @@ public class Route {
 	public double costWeight;
 	public double costVolume;
 	
-	public Route(String details){
+	public Route(String[] values){
 		
-	String[] values = details.split("\t");
-	System.out.println(details);
+
+	System.out.println(values);
 	this.ID = Integer.parseInt(values[0]);
 	this.destination = (values[1]);
 	this.origin = (values[2]);

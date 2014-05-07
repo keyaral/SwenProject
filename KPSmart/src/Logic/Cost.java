@@ -10,8 +10,8 @@ public class Cost {
 	public int priority;
 
 
-	public Cost(String details) {
-		String[] values = details.split("\t");
+	public Cost(String[] values) {
+	
 		this.ID = Integer.parseInt(values[0]);
 		this.weight = Integer.parseInt(values[1]);
 		this.volume = Integer.parseInt(values[2]);

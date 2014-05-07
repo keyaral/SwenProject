@@ -5,96 +5,145 @@ import java.util.Date;
 
 public class EventProcesser {
 
-	RouteListClass routes;
-	CostListClass costs;
+	RouteListClass routes = new RouteListClass();
+	CostListClass costs = new CostListClass();;
 	ArrayList<KPEvent> events = new ArrayList<KPEvent>();
 
 	public EventProcesser() {
-		routes = new RouteListClass();
-		costs = new CostListClass();
+		 
 	}
 
-	public String proccess(String details) throws Exception {
-
-		String type = details.substring(0, 2);
+	public String proccess(String[] details) throws Exception {
+System.out.println( details);
+		int type = Integer.parseInt(details[0]);
 		Boolean safe = false;
-		if (type.equals("1a") || type.equals("1b") || type.equals("1c")
-				|| type.equals("2a") || type.equals("2b") || type.equals("2c")
-				|| type.equals("3a"))
-			safe = true;
-		// if (safe == false) throw new
-		// Exception("Error in Input: Can't detect type.");
-		if (safe == false)
-			return "Error not a valid event";
-		details = details.substring(3);
-		if (type.equals("1a")) {// call routes
-			if (!checkDetails(details, type))
-				;
-			Route r = new Route(details);
-			Boolean success = routes.addRoute(r);
-			KPEvent e = new KPEvent("Add", r, success);
-			// e.addStats;
-			events.add(e);
-		}
-		if (type.equals("1b")) {
-			if (!checkDetails(details, type))
-				;
-			Route r = new Route(details);
-			Boolean success = routes.changeRoute(r);
-			KPEvent e = new KPEvent("Change", r, success);
-			// e.addStats;
-			events.add(e);
-		}
+		String message = "error";
+	/**
+	 * Case Switch
+	 * 
+	 * 	
+	 * 0 = Add route
+	 * 1 = change Route
+	 * 2 = discontine Route
+	 * 
+	 * 3 = Add Cost
+	 * 4 = Change Cost
+	 * 
+	 * 5 Deliver Mail
+	 * 
+	 */
+		
+switch (type) {	
+		
+		
+		case 0:   message = addRoute(details) ;
+		  break;
+		case 1:  message =  changeRoute(details);
+		  break;
+		case 2: message =   discontineRoute(details);
+		  break;
+		case 3: message =  addCost(details);
+    	  break;
+		case 4: message =  changeCost(details);
+		  break;
+		case 5:  message =  deliverMail(details);
+		  break;
+		 default: message = error(details, " Not a valid Type");
+         break;
+		
+		}	
+		return message;
+	
+	}
+			
+			
+			private String error(String[] details, String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-		if (type.equals("1c")) {
-			if (!checkDetails(details, type))
-				;
-			Route r = new Route(details);
-			Boolean success = routes.deleteRoute(r);
-			KPEvent e = new KPEvent("Delete", r, success);
-			// e.addStats;
-			events.add(e);
-		}
-
-		if (type.equals("2a")) {// call Costs
-			if (!checkDetails(details, type))
-				;
-			Cost c = new Cost(details);
-			Boolean success = costs.addCost(c);
-			KPEvent e = new KPEvent("Add", c, success);
-			// e.addStats;
-			events.add(e);
-		}
-		if (type.equals("2b")) {// call Costs
-			if (!checkDetails(details, type))
-				;
-			Cost c = new Cost(details);
-			Boolean success = costs.changeCost(c);
-			KPEvent e = new KPEvent("Change", c, success);
-			// e.addStats;
-			events.add(e);
-		}
-		if (type.equals("2c")) {// call Costs
-			if (!checkDetails(details, type))
-				;
-			Cost c = new Cost(details);
-			Boolean success = costs.deleteCost(c);
-			KPEvent e = new KPEvent("Delete", c, success);
-			// e.addStats;
-			events.add(e);
-		}
-
-		if (type.equals("3a")) {// call Mail
-			if (!checkDetails(details, type))
-				;
+		private String deliverMail(String[] details) {
 			Mail m = new Mail(details);
 			// TODO ShipMail
 			KPEvent e = new KPEvent("Send", m, true);
 			// e.addStats;
 			events.add(e);
-		}
-		return type;
+			
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+		private String changeCost(String[] details) {
+			
+			Cost c = new Cost(details);
+			Boolean success = costs.changeCost(c);
+			KPEvent e = new KPEvent("Change", c, success);
+			// e.addStats;
+			events.add(e);	
+			
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+		private String addCost(String[] details) {
+			Cost c = new Cost(details);
+			Boolean success = costs.addCost(c);
+			KPEvent e = new KPEvent("Add", c, success);
+			// e.addStats;
+			events.add(e);
+			
+			
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+		
+		
+		
+		private String discontineRoute(String[] details) {
+			Route r = new Route(details);
+			Boolean success = routes.deleteRoute(r);
+			KPEvent e = new KPEvent("Delete", r, success);
+			// e.addStats;
+			events.add(e);
+			
+			
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+		private String changeRoute(String[] details) {
+			
+			Route r = new Route(details);
+			Boolean success = routes.changeRoute(r);
+			KPEvent e = new KPEvent("Change", r, success);
+			// e.addStats;
+			events.add(e);
+			// TODO Auto-generated method stub
+			return null;
+			
+		
+	}
+
+		private String addRoute(String[] details) {
+			Route r = new Route(details);
+			Boolean success = routes.addRoute(r);
+			KPEvent e = new KPEvent("Add", r, success);
+			// e.addStats;
+			events.add(e);
+		
+			// TODO Auto-generated method stub
+			return null;
+			
+		
+			
+		}
+
+
+
+
+
+
 
 	private boolean checkDetails(String details, String type) throws Exception {
 		String check = details;
