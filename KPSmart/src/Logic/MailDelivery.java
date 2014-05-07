@@ -5,8 +5,10 @@ import java.util.HashSet;
 
 public class MailDelivery {
 
+	
+	public ArrayList<Destination> allDestinations = new ArrayList<Destination>();
     public ArrayList<Destination> nzDestinations = new ArrayList<Destination>();	
-    public ArrayList<Destination> overSeasDestinations = new ArrayList<Destination>();
+    
     
 	public int totalVolume = 0;
 	public int totalWeight = 0;
@@ -19,7 +21,13 @@ public class MailDelivery {
 	
 	public HashSet<Mail> mails = new HashSet<Mail>();
 	
-	
+	public void newNzDestination(String n) {
+		Destination d = new Destination (n, true);
+		
+		nzDestinations.add(d);
+		allDestinations.add(d);
+		
+	} 
 	
 
 	public MailDelivery() {
@@ -30,6 +38,11 @@ public class MailDelivery {
 		nzDestinations.add(new Destination("Palmerston North", true) );
 		nzDestinations.add(new Destination("Christchuch", true) );
 		nzDestinations.add(new Destination("Wellington", true) );
+		
+		allDestinations.addAll(nzDestinations);
+		
+		
+		
 		// TODO Auto-generated constructor stub
 	}
 

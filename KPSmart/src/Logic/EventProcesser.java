@@ -8,10 +8,21 @@ public class EventProcesser {
 	RouteListClass routes = new RouteListClass();
 	CostListClass costs = new CostListClass();;
 	ArrayList<KPEvent> events = new ArrayList<KPEvent>();
-
+	MailDelivery mailList = new MailDelivery();
 	public EventProcesser() {
 		 
 	}
+	
+	public ArrayList<Destination> validOrigin(){
+		
+		return null;
+	}
+public ArrayList<Destination> validDestinations(){
+		
+		return null;
+	}
+	
+	
 
 	public String proccess(String[] details) throws Exception {
 System.out.println( details);
@@ -25,10 +36,8 @@ System.out.println( details);
 	 * 0 = Add route
 	 * 1 = change Route
 	 * 2 = discontine Route
-	 * 
 	 * 3 = Add Cost
 	 * 4 = Change Cost
-	 * 
 	 * 5 Deliver Mail
 	 * 
 	 */
@@ -56,21 +65,34 @@ switch (type) {
 	
 	}
 			
-			
+		/**
+		 * A method that will return an error message.
+		 * 
+		 * I have put this in place so we can trace to an error method call.	
+		 * 
+		 * @param details String Array of event informations
+		 * @param string Error message from a problems
+		 * @return
+		 */
 			private String error(String[] details, String string) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return "error: "+string;
 	}
 
 		private String deliverMail(String[] details) throws CloneNotSupportedException {
 			Mail m = new Mail(details);
-			// TODO ShipMail
-			KPEvent e = new KPEvent("Send", m, true, (Statistics)Logic.stats.clone());
-			// e.addStats;
-			events.add(e);
+			Route r = routes.findValidRoute(m);
+			Cost c = costs.findValidCost(m);
 			
-		// TODO Auto-generated method stub
-		return null;
+			if (r==null){ return error(details, "No valid Route"); }
+			if (c==null){ return error(details, "No valid Cost"); }
+			
+			Boolean success = mailList.deliverMail(m, r, c);
+			KPEvent e = new KPEvent("Send", m, success, (Statistics)Logic.stats.clone());
+			events.add(e);
+						
+			if(success)	return "Mail: " +  m.ID + " was successfully sent"; 
+			return error(details, "Cost was not Changes");
 	}
 
 		private String changeCost(String[] details) throws CloneNotSupportedException {
@@ -78,23 +100,43 @@ switch (type) {
 			Cost c = new Cost(details);
 			Boolean success = costs.changeCost(c);
 			KPEvent e = new KPEvent("Change", c, success, (Statistics)Logic.stats.clone());
-			// e.addStats;
 			events.add(e);	
 			
-		// TODO Auto-generated method stub
-		return null;
+		if(success)	return "Cost: " +  c.ID + " was successfully changed"; 
+		
+		return error(details, "Cost was not Changes");
 	}
 
 		private String addCost(String[] details) throws CloneNotSupportedException {
 			Cost c = new Cost(details);
 			Boolean success = costs.addCost(c);
 			KPEvent e = new KPEvent("Add", c, success , (Statistics)Logic.stats.clone());
-			// e.addStats;
 			events.add(e);
+			boolean neworigin = ! mailList.allDestinations.contains(c.origin);
+			boolean newdest = ! mailList.allDestinations.contains(c.destination);
+			 
+			if ( neworigin && newdest && success) {
+				mailList.allDestinations.add(new Destination(c.origin,false)); mailList.allDestinations.add(new Destination(c.destination,false));
+				return "Cost: " + c.ID + " was successfully added  "
+																+ "	\n a new origin is avaliable: "+ c.origin
+																+ "\n a new destination is avaliable" + c.destination; }
 			
+			if ( neworigin && success ) {
+				mailList.allDestinations.add(new Destination (c.origin,false));  	
+				return "Cost: " + c.ID + " was successfully added."
+												+ "	\n A new origin is avaliable: "+ c.origin; }
 			
-		// TODO Auto-generated method stub
-		return null;
+			if ( newdest && success) {
+				mailList.allDestinations.add(new Destination(c.destination,false));
+				return "Cost: " + c.ID + " was successfully added." 
+												+ "\n a new destination is avaliable" + c.destination; }
+			
+			if(success)	return "Cost: " + c.ID + " was successfully added"; 
+			
+ 			
+			return error(details, "Cost was not added");
+			 
+	
 	}
 
 		
@@ -108,8 +150,9 @@ switch (type) {
 			events.add(e);
 			
 			
-		// TODO Auto-generated method stub
-		return null;
+			if(success)	return "Route: " + r.ID + " was successfully deleted"; 
+			
+			return error(details, "Route was not deleted ");
 	}
 
 		private String changeRoute(String[] details) throws CloneNotSupportedException {
@@ -119,8 +162,9 @@ switch (type) {
 			KPEvent e = new KPEvent("Change", r, success,  (Statistics)Logic.stats.clone());
 			// e.addStats;
 			events.add(e);
-			// TODO Auto-generated method stub
-			return null;
+			if(success)	return "Route: " + r.ID + " was successfully changed "; 
+			
+			return error(details, "Route was not Changes");
 			
 		
 	}
@@ -129,12 +173,11 @@ switch (type) {
 			Route r = new Route(details);
 			Boolean success = routes.addRoute(r);
 			KPEvent e = new KPEvent("Add", r, success, (Statistics)Logic.stats.clone());
-			// e.addStats;
 			events.add(e);	
 		
-			// TODO Auto-generated method stub
-			return null;
+			if(success)	return "Route: " + r.ID + " was successfully added "; 
 			
+			return error(details, "Route was not added");
 		
 			
 		}

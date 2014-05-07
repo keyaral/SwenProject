@@ -8,8 +8,9 @@ public class Cost {
 	public String destination;
 	public String origin;
 	public int priority;
-
-
+	
+	
+	
 	public Cost(String[] values) {
 	
 		this.ID = Integer.parseInt(values[0]);
@@ -18,6 +19,8 @@ public class Cost {
 		this.destination = (values[3]);
 		this.origin = (values[4]);
 		this.priority = Integer.parseInt(values[5]);
+		
+		
 	}
 	
 	public Cost(int i, double w, double v, String d, String o, int p){
