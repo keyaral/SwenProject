@@ -16,13 +16,26 @@ public class EventLogManager {
 	}
 
 	public String getDetails() {
-		// TODO Need to determine detail arangement
-		return "";
+		KPEvent e = eventProcesser.getEvents().get(index);
+		String details = "Event " + index + "/" + maxIndex + "\n\n";
+		if (e.object instanceof Route) {
+			Route r = (Route)(e.object);
+			details += "Route " + r.ID + " ";
+		}
+		else if (e.object instanceof Cost) {
+			Cost c = (Cost)(e.object);
+			details += "Cost " + c.ID + " ";
+		}
+		else if (e.object instanceof Mail) {
+			Mail m = (Mail)(e.object);
+		}
+		return details;
 	}
 
 	public String getStats() {
-		// eventProcesser.get(index).Statistics;
-		return "";
+		Statistics s = eventProcesser.getEvents().get(index).statistics;
+		String stats = s.revenue() + " " + s.expenditure() + " " + s.events();
+		return stats;
 	}
 
 	public void next() throws TransitionError {
