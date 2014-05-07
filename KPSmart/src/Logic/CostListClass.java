@@ -9,10 +9,21 @@ public class CostListClass {
 	
 	public CostListClass(){
 		costs = new HashMap<String, Cost>();
-		//costs.addAll();  Add from database
-		Cost testCost1 = new Cost(1, 10,15,"Auckland","Wellington",2);
-		Cost testCost2 = new Cost(2, 10,15,"Auckland","Wellington",2);
-		Cost testCost3 = new Cost(3, 10,15,"Auckland","Wellington",2);
+
+		Cost testCost1 = new Cost(1, 10,15,"Wellington","Rotarua",2);
+		Cost testCost2 = new Cost(2, 10,15,"Auckland","Rotarua",2);
+		Cost testCost3 = new Cost(3, 10,15,"Dunedin","Wellington",2);
+		Cost testCost4 = new Cost(1, 10,15,"Rotarua","Wellington",2);
+		Cost testCost5 = new Cost(2, 10,15,"Rotarua","Auckland",2);
+		Cost testCost6 = new Cost(3, 10,15,"Wellington","Dunedin",2);
+		Cost testCost7 = new Cost(1, 10,15,"Wellington","Rotarua",2);
+		Cost testCost8 = new Cost(2, 10,15,"Auckland","Rotarua",2);
+		Cost testCost9 = new Cost(3, 10,15,"Dunedin","Wellington",2);
+		
+		Cost testCost11 = new Cost(1, 10,15,"Auckland","Wellington",1);
+		Cost testCost12 = new Cost(2, 10,15,"Wellington","Auckland",1);
+		Cost testCost13 = new Cost(3, 10,15,"Wellington","Dunedin",1);
+		
 		costs.put("AucklandStndWellington", testCost1);
 		costs.put("AucklandStndWellington", testCost2);
 		costs.put("AucklandStndWellington", testCost3);

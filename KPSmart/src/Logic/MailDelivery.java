@@ -85,7 +85,7 @@ public class MailDelivery {
 	
 	private Destination findOrigin(String origin) {
 		Boolean dom = false;
-		for (Destination d :nzDestinations ) {
+		for (Destination d :allDestinations ) {
 			if ( origin.equals(d.getName()) ) {
 				return d;  }
 		}
@@ -96,20 +96,17 @@ public class MailDelivery {
 	
 	private Destination findDestination(String des) {
 		Boolean dom = false;
-		for (Destination d :nzDestinations ) {
+		for (Destination d :allDestinations ) {
 			if ( des.equals(d.getName()) ) {
 				return d;  }
 		}
-	
+		if (!dom) {//TODO ERROR}	
+		}
+		return null;
 		
-			for (Destination os :overSeasDestinations ) {
-				if ( des.equals(os.getName()) ) {
-					return os;  }
-			}
-		
-		Destination newOs = new Destination(des, false);	
-		overSeasDestinations.add(newOs);	
-			return newOs;
+		//Destination newOs = new Destination(des, false);	
+	//	allDestinations.add(newOs);	
+		//	return newOs;
 		}
 	
 	
