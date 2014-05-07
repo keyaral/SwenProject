@@ -32,8 +32,7 @@ public class EventProcesser {
 				;
 			Route r = new Route(details);
 			Boolean success = routes.addRoute(r);
-			KPEvent e = new KPEvent("Add", r, success);
-			// e.addStats;
+			KPEvent e = new KPEvent("Add", r, success, (Statistics)Logic.stats.clone());
 			events.add(e);
 		}
 		if (type.equals("1b")) {
@@ -41,8 +40,7 @@ public class EventProcesser {
 				;
 			Route r = new Route(details);
 			Boolean success = routes.changeRoute(r);
-			KPEvent e = new KPEvent("Change", r, success);
-			// e.addStats;
+			KPEvent e = new KPEvent("Change", r, success, (Statistics)Logic.stats.clone());
 			events.add(e);
 		}
 
@@ -51,8 +49,7 @@ public class EventProcesser {
 				;
 			Route r = new Route(details);
 			Boolean success = routes.deleteRoute(r);
-			KPEvent e = new KPEvent("Delete", r, success);
-			// e.addStats;
+			KPEvent e = new KPEvent("Delete", r, success, (Statistics)Logic.stats.clone());
 			events.add(e);
 		}
 
@@ -61,8 +58,7 @@ public class EventProcesser {
 				;
 			Cost c = new Cost(details);
 			Boolean success = costs.addCost(c);
-			KPEvent e = new KPEvent("Add", c, success);
-			// e.addStats;
+			KPEvent e = new KPEvent("Add", c, success, (Statistics)Logic.stats.clone());
 			events.add(e);
 		}
 		if (type.equals("2b")) {// call Costs
@@ -70,8 +66,7 @@ public class EventProcesser {
 				;
 			Cost c = new Cost(details);
 			Boolean success = costs.changeCost(c);
-			KPEvent e = new KPEvent("Change", c, success);
-			// e.addStats;
+			KPEvent e = new KPEvent("Change", c, success, (Statistics)Logic.stats.clone());
 			events.add(e);
 		}
 		if (type.equals("2c")) {// call Costs
@@ -79,8 +74,7 @@ public class EventProcesser {
 				;
 			Cost c = new Cost(details);
 			Boolean success = costs.deleteCost(c);
-			KPEvent e = new KPEvent("Delete", c, success);
-			// e.addStats;
+			KPEvent e = new KPEvent("Delete", c, success, (Statistics)Logic.stats.clone());
 			events.add(e);
 		}
 
@@ -89,8 +83,7 @@ public class EventProcesser {
 				;
 			Mail m = new Mail(details);
 			// TODO ShipMail
-			KPEvent e = new KPEvent("Send", m, true);
-			// e.addStats;
+			KPEvent e = new KPEvent("Send", m, true, (Statistics)Logic.stats.clone());
 			events.add(e);
 		}
 		return type;
