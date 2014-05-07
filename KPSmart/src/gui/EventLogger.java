@@ -20,7 +20,7 @@ public class EventLogger extends JInternalFrame{
 	private static final long serialVersionUID = 1L;
 
 	private EventLogManager manager = new EventLogManager();
-	private List<String> amountOfMail = new ArrayList<String>();
+	private List<String> amountOfMail = new ArrayList<String>();//
 	private List<String> averageDeliveryTimes = new ArrayList<String>();
 	private List<String> crticalRoutes = new ArrayList<String>();
 

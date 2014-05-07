@@ -7,7 +7,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
-import log.reader.XmlReader;
+import Log.reader.XmlReader;
 
 import Log.Log;
 import Log.Log.Cost;
