@@ -12,24 +12,24 @@ import Log.event.*;
 
 
 public class EventLogger extends JInternalFrame{
-	
-	
+
+
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private EventLogManager manager = new EventLogManager();
 	private List<String> amountOfMail = new ArrayList<String>();
 	private List<String> averageDeliveryTimes = new ArrayList<String>();
 	private List<String> crticalRoutes = new ArrayList<String>();
-	
+
 	private JTextArea textLog;
 	private JLabel lblRevenue;
 	private JLabel lblExpenditure;
 	private JLabel lblEventsReported;
 	private JTextField textField;
-	
+
 	public EventLogger() {
 		setTitle("Event Log");
 		setIconifiable(true);
@@ -37,13 +37,13 @@ public class EventLogger extends JInternalFrame{
 		setBounds(0,0,568,337);
 		setLocation(400,150);
 		JScrollPane scroller = new JScrollPane();
-		
+
 		JPanel bottomLeftPane = new JPanel();
 		bottomLeftPane.setBorder(new LineBorder(Color.LIGHT_GRAY));
-		
+
 		JPanel rightPane = new JPanel();
 		rightPane.setBorder(new LineBorder(Color.LIGHT_GRAY));
-		
+
 		GroupLayout layout = new GroupLayout(getContentPane());
 		layout.setHorizontalGroup(
 			layout.createParallelGroup(Alignment.CENTER)
@@ -68,14 +68,14 @@ public class EventLogger extends JInternalFrame{
 							.addComponent(bottomLeftPane, GroupLayout.PREFERRED_SIZE, 71, Short.MAX_VALUE)))
 					.addContainerGap())
 		);
-		
+
 		JButton btnClose = new JButton("Close");
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}
 		});
-		
+
 		JTabbedPane bussinessPanel = new JTabbedPane(JTabbedPane.TOP);
 		GroupLayout gl_rightPane = new GroupLayout(rightPane);
 		gl_rightPane.setHorizontalGroup(
@@ -96,14 +96,14 @@ public class EventLogger extends JInternalFrame{
 					.addComponent(btnClose)
 					.addContainerGap())
 		);
-		
+
 		JPanel statsPanel = new JPanel();
 		bussinessPanel.addTab("Statistics", null, statsPanel, null);
-		
+
 		lblRevenue = new JLabel("Revenue:");
-		
+
 		lblExpenditure = new JLabel("Expenditure:");
-		
+
 		lblEventsReported = new JLabel("Events Reported:");
 		GroupLayout gl_statsPanel = new GroupLayout(statsPanel);
 		gl_statsPanel.setHorizontalGroup(
@@ -128,43 +128,43 @@ public class EventLogger extends JInternalFrame{
 					.addContainerGap(138, Short.MAX_VALUE))
 		);
 		statsPanel.setLayout(gl_statsPanel);
-		
+
 		JList amountOfMailList = new JList();
 		bussinessPanel.addTab("Amount Of Mail", null, amountOfMailList, null);
-		
+
 		JList averageDeliveryTimesList = new JList();
 		bussinessPanel.addTab("Average Delivery Times", null, averageDeliveryTimesList, null);
-		
+
 		JList criticalRoutesList = new JList();
 		bussinessPanel.addTab("Critical Routes", null, criticalRoutesList, null);
 		rightPane.setLayout(gl_rightPane);
-		
+
 		textLog = new JTextArea();
 		textLog.setEditable(false);
 		scroller.setViewportView(textLog);
-		
+
 		JButton btnPrevious = new JButton("Previous");
 		btnPrevious.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		
+
 		JButton btnNext = new JButton("Next");
 		btnNext.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
 
-		
+
 		JButton btnGoTo = new JButton("Go To");
 		btnGoTo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		
+
 		textField = new JTextField();
 		textField.setColumns(10);
-						
+
 		GroupLayout gl_bottomLeftPane = new GroupLayout(bottomLeftPane);
 		gl_bottomLeftPane.setHorizontalGroup(
 			gl_bottomLeftPane.createParallelGroup(Alignment.LEADING)
@@ -192,19 +192,19 @@ public class EventLogger extends JInternalFrame{
 						.addComponent(btnGoTo))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
-		
+
 		bottomLeftPane.setLayout(gl_bottomLeftPane);
 		getContentPane().setLayout(layout);
 	}
-	
+
 	/**
 	 * Updates the log
 	 */
 	public void update() {
 		textLog.setText(manager.getDetails());
-//		String[] statistics = MainWindow.logic.getStatistics().split(" ");
-//		lblRevenue.setText("Revenue: " + statistics[0]);
-//		lblExpenditure.setText("Expenditure: " + statistics[1]);
-//		lblEventsReported.setText("Events Reported: " + statistics[2]);
+		String[] statistics = manager.getStats().split(" ");
+		lblRevenue.setText("Revenue: " + statistics[0]);
+		lblExpenditure.setText("Expenditure: " + statistics[1]);
+		lblEventsReported.setText("Events Reported: " + statistics[2]);
 	}
 }
