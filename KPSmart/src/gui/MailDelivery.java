@@ -196,6 +196,7 @@ public class MailDelivery extends JInternalFrame {
 				 randomPrioritySelection(cmbPriority.getItemCount());
 				 generateRandWeightAndVolume();
 				 generateRandomDate();
+				 generateRandWeightAndVolume();
 			}
 		});
 		GroupLayout gl_btnPanel = new GroupLayout(btnPanel);

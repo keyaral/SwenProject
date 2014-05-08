@@ -13,21 +13,51 @@ import javax.swing.JButton;
 import javax.swing.JList;
 
 import Logic.Cost;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Random;
+
+import javax.swing.JComboBox;
 
 public class CostModification extends JInternalFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField txtRouteNumber;
-	private JTextField txtOriginPort;
-	private JTextField txtDestinationPort;
 	private JFormattedTextField txtWeightCost;
 	private JFormattedTextField txtVolumeCost;
-	private JFormattedTextField txtPriority;
-
+	private JComboBox cmbPriority;
+	private JComboBox cmbDestination;
+	private JComboBox cmbOrigin;
+	//Generate Random ID
+	private void generateRandomId(int rnd){
+		Random random=new Random();
+		int id=random.nextInt(rnd);
+		txtRouteNumber.setText(Integer.toString(id));
+	}
+	private void randomDestinationSelection(int item){
+		Random random=new Random();
+		int id=random.nextInt(item);
+		cmbDestination.setSelectedIndex(id);
+	}
+	private void randomOriginSelection(int item){
+		Random random=new Random();
+		int id=random.nextInt(item);
+		cmbOrigin.setSelectedIndex(id);
+	}
+	private void randomPrioritySelection(int item){
+		Random random=new Random();
+		int id=random.nextInt(item);
+		cmbPriority.setSelectedIndex(id);
+	}
+	private void generateRandWeightAndVolumeCost(){
+		Random random=new Random();
+		double number=random.nextDouble();
+		txtWeightCost.setText(Double.toString(Math.round(number*100)));
+		txtVolumeCost.setText(Double.toString(Math.round(number*50)));
+	}
 	@SuppressWarnings("rawtypes")
 	public CostModification() {
 		setClosable(true);
@@ -62,11 +92,11 @@ public class CostModification extends JInternalFrame {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null,"Fields cleared...",null, 1);
 				txtRouteNumber.setText("");
-				txtOriginPort.setText("");
-				txtDestinationPort.setText("");
+				cmbOrigin.setSelectedIndex(-1);
+				cmbDestination.setSelectedIndex(-1);
 				txtWeightCost.setText("");
 				txtVolumeCost.setText("");
-				txtPriority.setText("");
+				cmbPriority.setSelectedIndex(-1);
 				MainWindow.logic.processform("Cost Modification --> All fields cleared.");
 				
 				
@@ -75,19 +105,24 @@ public class CostModification extends JInternalFrame {
 		JButton btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String priority=(String)cmbPriority.getSelectedItem();
+				String origin=(String)cmbOrigin.getSelectedItem();
+				String destination=(String)cmbDestination.getSelectedItem();
 				
-				if(txtRouteNumber.getText().equals("") || txtOriginPort.getText().equals("") || txtDestinationPort.getText().equals("")
-						|| txtWeightCost.getText().equals("") || txtVolumeCost.getText().equals("") || txtPriority.getText().equals("")){
+				if(txtRouteNumber.getText().equals("") || origin.equals("") || destination.equals("")
+						|| txtWeightCost.getText().equals("") || txtVolumeCost.getText().equals("") || priority.equals("")){
 					System.out.println(MainWindow.logic.processform("Cost Modification -- > Data input fields are empty.Please fill in all fields..."));
 					JOptionPane.showMessageDialog(null,"Please enter all details",null, 1);
 					
 				}else{
 		
 					String values=Integer.parseInt(txtRouteNumber.getText())+"\t"+Double.parseDouble(txtWeightCost.getText())+"\t"+
-							Double.parseDouble(txtVolumeCost.getText())+"\t"+txtDestinationPort.getText()+"\t"+txtOriginPort.getText()+"\t"+
-							Integer.parseInt(txtPriority.getText());
-							//Cost cost=new Cost(values);
-						JOptionPane.showMessageDialog(null, "Saved!",null, 1);
+							Double.parseDouble(txtVolumeCost.getText())+"\t"+destination+"\t"+origin+"\t"+
+							priority;
+					String[] cmodification=values.split("\t");
+					Cost cost=new Cost(values);
+					
+						//JOptionPane.showMessageDialog(null, "Saved!",null, 1);
 						System.out.println(MainWindow.logic.processform("Cost Modification--> Saving Details...\n" + values));
 				}
 				
@@ -97,8 +132,40 @@ public class CostModification extends JInternalFrame {
 		JButton btnClose = new JButton("Close");
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MainWindow.logic.processform("Closing Cost Modification Form.");
+				String[] close={"Closing Cost Modification Form"};
+				MainWindow.logic.processform(close[0]);
 				dispose();
+			}
+		});
+		
+		JButton btnLoadTestData = new JButton("Load Test Data");
+		btnLoadTestData.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				generateRandomId(1000);
+				generateRandWeightAndVolumeCost();
+				if (cmbDestination.getItemCount()==0){
+					cmbDestination.setSelectedIndex(-1);
+					cmbDestination.addItem("No Destination Defined");
+					randomDestinationSelection(1);
+				}else{
+					randomDestinationSelection(cmbDestination.getItemCount());
+				}
+				if (cmbOrigin.getItemCount()==0){
+					cmbOrigin.setSelectedIndex(-1);
+					cmbOrigin.addItem("No Origin Defined");
+					randomDestinationSelection(1);
+				}else{
+					randomOriginSelection(cmbOrigin.getItemCount());
+				}
+				if (cmbPriority.getItemCount()==0){
+					cmbPriority.setSelectedIndex(-1);
+					cmbPriority.addItem("No Priority Defined");
+					randomDestinationSelection(1);
+				}else{
+					randomPrioritySelection(cmbPriority.getItemCount());
+				}
+				
+				
 			}
 		});
 		GroupLayout gl_btnPanel = new GroupLayout(btnPanel);
@@ -109,7 +176,9 @@ public class CostModification extends JInternalFrame {
 					.addComponent(btnClearFields)
 					.addGap(10)
 					.addComponent(btnSave)
-					.addPreferredGap(ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+					.addComponent(btnLoadTestData, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
+					.addGap(64)
 					.addComponent(btnClose)
 					.addGap(19))
 		);
@@ -120,8 +189,9 @@ public class CostModification extends JInternalFrame {
 					.addGroup(gl_btnPanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnSave)
 						.addComponent(btnClearFields)
-						.addComponent(btnClose))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addComponent(btnClose)
+						.addComponent(btnLoadTestData))
+					.addContainerGap(14, Short.MAX_VALUE))
 		);
 		btnPanel.setLayout(gl_btnPanel);
 		
@@ -144,13 +214,6 @@ public class CostModification extends JInternalFrame {
 		JLabel lblOriginatingPort = new JLabel("Originating Port");
 		
 		JLabel lblDestinationPort = new JLabel("Destination Port");
-		
-		txtOriginPort = new JTextField();
-		txtOriginPort.setColumns(10);
-		
-		txtDestinationPort = new JTextField();
-		txtDestinationPort.setText("");
-		txtDestinationPort.setColumns(10);
 		
 		JList listOfExistingRoutes = new JList();
 		
@@ -186,18 +249,12 @@ public class CostModification extends JInternalFrame {
 		JLabel lblVolumeCost = new JLabel("Volume Cost");
 		
 		JLabel lblPriority = new JLabel("Priority");
-		//Allow text box to accept number only
-		txtPriority = new JFormattedTextField();
-		txtPriority.addKeyListener(new KeyAdapter() { 
-	         public void keyTyped(KeyEvent e) {  
-	           char c = e.getKeyChar();  
-	           if (!(Character.isDigit(c) ||  
-	              (c == KeyEvent.VK_BACK_SPACE)||
-	              (c == KeyEvent.VK_DELETE))) {  
-	                e.consume();  
-	              }  
-	         }  
-	   });  
+		
+		cmbPriority = new JComboBox();
+		
+		cmbDestination = new JComboBox();
+		
+		cmbOrigin = new JComboBox();
 		
 		GroupLayout gl_DataInputPanel = new GroupLayout(DataInputPanel);
 		gl_DataInputPanel.setHorizontalGroup(
@@ -205,29 +262,29 @@ public class CostModification extends JInternalFrame {
 				.addGroup(gl_DataInputPanel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblPriority)
-						.addGroup(Alignment.TRAILING, gl_DataInputPanel.createSequentialGroup()
+						.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
 							.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
-									.addGroup(gl_DataInputPanel.createSequentialGroup()
-										.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.TRAILING)
-											.addComponent(lblOriginatingPort, GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
-											.addComponent(lblDestinationPort, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-										.addGap(18))
-									.addComponent(lblWeightCost)
-									.addComponent(lblVolumeCost, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE))
 								.addGroup(gl_DataInputPanel.createSequentialGroup()
-									.addComponent(lblRouteNumber, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
-									.addGap(12)))
-							.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
-								.addGroup(Alignment.TRAILING, gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
-									.addComponent(txtPriority, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
-									.addComponent(txtOriginPort, GroupLayout.PREFERRED_SIZE, 164, GroupLayout.PREFERRED_SIZE))
-								.addComponent(txtDestinationPort, GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-								.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.TRAILING, false)
-									.addComponent(txtVolumeCost, Alignment.LEADING)
-									.addComponent(txtWeightCost, Alignment.LEADING)
-									.addComponent(txtRouteNumber, Alignment.LEADING)))))
+									.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.TRAILING)
+										.addComponent(lblOriginatingPort, GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
+										.addComponent(lblDestinationPort, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+									.addGap(18))
+								.addComponent(lblWeightCost)
+								.addComponent(lblVolumeCost, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE))
+							.addGroup(gl_DataInputPanel.createSequentialGroup()
+								.addComponent(lblRouteNumber, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+								.addGap(12)))
+						.addGroup(gl_DataInputPanel.createSequentialGroup()
+							.addComponent(lblPriority)
+							.addGap(61)))
+					.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(cmbOrigin, 0, 138, Short.MAX_VALUE)
+						.addComponent(cmbDestination, 0, 138, Short.MAX_VALUE)
+						.addComponent(cmbPriority, 0, 164, Short.MAX_VALUE)
+						.addGroup(Alignment.TRAILING, gl_DataInputPanel.createParallelGroup(Alignment.TRAILING, false)
+							.addComponent(txtVolumeCost, Alignment.LEADING)
+							.addComponent(txtWeightCost, Alignment.LEADING)
+							.addComponent(txtRouteNumber, Alignment.LEADING)))
 					.addGap(27)
 					.addComponent(listOfExistingRoutes, GroupLayout.PREFERRED_SIZE, 211, GroupLayout.PREFERRED_SIZE)
 					.addGap(33))
@@ -252,15 +309,15 @@ public class CostModification extends JInternalFrame {
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblDestinationPort)
-								.addComponent(txtDestinationPort, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addComponent(cmbDestination, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(txtOriginPort, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblOriginatingPort))
-							.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(lblOriginatingPort)
+								.addComponent(cmbOrigin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblPriority)
-								.addComponent(txtPriority, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(cmbPriority, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(gl_DataInputPanel.createSequentialGroup()
 							.addGap(19)
 							.addComponent(listOfExistingRoutes, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE)))
