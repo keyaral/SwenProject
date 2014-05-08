@@ -32,10 +32,11 @@ public class RouteChain {
 	}
 	
 	public void PrintAllRoutes(){		//Testing Purposes
-		System.out.println(routes.size());
+		System.out.println("Route Option");
+		int count = 1;
 		for(Route r : routes){
-			System.out.println("!");
-		//	System.out.println("Route Origin: "+r.origin.getName()+" Destination: "+r.destination.getName());
+		System.out.println("Step "+count+": "+r.origin.getName()+" to: "+r.destination.getName());
+		count++;
 		}
 	}
 }

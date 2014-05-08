@@ -106,19 +106,22 @@ public class RouteListClass {
 				if(Double.valueOf(s) < lowestCost) lowestCost = Double.valueOf(s);
 			}
 		}
-		for(RouteChain r1 : PreferableRoutes.values()){System.out.println("Test1");r1.PrintAllRoutes();}
+		for(RouteChain r1 : PreferableRoutes.values()){r1.PrintAllRoutes();}
 		
 		return PossibleRoutes.get((Double.toString(lowestCost)));
 	}
 
 	private ArrayList<Route> searchRouteChain(Destination d, ArrayList<Route> currentRoutes, Destination finish) {
+		
 		for(Route t :d.routes){
 			if(t.visited == false){
 				t.visited = true;
 				currentRoutes.add(t); 
-				if(t.destination.getName().equals(finish.getName())) {System.out.println("Found "+t.origin.getName()); tempPath.add(currentRoutes); 
-				currentRoutes.removeAll(currentRoutes);
-				}
+				if(t.destination.getName().equals(finish.getName())) {System.out.println("Found Route to Destination From: "+t.origin.getName()); 
+				ArrayList<Route> tempRoutes = new ArrayList<Route>();
+				for(Route r : currentRoutes) if(r.added == false){ tempRoutes.add(r); r.added = true;}
+				tempPath.add(tempRoutes);
+				} 
 				else currentRoutes = searchRouteChain(t.destination, currentRoutes,finish);}
 	     	}
 		return currentRoutes;

@@ -20,6 +20,7 @@ public class Route {
 	public double costVolume;
 	public ArrayList<Route> neighbours = new ArrayList<Route>();
 	public boolean visited = false;
+	public boolean added = false;
 	
 	public Route(String details){
 		
