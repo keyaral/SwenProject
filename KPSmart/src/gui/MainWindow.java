@@ -3,10 +3,20 @@ import javax.swing.*;
 
 import java.awt.event.*;
 import java.awt.Color;
+import java.awt.ComponentOrientation;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.Window;
 
 import javax.swing.GroupLayout.Alignment;
 
 import Logic.Logic;
+
+import javax.swing.border.LineBorder;
+
+import java.awt.Font;
+
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class MainWindow extends JFrame{
 
@@ -29,15 +39,30 @@ public class MainWindow extends JFrame{
 	private JMenuItem exit;
 	public JMenuItem mnuItemCostModification;
 	public JDesktopPane desktopPane;
-	
+	private BusinessMonitoring bMonitoring;
 	public static final Logic logic = new Logic();
-	
+	 private final Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 	public MainWindow() {
 		super("KPSmart");
 		this.setExtendedState(MAXIMIZED_BOTH);
 		setTitle("KPSmart Postal Services");
 		initComponents();
 		CreateEvent();
+		if (bMonitoring==null || !bMonitoring.isClosable()){
+			bMonitoring= new BusinessMonitoring();
+			bMonitoring.txtAverageDeliveryTimes.setEnabled(false);
+			bMonitoring.txtRevenue.setEnabled(false);
+			bMonitoring.txtProfit.setEnabled(false);
+			bMonitoring.txtExpenditure.setEnabled(false);
+			bMonitoring.txtAverageWeight.setEnabled(false);
+			bMonitoring.txtAverageVolume.setEnabled(false);
+			bMonitoring.txtAverageDeliveryTimes.setEnabled(false);
+			desktopPane.add(bMonitoring);
+			bMonitoring.setLocation(1000,0);
+			bMonitoring.setVisible(true);
+			
+		}
+		
 	}
 
 	private void initComponents(){
@@ -144,34 +169,35 @@ public class MainWindow extends JFrame{
 		});
 		
 		desktopPane = new JDesktopPane();
+
+        getContentPane().setVisible( true );  
 		desktopPane.setBackground(Color.LIGHT_GRAY);
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(10)
-					.addComponent(desktopPane)
-					.addGap(10))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(menuBar, GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(10)
+							.addComponent(desktopPane, GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE))
+						.addComponent(menuBar, GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addComponent(menuBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(19)
-					.addComponent(desktopPane)
-					.addContainerGap())
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(desktopPane, GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE))
 		);
 		GroupLayout gl_desktopPane = new GroupLayout(desktopPane);
 		gl_desktopPane.setHorizontalGroup(
-			gl_desktopPane.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 381, Short.MAX_VALUE)
+			gl_desktopPane.createParallelGroup(Alignment.TRAILING)
+				.addGap(0, 391, Short.MAX_VALUE)
 		);
 		gl_desktopPane.setVerticalGroup(
 			gl_desktopPane.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 365, Short.MAX_VALUE)
+				.addGap(0, 562, Short.MAX_VALUE)
 		);
 		desktopPane.setLayout(gl_desktopPane);
 		getContentPane().setLayout(groupLayout);
@@ -257,6 +283,4 @@ public class MainWindow extends JFrame{
 		new MainWindow();
 		
 	}
-
-	
 }
