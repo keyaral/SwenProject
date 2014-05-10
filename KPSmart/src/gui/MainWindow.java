@@ -110,7 +110,7 @@ public class MainWindow extends JFrame{
 		jHelp.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-						JOptionPane.showMessageDialog(null,"Help will be available soon",null, 1);
+						JOptionPane.showMessageDialog(null,"Help is not available at this time...",null, 1);
 				
 				}	
 			}

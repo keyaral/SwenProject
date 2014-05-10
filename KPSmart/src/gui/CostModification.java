@@ -32,6 +32,7 @@ public class CostModification extends JInternalFrame {
 	private JComboBox cmbDestination;
 	private JComboBox cmbOrigin;
 	//Generate Random ID
+	
 	private void generateRandomId(int rnd){
 		Random random=new Random();
 		int id=random.nextInt(rnd);
@@ -97,7 +98,8 @@ public class CostModification extends JInternalFrame {
 				txtWeightCost.setText("");
 				txtVolumeCost.setText("");
 				cmbPriority.setSelectedIndex(-1);
-				MainWindow.logic.processform("Cost Modification --> All fields cleared.");
+				String[] msg={"Cost Modification --> All fields cleared."};
+				MainWindow.logic.processform(msg[0]);
 				
 				
 			}
@@ -108,22 +110,30 @@ public class CostModification extends JInternalFrame {
 				String priority=(String)cmbPriority.getSelectedItem();
 				String origin=(String)cmbOrigin.getSelectedItem();
 				String destination=(String)cmbDestination.getSelectedItem();
-				
+				int dialogButton = JOptionPane.YES_NO_OPTION;
 				if(txtRouteNumber.getText().equals("") || origin.equals("") || destination.equals("")
 						|| txtWeightCost.getText().equals("") || txtVolumeCost.getText().equals("") || priority.equals("")){
 					System.out.println(MainWindow.logic.processform("Cost Modification -- > Data input fields are empty.Please fill in all fields..."));
 					JOptionPane.showMessageDialog(null,"Please enter all details",null, 1);
 					
 				}else{
-		
+					int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to save the details?","Confirmation",dialogButton);
+					if(dialogResult == JOptionPane.YES_OPTION){
 					String values=Integer.parseInt(txtRouteNumber.getText())+"\t"+Double.parseDouble(txtWeightCost.getText())+"\t"+
 							Double.parseDouble(txtVolumeCost.getText())+"\t"+destination+"\t"+origin+"\t"+
 							priority;
 					String[] cmodification=values.split("\t");
-					Cost cost=new Cost(values);
+						for (int i=0;i<cmodification.length;i++){
+							MainWindow.logic.processform(cmodification[i]);
+						}
 					
 						//JOptionPane.showMessageDialog(null, "Saved!",null, 1);
-						System.out.println(MainWindow.logic.processform("Cost Modification--> Saving Details...\n" + values));
+						String[] msg={"Cost Modification--> Saving Details"};
+						MainWindow.logic.processform(msg[0]);
+					}else{
+						//Changes are not saved
+						JOptionPane.showMessageDialog(null,"Details not saved.",null, 1);
+					}
 				}
 				
 			}
@@ -147,8 +157,21 @@ public class CostModification extends JInternalFrame {
 					cmbDestination.setSelectedIndex(-1);
 					cmbDestination.addItem("No Destination Defined");
 					randomDestinationSelection(1);
+				
 				}else{
 					randomDestinationSelection(cmbDestination.getItemCount());
+					System.out.println("Test Data Loaded...");
+					String priority=(String)cmbPriority.getSelectedItem();
+					String origin=(String)cmbOrigin.getSelectedItem();
+					String destination=(String)cmbDestination.getSelectedItem();
+					String values=Integer.parseInt(txtRouteNumber.getText())+"\t"+Double.parseDouble(txtWeightCost.getText())+"\t"+
+							Double.parseDouble(txtVolumeCost.getText())+"\t"+destination+"\t"+origin+"\t"+
+							priority;
+					
+					String[] testData=values.split("\t");
+					for (int i=0;i<testData.length;i++){
+						MainWindow.logic.processform(testData[i]);
+					}
 				}
 				if (cmbOrigin.getItemCount()==0){
 					cmbOrigin.setSelectedIndex(-1);
@@ -249,12 +272,12 @@ public class CostModification extends JInternalFrame {
 		JLabel lblVolumeCost = new JLabel("Volume Cost");
 		
 		JLabel lblPriority = new JLabel("Priority");
-		
-		cmbPriority = new JComboBox();
-		
-		cmbDestination = new JComboBox();
-		
-		cmbOrigin = new JComboBox();
+		String [] mailPriority={"Domestic Air","International Air","Domestic Standard","Internation Standard Priority"};
+		cmbPriority = new JComboBox( mailPriority);
+		String[] destinations={"Rome","Sydney","London","New York","Singapore","Japan","Manila","Fiji","Hawaii","Moscow"};
+		cmbDestination = new JComboBox(destinations);
+		String[] distributionCenters={"Auckland","Hamilton","Rotorua","Palmerston North","Wellington","Christ Church","Dunedin"};
+		cmbOrigin = new JComboBox(distributionCenters);
 		
 		GroupLayout gl_DataInputPanel = new GroupLayout(DataInputPanel);
 		gl_DataInputPanel.setHorizontalGroup(

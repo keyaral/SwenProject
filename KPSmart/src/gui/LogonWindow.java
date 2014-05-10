@@ -3,7 +3,11 @@ package gui;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -11,6 +15,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.ImageIcon;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 
 
 public class LogonWindow extends JFrame {
@@ -37,13 +44,13 @@ public class LogonWindow extends JFrame {
 		txtPassword = new JPasswordField(15);
 		
 		getContentPane().setLayout(new BorderLayout());
-		setSize(324, 177);
+		setSize(376, 254);
 		setLocation(500,250);
 		panel.setLayout(null);
-		txtUserId.setBounds(94,29,181,20);
-		txtPassword.setBounds(94,60,181,20);
-		cancelButton.setBounds(195,91,80,23);
-		loginButton.setBounds(94, 91, 91, 23);
+		txtUserId.setBounds(94,111,181,20);
+		txtPassword.setBounds(94,142,181,20);
+		cancelButton.setBounds(192,173,80,23);
+		loginButton.setBounds(91, 173, 91, 23);
 		lblUserId.setBounds(30,30 , 150, 20);
 		lblPassword.setBounds(20,40,150,20);
 		
@@ -56,12 +63,19 @@ public class LogonWindow extends JFrame {
 		getContentPane().add(panel);
 		
 		JLabel lblUserName = new JLabel("User Name");
-		lblUserName.setBounds(10, 32, 74, 14);
+		lblUserName.setBounds(20, 114, 74, 14);
 		panel.add(lblUserName);
 		
 		JLabel lblPassword_1 = new JLabel("Password");
-		lblPassword_1.setBounds(20, 63, 74, 14);
+		lblPassword_1.setBounds(20, 145, 74, 14);
 		panel.add(lblPassword_1);
+		
+		lblKpsmart = new JLabel("KPSmart");
+		lblKpsmart.setBackground(new Color(255, 222, 173));
+		lblKpsmart.setForeground(SystemColor.activeCaption);
+		lblKpsmart.setFont(new Font("Tahoma", Font.ITALIC, 52));
+		lblKpsmart.setBounds(20, 11, 340, 59);
+		panel.add(lblKpsmart);
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -120,7 +134,8 @@ public class LogonWindow extends JFrame {
 	}
 	public static void main (String[] args) {
 		new LogonWindow();
-		
-		
+
 	}
+	    private JLabel lblKpsmart;
+	    
 }
