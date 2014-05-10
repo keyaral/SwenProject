@@ -171,23 +171,22 @@ public class MailDelivery extends JInternalFrame {
 						|| txtDate.getText().equals("")){
 					
 					JOptionPane.showMessageDialog(null,"Please enter all details",null, 1);
-					String[] msg={"Mail Delivery Form-->Some data input fields are empty"};
-					MainWindow.logic.processform(msg[0]);
 				}else{
 					
 					int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to send this mail item?","Confirmation",dialogButton);
 					if(dialogResult == JOptionPane.YES_OPTION){
 						btnSave.setEnabled(false);
+						String type= MainWindow.logic.switchEvents(3,"3a"); //Case 3: Type "3a" Send  Mail
 						
-							String details=txtMailId.getText() + "\t" + destination + "\t" +
+							String details=type+txtMailId.getText() + "\t" + destination + "\t" +
 											origin+"\t" + txtWeight.getText() + "\t" +
-											txtVolume.getText()+"\t" + day + "\t" + txtDate.getText() +"\t" + priority  ;
+											txtVolume.getText()+"\t" + priority + "\t" + txtDate.getText()  ;
 							JOptionPane.showMessageDialog(null,"Mail Item sent.",null, 1);
-							mailDeliveryDetails=details.split("\t");
-							for (int i=0;i<mailDeliveryDetails.length;i++){
-								MainWindow.logic.processform(mailDeliveryDetails[i]);
-							}
-					}else{
+
+		
+								MainWindow.logic.processform(details);
+							//}
+					}else{	
 						//Do nothing
 						JOptionPane.showMessageDialog(null,"Canceled",null, 1);
 						

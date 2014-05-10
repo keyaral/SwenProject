@@ -2,6 +2,8 @@ package Logic;
 
 import java.util.HashSet;
 
+import javax.swing.JOptionPane;
+
 public class RouteListClass {
 
 	public HashSet<Route> routes;
@@ -22,7 +24,9 @@ public class RouteListClass {
 		for(Route a : routes){
 			if(a.ID == r.ID) exists = true;		//Can change to names instead of ID's
 		}
-		if(exists == true){ System.out.println("Already Exists"); return false;}
+		if(exists == true){ 
+			JOptionPane.showMessageDialog(null,r.ID + " Already Exists",null, 1);
+			System.out.println("Already Exists"); return false;}
 		else{routes.add(r); return true;}
 	}
 	
