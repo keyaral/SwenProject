@@ -26,7 +26,7 @@ public class BusinessMonitoring extends JInternalFrame {
 	public JTextField txtAverageDeliveryTimes;
 
 	
-	/**
+	/** 
 	 * Create the frame.
 	 */
 	public BusinessMonitoring() {
