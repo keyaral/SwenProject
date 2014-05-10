@@ -74,7 +74,7 @@ public class CostListClass {
 		String query = m.origin+m.priority+m.destination;
 		Cost c = costs.get(query);
 		System.out.print(c.toString());
-		return c;
+		return c; 
 	}
 	
 	public boolean contains( Cost c) {
