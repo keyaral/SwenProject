@@ -1,4 +1,4 @@
-package gui;
+ package gui;
 
 import java.util.*;
 
@@ -19,7 +19,7 @@ import Log.event.*;
 public class EventLogger extends JInternalFrame{
 
 
-	/**
+	/** 
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
