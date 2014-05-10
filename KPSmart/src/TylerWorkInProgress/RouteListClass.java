@@ -84,10 +84,13 @@ public class RouteListClass {
 		HashMap<String,RouteChain> PreferableRoutes = new HashMap<String,RouteChain>();
 	
 		for(Route r : origins){
-			int i = 0;
-			while(i <= destinations.size()){			//TODO do this a better way
+			int i;
+			do {
+			i = this.tempPath.size();
 			searchRouteChain(r.origin,new ArrayList<Route>(), m.destination);
-			i++;}}
+			}
+			while(i < destinations.size());
+		}
 		
 		for(ArrayList<Route> l : this.tempPath){
 		RouteChain MakeChain = new RouteChain(l,m.destination,m.origin);
