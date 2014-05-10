@@ -100,6 +100,10 @@ switch (type) {
 			if (success ){
 			KPEvent e = new KPEvent("Send", m, success, (Statistics)Logic.stats.clone());
 			events.add(e);
+			MainWindow.logic.stats.mails.add(m);
+			MainWindow.logic.stats.addRevenue((int)m.cost);
+			MainWindow.logic.stats.addRevenue((int)r.cost);
+			MainWindow.logic.stats.incrementEvents();
 			return "Mail: " +  m.ID + " was successfully sent"; 
 			}		
 			return error(details, "Cost was not Changes");
@@ -215,8 +219,9 @@ switch (type) {
 			Boolean success = routes.changeRoute(r);
 			
 			if(success)	{
-						KPEvent e = new KPEvent("Change", r, success,  (Statistics)Logic.stats.clone());
-			events.add(e);
+				KPEvent e = new KPEvent("Change", r, success,  (Statistics)Logic.stats.clone());
+				events.add(e);
+				MainWindow.logic.stats.incrementEvents();
 			return "Route: " + r.ID + " was successfully changed ";  } 
 			
 			else return error(details, "Route was not Changes");
@@ -232,6 +237,7 @@ switch (type) {
 			if (success)	{ 
 				KPEvent e = new KPEvent("Add", r, success, (Statistics)Logic.stats.clone());
 				events.add(e);
+				MainWindow.logic.stats.incrementEvents();
 				return "Route: " + r.ID + " was successfully added "; }
 			
 			
