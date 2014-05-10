@@ -160,7 +160,7 @@ public class TransportCost extends JInternalFrame {
 						cmbDay.setSelectedIndex(-1);
 						cmbType.setSelectedIndex(-1);
 						cmbCompany.setSelectedIndex(-1);
-				MainWindow.logic.processform("Transport Route Form --> Fields Cleared.");
+						//TODO	MainWindow.logic.processform("Transport Route Form --> Fields Cleared.");
 				//JOptionPane.showMessageDialog(null,"Clear Fields!",null, 1);
 			}
 		});
@@ -184,7 +184,7 @@ public class TransportCost extends JInternalFrame {
 						|| txtFrequency.getText().equals("")
 						|| day.equals("")
 						||txtDate.getText().equals("")){
-					MainWindow.logic.processform("Route Form --> Some fields are empty...");
+					//TODO	MainWindow.logic.processform("Route Form --> Some fields are empty...");
 					JOptionPane.showMessageDialog(null,"Please enter all details required !",null, 1);
 						
 			}else
@@ -215,7 +215,7 @@ public class TransportCost extends JInternalFrame {
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Logic logic=new Logic();
-				logic.processform("\nClosing Transport Route Form...");
+				//TODO	logic.processform("\nClosing Transport Route Form...");
 				dispose();
 			}
 		});

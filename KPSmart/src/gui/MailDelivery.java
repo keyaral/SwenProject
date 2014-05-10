@@ -165,7 +165,7 @@ public class MailDelivery extends JInternalFrame {
 						|| txtDate.getText().equals("")){
 					
 					JOptionPane.showMessageDialog(null,"Please enter all details",null, 1);
-					MainWindow.logic.processform("Mail Delivery Form-->Some data input fields are empty...");
+					//TODO		MainWindow.logic.processform("Mail Delivery Form-->Some data input fields are empty...");
 				}else{
 					String details=txtMailId.getText() + "\t" + destination + "\t" +
 									origin+"\t" + txtWeight.getText() + "\t" +

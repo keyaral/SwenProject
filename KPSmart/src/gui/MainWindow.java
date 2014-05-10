@@ -1,4 +1,13 @@
 package gui;
+import gui.BusinessMonitoring;
+import gui.CostModification;
+import gui.CreateNewUser;
+import gui.EventLogger;
+import gui.LogonWindow;
+import gui.MailDelivery;
+import gui.ManagerWindow;
+import gui.TransportCost;
+
 import javax.swing.*;
 
 import java.awt.event.*;
@@ -64,6 +73,8 @@ public class MainWindow extends JFrame{
 		}
 		
 	}
+	
+
 
 	private void initComponents(){
 		setLocation(350,250);
@@ -283,4 +294,5 @@ public class MainWindow extends JFrame{
 		new MainWindow();
 		
 	}
+	
 }

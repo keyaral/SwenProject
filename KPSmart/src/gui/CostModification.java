@@ -97,7 +97,7 @@ public class CostModification extends JInternalFrame {
 				txtWeightCost.setText("");
 				txtVolumeCost.setText("");
 				cmbPriority.setSelectedIndex(-1);
-				MainWindow.logic.processform("Cost Modification --> All fields cleared.");
+			//TODO 	MainWindow.logic.processform("Cost Modification --> All fields cleared.");
 				
 				
 			}
@@ -111,7 +111,7 @@ public class CostModification extends JInternalFrame {
 				
 				if(txtRouteNumber.getText().equals("") || origin.equals("") || destination.equals("")
 						|| txtWeightCost.getText().equals("") || txtVolumeCost.getText().equals("") || priority.equals("")){
-					System.out.println(MainWindow.logic.processform("Cost Modification -- > Data input fields are empty.Please fill in all fields..."));
+					//TODO	System.out.println(MainWindow.logic.processform("Cost Modification -- > Data input fields are empty.Please fill in all fields..."));
 					JOptionPane.showMessageDialog(null,"Please enter all details",null, 1);
 					
 				}else{
@@ -123,7 +123,7 @@ public class CostModification extends JInternalFrame {
 					Cost cost=new Cost(values);
 					
 						//JOptionPane.showMessageDialog(null, "Saved!",null, 1);
-						System.out.println(MainWindow.logic.processform("Cost Modification--> Saving Details...\n" + values));
+					//TODO	System.out.println(MainWindow.logic.processform("Cost Modification--> Saving Details...\n" + values));
 				}
 				
 			}
