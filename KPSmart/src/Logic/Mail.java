@@ -28,14 +28,14 @@ public class Mail {
 
 	public Mail(String[] values) {
 	
-		this.ID = Integer.parseInt(values[0]);
-		this.destination = (values[1]);
-		this.origin = (values[2]);
-		this.weight = Integer.parseInt(values[3]);
-		this.volume = Integer.parseInt(values[4]);
-		this.priority = Integer.parseInt(values[5]);
+		this.ID = Integer.parseInt(values[1]);
+		this.destination = (values[2]);
+		this.origin = (values[3]);
+		this.weight = Integer.parseInt(values[4]);
+		this.volume = Integer.parseInt(values[5]);
+		this.priority = Integer.parseInt(values[6]);
 		this.date = new Date();
-		this.date.parse(values[6]);
+	//	this.date.parse(values[7]);
 	}
 	
 	public void addCost(double c){

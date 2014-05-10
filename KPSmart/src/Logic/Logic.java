@@ -1,5 +1,6 @@
 package Logic;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -10,7 +11,56 @@ public class Logic {
 
 	public Logic() {
 		eventProcessor = new EventProcesser();
+		setupBaseEvents();
+		
+		
 	}
+	
+	
+
+
+	private void setupBaseEvents() {
+		//Add Base Costs
+		
+		System.out.println("Costs start ");
+		processform( new String[] {"3","122","15","20","Rotarua", "Auckland","2"} );
+		
+		processform( new String[] {"3","123","15","20","Wellington", "Auckland","1"} );
+		processform( new String[] {"3","124","15","20","Auckland", "Wellington","1"} );
+		
+		processform( new String[] {"3","125","15","20","Rotarua", "Auckland","1"} );	
+		processform( new String[] {"3","126","15","20","Wellington", "Rotarua","1"} );	
+		processform( new String[] {"3","127","15","20","Auckland", "Rotarua","1"} );
+		processform( new String[] {"3","128","15","20","Rotarua", "Wellington","1"} );
+		
+		System.out.println("Costs done ");
+		
+		processform( new String[] {"0","4126","Auckland", "Wellington","8","10","200","200","1","Tuesday", "5", "3","KpStart"} );	
+		processform( new String[] {"0","4125","Auckland", "Wellington","8","10","200","200","2","Tuesday", "5", "3","KpStart"} );	
+		
+		
+		processform( new String[] {"0","4127","Rotarua", "Wellington","8","10","200","200","1","Tuesday", "5", "3","KpStart"} );	
+		processform( new String[] {"0","4128","Wellington", "Rotarua","8","10","200","200","1","Tuesday", "5", "3","KpStart"} );	
+		processform( new String[] {"0","4129","Auckland", "Rotarua","8","10","200","200","1","Tuesday", "5", "3","KpStart"} );	
+		processform( new String[] {"0","4120","Rotarua", "Auckland","8","10","200","200","1","Tuesday", "5", "3","KpStart"} );	
+		processform( new String[] {"0","4125","Wellington", "Auckland","8","10","200","200","1","Tuesday", "5", "3","KpStart"} );	
+		System.out.println("routes done ");
+		
+		
+		processform( new String[] {"5","5126","Rotarua", "Auckland","8","10","1","Tuesday", "10-17-2014"} );	
+		processform( new String[] {"5","5126","Rotarua", "Auckland","8","10","2","Tuesday", "10-17-2014"} );
+	System.out.println("mail done ");
+
+//		
+		
+		
+		}
+		
+		
+		
+		
+		
+	
 
 
 	public String processform(String[] details) {

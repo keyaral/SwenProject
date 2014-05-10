@@ -224,7 +224,8 @@ public class EventLogger extends JInternalFrame{
 	 */
 	public void update() {
 		textLog.setText(manager.getDetails());
-		String[] statistics = manager.getStats().split(" ");
+		//String[] statistics = manager.getStats().split(" ");
+		String[] statistics = manager.getStats();
 		lblRevenue.setText("Revenue: " + statistics[0]);
 		lblExpenditure.setText("Expenditure: " + statistics[1]);
 		lblEventsReported.setText("Events Reported: " + statistics[2]);
