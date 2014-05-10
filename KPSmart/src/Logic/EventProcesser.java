@@ -9,7 +9,7 @@ public class EventProcesser {
 	CostListClass costs = new CostListClass();;
 	ArrayList<KPEvent> events = new ArrayList<KPEvent>();
 	MailDelivery mailList = new MailDelivery();
-	Statistics currentStats = new Statistics();
+//	Statistics currentStats = new Statistics();
 	public EventProcesser() {
 		 
 	}
@@ -136,6 +136,8 @@ switch (type) {
 		 *Makes a new cost, and then tries to add it. 
 		 *
 		 * If successful a confimtion message is returned, else an error message
+		 * 
+		 * If new Destinations are created by the KpCost, then they are added and it is reported
 		 */	
 		
 		

@@ -47,8 +47,8 @@ public class Logic {
 		System.out.println("routes done ");
 		
 		
-		processform( new String[] {"5","5126","Rotarua", "Auckland","8","10","1","Tuesday", "10-17-2014"} );	
-		processform( new String[] {"5","5126","Rotarua", "Auckland","8","10","2","Tuesday", "10-17-2014"} );
+		processform( new String[] {"5","5126","Rotarua", "Auckland","8","10","1", "10-17-2014"} );	
+		processform( new String[] {"5","5126","Rotarua", "Auckland","8","10","2", "10-17-2014"} );
 	System.out.println("mail done ");
 
 //		

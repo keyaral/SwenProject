@@ -26,6 +26,7 @@ public class Mail {
 
 
 
+	@SuppressWarnings("deprecation")
 	public Mail(String[] values) {
 	
 		this.ID = Integer.parseInt(values[1]);
@@ -34,9 +35,15 @@ public class Mail {
 		this.weight = Integer.parseInt(values[4]);
 		this.volume = Integer.parseInt(values[5]);
 		this.priority = Integer.parseInt(values[6]);
-		this.date = new Date();
-	//	this.date.parse(values[7]);
-	}
+		
+		String[] dateA = values[7].split("-");
+		int year = Integer.parseInt(dateA[0]); 
+		int month= Integer.parseInt(dateA[1]); 
+		int day = Integer.parseInt(dateA[2]);
+		
+		this.date = new Date(year,month, day) ;
+		
+	    }
 	
 	public void addCost(double c){
 		
