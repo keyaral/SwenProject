@@ -89,7 +89,7 @@ public class RouteListClass {
 			i = this.tempPath.size();
 			searchRouteChain(r.origin,new ArrayList<Route>(), m.destination);
 			}
-			while(i < destinations.size());
+			while(i < destinations.size()); //create Routes for a new route chain
 		}
 		
 		for(ArrayList<Route> l : this.tempPath){
