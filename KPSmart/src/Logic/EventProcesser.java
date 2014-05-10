@@ -1,5 +1,7 @@
 package Logic;//
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -89,6 +91,7 @@ public class EventProcesser {
 		return type;
 	}
 
+	@SuppressWarnings("deprecation")
 	private boolean checkDetails(String details, String type) throws Exception {
 		String check = details;
 		String[] values = check.split("\t");
@@ -172,12 +175,15 @@ public class EventProcesser {
 				int weight = Integer.parseInt(values[3]);
 				int volume = Integer.parseInt(values[4]);
 				int priority = Integer.parseInt(values[5]);
-				Date date = new Date();
-				date.parse(values[6]);
-				if (destination == null || origin == null || date == null)
+				//Date date = new Date();
+				DateFormat dateFormat=new SimpleDateFormat("dd-mm-yyyy");
+				dateFormat.parse(values[6]);
+				//date.parse(values[6]);
+				if (destination == null || origin == null || dateFormat == null)
 					throw new Exception(
 							"Null values in mail creation for destination/origin or date");
 			} catch (Exception e) {
+		
 				throw new Exception("Error in creating a new mail");
 			}
 		}

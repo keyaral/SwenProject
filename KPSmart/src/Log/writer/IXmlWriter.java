@@ -4,6 +4,7 @@ import Log.*;
 import Log.Log.*;
 
 
+
 public interface IXmlWriter {
 	
 	Log WriteLog(Log log);
