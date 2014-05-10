@@ -51,7 +51,9 @@ public class TransportCost extends JInternalFrame {
 	private JFormattedTextField txtDate;
 	private JFormattedTextField txtMaxVolume;
 	private JFormattedTextField txtWeightCost_1;
-
+	public String[] mailDeliveryDetails;
+	public String[] costModificationDetails;
+	public String[] transportCost;
 	//Generate Random ID
 	private void generateRandomId(int rnd){
 		Random random=new Random();
@@ -160,7 +162,8 @@ public class TransportCost extends JInternalFrame {
 						cmbDay.setSelectedIndex(-1);
 						cmbType.setSelectedIndex(-1);
 						cmbCompany.setSelectedIndex(-1);
-				MainWindow.logic.processform("Transport Route Form --> Fields Cleared.");
+				String[] msg={"Transport Route Form --> Fields Cleared."};
+				MainWindow.logic.processform(msg[0]);
 				//JOptionPane.showMessageDialog(null,"Clear Fields!",null, 1);
 			}
 		});
@@ -172,6 +175,7 @@ public class TransportCost extends JInternalFrame {
 				String to=(String)cmbTo.getSelectedItem();
 				String from=(String)cmbFrom.getSelectedItem();
 				String day=(String)cmbDay.getSelectedItem();
+				int dialogButton = JOptionPane.YES_NO_OPTION;
 				if (txtCostId.getText().equals("")
 						||company.equals("") 
 						|| to.equals("")
@@ -184,11 +188,15 @@ public class TransportCost extends JInternalFrame {
 						|| txtFrequency.getText().equals("")
 						|| day.equals("")
 						||txtDate.getText().equals("")){
-					MainWindow.logic.processform("Route Form --> Some fields are empty...");
+					String[] msg={"Route Form --> Some fields are empty..."};
+					MainWindow.logic.processform(msg[0]);
 					JOptionPane.showMessageDialog(null,"Please enter all details required !",null, 1);
 						
 			}else
 			{
+				
+				int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to save the details?","Confirmation",dialogButton);
+				if(dialogResult == JOptionPane.YES_OPTION){
 					String values=
 						txtCostId.getText()+"\t"+
 						cmbCompany.getSelectedItem().toString()+"\t"+
@@ -204,8 +212,16 @@ public class TransportCost extends JInternalFrame {
 						cmbDay.getSelectedItem().toString() +"\t"+
 						txtDate.getText();
 				
+				transportCost=values.split("\t");
+				for (int i=0;i<transportCost.length;i++){
+					MainWindow.logic.processform(transportCost[i]);
+				}
 				JOptionPane.showMessageDialog(null,"Route Form: Save Details !",null, 1);
-				MainWindow.logic.processform(values);
+				}else{
+					//Details not saved
+					JOptionPane.showMessageDialog(null,"Details not saved !",null, 1);
+					
+				}
 			}
 			}
 		});
@@ -215,7 +231,8 @@ public class TransportCost extends JInternalFrame {
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Logic logic=new Logic();
-				logic.processform("\nClosing Transport Route Form...");
+				String[] msg={"Closing Transport Route Form..."};
+				logic.processform(msg[0]);
 				dispose();
 			}
 		});
@@ -233,6 +250,26 @@ public class TransportCost extends JInternalFrame {
 				randomDestinationSelection(cmbFrom.getItemCount());
 				generateRadomDurationFrequency(100);
 				generateMaxRandWeightAndVolume();
+				String values=
+						txtCostId.getText()+"\t"+
+						cmbCompany.getSelectedItem().toString()+"\t"+
+						cmbTo.getSelectedItem().toString()+"\t"+
+						cmbFrom.getSelectedItem().toString()+"\t"+
+						cmbType.getSelectedItem().toString()+"\t"+
+						txtWeightCost_1.getText()+"\t"+
+						txtVolumeCost.getText()+"\t"+
+						txtMaxWeight.getText()+"\t"+
+						txtMaxVolume.getText()+"\t"+
+						txtDuration.getText()+"\t"+
+						txtFrequency.getText()+"\t"+
+						cmbDay.getSelectedItem().toString() +"\t"+
+						txtDate.getText();
+				System.out.println("Test Data Loaded onto Transport Route Cost Form...");
+				String[] msg=values.split("\t");
+				for (int i=0;i<msg.length;i++){
+					MainWindow.logic.processform(msg[i]);
+				}
+				
 			}
 		});
 		GroupLayout gl_btnPanel = new GroupLayout(btnPanel);

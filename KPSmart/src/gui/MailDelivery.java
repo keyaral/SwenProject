@@ -47,10 +47,12 @@ public class MailDelivery extends JInternalFrame {
 	@SuppressWarnings("rawtypes")
 	private JComboBox cmbPriority;
 	private JTextField txtMailId;
+	public String[] mailDeliveryDetails;
 	 
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
 
 	}
@@ -110,6 +112,7 @@ public class MailDelivery extends JInternalFrame {
 		setLocation(400,150);
 		JPanel DataInputPanel = new JPanel();
 		
+		
 		JPanel btnPanel = new JPanel();
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -145,6 +148,8 @@ public class MailDelivery extends JInternalFrame {
 				cmbOrigin.setSelectedIndex(-1);
 				cmbPriority.setSelectedIndex(-1);
 				MainWindow.logic.processform("Mail Delivery Form--> All fields cleared...");
+				 btnSave.setEnabled(true);
+				 btnClearFields.setEnabled(false);
 				
 			}
 			
@@ -157,6 +162,7 @@ public class MailDelivery extends JInternalFrame {
 				String origin=(String)cmbOrigin.getSelectedItem();
 				String day=(String)cmbDay.getSelectedItem();
 				String priority=(String)cmbPriority.getSelectedItem();
+				int dialogButton = JOptionPane.YES_NO_OPTION;
 				if (txtMailId.getText().equals("")|| destination.equals("") 
 						|| origin.equals("")
 						|| day.equals("")
@@ -165,13 +171,29 @@ public class MailDelivery extends JInternalFrame {
 						|| txtDate.getText().equals("")){
 					
 					JOptionPane.showMessageDialog(null,"Please enter all details",null, 1);
-					MainWindow.logic.processform("Mail Delivery Form-->Some data input fields are empty...");
+					String[] msg={"Mail Delivery Form-->Some data input fields are empty"};
+					MainWindow.logic.processform(msg[0]);
 				}else{
-					String details=txtMailId.getText() + "\t" + destination + "\t" +
-									origin+"\t" + txtWeight.getText() + "\t" +
-									txtVolume.getText()+"\t" + day + "\t" + txtDate.getText() +"\t" + priority  ;
-					MainWindow.logic.processform(details);
-					JOptionPane.showMessageDialog(null,"Save Details : " + MainWindow.logic.getdetails(),null, 1);
+					
+					int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to send this mail item?","Confirmation",dialogButton);
+					if(dialogResult == JOptionPane.YES_OPTION){
+						btnSave.setEnabled(false);
+						
+							String details=txtMailId.getText() + "\t" + destination + "\t" +
+											origin+"\t" + txtWeight.getText() + "\t" +
+											txtVolume.getText()+"\t" + day + "\t" + txtDate.getText() +"\t" + priority  ;
+							JOptionPane.showMessageDialog(null,"Mail Item sent.",null, 1);
+							mailDeliveryDetails=details.split("\t");
+							for (int i=0;i<mailDeliveryDetails.length;i++){
+								MainWindow.logic.processform(mailDeliveryDetails[i]);
+							}
+					}else{
+						//Do nothing
+						JOptionPane.showMessageDialog(null,"Canceled",null, 1);
+						
+						
+					}
+					
 				}
 				
 			}
@@ -180,8 +202,9 @@ public class MailDelivery extends JInternalFrame {
 		btnClose = new JButton("Close");
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String[] close={"Closing Mail Delivery Form"};
 				Logic logic=new Logic();
-				logic.processform("\nClosing Mail Delivery Form");
+				logic.processform(close[0]);
 				dispose();
 			}
 		});
@@ -197,6 +220,8 @@ public class MailDelivery extends JInternalFrame {
 				 generateRandWeightAndVolume();
 				 generateRandomDate();
 				 generateRandWeightAndVolume();
+				 btnSave.setEnabled(true);
+				 btnClearFields.setEnabled(true);
 			}
 		});
 		GroupLayout gl_btnPanel = new GroupLayout(btnPanel);
@@ -394,6 +419,8 @@ public class MailDelivery extends JInternalFrame {
 		);
 		DataInputPanel.setLayout(gl_DataInputPanel);
 		getContentPane().setLayout(groupLayout);
+		btnSave.setEnabled(false);
+		btnClearFields.setEnabled(false);
 		//Clear combo Boxes on startup.
 		cmbDay.setSelectedIndex(-1);
 		cmbDestination.setSelectedIndex(-1);
