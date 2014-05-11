@@ -13,7 +13,8 @@ public class Mail {
 	public Date date;
 	public double cost;
 	public String name;
-	
+	public double time;
+
 	public Mail(int i, String de, String o, double w, double v, int p, Date da){
 		this.ID = i;
 		this.name = o;
@@ -37,9 +38,13 @@ public class Mail {
 		this.date = new Date();
 		this.date.parse(values[6]);
 	}
-	
+
 	public void addCost(double c){
-		
+
 		this.cost= c;
+	}
+
+	public void addShipmentTime(double t) {
+		this.time = t;
 	}
 }
