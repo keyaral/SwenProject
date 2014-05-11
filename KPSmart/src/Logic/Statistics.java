@@ -46,27 +46,28 @@ public class Statistics implements Cloneable{
 		events++;
 	}
 
-	public List<String> getMailAmounts() {
-		List<String> amounts = new ArrayList<String>();
+	public List<String[]> getMailAmounts() {
+		List<String[]> amounts = new ArrayList<String[]>();
 		for (Mail mail: mails) {
 			if (amounts.isEmpty()) {
-				amounts.add(mail.origin + " " + mail.destination + " " + mail.volume + " " + mail.weight + "  1");
+				String[] s = {mail.origin, mail.destination, String.valueOf(mail.volume), String.valueOf(mail.weight), "1"};
+				amounts.add(s);
 			}
 			else {
 				boolean found = false;
-				for (String a: amounts) {
-					String[] array = a.split(" ");
-					if (array[0].equals(mail.origin) && array[1].equals(mail.destination)) {
-						a = array[0] + " " + array[1] + " " +
-								(Double.parseDouble(array[2]) + mail.volume) + " " +
-								(Double.parseDouble(array[3]) + mail.weight) + " " +
-								(Integer.parseInt(array[5]) + 1);
+				for (String[] a: amounts) {
+					if (a[0].equals(mail.origin) && a[1].equals(mail.destination)) {
+						a[2] = String.valueOf(Double.parseDouble(a[2]) + mail.volume);
+						a[3] = String.valueOf(Double.parseDouble(a[3]) + mail.weight);
+						a[4] = String.valueOf(Integer.parseInt(a[4]) + 1);
 						found = true;
 						break;
 					}
 				}
-				if (!found)
-					amounts.add(mail.origin + " " + mail.destination + " " + mail.volume + " " + mail.weight + "  1");
+				if (!found) {
+					String[] s = {mail.origin, mail.destination, String.valueOf(mail.volume), String.valueOf(mail.weight), "1"};
+					amounts.add(s);
+				}
 			}
 		}
 		return amounts;
