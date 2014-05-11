@@ -59,6 +59,7 @@ public class RouteListClass {
 	}
 
 	public RouteChain findValidRoute(Mail m) {
+		this.tempPath.clear();
 		for(Route r : this.routes) r.visited = false;
 		ArrayList<Route> origins = new ArrayList<Route>();
 		ArrayList<Route> destinations = new ArrayList<Route>();
@@ -117,6 +118,19 @@ public class RouteListClass {
 	     	}
 		return currentRoutes;
 	}	
+	
+	public ArrayList<RouteChain> findCriticalRoutes(Mail m){
+		findValidRoute(m);
+		ArrayList<RouteChain> possibleRoutes = new ArrayList<RouteChain>();
+		ArrayList<RouteChain> criticalRoutes = new ArrayList<RouteChain>();
+		for(ArrayList<Route> r : this.tempPath){
+			possibleRoutes.add(new RouteChain(r,m.destination,m.origin));
+		}
+		for(RouteChain r : possibleRoutes){
+			if(r.isCritical(m) && r.checkViable(m)) criticalRoutes.add(r);
+		}
+		return criticalRoutes;
+	}
 	
 	
 }
