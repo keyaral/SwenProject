@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Logic {
 
-	public static final Statistics stats = new Statistics();
+	public final Statistics stats = new Statistics();
 	public final EventProcesser eventProcessor;
 	
 
