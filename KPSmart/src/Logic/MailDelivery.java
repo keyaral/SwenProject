@@ -81,7 +81,7 @@ public class MailDelivery {
 	return null;
 	}
 	
-	private Destination findDestination(String des) {
+	public Destination findDestination(String des) {
 		Boolean dom = false;
 		for (Destination d :nzDestinations ) {
 			if ( des.equals(d.getName()) ) {

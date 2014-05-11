@@ -3,8 +3,8 @@ package Logic;
 public class Route {
 
 	public int ID;
-	public String destination;
-	public String origin;
+	public Destination destination;
+	public Destination origin;
 	public double cost;
 	public double maxWeight;
 	public double maxVolume;
@@ -16,13 +16,15 @@ public class Route {
 	public double costWeight;
 	public double costVolume;
 	
+	public boolean visited = false;
+	public boolean added = false;
 	public Route(String details){
 		
 	String[] values = details.split("\t");
 	System.out.println(details);
 	this.ID = Integer.parseInt(values[0]);
-	this.destination = (values[1]);
-	this.origin = (values[2]);
+	this.destination = new Destination(values[1],false);	//TODO put false here as not sure what to put
+	this.origin =  new Destination(values[2],false);
 	this.costWeight = Integer.parseInt(values[3]);
 	this.costVolume = Integer.parseInt(values[4]);
 	this.maxWeight = Integer.parseInt(values[5]);
@@ -36,8 +38,8 @@ public class Route {
 	
 	public Route(int id, String d, String o, double c1, double c2, double mW, double mV, int p, String da, double f, double du, String cN){
 		this.ID = id;
-		this.destination = d;
-		this.origin = o;
+		this.destination = new Destination(d,false);	//TODO put false here temporarily
+		this.origin = new Destination(o,false);	//TODO put false here temporarily
 		this.costWeight = c1;
 		this.costVolume = c2;
 		this.maxWeight = mW;
