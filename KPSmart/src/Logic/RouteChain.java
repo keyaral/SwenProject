@@ -19,7 +19,7 @@ public class RouteChain {
 //		double cost = 0;
 //		for(Route r : routes){
 //			cost = r.cost*m.cost;
-//		}
+//		}//
 //		return cost;
 	}
 	
