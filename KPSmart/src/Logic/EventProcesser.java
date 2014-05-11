@@ -194,7 +194,6 @@ public class EventProcesser {
 	}
 	
 	private void addEvent(String type, boolean success, Object o) throws CloneNotSupportedException{
-		events.add(new KPEvent(type, o, success, (Statistics)MainWindow.logic.stats.clone()));
 		if (o instanceof Mail) {
 			Mail m = (Mail) o;
 			MainWindow.logic.stats.setRevenue(mailList.gettRevenue());
@@ -202,11 +201,13 @@ public class EventProcesser {
 			MainWindow.logic.stats.mails.add(m);
 		}
 		else if (o instanceof Route) {
-			
+			Route r = (Route) o;
+			MainWindow.logic.stats.routes.add(r);
 		}
 		else if (o instanceof Cost) {
 			
 		}
+		events.add(new KPEvent(type, o, success, (Statistics)MainWindow.logic.stats.clone()));
 		MainWindow.logic.stats.incrementEvents();
 	}
 	
