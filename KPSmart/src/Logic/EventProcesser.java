@@ -1,5 +1,9 @@
 package Logic;//
 
+import gui.MainWindow;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -7,6 +11,7 @@ public class EventProcesser {
 
 	RouteListClass routes;
 	CostListClass costs;
+	MailDelivery mailList = new MailDelivery();
 	ArrayList<KPEvent> events = new ArrayList<KPEvent>();
 
 	public EventProcesser() {
@@ -32,7 +37,7 @@ public class EventProcesser {
 				;
 			Route r = new Route(details);
 			Boolean success = routes.addRoute(r);
-			KPEvent e = new KPEvent("Add", r, success, (Statistics)Logic.stats.clone());
+			KPEvent e = new KPEvent("Add", r, success, (Statistics)MainWindow.logic.stats.clone());
 			events.add(e);
 		}
 		if (type.equals("1b")) {
@@ -40,7 +45,7 @@ public class EventProcesser {
 				;
 			Route r = new Route(details);
 			Boolean success = routes.changeRoute(r);
-			KPEvent e = new KPEvent("Change", r, success, (Statistics)Logic.stats.clone());
+			KPEvent e = new KPEvent("Change", r, success, (Statistics)MainWindow.logic.stats.clone());
 			events.add(e);
 		}
 
@@ -49,7 +54,7 @@ public class EventProcesser {
 				;
 			Route r = new Route(details);
 			Boolean success = routes.deleteRoute(r);
-			KPEvent e = new KPEvent("Delete", r, success, (Statistics)Logic.stats.clone());
+			KPEvent e = new KPEvent("Delete", r, success, (Statistics)MainWindow.logic.stats.clone());
 			events.add(e);
 		}
 
@@ -58,7 +63,7 @@ public class EventProcesser {
 				;
 			Cost c = new Cost(details);
 			Boolean success = costs.addCost(c);
-			KPEvent e = new KPEvent("Add", c, success, (Statistics)Logic.stats.clone());
+			KPEvent e = new KPEvent("Add", c, success, (Statistics)MainWindow.logic.stats.clone());
 			events.add(e);
 		}
 		if (type.equals("2b")) {// call Costs
@@ -66,7 +71,7 @@ public class EventProcesser {
 				;
 			Cost c = new Cost(details);
 			Boolean success = costs.changeCost(c);
-			KPEvent e = new KPEvent("Change", c, success, (Statistics)Logic.stats.clone());
+			KPEvent e = new KPEvent("Change", c, success, (Statistics)MainWindow.logic.stats.clone());
 			events.add(e);
 		}
 		if (type.equals("2c")) {// call Costs
@@ -74,7 +79,7 @@ public class EventProcesser {
 				;
 			Cost c = new Cost(details);
 			Boolean success = costs.deleteCost(c);
-			KPEvent e = new KPEvent("Delete", c, success, (Statistics)Logic.stats.clone());
+			KPEvent e = new KPEvent("Delete", c, success, (Statistics)MainWindow.logic.stats.clone());
 			events.add(e);
 		}
 
@@ -83,12 +88,13 @@ public class EventProcesser {
 				;
 			Mail m = new Mail(details);
 			// TODO ShipMail
-			KPEvent e = new KPEvent("Send", m, true, (Statistics)Logic.stats.clone());
+			KPEvent e = new KPEvent("Send", m, true, (Statistics)MainWindow.logic.stats.clone());
 			events.add(e);
 		}
 		return type;
 	}
 
+	@SuppressWarnings("deprecation")
 	private boolean checkDetails(String details, String type) throws Exception {
 		String check = details;
 		String[] values = check.split("\t");
@@ -172,16 +178,37 @@ public class EventProcesser {
 				int weight = Integer.parseInt(values[3]);
 				int volume = Integer.parseInt(values[4]);
 				int priority = Integer.parseInt(values[5]);
-				Date date = new Date();
-				date.parse(values[6]);
-				if (destination == null || origin == null || date == null)
+				//Date date = new Date();
+				DateFormat dateFormat=new SimpleDateFormat("dd-mm-yyyy");
+				dateFormat.parse(values[6]);
+				//date.parse(values[6]);
+				if (destination == null || origin == null || dateFormat == null)
 					throw new Exception(
 							"Null values in mail creation for destination/origin or date");
 			} catch (Exception e) {
+		
 				throw new Exception("Error in creating a new mail");
 			}
 		}
 		return true;
+	}
+	
+	private void addEvent(String type, boolean success, Object o) throws CloneNotSupportedException{
+		if (o instanceof Mail) {
+			Mail m = (Mail) o;
+			MainWindow.logic.stats.setRevenue(mailList.gettRevenue());
+			MainWindow.logic.stats.setExpenditure(mailList.gettExpediture());
+			MainWindow.logic.stats.mails.add(m);
+		}
+		else if (o instanceof Route) {
+			Route r = (Route) o;
+			MainWindow.logic.stats.routes.add(r);
+		}
+		else if (o instanceof Cost) {
+			
+		}
+		events.add(new KPEvent(type, o, success, (Statistics)MainWindow.logic.stats.clone()));
+		MainWindow.logic.stats.incrementEvents();
 	}
 	
 	public ArrayList<KPEvent> getEvents() {

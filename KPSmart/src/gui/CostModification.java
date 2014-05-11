@@ -110,26 +110,21 @@ public class CostModification extends JInternalFrame {
 				String priority=(String)cmbPriority.getSelectedItem();
 				String origin=(String)cmbOrigin.getSelectedItem();
 				String destination=(String)cmbDestination.getSelectedItem();
+				
+				String type=MainWindow.logic.switchEvents(2,"2a");//Case 2: Type "2a" Add cost
+				
 				int dialogButton = JOptionPane.YES_NO_OPTION;
 				if(txtRouteNumber.getText().equals("") || origin.equals("") || destination.equals("")
 						|| txtWeightCost.getText().equals("") || txtVolumeCost.getText().equals("") || priority.equals("")){
-					System.out.println(MainWindow.logic.processform("Cost Modification -- > Data input fields are empty.Please fill in all fields..."));
 					JOptionPane.showMessageDialog(null,"Please enter all details",null, 1);
 					
 				}else{
 					int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to save the details?","Confirmation",dialogButton);
 					if(dialogResult == JOptionPane.YES_OPTION){
-					String values=Integer.parseInt(txtRouteNumber.getText())+"\t"+Double.parseDouble(txtWeightCost.getText())+"\t"+
-							Double.parseDouble(txtVolumeCost.getText())+"\t"+destination+"\t"+origin+"\t"+
+					String values=type+txtRouteNumber.getText()+"\t"+txtWeightCost.getText()+"\t"+
+							txtVolumeCost.getText()+"\t"+destination+"\t"+origin+"\t"+
 							priority;
-					String[] cmodification=values.split("\t");
-						for (int i=0;i<cmodification.length;i++){
-							MainWindow.logic.processform(cmodification[i]);
-						}
-					
-						//JOptionPane.showMessageDialog(null, "Saved!",null, 1);
-						String[] msg={"Cost Modification--> Saving Details"};
-						MainWindow.logic.processform(msg[0]);
+							MainWindow.logic.processform(values);
 					}else{
 						//Changes are not saved
 						JOptionPane.showMessageDialog(null,"Details not saved.",null, 1);
@@ -142,8 +137,6 @@ public class CostModification extends JInternalFrame {
 		JButton btnClose = new JButton("Close");
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String[] close={"Closing Cost Modification Form"};
-				MainWindow.logic.processform(close[0]);
 				dispose();
 			}
 		});
@@ -161,17 +154,6 @@ public class CostModification extends JInternalFrame {
 				}else{
 					randomDestinationSelection(cmbDestination.getItemCount());
 					System.out.println("Test Data Loaded...");
-					String priority=(String)cmbPriority.getSelectedItem();
-					String origin=(String)cmbOrigin.getSelectedItem();
-					String destination=(String)cmbDestination.getSelectedItem();
-					String values=Integer.parseInt(txtRouteNumber.getText())+"\t"+Double.parseDouble(txtWeightCost.getText())+"\t"+
-							Double.parseDouble(txtVolumeCost.getText())+"\t"+destination+"\t"+origin+"\t"+
-							priority;
-					
-					String[] testData=values.split("\t");
-					for (int i=0;i<testData.length;i++){
-						MainWindow.logic.processform(testData[i]);
-					}
 				}
 				if (cmbOrigin.getItemCount()==0){
 					cmbOrigin.setSelectedIndex(-1);

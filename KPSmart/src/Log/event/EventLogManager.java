@@ -16,6 +16,7 @@ public class EventLogManager {
 	}
 
 	public String getDetails() {
+		if (eventProcesser.getEvents().isEmpty()) return "No events processed yet.";
 		KPEvent e = eventProcesser.getEvents().get(index);
 		String details = "Event " + index + "/" + maxIndex + "\n\n";
 		
@@ -49,9 +50,13 @@ public class EventLogManager {
 		return details;
 	}
 
-	public String getStats() {
+	public String[] getStats() {
+		if (eventProcesser.getEvents().isEmpty()) {
+			String[] stats = {"0", "0", "0"};
+			return stats;
+		}
 		Statistics s = eventProcesser.getEvents().get(index).statistics;
-		String stats = s.revenue() + " " + s.expenditure() + " " + s.events();
+		String[] stats = {String.valueOf(s.revenue()), String.valueOf(s.expenditure()), String.valueOf(s.events())};
 		return stats;
 	}
 

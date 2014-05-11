@@ -5,8 +5,9 @@ import java.util.List;
 
 public class Logic {
 
-	public static final Statistics stats = new Statistics();
+	public final Statistics stats = new Statistics();
 	public final EventProcesser eventProcessor;
+	
 
 	public Logic() {
 		eventProcessor = new EventProcesser();
@@ -62,5 +63,35 @@ public class Logic {
 	  //	l.processform("1a	4	Auckland	Wellington	10	15	200	200	1	Thursday	2	3	TylerCorp");
 	//  	System.out.println(l.eventProcessor.events.size());
 	}
-
+	//This method will be called from the input entry forms
+	public final String switchEvents(int eventType,String type){
+		String returnStr="";
+		 switch(eventType){
+		 case 0: //For Route Add/C
+			 if (type.equals("1a")) {
+				 returnStr="1a";
+			 }else if (type.equals("1b")){
+				 returnStr= "1b";
+			 }else if (type.equals("1c")){
+				 returnStr= "1c";
+			 }
+			 break;
+		 case 1: 
+			 if (type.equals("2a")) {
+				 returnStr= "2a";
+			 }else if (type.equals("2b")){
+				 returnStr= "2b";
+			 }else if (type.equals("2c")){
+				 returnStr= "2c";
+			 }
+			 break;
+		 case 2: 
+			 if (type.equals("3a")){
+				 returnStr= "3a";
+			 }
+			 break;
+		 }
+			 return returnStr;
+		 
+	 }
 }
