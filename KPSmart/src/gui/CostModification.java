@@ -221,8 +221,8 @@ public class CostModification extends JInternalFrame {
 					.addPreferredGap(ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
 					.addComponent(btnLoadTestData, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
 					.addGap(64)
-					.addComponent(btnAdd)
-					.addGap(19)
+					//.addComponent(btnAdd)
+				//	.addGap(19)
 					.addComponent(btnClose)
 					.addGap(19))
 		);
