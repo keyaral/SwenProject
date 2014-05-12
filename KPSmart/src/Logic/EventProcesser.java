@@ -363,31 +363,40 @@ switch (type) {
 					throw new Exception(
 							"Null values in mail creation for destination/origin or date");
 			} catch (Exception e) {
-		
+
 				throw new Exception("Error in creating a new mail");
 			}
 		}
 		return true;
 	}
-	
-	private void addEvent(String type, boolean success, Object o) throws CloneNotSupportedException{
-		if (o instanceof Mail) {
-			Mail m = (Mail) o;
+
+	private void addEvent(String type, boolean success, Object ... o) throws CloneNotSupportedException{
+		if (o[0] instanceof Mail) {
+			Mail m = (Mail) o[0];
 			MainWindow.logic.stats.setRevenue(mailList.gettRevenue());
 			MainWindow.logic.stats.setExpenditure(mailList.gettExpediture());
 			MainWindow.logic.stats.mails.add(m);
 		}
-		else if (o instanceof Route) {
-			Route r = (Route) o;
-			MainWindow.logic.stats.routes.add(r);
+		else if (o[0] instanceof Route) {
+			Route r = (Route) o[0];
+			if (type.equals("Add"))
+				MainWindow.logic.stats.routes.add((Route)r.clone());
+			else if (type.equals("Changes")) {
+				Route rd = (Route) o[1];
+				MainWindow.logic.stats.routes.remove(rd);
+				MainWindow.logic.stats.routes.add((Route)r.clone());
+			}
+			else if (type.equals("Remove")) {
+				MainWindow.logic.stats.routes.remove(r);
+			}
 		}
-		else if (o instanceof Cost) {
-			
+		else if (o[0] instanceof Cost) {
+
 		}
 		events.add(new KPEvent(type, o, success, (Statistics)MainWindow.logic.stats.clone()));
 		MainWindow.logic.stats.incrementEvents();
 	}
-	
+
 	public ArrayList<KPEvent> getEvents() {
 		return events;
 		}

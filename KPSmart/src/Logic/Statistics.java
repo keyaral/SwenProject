@@ -97,9 +97,40 @@ public class Statistics implements Cloneable{
 		return amounts;
 	}
 
-	public List<String> getDeliveryTimes() {
-		List<String> times = new ArrayList<String>();
-		// TODO
+	public List<String[]> getDeliveryTimes() {
+		List<String[]> times = new ArrayList<String[]>();
+		List<double[]> data = new ArrayList<double[]>();
+		for (Mail mail: mails) {
+			boolean found = false;
+			if (times.isEmpty()) {
+				String[] s = {mail.origin, mail.destination, String.valueOf(mail.priority), ""};
+				double[] d = {mail.time, 1};
+				times.add(s);
+				data.add(d);
+			}
+			else {
+				for (int i = 0; i < times.size(); i++) {
+					if (mail.origin.equals(times.get(i)[0]) &&
+							mail.destination.equals(times.get(i)[1]) &&
+							mail.priority == Integer.parseInt(times.get(i)[2])) {
+						data.get(i)[0] += mail.time;
+						data.get(i)[1]++;
+						found = true;
+						break;
+					}
+				}
+				if (!found) {
+					String[] s = {mail.origin, mail.destination, String.valueOf(mail.priority), ""};
+					double[] d = {mail.time, 1};
+					times.add(s);
+					data.add(d);
+				}
+			}
+
+		}
+		for (int i = 0; i < times.size(); i++) {
+			times.get(i)[3] = String.valueOf(data.get(i)[0]/data.get(i)[1]);
+		}
 		return times;
 	}
 

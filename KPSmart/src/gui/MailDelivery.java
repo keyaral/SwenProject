@@ -176,7 +176,7 @@ public class MailDelivery extends JInternalFrame {
 					int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to send this mail item?","Confirmation",dialogButton);
 					if(dialogResult == JOptionPane.YES_OPTION){
 						btnSave.setEnabled(false);
-<<<<<<< HEAD
+
 							
 							String[]  details ={ "5",txtMailId.getText(), destination ,
 											origin, txtWeight.getText(),
@@ -185,17 +185,10 @@ public class MailDelivery extends JInternalFrame {
 							JOptionPane.showMessageDialog(null,MainWindow.logic.processform(details),null, 1);
 
 		
-=======
-						String type= MainWindow.logic.switchEvents(3,"3a"); //Case 3: Type "3a" Send  Mail
-						
-							String details=type+txtMailId.getText() + "\t" + destination + "\t" +
-											origin+"\t" + txtWeight.getText() + "\t" +
-											txtVolume.getText()+"\t" + priority + "\t" + txtDate.getText()  ;
-							JOptionPane.showMessageDialog(null,"Mail Item sent.",null, 1);
 
-		
-								MainWindow.logic.processform(details);
->>>>>>> refs/remotes/origin/master
+				//		String type= MainWindow.logic.switchEvents(3,"3a"); //Case 3: Type "3a" Send  Mail
+						
+					
 							//}
 					}else{	
 						//Do nothing

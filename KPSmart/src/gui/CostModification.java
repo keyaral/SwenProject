@@ -111,11 +111,9 @@ public class CostModification extends JInternalFrame {
 				String origin=(String)cmbOrigin.getSelectedItem();
 				String destination=(String)cmbDestination.getSelectedItem();
 				
-<<<<<<< HEAD
+
 			//	String type=MainWindow.logic.switchEvents(2,"2a");//Case 2: Type "2a" Add cost
-=======
-				String type=MainWindow.logic.switchEvents(2,"2a");//Case 2: Type "2a" Add cost
->>>>>>> refs/remotes/origin/master
+
 				
 				int dialogButton = JOptionPane.YES_NO_OPTION;
 				if(txtRouteNumber.getText().equals("") || origin.equals("") || destination.equals("")
@@ -125,17 +123,13 @@ public class CostModification extends JInternalFrame {
 				}else{
 					int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to save the changes?","Confirmation",dialogButton);
 					if(dialogResult == JOptionPane.YES_OPTION){
-<<<<<<< HEAD
+
 						
 					String[] values={ "4", txtRouteNumber.getText(),txtWeightCost.getText(),
 							txtVolumeCost.getText(),destination,origin,	priority }; 
 					JOptionPane.showMessageDialog(null,MainWindow.logic.processform(values),null, 1);	
-=======
-					String values=type+txtRouteNumber.getText()+"\t"+txtWeightCost.getText()+"\t"+
-							txtVolumeCost.getText()+"\t"+destination+"\t"+origin+"\t"+
-							priority;
-							MainWindow.logic.processform(values);
->>>>>>> refs/remotes/origin/master
+
+
 					}else{
 						//Changes are not saved
 						JOptionPane.showMessageDialog(null,"Details not saved.",null, 1);

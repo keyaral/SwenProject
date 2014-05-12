@@ -199,7 +199,7 @@ public class TransportCost extends JInternalFrame {
 				
 				int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to save the details?","Confirmation",dialogButton);
 				if(dialogResult == JOptionPane.YES_OPTION){
-<<<<<<< HEAD
+
 				//	String type=MainWindow.logic.switchEvents(0, "1a");//Case 0: Type "1a"-call route
 					String[] values = { "0 ",
 						txtCostId.getText(),
@@ -232,40 +232,9 @@ public class TransportCost extends JInternalFrame {
 					
 					
 				JOptionPane.showMessageDialog(null,MainWindow.logic.processform(values),null, 1);
-=======
-					String type=MainWindow.logic.switchEvents(0, "1a");//Case 0: Type "1a"-call route
-					String values=type+
-						txtCostId.getText()+"\t"+
-						cmbTo.getSelectedItem().toString()+"\t"+
-						cmbFrom.getSelectedItem().toString()+"\t"+
-						txtWeightCosts.getText()+"\t"+
-						txtVolumeCost.getText()+"\t"+
-						txtMaxWeight.getText()+"\t"+
-						txtMaxVolume.getText()+"\t"+
-						cmbType.getSelectedIndex()+"\t"+
-						cmbDay.getSelectedItem().toString() +"\t"+
-						txtFrequency.getText()+"\t"+
-						txtDuration.getText()+"\t"+
-						cmbCompany.getSelectedItem().toString();
-					//Disable the save buutton to avoid double entry
-					btnSave.setEnabled(false);
-					cmbType.setEnabled(false);
-					txtCostId.setEnabled(false);
-					txtFrequency.setEnabled(false);
-					cmbDay.setEnabled(false);;
-					txtVolumeCost.setEnabled(false);
-					txtMaxWeight.setEnabled(false);
-					txtDuration.setEnabled(false);
-					txtMaxVolume.setEnabled(false);
-					txtWeightCosts.setEnabled(false);
-					cmbTo.setEnabled(false);
-					cmbFrom.setEnabled(false);
-					btnClearFields.setEnabled(false);
-					cmbCompany.setEnabled(false);
+
+				//	String type=MainWindow.logic.switchEvents(0, "1a");//Case 0: Type "1a"-call route
 					
-					MainWindow.logic.processform(values);
-				//JOptionPane.showMessageDialog(null,"Route Form: Save Details !",null, 1);
->>>>>>> refs/remotes/origin/master
 				}else{
 					//Details not saved
 					JOptionPane.showMessageDialog(null,"Details not saved !",null, 1);
