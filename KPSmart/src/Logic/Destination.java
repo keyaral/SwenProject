@@ -2,6 +2,7 @@ package Logic;
 
 import java.util.ArrayList;
 
+
 public class Destination {
 
 private String name;	
@@ -15,6 +16,7 @@ private double domesticVolume = 0.0;
 private double internationVolume = 0.0;
 private double domesticWeightS = 0.0;
 private double internationWeight = 0.0;
+
 public ArrayList<Route> routes = new ArrayList<Route>();
 
 public Destination(String name, double domesticVolume,
@@ -76,12 +78,13 @@ public  boolean isDomestic() {
 	return domestic;
 }
 
+
 public void addRoute(Route r){
 	this.routes.add(r);
 }
 
 
 
-
 }
+
 

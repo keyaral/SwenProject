@@ -33,21 +33,25 @@ public class Statistics implements Cloneable{
 	public int events() {
 		return events;
 	}
-	
+
 	
 	public void setRevenue(double r) {
 		revenue = r;
  	}
 	public void addRevenue(int change) {
 		revenue += change;
+
 	}
+
 
 	
 		public void setExpenditure(double e) {
 				expenditure = e;
 		 	}
+		
 	public void addExpenditure(int change) {
 		expenditure += change;
+
 	}
 
 	public void incrementEvents() {
@@ -58,23 +62,35 @@ public class Statistics implements Cloneable{
 		List<String[]> amounts = new ArrayList<String[]>();
 		for (Mail mail: mails) {
 			if (amounts.isEmpty()) {
+
 				String[] string = {mail.origin, mail.destination, String.valueOf(mail.volume), String.valueOf(mail.weight), "1"};
 				amounts.add(string);
+
 			}
 			else {
 				boolean found = false;
 				for (String[] a: amounts) {
 					if (a[0].equals(mail.origin) && a[1].equals(mail.destination)) {
 						a[2] = String.valueOf(Double.parseDouble(a[2]) + mail.volume);
+
 						a[2] = String.valueOf(Double.parseDouble(a[3]) + mail.weight);
 						a[2] = String.valueOf(Integer.parseInt(a[4]) + 1);
+
+						a[3] = String.valueOf(Double.parseDouble(a[3]) + mail.weight);
+						a[4] = String.valueOf(Integer.parseInt(a[4]) + 1);
+
 						found = true;
 						break;
 					}
 				}
 				if (!found) {
+
 					String[] string = {mail.origin, mail.destination, String.valueOf(mail.volume), String.valueOf(mail.weight), "1"};
 					amounts.add(string);
+
+					String[] s = {mail.origin, mail.destination, String.valueOf(mail.volume), String.valueOf(mail.weight), "1"};
+					amounts.add(s);
+
 				}
 			}
 		}

@@ -16,15 +16,18 @@ public class Route {
 	public double costWeight;
 	public double costVolume;
 	
+
 	public Destination destinationD;
 	public Destination originD; 
 	boolean visited = false;
 	public boolean added = false;
 	
-	public Route(String[] values){
-		
 
-	System.out.println(values);
+
+	public Route(String[] values){
+
+
+	
 	this.ID = Integer.parseInt(values[1]);
 	this.destination = (values[2]);
 	this.origin = (values[3]);
@@ -37,6 +40,8 @@ public class Route {
 	this.frequency = Integer.parseInt(values[10]);
 	this.duration = Integer.parseInt(values[11]);
 	this.companyName = (values[12]);
+
+
 	}
 	
 	private int checkPriority(String string) {
@@ -51,8 +56,8 @@ public class Route {
 
 	public Route(int id, String d, String o, double c1, double c2, double mW, double mV, int p, String da, double f, double du, String cN){
 		this.ID = id;
-		this.destination = d;
-		this.origin = o;
+		this.destination = d;	//TODO put false here temporarily
+		this.origin = o;	//TODO put false here temporarily
 		this.costWeight = c1;
 		this.costVolume = c2;
 		this.maxWeight = mW;

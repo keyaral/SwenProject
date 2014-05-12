@@ -6,13 +6,15 @@ import java.util.HashSet;
 
 import javax.swing.JOptionPane;
 
+
 import TylerWorkInProgress.RouteChain;
 
 public class RouteListClass {
 
 	public HashSet<Route> routes;
 	public ArrayList<ArrayList<Route>>tempPath = new ArrayList<ArrayList<Route>>();
-	
+
+
 	public RouteListClass(){
 		routes = new HashSet<Route>();
 		//routes.addAll(); ADD ALL From data base
@@ -29,12 +31,14 @@ public class RouteListClass {
 		for(Route a : routes){
 			if(a.ID == r.ID) exists = true;		//Can change to names instead of ID's
 		}
+
 		
 		if(exists == true){ 
 						JOptionPane.showMessageDialog(null,r.ID + " Already Exists",null, 1);
 						System.out.println("Already Exists"); return false;}
 		
 	//	if(exists == true){ System.out.println("Already Exists"); return false;}
+
 		else{routes.add(r); return true;}
 	}
 	
@@ -62,6 +66,7 @@ public class RouteListClass {
 
 		return null;
 	}
+
 
 
 	public RouteChain findValidRoute(Mail m) { return null; }
@@ -123,5 +128,6 @@ public class RouteListClass {
 //		return currentRoutes;
 //	}	
 //	
+
 	
 }

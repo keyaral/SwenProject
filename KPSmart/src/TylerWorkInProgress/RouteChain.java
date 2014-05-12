@@ -1,6 +1,11 @@
 package TylerWorkInProgress;
 import java.util.ArrayList;
 
+import javax.print.attribute.standard.Destination;
+
+import Log.Log.Mail;
+import Logic.Route;
+
 
 public class RouteChain {
 
@@ -35,7 +40,7 @@ public class RouteChain {
 		System.out.println("Route Option");
 		int count = 1;
 		for(Route r : routes){
-		System.out.println("Step "+count+": "+r.origin.getName()+" to: "+r.destination.getName());
+		System.out.println("Step "+count+": "+r.origin+" to: "+r.destination);
 		count++;
 		}
 	}

@@ -16,7 +16,7 @@ public class EventLogManager {
 	}
 
 	public String getDetails() {
-		if (eventProcesser.getEvents().isEmpty()) return "There no events processed yet.";
+		if (eventProcesser.getEvents().isEmpty()) return "No events processed yet.";
 		KPEvent e = eventProcesser.getEvents().get(index);
 		String details = "Event " + index + "/" + maxIndex + "\n\n";
 
