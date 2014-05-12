@@ -28,13 +28,13 @@ public class Mail {
 
 	@SuppressWarnings("deprecation")
 	public Mail(String[] values) {
-	
+	System.out.println(values[6]);
 		this.ID = Integer.parseInt(values[1]);
 		this.destination = (values[2]);
 		this.origin = (values[3]);
-		this.weight = Integer.parseInt(values[4]);
-		this.volume = Integer.parseInt(values[5]);
-		this.priority = Integer.parseInt(values[6]);
+		this.weight = Double.parseDouble(values[4]);
+		this.volume = Double.parseDouble(values[5]);
+		this.priority = checkpriority(values[6]);
 		
 		String[] dateA = values[7].split("-");
 		int year = Integer.parseInt(dateA[0]); 
@@ -45,6 +45,18 @@ public class Mail {
 		
 	    }
 	
+	private int checkpriority(String string) {
+		// TODO Auto-generated method stub
+	if ( string.equals("Domestic Air") ) {return 1;} 
+	if ( string.equals("Domestic Standard") ) {return 2;}
+	if ( string.equals("International Standard Priorityr") ) {return 3;}
+	if ( string.equals("International Air") ) {return 4;}
+		
+		return 0;
+	}
+
+
+
 	public void addCost(double c){
 		
 		this.cost= c;

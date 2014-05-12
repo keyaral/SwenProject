@@ -137,5 +137,6 @@ public class LogonWindow extends JFrame {
 
 	}
 	    private JLabel lblKpsmart;
+	 
 	    
 }

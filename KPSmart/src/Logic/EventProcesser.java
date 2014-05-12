@@ -3,17 +3,23 @@ package Logic;//
 import java.util.ArrayList;
 import java.util.Date;
 
+
+
 public class EventProcesser {
 
 	RouteListClass routes = new RouteListClass();
 	CostListClass costs = new CostListClass();;
 	ArrayList<KPEvent> events = new ArrayList<KPEvent>();
 	MailDelivery mailList = new MailDelivery();
-//	Statistics currentStats = new Statistics();
+	Statistics currentStats = new Statistics();
 	public EventProcesser() {
 		 
 	}
 	
+	public EventProcesser(Statistics stats) {
+		currentStats = stats;// TODO Auto-generated constructor stub
+	}
+
 	public ArrayList<Destination> validOrigin(){
 		
 		return null;
@@ -65,7 +71,27 @@ switch (type) {
 		return message;
 	
 	}
-			
+	private void addEvent(String type, boolean success, Object o) throws CloneNotSupportedException{
+		
+		 		if (o instanceof Mail) {
+		 			Mail m = (Mail) o;
+		 			currentStats.setRevenue(mailList.gettRevenue());
+		
+		 			currentStats.mails.add(m);
+		 		}
+		 		else if (o instanceof Route) {
+					
+				Route r = (Route) o;
+				currentStats.routes.add(r);
+		 		}
+		 		else if (o instanceof Cost) {
+		 			
+		 		}
+			events.add(new KPEvent(type, o, success, (Statistics)currentStats.clone()));
+			currentStats.incrementEvents();
+		 	}	
+
+	
 		/**
 		 * A method that will return an error message.
 		 * 
@@ -90,20 +116,24 @@ switch (type) {
  
 		private String deliverMail(String[] details) throws CloneNotSupportedException {
 			Mail m = new Mail(details);
-			Route r = routes.findValidRoute(m);
+			Route r = null; // routes.findValidRoute(m);
 			Cost c = costs.findValidCost(m);
 			
-			if (r==null){ return error(details, "No valid Route"); }
+		
 			if (c==null){ return error(details, "No valid Cost"); }
+			if (r==null){ return error(details, "No valid Route"); }
 			
 			Boolean success = mailList.deliverMail(m, r, c);
 			if (success ){
-			KPEvent e = new KPEvent("Send", m, success, (Statistics)Logic.stats.clone());
+			;
+			currentStats.mails.add(m);
+			currentStats.addRevenue((int)m.cost);
+			currentStats.addRevenue((int)r.cost);
+			currentStats.incrementEvents();
+			
+			KPEvent e = new KPEvent("Send", m, success, (Statistics)currentStats.clone());
 			events.add(e);
-			MainWindow.logic.stats.mails.add(m);
-			MainWindow.logic.stats.addRevenue((int)m.cost);
-			MainWindow.logic.stats.addRevenue((int)r.cost);
-			MainWindow.logic.stats.incrementEvents();
+			
 			return "Mail: " +  m.ID + " was successfully sent"; 
 			}		
 			return error(details, "Cost was not Changes");
@@ -126,7 +156,7 @@ switch (type) {
 			Boolean success = costs.changeCost(c);
 			
 			if (success ){
-			KPEvent e = new KPEvent("Change", c, success, (Statistics)Logic.stats.clone());
+			KPEvent e = new KPEvent("Change", c, success, (Statistics)currentStats.clone());
 			events.add(e);	
 			
 			return "Cost: " +  c.ID + " was successfully changed"; }
@@ -156,7 +186,7 @@ switch (type) {
 			
 			if ( neworigin && newdest && success) {
 				mailList.allDestinations.add(new Destination(c.origin,false)); mailList.allDestinations.add(new Destination(c.destination,false));
-				KPEvent e = new KPEvent("Add", c, success , (Statistics)Logic.stats.clone());
+				KPEvent e = new KPEvent("Add", c, success , (Statistics)currentStats.clone());
 				events.add(e);
 				
 				return "Cost: " + c.ID + " was successfully added  "
@@ -164,21 +194,21 @@ switch (type) {
 																+ "\n a new destination is avaliable" + c.destination; }
 			
 			else if ( neworigin && success ) {
-				KPEvent e = new KPEvent("Add", c, success , (Statistics)Logic.stats.clone());
+				KPEvent e = new KPEvent("Add", c, success , (Statistics)currentStats.clone());
 				events.add(e);
 				mailList.allDestinations.add(new Destination (c.origin,false));  	
 				return "Cost: " + c.ID + " was successfully added."
 												+ "	\n A new origin is avaliable: "+ c.origin; }
 			
 			else if ( newdest && success) {
-				KPEvent e = new KPEvent("Add", c, success , (Statistics)Logic.stats.clone());
+				KPEvent e = new KPEvent("Add", c, success , (Statistics)currentStats.clone());
 				events.add(e);
 				mailList.allDestinations.add(new Destination(c.destination,false));
 				return "Cost: " + c.ID + " was successfully added." 
 												+ "\n a new destination is avaliable" + c.destination; }
 			
 			else if (success) {
-				KPEvent e = new KPEvent("Add", c, success , (Statistics)Logic.stats.clone());
+				KPEvent e = new KPEvent("Add", c, success , (Statistics)currentStats.clone());
 				events.add(e);
 				return "Cost: " + c.ID + " was successfully added";  	}
 			
@@ -200,12 +230,13 @@ switch (type) {
 		
 		private String discontineRoute(String[] details) throws CloneNotSupportedException {
 			Route r = new Route(details);
+			mailList.assignDestinations(r);
 			Boolean success = routes.deleteRoute(r);
 			
 			
 			
 			if(success)	{ 
-				KPEvent e = new KPEvent("Delete", r, success,  (Statistics)Logic.stats.clone());
+				KPEvent e = new KPEvent("Delete", r, success,  (Statistics)currentStats.clone());
 				// e.addStats;
 				events.add(e);
 				return "Route: " + r.ID + " was successfully deleted"; }
@@ -216,12 +247,13 @@ switch (type) {
 		private String changeRoute(String[] details) throws CloneNotSupportedException {
 			
 			Route r = new Route(details);
+			mailList.assignDestinations(r);
 			Boolean success = routes.changeRoute(r);
 			
 			if(success)	{
-				KPEvent e = new KPEvent("Change", r, success,  (Statistics)Logic.stats.clone());
+				KPEvent e = new KPEvent("Change", r, success,  (Statistics)currentStats.clone());
 				events.add(e);
-				MainWindow.logic.stats.incrementEvents();
+				currentStats.incrementEvents();
 			return "Route: " + r.ID + " was successfully changed ";  } 
 			
 			else return error(details, "Route was not Changes");
@@ -231,13 +263,14 @@ switch (type) {
 
 		private String addRoute(String[] details) throws CloneNotSupportedException {
 			Route r = new Route(details);
+			mailList.assignDestinations(r);
 			Boolean success = routes.addRoute(r);
 			
 		
 			if (success)	{ 
-				KPEvent e = new KPEvent("Add", r, success, (Statistics)Logic.stats.clone());
+				KPEvent e = new KPEvent("Add", r, success, (Statistics)currentStats.clone());
 				events.add(e);
-				MainWindow.logic.stats.incrementEvents();
+				currentStats.incrementEvents();
 				return "Route: " + r.ID + " was successfully added "; }
 			
 			

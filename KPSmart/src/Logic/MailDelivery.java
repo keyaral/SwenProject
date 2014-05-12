@@ -94,7 +94,7 @@ public class MailDelivery {
 	return null;
 	}
 	
-	private Destination findDestination(String des) {
+	public Destination findDestination(String des) {
 		Boolean dom = false;
 		for (Destination d :allDestinations ) {
 			if ( des.equals(d.getName()) ) {
@@ -136,6 +136,12 @@ public class MailDelivery {
 
 	public HashSet<Mail> getMails() {
 		return mails;
+	}
+
+
+	public void assignDestinations(Route r) {
+		r.destinationD = findDestination(r.destination);
+		r.originD = findOrigin(r.origin);
 	}
 	
 	

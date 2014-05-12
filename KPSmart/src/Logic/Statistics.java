@@ -3,8 +3,8 @@ import java.util.*;
 
 public class Statistics implements Cloneable{
 
-	private int revenue = 0;
-	private int expenditure = 0;
+	private double revenue = 0;
+	private double expenditure = 0;
 	private int events = 0;
 	public final Set<Mail> mails;
 	public final Set<Route> routes;
@@ -22,22 +22,30 @@ public class Statistics implements Cloneable{
 		routes = s.routes;
 	}
 
-	public int revenue() {
+	public double revenue() {
 		return revenue;
 	}
 
-	public int expenditure() {
+	public double expenditure() {
 		return expenditure;
 	}
 
 	public int events() {
 		return events;
 	}
-
+	
+	
+	public void setRevenue(double r) {
+		revenue = r;
+ 	}
 	public void addRevenue(int change) {
 		revenue += change;
 	}
 
+	
+		public void setExpenditure(double e) {
+				expenditure = e;
+		 	}
 	public void addExpenditure(int change) {
 		expenditure += change;
 	}

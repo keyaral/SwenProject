@@ -73,8 +73,9 @@ public class CostListClass {
 	public Cost findValidCost(Mail m) {
 		String query = m.origin+m.priority+m.destination;
 		Cost c = costs.get(query);
-		System.out.print(c.toString());
-		return c; 
+		
+		if (c == null) return null;
+		else return c; 
 	}
 	
 	public boolean contains( Cost c) {

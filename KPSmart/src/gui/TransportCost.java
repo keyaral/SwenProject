@@ -48,12 +48,12 @@ public class TransportCost extends JInternalFrame {
 	private JFormattedTextField txtVolumeCost;
 	private JFormattedTextField txtMaxWeight;
 	private JFormattedTextField txtDuration;
-	private JFormattedTextField txtDate;
 	private JFormattedTextField txtMaxVolume;
 	private JFormattedTextField txtWeightCost_1;
-	public String[] mailDeliveryDetails;
-	public String[] costModificationDetails;
-	public String[] transportCost;
+	private JFormattedTextField txtWeightCosts;
+	private JButton btnClearFields;
+
+	private JButton btnSave;
 	//Generate Random ID
 	private void generateRandomId(int rnd){
 		Random random=new Random();
@@ -73,11 +73,11 @@ public class TransportCost extends JInternalFrame {
 		txtFrequency.setText(Integer.toString(number*2));
 		
 	}
-	private void generateMaxRandWeightAndVolume(){
+	private void generateMaxRandWeightAndVolume(int rnd){
 		Random random=new Random();
-		double number=random.nextDouble();
-		txtMaxWeight.setText(Double.toString(Math.round(number*100)));
-		txtMaxVolume.setText(Double.toString(Math.round(number*50)));
+		int number=random.nextInt(rnd);
+		txtMaxWeight.setText(Integer.toString(number));
+		txtMaxVolume.setText(Integer.toString((number*2)));
 	}
 	private void randomDestinationSelection(int item){
 		Random random=new Random();
@@ -100,17 +100,13 @@ public class TransportCost extends JInternalFrame {
 		int id=random.nextInt(item);
 		cmbType.setSelectedIndex(id);
 	}
-	private void generateRandWeightAndVolume(){
+	private void generateRandWeightAndVolume(int rnd){
 		Random random=new Random();
-		double number=random.nextDouble();
-		txtWeightCost_1.setText(Double.toString(Math.round(number*100)));
-		txtVolumeCost.setText(Double.toString(Math.round(number*250)));
+		int number=random.nextInt(rnd);
+		txtWeightCosts.setText(Integer.toString(number));
+		txtVolumeCost.setText(Integer.toString(number*2));
 	}
-	private void generateRandomDate(){
-		DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
-		Date date = new Date();
-		txtDate.setText(dateFormat.format(date));
-	}
+
 	/**
 	 * Create the frame.
 	 */
@@ -146,52 +142,56 @@ public class TransportCost extends JInternalFrame {
 					.addGap(37))
 		);
 		
-		JButton btnClearFields = new JButton("Clear Fields");
+		btnClearFields = new JButton("Clear Fields");
 		btnClearFields.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 						txtCostId.setText("");
-						txtWeightCost_1.setText("");
+						txtWeightCosts.setText("");
 						txtVolumeCost.setText("");
 						txtMaxWeight.setText("");
 						txtMaxVolume.setText("");
 						txtDuration.setText("");
 						txtFrequency.setText("");
-						txtDate.setText("");
 						cmbFrom.setSelectedIndex(-1);
 						cmbTo.setSelectedIndex(-1);
 						cmbDay.setSelectedIndex(-1);
 						cmbType.setSelectedIndex(-1);
 						cmbCompany.setSelectedIndex(-1);
-				String[] msg={"Transport Route Form --> Fields Cleared."};
-				MainWindow.logic.processform(msg[0]);
-				//JOptionPane.showMessageDialog(null,"Clear Fields!",null, 1);
+						btnSave.setEnabled(false);
+						cmbType.setEnabled(true);
+						txtCostId.setEnabled(true);
+						txtFrequency.setEnabled(true);
+						cmbDay.setEnabled(true);
+						txtVolumeCost.setEnabled(true);
+						txtMaxWeight.setEnabled(true);
+						txtDuration.setEnabled(true);
+						txtMaxVolume.setEnabled(true);
+						txtWeightCosts.setEnabled(true);
+						btnClearFields.setEnabled(true);
 			}
 		});
 		
-		JButton btnSave = new JButton("Save");
+		btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String company=(String)cmbCompany.getSelectedItem();
-				String to=(String)cmbTo.getSelectedItem();
-				String from=(String)cmbFrom.getSelectedItem();
-				String day=(String)cmbDay.getSelectedItem();
+				String to=(String)cmbTo.getSelectedItem().toString();
+				String from=(String)cmbFrom.getSelectedItem().toString();
+				String day=(String)cmbDay.getSelectedItem().toString();
+				String priority=(String)cmbType.getSelectedItem().toString();
 				int dialogButton = JOptionPane.YES_NO_OPTION;
 				if (txtCostId.getText().equals("")
 						||company.equals("") 
 						|| to.equals("")
 						||from.equals("")
-						||txtWeightCost_1.getText().equals("")
+						||txtWeightCosts.getText().equals("")
 						|| txtVolumeCost.getText().equals("")
 						||txtMaxWeight.getText().equals("")
 						||txtMaxVolume.getText().equals("")
 						|| txtDuration.getText().equals("")
 						|| txtFrequency.getText().equals("")
-						|| day.equals("")
-						||txtDate.getText().equals("")){
-				
-				
-					String[] msg={"Route Form --> Some fields are empty..."};
-					MainWindow.logic.processform(msg[0]);
+						|| priority.equals("")
+						|| day.equals("")){
 					JOptionPane.showMessageDialog(null,"Please enter all details required !",null, 1);
 						
 			}else
@@ -199,26 +199,38 @@ public class TransportCost extends JInternalFrame {
 				
 				int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to save the details?","Confirmation",dialogButton);
 				if(dialogResult == JOptionPane.YES_OPTION){
-					String values=
-						txtCostId.getText()+"\t"+
-						cmbCompany.getSelectedItem().toString()+"\t"+
-						cmbTo.getSelectedItem().toString()+"\t"+
-						cmbFrom.getSelectedItem().toString()+"\t"+
-						cmbType.getSelectedItem().toString()+"\t"+
-						txtWeightCost_1.getText()+"\t"+
-						txtVolumeCost.getText()+"\t"+
-						txtMaxWeight.getText()+"\t"+
-						txtMaxVolume.getText()+"\t"+
-						txtDuration.getText()+"\t"+
-						txtFrequency.getText()+"\t"+
-						cmbDay.getSelectedItem().toString() +"\t"+
-						txtDate.getText();
-				
-				transportCost=values.split("\t");
-				for (int i=0;i<transportCost.length;i++){
-					MainWindow.logic.processform(transportCost[i]);
-				}
-				JOptionPane.showMessageDialog(null,"Route Form: Save Details !",null, 1);
+				//	String type=MainWindow.logic.switchEvents(0, "1a");//Case 0: Type "1a"-call route
+					String[] values = { "0 ",
+						txtCostId.getText(),
+						cmbTo.getSelectedItem().toString(),
+						cmbFrom.getSelectedItem().toString(),
+						txtWeightCosts.getText(),
+						txtVolumeCost.getText(),
+						txtMaxWeight.getText(),
+						txtMaxVolume.getText(),
+						""+cmbType.getSelectedIndex(),
+						cmbDay.getSelectedItem().toString(),
+						txtFrequency.getText(),
+						txtDuration.getText(),
+						cmbCompany.getSelectedItem().toString() };
+					//Disable the save buutton to avoid double entry
+					btnSave.setEnabled(false);
+					cmbType.setEnabled(false);
+					txtCostId.setEnabled(false);
+					txtFrequency.setEnabled(false);
+					cmbDay.setEnabled(false);;
+					txtVolumeCost.setEnabled(false);
+					txtMaxWeight.setEnabled(false);
+					txtDuration.setEnabled(false);
+					txtMaxVolume.setEnabled(false);
+					txtWeightCosts.setEnabled(false);
+					cmbTo.setEnabled(false);
+					cmbFrom.setEnabled(false);
+					btnClearFields.setEnabled(false);
+					cmbCompany.setEnabled(false);
+					
+					
+				JOptionPane.showMessageDialog(null,MainWindow.logic.processform(values),null, 1);
 				}else{
 					//Details not saved
 					JOptionPane.showMessageDialog(null,"Details not saved !",null, 1);
@@ -232,10 +244,7 @@ public class TransportCost extends JInternalFrame {
 		JButton btnClose = new JButton("Close");
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Logic logic=new Logic();
 
-				String[] msg={"Closing Transport Route Form..."};
-				logic.processform(msg[0]);
 				dispose();
 			}
 		});
@@ -243,36 +252,44 @@ public class TransportCost extends JInternalFrame {
 		JButton btnLoadTestData = new JButton("Load Test Data");
 		btnLoadTestData.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				generateRandomId(1000);
+				generateRandomId(100);
 				randomCompanySelection(cmbCompany.getItemCount());
-				generateRandomDate();
-				generateRandWeightAndVolume();
+				generateRandWeightAndVolume(100);
 				randomPrioritySelection(cmbType.getItemCount());
 				randomDaySelection(cmbDay.getItemCount());
 				randomOriginSelection(cmbTo.getItemCount());
 				randomDestinationSelection(cmbFrom.getItemCount());
 				generateRadomDurationFrequency(100);
-				generateMaxRandWeightAndVolume();
+				generateMaxRandWeightAndVolume(100);
 				String values=
 						txtCostId.getText()+"\t"+
-						cmbCompany.getSelectedItem().toString()+"\t"+
 						cmbTo.getSelectedItem().toString()+"\t"+
 						cmbFrom.getSelectedItem().toString()+"\t"+
-						cmbType.getSelectedItem().toString()+"\t"+
-						txtWeightCost_1.getText()+"\t"+
+						txtWeightCosts.getText()+"\t"+
 						txtVolumeCost.getText()+"\t"+
 						txtMaxWeight.getText()+"\t"+
 						txtMaxVolume.getText()+"\t"+
-						txtDuration.getText()+"\t"+
-						txtFrequency.getText()+"\t"+
+						cmbType.getSelectedIndex()+"\t"+
 						cmbDay.getSelectedItem().toString() +"\t"+
-						txtDate.getText();
+						txtFrequency.getText()+"\t"+
+						txtDuration.getText()+"\t"+
+						cmbCompany.getSelectedItem().toString();
+				btnSave.setEnabled(true);
+				cmbType.setEnabled(true);
+				txtCostId.setEnabled(true);
+				txtFrequency.setEnabled(true);
+				cmbDay.setEnabled(true);
+				txtVolumeCost.setEnabled(true);
+				txtMaxWeight.setEnabled(true);
+				txtDuration.setEnabled(true);
+				txtMaxVolume.setEnabled(true);
+				txtWeightCosts.setEnabled(true);
+				btnClearFields.setEnabled(true);
+				cmbCompany.setEnabled(true);
+				cmbTo.setEnabled(true);
+				cmbFrom.setEnabled(true);
+
 				System.out.println("Test Data Loaded onto Transport Route Cost Form...");
-				String[] msg=values.split("\t");
-				for (int i=0;i<msg.length;i++){
-					MainWindow.logic.processform(msg[i]);
-				}
-				
 			}
 		});
 		GroupLayout gl_btnPanel = new GroupLayout(btnPanel);
@@ -396,29 +413,13 @@ public class TransportCost extends JInternalFrame {
 		txtFrequency = new JFormattedTextField();
 		String[] days={"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
 		cmbDay = new JComboBox(days);
-		DateFormat dateFormat=new SimpleDateFormat("dd-mm-yyyy");
-		 //txtDate = new JFormattedTextField(dateFormat);
-		txtDate = new JFormattedTextField(dateFormat);
-		//txtDate .addKeyListener(new KeyAdapter() { 
-	   //      public void keyTyped(KeyEvent e) {  
-	   //        char c = e.getKeyChar();  
-	   //        if (!(Character.isDigit(c) ||  
-	   //           (c == KeyEvent.VK_BACK_SPACE) ||
-	   //           (c == KeyEvent.VK_DELETE))) {  
-	  //              e.consume();  
-	 //             }  
-	  //       }  
-	 //  });  
-		txtDate.setToolTipText("Please enter date ");
-		
-		JLabel lblDate = new JLabel("Date");
 		
 		txtCostId = new JTextField();
 		txtCostId.setColumns(10);
 		
 		JLabel lblTransportCostId = new JLabel("Transport Cost ID");
 		
-		txtWeightCost_1 = new JFormattedTextField();
+		txtWeightCosts = new JFormattedTextField();
 		GroupLayout gl_DataInputPanel = new GroupLayout(DataInputPanel);
 		gl_DataInputPanel.setHorizontalGroup(
 			gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
@@ -463,7 +464,7 @@ public class TransportCost extends JInternalFrame {
 							.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_DataInputPanel.createSequentialGroup()
 									.addGap(3)
-									.addComponent(txtWeightCost_1, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE)
+									.addComponent(txtWeightCosts, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE)
 									.addGap(18)
 									.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
 										.addGroup(gl_DataInputPanel.createSequentialGroup()
@@ -482,14 +483,9 @@ public class TransportCost extends JInternalFrame {
 											.addComponent(txtDuration, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
 											.addGap(28)
 											.addComponent(lblFrequency))
-										.addGroup(gl_DataInputPanel.createSequentialGroup()
-											.addComponent(cmbDay, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
-											.addGap(28)
-											.addComponent(lblDate)))
+										.addComponent(cmbDay, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
 									.addGap(18)
-									.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(txtDate)
-										.addComponent(txtFrequency, GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))))))
+									.addComponent(txtFrequency, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)))))
 					.addGap(16))
 		);
 		gl_DataInputPanel.setVerticalGroup(
@@ -533,7 +529,7 @@ public class TransportCost extends JInternalFrame {
 						.addGroup(gl_DataInputPanel.createSequentialGroup()
 							.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblWeightCost)
-								.addComponent(txtWeightCost_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addComponent(txtWeightCosts, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 							.addPreferredGap(ComponentPlacement.UNRELATED)))
 					.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_DataInputPanel.createSequentialGroup()
@@ -561,11 +557,7 @@ public class TransportCost extends JInternalFrame {
 						.addGroup(gl_DataInputPanel.createSequentialGroup()
 							.addGap(3)
 							.addComponent(lblDay))
-						.addGroup(gl_DataInputPanel.createSequentialGroup()
-							.addGap(3)
-							.addComponent(lblDate))
-						.addComponent(cmbDay, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtDate, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(cmbDay, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(28))
 		);
 		DataInputPanel.setLayout(gl_DataInputPanel);

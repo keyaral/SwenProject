@@ -147,7 +147,7 @@ public class MailDelivery extends JInternalFrame {
 				cmbDestination.setSelectedIndex(-1);
 				cmbOrigin.setSelectedIndex(-1);
 				cmbPriority.setSelectedIndex(-1);
-				MainWindow.logic.processform("Mail Delivery Form--> All fields cleared...");
+				
 				 btnSave.setEnabled(true);
 				 btnClearFields.setEnabled(false);
 				
@@ -171,27 +171,21 @@ public class MailDelivery extends JInternalFrame {
 						|| txtDate.getText().equals("")){
 					
 					JOptionPane.showMessageDialog(null,"Please enter all details",null, 1);
-<<<<<<< HEAD
-					//TODO		MainWindow.logic.processform("Mail Delivery Form-->Some data input fields are empty...");
-=======
-					String[] msg={"Mail Delivery Form-->Some data input fields are empty"};
-					MainWindow.logic.processform(msg[0]);
->>>>>>> branch 'master' of https://github.com/keyaral/SwenProject.git
 				}else{
 					
 					int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to send this mail item?","Confirmation",dialogButton);
 					if(dialogResult == JOptionPane.YES_OPTION){
 						btnSave.setEnabled(false);
-						
-							String details=txtMailId.getText() + "\t" + destination + "\t" +
-											origin+"\t" + txtWeight.getText() + "\t" +
-											txtVolume.getText()+"\t" + day + "\t" + txtDate.getText() +"\t" + priority  ;
-							JOptionPane.showMessageDialog(null,"Mail Item sent.",null, 1);
-							mailDeliveryDetails=details.split("\t");
-							for (int i=0;i<mailDeliveryDetails.length;i++){
-								MainWindow.logic.processform(mailDeliveryDetails[i]);
-							}
-					}else{
+							
+							String[]  details ={ "5",txtMailId.getText(), destination ,
+											origin, txtWeight.getText(),
+											txtVolume.getText(),priority,txtDate.getText()  };
+							
+							JOptionPane.showMessageDialog(null,MainWindow.logic.processform(details),null, 1);
+
+		
+							//}
+					}else{	
 						//Do nothing
 						JOptionPane.showMessageDialog(null,"Canceled",null, 1);
 						
@@ -207,8 +201,7 @@ public class MailDelivery extends JInternalFrame {
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String[] close={"Closing Mail Delivery Form"};
-				Logic logic=new Logic();
-				logic.processform(close[0]);
+			
 				dispose();
 			}
 		});
@@ -308,7 +301,7 @@ public class MailDelivery extends JInternalFrame {
 		txtDate.setToolTipText("Enter Date");
 		//Define Mail Priority
 		
-		String [] mailPriority={"Domestic Air","International Air","Domestic Standard","Internation Standard Priority"};
+		String [] mailPriority={"Domestic Air","International Air","Domestic Standard","International Standard Priority"};
 		cmbPriority = new JComboBox(mailPriority);
 		
 		JLabel lblDeliveryId = new JLabel("Delivery ID");

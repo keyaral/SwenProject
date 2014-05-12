@@ -6,11 +6,11 @@ import java.util.List;
 
 public class Logic {
 
-	public static final Statistics stats = new Statistics();
+	public final Statistics stats = new Statistics();
 	public final EventProcesser eventProcessor;
 
 	public Logic() {
-		eventProcessor = new EventProcesser();
+		eventProcessor = new EventProcesser(stats);
 		setupBaseEvents();
 		
 		
@@ -36,7 +36,7 @@ public class Logic {
 		System.out.println("Costs done ");
 		
 		processform( new String[] {"0","4126","Auckland", "Wellington","8","10","200","200","1","Tuesday", "5", "3","KpStart"} );	
-		processform( new String[] {"0","4125","Auckland", "Wellington","8","10","200","200","2","Tuesday", "5", "3","KpStart"} );	
+		processform( new String[] {"0","4124","Auckland", "Wellington","8","10","200","200","2","Tuesday", "5", "3","KpStart"} );	
 		
 		
 		System.out.println(	processform( new String[] {"0","4127","Rotarua", "Wellington","8","10","200","200","1","Tuesday", "5", "3","KpStart"} ));	

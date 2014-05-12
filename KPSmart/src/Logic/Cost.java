@@ -12,17 +12,27 @@ public class Cost {
 	
 	
 	public Cost(String[] values) {
-	
+		System.out.println(values[6]);
 		this.ID = Integer.parseInt(values[1]);
 		this.weight = Integer.parseInt(values[2]);
 		this.volume = Integer.parseInt(values[3]);
 		this.destination = (values[4]);
 		this.origin = (values[5]);
-		this.priority = Integer.parseInt(values[6]);
+		this.priority = priorityCheck(values[6]);
 		
 		
 	}
 	
+	private int priorityCheck(String string) {
+		// TODO Auto-generated method stub
+		if ( string.equals("Domestic Air") ) {return 1;} 
+		if ( string.equals("Domestic Standard") ) {return 2;}
+		if ( string.equals("International Standard Priorityr") ) {return 3;}
+		if ( string.equals("International Air") ) {return 4;}
+			
+			return 0;
+	}
+
 	public Cost(int i, double w, double v, String d, String o, int p){
 		this.ID = i;
 		this.weight = w;

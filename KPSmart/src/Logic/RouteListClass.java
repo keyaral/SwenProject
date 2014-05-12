@@ -1,11 +1,18 @@
 package Logic;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+
+import javax.swing.JOptionPane;
+
+import TylerWorkInProgress.RouteChain;
 
 public class RouteListClass {
 
 	public HashSet<Route> routes;
-
+	public ArrayList<ArrayList<Route>>tempPath = new ArrayList<ArrayList<Route>>();
+	
 	public RouteListClass(){
 		routes = new HashSet<Route>();
 		//routes.addAll(); ADD ALL From data base
@@ -22,7 +29,12 @@ public class RouteListClass {
 		for(Route a : routes){
 			if(a.ID == r.ID) exists = true;		//Can change to names instead of ID's
 		}
-		if(exists == true){ System.out.println("Already Exists"); return false;}
+		
+		if(exists == true){ 
+						JOptionPane.showMessageDialog(null,r.ID + " Already Exists",null, 1);
+						System.out.println("Already Exists"); return false;}
+		
+	//	if(exists == true){ System.out.println("Already Exists"); return false;}
 		else{routes.add(r); return true;}
 	}
 	
@@ -51,10 +63,65 @@ public class RouteListClass {
 		return null;
 	}
 
-	public Route findValidRoute(Mail m) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
+
+	public RouteChain findValidRoute(Mail m) { return null; }
+//		for(Route r : this.routes) r.visited = false;
+//		ArrayList<Route> origins = new ArrayList<Route>();
+//		ArrayList<Route> destinations = new ArrayList<Route>();
+//	for(Route r : this.routes){									//Search for routes that are capable of handling the initial criteria
+//			if(r.origin.getName().equals(m.origin)) origins.add(r);
+//			if(r.destination.getName().equals(m.destination)) destinations.add(r);
+//		}
+//			if(origins.isEmpty() || destinations.isEmpty()){ return null;}
+//
+//		HashMap<String,RouteChain> PossibleRoutes = new HashMap<String,RouteChain>();
+//		HashMap<String,RouteChain> PreferableRoutes = new HashMap<String,RouteChain>();
+//	
+//		for(Route r : origins){
+//			int i;
+//			do {
+//			i = this.tempPath.size();
+//			searchRouteChain(r.origin,new ArrayList<Route>(), m.destination);
+//		}
+//			while(i < destinations.size()); //create Routes for a new route chain
+//		}
+//		
+//		for(ArrayList<Route> l : this.tempPath){
+//		RouteChain MakeChain = new RouteChain(l,m.destination,m.origin);
+//		PossibleRoutes.put(Double.toString(MakeChain.calculateCost(m)),MakeChain);
+//		if(MakeChain.checkViable(m)) PreferableRoutes.put(Double.toString(MakeChain.calculateCost(m)),MakeChain);
+//		}
+//
+//		double lowestCost = Integer.MAX_VALUE;
+//		if(PreferableRoutes.size() == 0){
+//			for(String s : PossibleRoutes.keySet()){
+//				if(Double.valueOf(s) < lowestCost) lowestCost = Double.valueOf(s);
+//		}
+//	}
+//		else{
+//			for(String s : PreferableRoutes.keySet()){
+//				if(Double.valueOf(s) < lowestCost) lowestCost = Double.valueOf(s);
+//			}
+//		}
+//		for(RouteChain r1 : PreferableRoutes.values()){r1.PrintAllRoutes();}
+//		
+//		return PossibleRoutes.get((Double.toString(lowestCost)));
+// 	}
+//
+//	private ArrayList<Route> searchRouteChain(Destination d, ArrayList<Route> currentRoutes, Destination finish) {
+//		
+//		for(Route t :d.routes){
+//			if(t.visited == false){
+//				t.visited = true;
+//				currentRoutes.add(t); 
+//				if(t.destination.getName().equals(finish.getName())) {System.out.println("Found Route to Destination From: "+t.origin.getName()); 				ArrayList<Route> tempRoutes = new ArrayList<Route>();
+//				for(Route r : currentRoutes) if(r.added == false){ tempRoutes.add(r); r.added = true;}
+//				tempPath.add(tempRoutes);
+//				} 
+//				else currentRoutes = searchRouteChain(t.destination, currentRoutes,finish);}
+//	     	}
+//		return currentRoutes;
+//	}	
+//	
 	
 }
