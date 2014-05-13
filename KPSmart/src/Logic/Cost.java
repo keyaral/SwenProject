@@ -14,8 +14,8 @@ public class Cost {
 	public Cost(String[] values) {
 		System.out.println(values[6]);
 		this.ID = Integer.parseInt(values[1]);
-		this.weight = Integer.parseInt(values[2]);
-		this.volume = Integer.parseInt(values[3]);
+		this.weight = Double.parseDouble(values[2]);
+		this.volume = Double.parseDouble(values[3]);
 		this.destination = (values[4]);
 		this.origin = (values[5]);
 		this.priority = priorityCheck(values[6]);

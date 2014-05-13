@@ -147,6 +147,13 @@ public class MailDelivery {
 		r.destinationD = findDestination(r.destination);
 		r.originD = findOrigin(r.origin);
 	}
+
+
+	public void assignDestinations(Mail m) {
+		m.destinationD = findDestination(m.destination);
+		m.originD = findOrigin(m.origin);
+		
+	}
 	
 	
 }

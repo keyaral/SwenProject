@@ -15,7 +15,36 @@ public class Mail {
 	public double cost;
 	public String name;
 	public double time;
+	
+	public Destination destinationD;
+	public synchronized Destination getDestinationD() {
+		return destinationD;
+	}
 
+
+
+
+	public synchronized void setDestinationD(Destination destinationD) {
+		this.destinationD = destinationD;
+	}
+
+
+
+
+	public synchronized Destination getOriginD() {
+		return originD;
+	}
+
+
+
+
+	public synchronized void setOriginD(Destination originD) {
+		this.originD = originD;
+	}
+
+	public Destination originD;
+	
+	
 	public Mail(int i, String de, String o, double w, double v, int p, Date da){
 		this.ID = i;
 		this.name = o;

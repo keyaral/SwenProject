@@ -108,6 +108,8 @@ switch (type) {
  
 		private String deliverMail(String[] details) throws CloneNotSupportedException {
 			Mail m = new Mail(details);
+			mailList.assignDestinations(m);
+			
 			Route r = null; // routes.findValidRoute(m);
 			Cost c = costs.findValidCost(m);
 			

@@ -32,14 +32,14 @@ public class Route implements Cloneable{
 	this.ID = Integer.parseInt(values[1]);
 	this.destination = (values[2]);
 	this.origin = (values[3]);
-	this.costWeight = Integer.parseInt(values[4]);
-	this.costVolume = Integer.parseInt(values[5]);
-	this.maxWeight = Integer.parseInt(values[6]);
-	this.maxVolume = Integer.parseInt(values[7]);
+	this.costWeight = Double.parseDouble(values[4]);
+	this.costVolume = Double.parseDouble(values[5]);
+	this.maxWeight = Double.parseDouble(values[6]);
+	this.maxVolume = Double.parseDouble(values[7]);
 	this.priority = checkPriority(values[8]);
 	this.day = (values[9]);
-	this.frequency = Integer.parseInt(values[10]);
-	this.duration = Integer.parseInt(values[11]);
+	this.frequency = Double.parseDouble(values[10]);
+	this.duration = Double.parseDouble(values[11]);
 	this.companyName = (values[12]);
 }
 
