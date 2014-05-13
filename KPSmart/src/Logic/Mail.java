@@ -11,6 +11,7 @@ public class Mail {
 	public double volume;
 	public int priority;
 	public Date date;
+	public double income;
 	public double cost;
 	public String name;
 	public double time;

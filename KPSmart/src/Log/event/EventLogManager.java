@@ -2,6 +2,7 @@ package Log.event;
 
 import gui.MainWindow;
 import Logic.*;
+import java.util.*;
 
 public class EventLogManager {
 
@@ -39,7 +40,7 @@ public class EventLogManager {
 		else if (e.type.equals("Change")) {
 			details += "was modified.";
 		}
-		else if (e.type.equals("Delete")) {
+		else if (e.type.equals("Remove")) {
 			details += "was removed.";
 		}
 		else if (e.type.equals("Send")) {
@@ -58,6 +59,24 @@ public class EventLogManager {
 		Statistics s = eventProcesser.getEvents().get(index).statistics;
 		String[] stats = {String.valueOf(s.revenue()), String.valueOf(s.expenditure()), String.valueOf(s.events())};
 		return stats;
+	}
+	
+	public List<String> getList(List<String[]> list) {
+		if (list==null) return null;
+		List<String> processedList = new ArrayList<String>();
+		for (String[] string: list) {
+			String s = "";
+			for (int i = 0; i < string.length; i++) {
+				if (i == string.length) s += string[i];
+				else s += string[i] + "";
+			}
+			processedList.add(s);
+		}
+		return processedList;
+	}
+	
+	public KPEvent getEvent() {
+		return eventProcesser.getEvents().get(index);
 	}
 
 	public void next()  {

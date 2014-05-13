@@ -111,17 +111,9 @@ switch (type) {
 			if (r==null){ return error(details, "No valid Route"); }
 			
 			Boolean success = mailList.deliverMail(m, r, c);
-			if (success ){
-			;
-			currentStats.mails.add(m);
-			currentStats.addRevenue((int)m.cost);
-			currentStats.addRevenue((int)r.cost);
-			currentStats.incrementEvents();
-			
-			KPEvent e = new KPEvent("Send", m, success, (Statistics)currentStats.clone());
-			events.add(e);
-			
-			return "Mail: " +  m.ID + " was successfully sent"; 
+			if (success){
+				addEvent("Send", success, m);
+				return "Mail: " +  m.ID + " was successfully sent"; 
 			}		
 			return error(details, "Cost was not Changes");
 	} 
@@ -223,9 +215,7 @@ switch (type) {
 			
 			
 			if(success)	{ 
-				KPEvent e = new KPEvent("Delete", r, success,  (Statistics)currentStats.clone());
-				// e.addStats;
-				events.add(e);
+				addEvent("Remove", success, r);
 				return "Route: " + r.ID + " was successfully deleted"; }
 			
 			return error(details, "Route was not deleted ");
@@ -238,10 +228,9 @@ switch (type) {
 			Boolean success = routes.changeRoute(r);
 			
 			if(success)	{
-				KPEvent e = new KPEvent("Change", r, success,  (Statistics)currentStats.clone());
-				events.add(e);
-				currentStats.incrementEvents();
-			return "Route: " + r.ID + " was successfully changed ";  } 
+				addEvent("Change", success, r);
+				return "Route: " + r.ID + " was successfully changed "; 
+			} 
 			
 			else return error(details, "Route was not Changes");
 			
@@ -252,14 +241,11 @@ switch (type) {
 			Route r = new Route(details);
 			mailList.assignDestinations(r);
 			Boolean success = routes.addRoute(r);
-			
 		
-			if (success)	{ 
-				KPEvent e = new KPEvent("Add", r, success, (Statistics)currentStats.clone());
-				events.add(e);
-				currentStats.incrementEvents();
-				return "Route: " + r.ID + " was successfully added "; }
-			
+			if (success){ 
+				addEvent("Add", success, r);
+				return "Route: " + r.ID + " was successfully added ";
+			}
 			
 			else { return error(details, "Route was not added"); }
 		
@@ -369,22 +355,29 @@ switch (type) {
 		}
 		return true;
 	}
-
+	
+	/**
+	 * Adds in the event based on the type and object assigned
+	 * with it as the current statistics at this stage. Note that
+	 * for an object that changes, two objects will be needed to
+	 * set the objects
+	 * 
+	 */
 	private void addEvent(String type, boolean success, Object ... o) throws CloneNotSupportedException{
 		if (o[0] instanceof Mail) {
 			Mail m = (Mail) o[0];
-			MainWindow.logic.stats.setRevenue(mailList.gettRevenue());
-			MainWindow.logic.stats.setExpenditure(mailList.gettExpediture());
-			MainWindow.logic.stats.mails.add(m);
+			currentStats.setRevenue(mailList.gettRevenue());
+			currentStats.setExpenditure(mailList.gettExpediture());
+			currentStats.mails.add(m);
 		}
 		else if (o[0] instanceof Route) {
 			Route r = (Route) o[0];
 			if (type.equals("Add"))
-				MainWindow.logic.stats.routes.add((Route)r.clone());
+				currentStats.routes.add((Route)r.clone());
 			else if (type.equals("Changes")) {
 				Route rd = (Route) o[1];
-				MainWindow.logic.stats.routes.remove(rd);
-				MainWindow.logic.stats.routes.add((Route)r.clone());
+				currentStats.routes.remove(rd);
+				currentStats.routes.add((Route)r.clone());
 			}
 			else if (type.equals("Remove")) {
 				MainWindow.logic.stats.routes.remove(r);
@@ -393,12 +386,16 @@ switch (type) {
 		else if (o[0] instanceof Cost) {
 
 		}
-		events.add(new KPEvent(type, o, success, (Statistics)MainWindow.logic.stats.clone()));
+		events.add(new KPEvent(type, o, success, new Statistics((Statistics)currentStats.clone())));
 		MainWindow.logic.stats.incrementEvents();
 	}
 
 	public ArrayList<KPEvent> getEvents() {
 		return events;
-		}
+	}
+	
+	public Statistics getStats() {
+		return currentStats;
+	}
 
 }

@@ -33,25 +33,13 @@ public class Statistics implements Cloneable{
 	public int events() {
 		return events;
 	}
-
 	
 	public void setRevenue(double r) {
 		revenue = r;
  	}
-	public void addRevenue(int change) {
-		revenue += change;
-
-	}
-
-
 	
-		public void setExpenditure(double e) {
-				expenditure = e;
-		 	}
-		
-	public void addExpenditure(int change) {
-		expenditure += change;
-
+	public void setExpenditure(double e) {
+		expenditure = e;
 	}
 
 	public void incrementEvents() {
@@ -59,6 +47,7 @@ public class Statistics implements Cloneable{
 	}
 
 	public List<String[]> getMailAmounts() {
+		if (mails.isEmpty()) return null;
 		List<String[]> amounts = new ArrayList<String[]>();
 		for (Mail mail: mails) {
 			if (amounts.isEmpty()) {
@@ -98,6 +87,7 @@ public class Statistics implements Cloneable{
 	}
 
 	public List<String[]> getDeliveryTimes() {
+		if (mails.isEmpty()) return null;
 		List<String[]> times = new ArrayList<String[]>();
 		List<double[]> data = new ArrayList<double[]>();
 		for (Mail mail: mails) {
@@ -135,6 +125,7 @@ public class Statistics implements Cloneable{
 	}
 
 	public List<String> getCriticalRoutes() {
+		if (mails.isEmpty() || routes.isEmpty()) return null;
 		List<String> routes = new ArrayList<String>();
 		// TODO
 		return routes;

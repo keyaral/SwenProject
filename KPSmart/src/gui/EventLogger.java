@@ -25,10 +25,7 @@ public class EventLogger extends JInternalFrame{
 	private static final long serialVersionUID = 1L;
 
 	private EventLogManager manager = new EventLogManager();
-	private List<String> amountOfMail = new ArrayList<String>();//
-	private List<String> averageDeliveryTimes = new ArrayList<String>();
-	private List<String> crticalRoutes = new ArrayList<String>();
-
+	
 	private JTextArea textLog;
 	private JLabel lblRevenue;
 	private JLabel lblExpenditure;
@@ -36,6 +33,10 @@ public class EventLogger extends JInternalFrame{
 	private JTextField textField;
 	private JButton btnPrevious = new JButton("Previous");
 	private JButton btnNext;
+
+	private JTextArea amountOfMailList = new JTextArea();
+	private JTextArea averageDeliveryTimesList = new JTextArea();
+	private JTextArea criticalRoutesList = new JTextArea();
 
 	public EventLogger() {
 		setTitle("Event Log");
@@ -135,14 +136,12 @@ public class EventLogger extends JInternalFrame{
 					.addContainerGap(138, Short.MAX_VALUE))
 		);
 		statsPanel.setLayout(gl_statsPanel);
-
-		JList amountOfMailList = new JList();
+		amountOfMailList.setEditable(false);
+		
 		bussinessPanel.addTab("Amount Of Mail", null, amountOfMailList, null);
-
-		JList averageDeliveryTimesList = new JList();
+		averageDeliveryTimesList.setEditable(false);
 		bussinessPanel.addTab("Average Delivery Times", null, averageDeliveryTimesList, null);
-
-		JList criticalRoutesList = new JList();
+		criticalRoutesList.setEditable(false);
 		bussinessPanel.addTab("Critical Routes", null, criticalRoutesList, null);
 		rightPane.setLayout(gl_rightPane);
 
@@ -235,9 +234,27 @@ public class EventLogger extends JInternalFrame{
 		
 		if (manager.atEnd()) btnNext.setEnabled(false);
 		else btnNext.setEnabled(true);
+		
+		amountOfMailList.setText("Key: Origin-Destination-Volume-Weight-Num");
+		averageDeliveryTimesList.setText("Key: Origin-Destination-Priority-AverageTime");
+		criticalRoutesList.setText("No mail or route has been created yet.");
+		
+		updateList(manager.getList(manager.getEvent().statistics.getMailAmounts()), amountOfMailList,
+				"No mail has been sent yet.");
+		updateList(manager.getList(manager.getEvent().statistics.getDeliveryTimes()), averageDeliveryTimesList,
+				"No mail has been sent yet.");
 	}
 	
-	public void displayErrorMessage(String message) {
+	private void updateList(List<String> ss, JTextArea list, String emptyMessage) {
+		if (ss == null) list.setText(emptyMessage);
+		else {
+			for (String s: ss) {
+				list.append("\n" + s);
+			}
+		}
+	}
+	
+	private void displayErrorMessage(String message) {
 		JOptionPane.showInternalMessageDialog(this, message, "Message", JOptionPane.PLAIN_MESSAGE);
 	}
 }

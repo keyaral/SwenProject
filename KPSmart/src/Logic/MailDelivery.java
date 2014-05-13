@@ -80,6 +80,10 @@ public class MailDelivery {
 		 origin.addInternationWeight(m.weight);
 		 
 	 }
+	 
+	 m.addCost(kpCost);
+	 m.addShipmentTime(r.duration);
+	 
 	return true;
 	}
 	
