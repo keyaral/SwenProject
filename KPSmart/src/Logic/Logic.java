@@ -6,12 +6,11 @@ import java.util.List;
 
 public class Logic {
 
-	public final Statistics stats = new Statistics();
 	public final EventProcesser eventProcessor;
 	
 
 	public Logic() {
-		eventProcessor = new EventProcesser(stats);
+		eventProcessor = new EventProcesser(new Statistics());
 		setupBaseEvents();
 		
 		

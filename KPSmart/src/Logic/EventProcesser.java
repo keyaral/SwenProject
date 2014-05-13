@@ -380,14 +380,14 @@ switch (type) {
 				currentStats.routes.add((Route)r.clone());
 			}
 			else if (type.equals("Remove")) {
-				MainWindow.logic.stats.routes.remove(r);
+				currentStats.routes.remove(r);
 			}
 		}
 		else if (o[0] instanceof Cost) {
 
 		}
 		events.add(new KPEvent(type, o, success, new Statistics((Statistics)currentStats.clone())));
-		MainWindow.logic.stats.incrementEvents();
+		currentStats.incrementEvents();
 	}
 
 	public ArrayList<KPEvent> getEvents() {

@@ -19,6 +19,7 @@ public class Mail {
 	public Mail(int i, String de, String o, double w, double v, int p, Date da){
 		this.ID = i;
 		this.name = o;
+		this.destination = de;
 		this.origin = o;
 		this.weight = w;
 		this.volume = v;
