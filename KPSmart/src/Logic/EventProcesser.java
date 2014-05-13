@@ -16,7 +16,7 @@ public class EventProcesser {
 	MailDelivery mailList = new MailDelivery();
 	ArrayList<KPEvent> events = new ArrayList<KPEvent>();
 
-	Statistics currentStats = new Statistics();
+	Statistics currentStats;
 	public EventProcesser() {
 		 
 	}

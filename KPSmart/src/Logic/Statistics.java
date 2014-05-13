@@ -51,10 +51,8 @@ public class Statistics implements Cloneable{
 		List<String[]> amounts = new ArrayList<String[]>();
 		for (Mail mail: mails) {
 			if (amounts.isEmpty()) {
-
 				String[] string = {mail.origin, mail.destination, String.valueOf(mail.volume), String.valueOf(mail.weight), "1"};
 				amounts.add(string);
-
 			}
 			else {
 				boolean found = false;
@@ -73,13 +71,8 @@ public class Statistics implements Cloneable{
 					}
 				}
 				if (!found) {
-
 					String[] string = {mail.origin, mail.destination, String.valueOf(mail.volume), String.valueOf(mail.weight), "1"};
 					amounts.add(string);
-
-					String[] s = {mail.origin, mail.destination, String.valueOf(mail.volume), String.valueOf(mail.weight), "1"};
-					amounts.add(s);
-
 				}
 			}
 		}
