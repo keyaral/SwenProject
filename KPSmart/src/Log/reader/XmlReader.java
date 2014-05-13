@@ -48,7 +48,7 @@ public class XmlReader implements IXmlReader{
 		Log log = FindAll();
 		
 		ArrayList<Cost> cost = new ArrayList<Cost>();
-		for(Object obj : log.getCostOrPriceOrMail()){
+		for(Object obj : log.getCostOrPriceOrRoute()){
 			if (obj.getClass() == Cost.class){
 				cost.add((Cost)obj);
 			}
@@ -64,7 +64,7 @@ public class XmlReader implements IXmlReader{
 		Log log = FindAll();
 		
 		ArrayList<Price> price = new ArrayList<Price>();
-		for(Object obj : log.getCostOrPriceOrMail()){
+		for(Object obj : log.getCostOrPriceOrRoute()){
 			if (obj.getClass() == Price.class){
 				price.add((Price)obj);
 			}
@@ -80,7 +80,7 @@ public class XmlReader implements IXmlReader{
 		Log log = FindAll();
 		
 		ArrayList<Timelimit> timeLimit = new ArrayList<Timelimit>();
-		for(Object obj : log.getCostOrPriceOrMail()){
+		for(Object obj : log.getCostOrPriceOrRoute()){
 			if (obj.getClass() == Timelimit.class){
 				timeLimit.add((Timelimit)obj);
 			}
@@ -96,7 +96,7 @@ public class XmlReader implements IXmlReader{
 		Log log = FindAll();
 		
 		ArrayList<Discontinue> discontinue = new ArrayList<Discontinue>();
-		for(Object obj : log.getCostOrPriceOrMail()){
+		for(Object obj : log.getCostOrPriceOrRoute()){
 			if (obj.getClass() == Discontinue.class){
 				discontinue.add((Discontinue)obj);
 			}
@@ -113,7 +113,7 @@ public class XmlReader implements IXmlReader{
 		Log log = FindAll();
 		
 		ArrayList<Mail> mail = new ArrayList<Mail>();
-		for(Object obj : log.getCostOrPriceOrMail()){
+		for(Object obj : log.getCostOrPriceOrRoute()){
 			if (obj.getClass() == Mail.class){
 				mail.add((Mail)obj);
 			}

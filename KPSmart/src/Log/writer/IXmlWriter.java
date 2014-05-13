@@ -18,6 +18,7 @@ public interface IXmlWriter {
 	Log InsertMail(Mail mail);
 	Log InsertTimeLimit(Timelimit timeLimit);
 	Log InsertDiscontinue(Discontinue discontinue);
+	Log InsertRoute(Route route);
 	
 
 }

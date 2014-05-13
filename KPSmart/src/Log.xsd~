@@ -54,7 +54,7 @@
                 <xs:element name="weight" type="xs:double" />
                 <xs:element name="volume" type="xs:double" />
                 <xs:element name="priority" type="xs:integer" />
-		<xs:element name="date" type="xs:dateTime" />
+		<xs:element name="date" type="xs:datetime" />
 		<xs:element name="income" type="xs:double" />
 		<xs:element name="cost" type="xs:double" />
 		<xs:element name="name" type="xs:string" />

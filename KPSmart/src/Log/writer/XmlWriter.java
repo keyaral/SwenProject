@@ -15,6 +15,7 @@ import Log.Log.Discontinue;
 import Log.Log.Mail;
 import Log.Log.Price;
 import Log.Log.Timelimit;
+import Log.Log.Route;
 
 public class XmlWriter implements IXmlWriter{
 	
@@ -83,7 +84,7 @@ public class XmlWriter implements IXmlWriter{
 		// TODO Auto-generated method stub
 		XmlReader reader =  new XmlReader(_xmlPath);
 		Log log = reader.FindAll();
-		log.getCostOrPriceOrMail().add(cost);
+		log.getCostOrPriceOrRoute().add(cost);
 		
 		WriteLog(log);
 		
@@ -94,7 +95,7 @@ public class XmlWriter implements IXmlWriter{
 	public Log InsertPrice(Price price) {
 		XmlReader reader =  new XmlReader(_xmlPath);
 		Log log = reader.FindAll();
-		log.getCostOrPriceOrMail().add(price);
+		log.getCostOrPriceOrRoute().add(price);
 		
 		WriteLog(log);
 		
@@ -105,7 +106,7 @@ public class XmlWriter implements IXmlWriter{
 	public Log InsertMail(Mail mail) {
 		XmlReader reader =  new XmlReader(_xmlPath);
 		Log log = reader.FindAll();
-		log.getCostOrPriceOrMail().add(mail);
+		log.getCostOrPriceOrRoute().add(mail);
 		
 		WriteLog(log);
 		
@@ -116,7 +117,7 @@ public class XmlWriter implements IXmlWriter{
 	public Log InsertTimeLimit(Timelimit timeLimit) {
 		XmlReader reader =  new XmlReader(_xmlPath);
 		Log log = reader.FindAll();
-		log.getCostOrPriceOrMail().add(timeLimit);
+		log.getCostOrPriceOrRoute().add(timeLimit);
 		
 		WriteLog(log);
 		
@@ -127,7 +128,18 @@ public class XmlWriter implements IXmlWriter{
 	public Log InsertDiscontinue(Discontinue discontinue) {
 		XmlReader reader =  new XmlReader(_xmlPath);
 		Log log = reader.FindAll();
-		log.getCostOrPriceOrMail().add(discontinue);
+		log.getCostOrPriceOrRoute().add(discontinue);
+		
+		WriteLog(log);
+		
+		return log;
+	}
+	
+	@Override
+	public Log InsertRoute(Route route) {
+		XmlReader reader =  new XmlReader(_xmlPath);
+		Log log = reader.FindAll();
+		log.getCostOrPriceOrRoute().add(route);
 		
 		WriteLog(log);
 		

@@ -2,10 +2,13 @@ package Logic;//
 
 import gui.MainWindow;
 
+import java.io.Writer;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import Log.Log;
+import Log.writer.*;
 
 
 
@@ -15,7 +18,9 @@ public class EventProcesser {
 	CostListClass costs = new CostListClass();;
 	MailDelivery mailList = new MailDelivery();
 	ArrayList<KPEvent> events = new ArrayList<KPEvent>();
-
+	
+	private String _xmlPath = "file.xml";
+	
 	Statistics currentStats;
 	public EventProcesser() {
 		 
@@ -113,10 +118,28 @@ switch (type) {
 			Boolean success = mailList.deliverMail(m, r, c);
 			if (success){
 				addEvent("Send", success, m);
+				Log.Mail mail = new Log.Mail();
+				LogMail(mail,m);
 				return "Mail: " +  m.ID + " was successfully sent"; 
 			}		
 			return error(details, "Cost was not Changes");
 	} 
+		private void LogMail(Log.Mail mail, Mail m){
+			//Log mail send
+			XmlWriter writer = new XmlWriter(_xmlPath);
+			mail.setCost(m.cost);
+			mail.setDate(m.date);
+			mail.setDestination(m.destination);
+			mail.setId(m.ID);
+			mail.setIncome(m.income);
+			mail.setName(m.name);
+			mail.setOrigin(m.origin);
+			mail.setPriority(m.priority);
+			mail.setTime(m.time);
+			mail.setVolume(m.volume);
+			mail.setWeight(m.weight);
+			writer.InsertMail(mail);
+		}
 
 		/**
 		 *Method for handling Changing Costs events
@@ -137,7 +160,8 @@ switch (type) {
 			if (success ){
 			KPEvent e = new KPEvent("Change", c, success, (Statistics)currentStats.clone());
 			events.add(e);	
-			
+			Log.Cost cost  = new Log.Cost();
+			LogCost(cost,c);
 			return "Cost: " +  c.ID + " was successfully changed"; }
 		
 			else return error(details, "Cost was not Changes");
@@ -167,7 +191,8 @@ switch (type) {
 				mailList.allDestinations.add(new Destination(c.origin,false)); mailList.allDestinations.add(new Destination(c.destination,false));
 				KPEvent e = new KPEvent("Add", c, success , (Statistics)currentStats.clone());
 				events.add(e);
-				
+				Log.Cost cost  = new Log.Cost();
+				LogCost(cost,c);
 				return "Cost: " + c.ID + " was successfully added  "
 																+ "	\n a new origin is avaliable: "+ c.origin
 																+ "\n a new destination is avaliable" + c.destination; }
@@ -175,7 +200,9 @@ switch (type) {
 			else if ( neworigin && success ) {
 				KPEvent e = new KPEvent("Add", c, success , (Statistics)currentStats.clone());
 				events.add(e);
-				mailList.allDestinations.add(new Destination (c.origin,false));  	
+				mailList.allDestinations.add(new Destination (c.origin,false)); 
+				Log.Cost cost  = new Log.Cost();
+				LogCost(cost,c);
 				return "Cost: " + c.ID + " was successfully added."
 												+ "	\n A new origin is avaliable: "+ c.origin; }
 			
@@ -183,12 +210,16 @@ switch (type) {
 				KPEvent e = new KPEvent("Add", c, success , (Statistics)currentStats.clone());
 				events.add(e);
 				mailList.allDestinations.add(new Destination(c.destination,false));
+				Log.Cost cost  = new Log.Cost();
+				LogCost(cost,c);
 				return "Cost: " + c.ID + " was successfully added." 
 												+ "\n a new destination is avaliable" + c.destination; }
 			
 			else if (success) {
 				KPEvent e = new KPEvent("Add", c, success , (Statistics)currentStats.clone());
 				events.add(e);
+				Log.Cost cost  = new Log.Cost();
+				LogCost(cost,c);
 				return "Cost: " + c.ID + " was successfully added";  	}
 			
  			
@@ -196,6 +227,18 @@ switch (type) {
 			 
 	
 	}
+		
+		private void LogCost(Log.Cost cost, Cost c){
+			XmlWriter writer = new XmlWriter(_xmlPath);
+			cost.setDestination(c.destination);
+			cost.setId(c.ID);
+			cost.setOrigin(c.origin);
+			cost.setPriority(c.priority);
+			cost.setVolume(c.volume);
+			cost.setWeight(c.weight);
+			writer.InsertCost(cost);
+			
+		}
 
 		/**
 		 *Method for handling adding Costs events
@@ -216,6 +259,8 @@ switch (type) {
 			
 			if(success)	{ 
 				addEvent("Remove", success, r);
+				Log.Route route = new Log.Route();
+				LogRoute(route,r);
 				return "Route: " + r.ID + " was successfully deleted"; }
 			
 			return error(details, "Route was not deleted ");
@@ -229,6 +274,8 @@ switch (type) {
 			
 			if(success)	{
 				addEvent("Change", success, r);
+				Log.Route route = new Log.Route();
+				LogRoute(route,r);
 				return "Route: " + r.ID + " was successfully changed "; 
 			} 
 			
@@ -244,12 +291,33 @@ switch (type) {
 		
 			if (success){ 
 				addEvent("Add", success, r);
+				//log add route
+				Log.Route route = new Log.Route();
+				LogRoute(route,r);
 				return "Route: " + r.ID + " was successfully added ";
 			}
 			
 			else { return error(details, "Route was not added"); }
 		
 			
+		}
+		
+		private void LogRoute(Log.Route route, Route r){
+			//log add route
+			XmlWriter writer = new XmlWriter(_xmlPath);		
+			route.setCompanyName(r.companyName);
+			route.setCostVolume(r.costVolume);
+			route.setCostWeight(r.costWeight);
+			route.setDay(r.day);
+			route.setDestination(r.destination);
+			route.setDuration(r.duration);
+			route.setFrequency(r.frequency);
+			route.setId(r.ID);
+			route.setMaxVolume(r.maxVolume);
+			route.setMaxWeight(r.maxWeight);
+			route.setOrigin(r.origin);
+			route.setPriority(r.priority);
+			writer.InsertRoute(route);
 		}
 
 

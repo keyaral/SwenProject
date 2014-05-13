@@ -17,7 +17,7 @@ public class LogTest {
 		XmlReader reader = new XmlReader("src/Log.xml");
 		
 		Log log = reader.FindAll();
-		assert(log.getCostOrPriceOrMail().get(0)!=null);
+		assert(log.getCostOrPriceOrRoute().get(0)!=null);
 		
 		
 	}
@@ -70,7 +70,7 @@ public class LogTest {
 	    
 	    Log result = reader.FindAll();
 	
-		assert(result.getCostOrPriceOrMail().size()>=2);
+		assert(result.getCostOrPriceOrRoute().size()>=2);
  	}
 	
 	@Test
@@ -88,7 +88,7 @@ public class LogTest {
 		
 		Log log =  writer.InsertPrice(price);
 	    
-		assert(log.getCostOrPriceOrMail().get(log.getCostOrPriceOrMail().indexOf(price)) != null);
+		assert(log.getCostOrPriceOrRoute().get(log.getCostOrPriceOrRoute().indexOf(price)) != null);
  	}
 	
 	private Log ConstructLogObjects(){
@@ -96,17 +96,7 @@ public class LogTest {
 		Log log = new Log();
 		//Construct a cost object
 		Log.Cost cost = new Log.Cost();
-		cost.setCompany("Test Company");
-		cost.setDay("01/03/2013");
-		cost.setDuration((short)3);
-		cost.setFrequency((short)1);
-		cost.setFrom("welly");
-		cost.setTo("Auckland");
-		cost.setMaxVolume(10);
-		cost.setMaxWeight(30);
-		cost.setType("Air");
-		cost.setVolumecost((short)10);
-		cost.setWeightcost((short)5);
+		
 		
 		//Construct a price object
 		Log.Price price = new Log.Price();
@@ -116,8 +106,8 @@ public class LogTest {
 		price.setVolumecost((short)10);
 		price.setWeightcost((short)10);
 		
-		log.getCostOrPriceOrMail().add(cost);
-		log.getCostOrPriceOrMail().add(price);
+		log.getCostOrPriceOrRoute().add(cost);
+		log.getCostOrPriceOrRoute().add(price);
 		
 		return log;
 		
