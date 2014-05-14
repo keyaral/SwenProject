@@ -201,7 +201,7 @@ public class TransportCost extends JInternalFrame {
 				if(dialogResult == JOptionPane.YES_OPTION){
 
 				//	String type=MainWindow.logic.switchEvents(0, "1a");//Case 0: Type "1a"-call route
-					String[] values = { "0 ",
+					String[] values = { "0",
 						txtCostId.getText(),
 						cmbTo.getSelectedItem().toString(),
 						cmbFrom.getSelectedItem().toString(),

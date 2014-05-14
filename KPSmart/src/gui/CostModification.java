@@ -154,7 +154,7 @@ public class CostModification extends JInternalFrame {
 					JOptionPane.showMessageDialog(null,"Please enter all details",null, 1);
 					
 				}else{
-					int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want add this route?","Confirmation",dialogButton);
+					int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want add this Cost?","Confirmation",dialogButton);
 					if(dialogResult == JOptionPane.YES_OPTION){
 						
 					String[] values={ "3", txtRouteNumber.getText(),txtWeightCost.getText(),
@@ -162,7 +162,7 @@ public class CostModification extends JInternalFrame {
 					JOptionPane.showMessageDialog(null,MainWindow.logic.processform(values),null, 1);		
 					}else{
 						//Changes are not saved
-						JOptionPane.showMessageDialog(null,"Route not added.",null, 1);
+						JOptionPane.showMessageDialog(null,"Cost not added.",null, 1);
 					}
 				}
 				
@@ -222,7 +222,7 @@ public class CostModification extends JInternalFrame {
 					.addComponent(btnLoadTestData, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
 					.addGap(64)
 					//.addComponent(btnAdd)
-				//	.addGap(19)
+				//	.addGap(19) TODO MAKE SURE THIS FITS
 					.addComponent(btnClose)
 					.addGap(19))
 		);
