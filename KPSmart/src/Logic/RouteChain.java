@@ -15,20 +15,18 @@ public class RouteChain {
 	}
 	
 	public double calculateCost(Mail m){
-		return Math.random()*10;				//TODO remove
-//		double cost = 0;
-//		for(Route r : routes){
-//			cost = r.cost*m.cost;
-//		}//
-//		return cost;
+		double cost = 0;
+		for(Route r : routes){
+			cost = r.cost*m.cost;
+		}
+		return cost;
 	}
 	
 	public Boolean checkViable(Mail m){
+		for(Route r : routes){
+			if(r.priority != m.priority) return false; 
+		}
 		return true;
-//		for(Route r : routes){
-//			if(r.priority != m.priority) return false; 
-//		}
-//		return true;
 	}
 	
 	
