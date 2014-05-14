@@ -1,5 +1,5 @@
 package Logic;
-
+//
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -113,7 +113,6 @@ public class RouteListClass {
  	}
 
 	private ArrayList<Route> searchRouteChain(Destination d, ArrayList<Route> currentRoutes, Destination finish) {
-		//
 		for(Route t :d.routes){
 			if(t.visited == false){
 				t.visited = true;
@@ -128,15 +127,10 @@ public class RouteListClass {
 		return currentRoutes;
 	}	
 	
-	public ArrayList<RouteChain> findCriticalRoutes(Mail m){
-		findValidRoute(m);
-		ArrayList<RouteChain> possibleRoutes = new ArrayList<RouteChain>();
-		ArrayList<RouteChain> criticalRoutes = new ArrayList<RouteChain>();
-		for(ArrayList<Route> r : this.tempPath){
-			possibleRoutes.add(new RouteChain(r,m.destinationD,m.origin));
-		}
-		for(RouteChain r : possibleRoutes){
-			if(r.isCritical(m) && r.checkViable(m)) criticalRoutes.add(r);
+	public ArrayList<Route> findCriticalRoutes(double averageCost){
+		ArrayList<Route> criticalRoutes = new ArrayList<Route>();
+		for(Route r : this.routes){
+			if( r.isCritical(averageCost)) criticalRoutes.add(r);
 		}
 		return criticalRoutes;
 	}

@@ -37,7 +37,7 @@ public class MailDelivery {
 		nzDestinations.add(new Destination("Rotarua", true) );
 		nzDestinations.add(new Destination("Palmerston North", true) );
 		nzDestinations.add(new Destination("Christchuch", true) );
-		nzDestinations.add(new Destination("Wellington", true) );
+		nzDestinations.add(new Destination("Hamilton", true) );
 		
 		allDestinations.addAll(nzDestinations);
 		
@@ -111,7 +111,7 @@ public class MailDelivery {
 		//Destination newOs = new Destination(des, false);	
 	//	allDestinations.add(newOs);	
 		//	return newOs;
-		}
+}
 	
 	
 	

@@ -155,7 +155,7 @@ switch (type) {
 		
 		
 		private String changeCost(String[] details) throws CloneNotSupportedException {
-			
+			//TODO ALEX CHANGE EVENTSs
 			Cost c = new Cost(details);
 			
 			Boolean success = costs.changeCost(c);
@@ -329,23 +329,22 @@ switch (type) {
 
 
 
-	private boolean checkDetails(String details, String type) throws Exception {
-		String check = details;
-		String[] values = check.split("\t");
-		if (type.equals("1a")) {
+	private boolean checkDetails(String[] values, String type) throws Exception {
+	
+		if (type.equals("0")) {
 			try {
-				int ID = Integer.parseInt(values[0]);
-				String destination = (values[1]);
-				String origin = (values[2]);
-				int costWeight = Integer.parseInt(values[3]);
-				int costVolume = Integer.parseInt(values[4]);
-				int maxWeight = Integer.parseInt(values[5]);
-				int maxVolume = Integer.parseInt(values[6]);
-				int priority = Integer.parseInt(values[7]);
-				String day = (values[8]);
-				int frequency = Integer.parseInt(values[9]);
-				int duration = Integer.parseInt(values[10]);
-				String companyName = (values[11]);
+				int ID = Integer.parseInt(values[1]);
+				String destination = (values[2]);
+				String origin = (values[3]);
+				int costWeight = Integer.parseInt(values[4]);
+				int costVolume = Integer.parseInt(values[5]);
+				int maxWeight = Integer.parseInt(values[6]);
+				int maxVolume = Integer.parseInt(values[7]);
+				int priority = Integer.parseInt(values[8]);
+				String day = (values[9]);
+				int frequency = Integer.parseInt(values[10]);
+				int duration = Integer.parseInt(values[11]);
+				String companyName = (values[12]);
 				if (destination == null || origin == null || day == null
 						|| companyName == null)
 					throw new Exception(
@@ -355,30 +354,30 @@ switch (type) {
 						"Null Values Entered in route adding - ints");
 			}
 		}
-		if (type.equals("1b")) {
+		if (type.equals("1")) {
 			try {
-				int ID = Integer.parseInt(values[0]);
-				int costWeight = Integer.parseInt(values[3]);
-				int costVolume = Integer.parseInt(values[4]);
+				int ID = Integer.parseInt(values[1]);
+				int costWeight = Integer.parseInt(values[4]);
+				int costVolume = Integer.parseInt(values[5]);
 			} catch (Exception e) {
 				throw new Exception("Error in entering an ID or cost values");
 			}
 		}
-		if (type.equals("1c")) {
+		if (type.equals("2")) {
 			try {
-				int ID = Integer.parseInt(values[0]);
+				int ID = Integer.parseInt(values[1]);
 			} catch (Exception e) {
 				throw new Exception("Error in entering an ID to delete");
 			}
 		}
-		if (type.equals("2a")) {
+		if (type.equals("3")) {
 			try {
-				int ID = Integer.parseInt(values[0]);
-				int weight = Integer.parseInt(values[1]);
-				int volume = Integer.parseInt(values[2]);
-				String destination = (values[3]);
-				String origin = (values[4]);
-				int priority = Integer.parseInt(values[5]);
+				int ID = Integer.parseInt(values[1]);
+				int weight = Integer.parseInt(values[2]);
+				int volume = Integer.parseInt(values[3]);
+				String destination = (values[4]);
+				String origin = (values[5]);
+				int priority = Integer.parseInt(values[6]);
 				if (destination == null || origin == null)
 					throw new Exception(
 							"Null Values Entered in cost adding - strings");
@@ -386,35 +385,29 @@ switch (type) {
 				throw new Exception("Null values entered in cost adding - ints");
 			}
 		}
-		if (type.equals("2b")) {
+		if (type.equals("4")) {
 			try {
-				int ID = Integer.parseInt(values[0]);
-				int weight = Integer.parseInt(values[1]);
-				int volume = Integer.parseInt(values[2]);
-				String destination = (values[3]);
-				String origin = (values[4]);
+				int ID = Integer.parseInt(values[1]);
+				int weight = Integer.parseInt(values[2]);
+				int volume = Integer.parseInt(values[3]);
+				String destination = (values[4]);
+				String origin = (values[5]);
 			} catch (Exception e) {
 				throw new Exception("Error in entering an ID or values");
 			}
 		}
-		if (type.equals("2c")) {
+		
+		if (type.equals("5")) {
 			try {
-				int ID = Integer.parseInt(values[0]);
-			} catch (Exception e) {
-				throw new Exception("Error in entering an ID to delete");
-			}
-		}
-		if (type.equals("3a")) {
-			try {
-				int ID = Integer.parseInt(values[0]);
-				String destination = (values[1]);
-				String origin = (values[2]);
-				int weight = Integer.parseInt(values[3]);
-				int volume = Integer.parseInt(values[4]);
-				int priority = Integer.parseInt(values[5]);
+				int ID = Integer.parseInt(values[1]);
+				String destination = (values[2]);
+				String origin = (values[3]);
+				int weight = Integer.parseInt(values[4]);
+				int volume = Integer.parseInt(values[5]);
+				int priority = Integer.parseInt(values[6]);
 				//Date date = new Date();
 				DateFormat dateFormat=new SimpleDateFormat("dd-mm-yyyy");
-				dateFormat.parse(values[6]);
+				dateFormat.parse(values[7]);
 				//date.parse(values[6]);
 				if (destination == null || origin == null || dateFormat == null)
 					throw new Exception(

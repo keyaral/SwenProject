@@ -66,6 +66,7 @@ public class MailDelivery extends JInternalFrame {
 		Random random=new Random();
 		int id=random.nextInt(item);
 		cmbDestination.setSelectedIndex(id);
+		
 	}
 	private void randomOriginSelection(int item){
 		Random random=new Random();
@@ -112,6 +113,7 @@ public class MailDelivery extends JInternalFrame {
 		setLocation(400,150);
 		JPanel DataInputPanel = new JPanel();
 		
+	
 		
 		JPanel btnPanel = new JPanel();
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
@@ -290,7 +292,9 @@ public class MailDelivery extends JInternalFrame {
 		
 		//Define the destinations
 		
-		String[] destinations={"Rome","Sydney","London","New York","Singapore","Japan","Manila","Fiji","Hawaii","Moscow"};
+		
+		String[] destinations= MainWindow.logic.getDestinations();
+			//{"Rome","Sydney","London","New York","Singapore","Japan","Manila","Fiji","Hawaii","Moscow"};
 
 		cmbDestination = new JComboBox(destinations);
 		

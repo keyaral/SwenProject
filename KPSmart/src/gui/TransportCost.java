@@ -253,6 +253,13 @@ public class TransportCost extends JInternalFrame {
 			}
 		});
 		
+		JButton btnViewID = new JButton("View Routes");	//Tyler's extra button
+		btnViewID.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RouteViewIDWindow x = new RouteViewIDWindow();
+				x.setVisible(true);
+			}});
+			
 		JButton btnLoadTestData = new JButton("Load Test Data");
 		btnLoadTestData.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -564,6 +571,9 @@ public class TransportCost extends JInternalFrame {
 						.addComponent(cmbDay, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(28))
 		);
+		DataInputPanel.add(btnViewID);			//Tyler's additional Button initialize
+		btnViewID.setBounds(340,10,140,40);
+		
 		DataInputPanel.setLayout(gl_DataInputPanel);
 		getContentPane().setLayout(groupLayout);
 		//Clear comboxboxes on startup

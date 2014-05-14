@@ -42,4 +42,10 @@ public class Cost {
 		this.priority = p;
 	}
 
+	
+	
+	public Boolean validDomestic(){
+		return null;
+		
+	}
 }

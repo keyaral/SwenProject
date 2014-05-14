@@ -1,5 +1,5 @@
 package Logic;
-
+//
 public class Route implements Cloneable{
 
 	public int ID;
@@ -85,6 +85,11 @@ public class Route implements Cloneable{
 		}
 	}
 
+	public Boolean isCritical(double averageCost){
+		if(cost >= (averageCost*3)) return true;
+		else return false;
+	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#clone()
 	 */
