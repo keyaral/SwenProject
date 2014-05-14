@@ -454,9 +454,6 @@ switch (type) {
 				currentStats.routes.remove(r);
 			}
 		}
-		else if (o[0] instanceof Cost) {
-
-		}
 		events.add(new KPEvent(type, o, success, new Statistics((Statistics)currentStats.clone())));
 		currentStats.incrementEvents();
 	}
