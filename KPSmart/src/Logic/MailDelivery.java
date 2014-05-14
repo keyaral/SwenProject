@@ -111,7 +111,7 @@ public class MailDelivery {
 		//Destination newOs = new Destination(des, false);	
 	//	allDestinations.add(newOs);	
 		//	return newOs;
-		}
+}
 	
 	
 	
