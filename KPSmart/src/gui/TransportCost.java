@@ -27,19 +27,19 @@ import Logic.Logic;
 public class TransportCost extends JInternalFrame {
 
 	/**
-	 * 
+	 *
 	 */
-	
+
 	private static final long serialVersionUID = 1L;
 	@SuppressWarnings("rawtypes")
 	private JComboBox cmbCompany;
-	
+
 	@SuppressWarnings("rawtypes")
 	private JComboBox cmbTo;
-	
+
 	@SuppressWarnings("rawtypes")
 	private JComboBox cmbFrom;
-	
+
 	@SuppressWarnings("rawtypes")
 	private JComboBox cmbType;
 	private JTextField txtCostId;
@@ -59,7 +59,7 @@ public class TransportCost extends JInternalFrame {
 		Random random=new Random();
 		int id=random.nextInt(rnd);
 		txtCostId.setText(Integer.toString(id));
-		
+
 	}
 	private void randomCompanySelection(int item){
 		Random random=new Random();
@@ -71,7 +71,7 @@ public class TransportCost extends JInternalFrame {
 		int number=random.nextInt(rnd);
 		txtDuration.setText(Integer.toString(number));
 		txtFrequency.setText(Integer.toString(number*2));
-		
+
 	}
 	private void generateMaxRandWeightAndVolume(int rnd){
 		Random random=new Random();
@@ -94,7 +94,7 @@ public class TransportCost extends JInternalFrame {
 		int id=random.nextInt(item);
 			cmbDay.setSelectedIndex(id);
 		}
-	
+
 	private void randomPrioritySelection(int item){
 		Random random=new Random();
 		int id=random.nextInt(item);
@@ -118,7 +118,7 @@ public class TransportCost extends JInternalFrame {
 		setBounds(100, 100, 532, 391);
 		setLocation(400,150);
 		JPanel DataInputPanel = new JPanel();
-		
+
 		JPanel btnPanel = new JPanel();
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -141,22 +141,11 @@ public class TransportCost extends JInternalFrame {
 					.addComponent(btnPanel, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 					.addGap(37))
 		);
-		
+
 		btnClearFields = new JButton("Clear Fields");
 		btnClearFields.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-						txtCostId.setText("");
-						txtWeightCosts.setText("");
-						txtVolumeCost.setText("");
-						txtMaxWeight.setText("");
-						txtMaxVolume.setText("");
-						txtDuration.setText("");
-						txtFrequency.setText("");
-						cmbFrom.setSelectedIndex(-1);
-						cmbTo.setSelectedIndex(-1);
-						cmbDay.setSelectedIndex(-1);
-						cmbType.setSelectedIndex(-1);
-						cmbCompany.setSelectedIndex(-1);
+				clearFields();
 						btnSave.setEnabled(false);
 						cmbType.setEnabled(true);
 						txtCostId.setEnabled(true);
@@ -170,7 +159,7 @@ public class TransportCost extends JInternalFrame {
 						btnClearFields.setEnabled(true);
 			}
 		});
-		
+
 		btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -181,7 +170,7 @@ public class TransportCost extends JInternalFrame {
 				String priority=(String)cmbType.getSelectedItem().toString();
 				int dialogButton = JOptionPane.YES_NO_OPTION;
 				if (txtCostId.getText().equals("")
-						||company.equals("") 
+						||company.equals("")
 						|| to.equals("")
 						||from.equals("")
 						||txtWeightCosts.getText().equals("")
@@ -193,10 +182,10 @@ public class TransportCost extends JInternalFrame {
 						|| priority.equals("")
 						|| day.equals("")){
 					JOptionPane.showMessageDialog(null,"Please enter all details required !",null, 1);
-						
+
 			}else
 			{
-				
+
 				int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to save the details?","Confirmation",dialogButton);
 				if(dialogResult == JOptionPane.YES_OPTION){
 
@@ -215,36 +204,26 @@ public class TransportCost extends JInternalFrame {
 						txtDuration.getText(),
 						cmbCompany.getSelectedItem().toString() };
 					//Disable the save buutton to avoid double entry
-					btnSave.setEnabled(false);
-					cmbType.setEnabled(false);
-					txtCostId.setEnabled(false);
-					txtFrequency.setEnabled(false);
-					cmbDay.setEnabled(false);;
-					txtVolumeCost.setEnabled(false);
-					txtMaxWeight.setEnabled(false);
-					txtDuration.setEnabled(false);
-					txtMaxVolume.setEnabled(false);
-					txtWeightCosts.setEnabled(false);
-					cmbTo.setEnabled(false);
-					cmbFrom.setEnabled(false);
-					btnClearFields.setEnabled(false);
-					cmbCompany.setEnabled(false);
-					
-					
+					setFields(false);
+
 				JOptionPane.showMessageDialog(null,MainWindow.logic.processform(values),null, 1);
 
+				//Enable the fields again and clear them
+				setFields(true);
+				clearFields();
+
 				//	String type=MainWindow.logic.switchEvents(0, "1a");//Case 0: Type "1a"-call route
-					
+
 				}else{
 					//Details not saved
 					JOptionPane.showMessageDialog(null,"Details not saved !",null, 1);
-					
+
 				}
 			}
 			}
 		});
 
-		
+
 		JButton btnClose = new JButton("Close");
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -252,14 +231,14 @@ public class TransportCost extends JInternalFrame {
 				dispose();
 			}
 		});
-		
+
 		JButton btnViewID = new JButton("View Routes");	//Tyler's extra button
 		btnViewID.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			//	RouteViewIDWindow x = new RouteViewIDWindow();	TODO
 			//	x.setVisible(true);
 			}});
-			
+
 		JButton btnLoadTestData = new JButton("Load Test Data");
 		btnLoadTestData.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -329,107 +308,107 @@ public class TransportCost extends JInternalFrame {
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		btnPanel.setLayout(gl_btnPanel);
-		
+
 		JLabel lblCompany = new JLabel("Company");
-		
+
 		JLabel lblTo = new JLabel("To");
-		
+
 		JLabel lblFrom = new JLabel("From");
-		
+
 		JLabel lblType = new JLabel("Priority Type");
-		
+
 		JLabel lblWeightCost = new JLabel("Weight Cost");
-		
+
 		JLabel lblVolumeCost = new JLabel("Volume Cost");
-		
+
 		JLabel lblMaxWeight = new JLabel("Max Weight");
-		
+
 		JLabel lblMaxVolume = new JLabel("Max Volume");
-		
+
 		JLabel lblDuration = new JLabel("Duration");
-		
+
 		JLabel lblFrequency = new JLabel("Frequency");
-		
+
 		JLabel lblDay = new JLabel("Day");
-		
+
 		String[] company={"Test Company"};
 		cmbCompany = new JComboBox(company);
-		
+
 		String[] destinations={"Rome","Sydney","London","New York","Singapore","Japan","Manila","Fiji","Hawaii","Moscow"};
 		cmbTo = new JComboBox(destinations);
 		String[] distributionCenters={"Auckland","Hamilton","Rotorua","Palmerston North","Wellington","Christ Church","Dunedin"};
 		cmbFrom = new JComboBox(distributionCenters);
 		String [] priority={"Domestic Air","International Air","Domestic Standard","Internation Standard Priority"};
 		cmbType = new JComboBox(priority);
-		
+
 		txtWeightCost_1=new JFormattedTextField();
-		txtWeightCost_1.addKeyListener(new KeyAdapter() { 
-	         public void keyTyped(KeyEvent e) {  
-	           char c = e.getKeyChar();  
-	           if (!(Character.isDigit(c) ||  
+		txtWeightCost_1.addKeyListener(new KeyAdapter() {
+	         public void keyTyped(KeyEvent e) {
+	           char c = e.getKeyChar();
+	           if (!(Character.isDigit(c) ||
 	              (c == KeyEvent.VK_BACK_SPACE) || (c==KeyEvent.VK_PERIOD)||
-	              (c == KeyEvent.VK_DELETE))) {  
-	                e.consume();  
-	              }  
-	         }  
-	   });  
+	              (c == KeyEvent.VK_DELETE))) {
+	                e.consume();
+	              }
+	         }
+	   });
 		txtVolumeCost = new JFormattedTextField();
 		txtVolumeCost.setText("");
-		txtVolumeCost.addKeyListener(new KeyAdapter() { 
-	         public void keyTyped(KeyEvent e) {  
-	           char c = e.getKeyChar();  
-	           if (!(Character.isDigit(c) ||  
+		txtVolumeCost.addKeyListener(new KeyAdapter() {
+	         public void keyTyped(KeyEvent e) {
+	           char c = e.getKeyChar();
+	           if (!(Character.isDigit(c) ||
 	              (c == KeyEvent.VK_BACK_SPACE) || (c==KeyEvent.VK_PERIOD)||
-	              (c == KeyEvent.VK_DELETE))) {  
-	                e.consume();  
-	              }  
-	         }  
-	   });  
+	              (c == KeyEvent.VK_DELETE))) {
+	                e.consume();
+	              }
+	         }
+	   });
 		txtMaxWeight = new JFormattedTextField();
-		 txtMaxWeight.addKeyListener(new KeyAdapter() { 
-	         public void keyTyped(KeyEvent e) {  
-	           char c = e.getKeyChar();  
-	           if (!(Character.isDigit(c) ||  
+		 txtMaxWeight.addKeyListener(new KeyAdapter() {
+	         public void keyTyped(KeyEvent e) {
+	           char c = e.getKeyChar();
+	           if (!(Character.isDigit(c) ||
 	              (c == KeyEvent.VK_BACK_SPACE) || (c==KeyEvent.VK_PERIOD)||
-	              (c == KeyEvent.VK_DELETE))) {  
-	                e.consume();  
-	              }  
-	         }  
-	   });  
-		
+	              (c == KeyEvent.VK_DELETE))) {
+	                e.consume();
+	              }
+	         }
+	   });
+
 		txtMaxVolume = new JFormattedTextField();
-		txtMaxVolume.addKeyListener(new KeyAdapter() { 
-	         public void keyTyped(KeyEvent e) {  
-	           char c = e.getKeyChar();  
-	           if (!(Character.isDigit(c) ||  
+		txtMaxVolume.addKeyListener(new KeyAdapter() {
+	         public void keyTyped(KeyEvent e) {
+	           char c = e.getKeyChar();
+	           if (!(Character.isDigit(c) ||
 	              (c == KeyEvent.VK_BACK_SPACE) || (c==KeyEvent.VK_PERIOD)||
-	              (c == KeyEvent.VK_DELETE))) {  
-	                e.consume();  
-	              }  
-	         }  
-	   });  
-		
+	              (c == KeyEvent.VK_DELETE))) {
+	                e.consume();
+	              }
+	         }
+	   });
+
 		txtDuration = new JFormattedTextField();
-		txtDuration.addKeyListener(new KeyAdapter() { 
-	         public void keyTyped(KeyEvent e) {  
-	           char c = e.getKeyChar();  
-	           if (!(Character.isDigit(c) ||  
+		txtDuration.addKeyListener(new KeyAdapter() {
+	         public void keyTyped(KeyEvent e) {
+	           char c = e.getKeyChar();
+	           if (!(Character.isDigit(c) ||
 	              (c == KeyEvent.VK_BACK_SPACE) ||
-	              (c == KeyEvent.VK_DELETE))) {  
-	                e.consume();  
-	              }  
-	         }  
-	   });  
-		
+	              (c == KeyEvent.VK_DELETE))) {
+	                e.consume();
+	              }
+	         }
+	   });
+
 		txtFrequency = new JFormattedTextField();
 		String[] days={"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
 		cmbDay = new JComboBox(days);
-		
+
 		txtCostId = new JTextField();
 		txtCostId.setColumns(10);
-		
+
 		JLabel lblTransportCostId = new JLabel("Transport Cost ID");
-		
+
 		txtWeightCosts = new JFormattedTextField();
 		GroupLayout gl_DataInputPanel = new GroupLayout(DataInputPanel);
 		gl_DataInputPanel.setHorizontalGroup(
@@ -573,7 +552,7 @@ public class TransportCost extends JInternalFrame {
 		);
 		DataInputPanel.add(btnViewID);			//Tyler's additional Button initialize
 		btnViewID.setBounds(340,10,140,40);
-		
+
 		DataInputPanel.setLayout(gl_DataInputPanel);
 		getContentPane().setLayout(groupLayout);
 		//Clear comboxboxes on startup
@@ -584,5 +563,37 @@ public class TransportCost extends JInternalFrame {
 		cmbCompany.setSelectedIndex(-1);
 
 	}
-	
+
+	private void clearFields() {
+		txtCostId.setText("");
+		txtWeightCosts.setText("");
+		txtVolumeCost.setText("");
+		txtMaxWeight.setText("");
+		txtMaxVolume.setText("");
+		txtDuration.setText("");
+		txtFrequency.setText("");
+		cmbFrom.setSelectedIndex(-1);
+		cmbTo.setSelectedIndex(-1);
+		cmbDay.setSelectedIndex(-1);
+		cmbType.setSelectedIndex(-1);
+		cmbCompany.setSelectedIndex(-1);
+	}
+
+	private void setFields(boolean enabled) {
+		btnSave.setEnabled(enabled);
+		cmbType.setEnabled(enabled);
+		txtCostId.setEnabled(enabled);
+		txtFrequency.setEnabled(enabled);
+		cmbDay.setEnabled(enabled);
+		txtVolumeCost.setEnabled(enabled);
+		txtMaxWeight.setEnabled(enabled);
+		txtDuration.setEnabled(enabled);
+		txtMaxVolume.setEnabled(enabled);
+		txtWeightCosts.setEnabled(enabled);
+		cmbTo.setEnabled(enabled);
+		cmbFrom.setEnabled(enabled);
+		btnClearFields.setEnabled(enabled);
+		cmbCompany.setEnabled(enabled);
+	}
+
 }

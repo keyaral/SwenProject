@@ -2,6 +2,7 @@ package Log.event;
 
 import gui.MainWindow;
 import Logic.*;
+
 import java.util.*;
 
 public class EventLogManager {
@@ -60,7 +61,7 @@ public class EventLogManager {
 		String[] stats = {String.valueOf(s.revenue()), String.valueOf(s.expenditure()), String.valueOf(s.events())};
 		return stats;
 	}
-	
+
 	public List<String> getList(List<String[]> list) {
 		if (list==null) return null;
 		List<String> processedList = new ArrayList<String>();
@@ -74,7 +75,7 @@ public class EventLogManager {
 		}
 		return processedList;
 	}
-	
+
 	public KPEvent getEvent() {
 		return eventProcesser.getEvents().get(index);
 	}
