@@ -113,7 +113,10 @@ public class MailDelivery {
 		//	return newOs;
 }
 	
-	
+	public boolean isDomestic(String s){
+		if ( nzDestinations.contains(s) ) return true;
+		else return false;
+	}
 	
 	
 	

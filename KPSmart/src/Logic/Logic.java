@@ -209,11 +209,11 @@ public class Logic {
 	
 		
 		
-		processform( new String[] {"0","11126","Auckland", "Rotarua","8","10","200","200","2","Tuesday", "5", "3","KpStart"} );	
-		processform( new String[] {"0","11124","Rotarua", "Auckland","8","10","200","200","2","Tuesday", "5", "3","KpStart"} );	
+		processform( new String[] {"0","11125","Auckland", "Rotarua","8","10","200","200","2","Tuesday", "5", "3","KpStart"} );	
+		processform( new String[] {"0","11123","Rotarua", "Auckland","8","10","200","200","2","Tuesday", "5", "3","KpStart"} );	
 		
-		processform( new String[] {"0","21126","Palmerston North", "Rotarua","8","10","200","200","2","Tuesday", "5", "3","KpStart"} );	
-		processform( new String[] {"0","21124","Rotarua", "Palmerston North","8","10","200","200","2","Tuesday", "5", "3","KpStart"} );	
+		processform( new String[] {"0","21123","Palmerston North", "Rotarua","8","10","200","200","2","Tuesday", "5", "3","KpStart"} );	
+		processform( new String[] {"0","21125","Rotarua", "Palmerston North","8","10","200","200","2","Tuesday", "5", "3","KpStart"} );	
 	
 		
 		processform( new String[] {"0","32126","Auckland", "Hamilton","8","10","200","200","2","Tuesday", "5", "3","KpStart"} );	
@@ -253,7 +253,7 @@ public class Logic {
 		System.out.println(	processform( new String[] {"5","325126","Rotarua", "Dunedin","8","10","2", "10-17-2014"} ) ) ;
 		
 				
-		System.out.println(	processform( new String[] {"5","415126","Wellington", "Auckland","8","10","1", "10-17-2014"} ) );	
+		System.out.println(" THIS SHOULD WORK~~" + 	processform( new String[] {"5","415126","Wellington", "Auckland","8","10","2", "10-17-2014"} ) );	
 		System.out.println(	processform( new String[] {"5","425126","Auckland", "Dunedin","8","10","2", "10-17-2014"} ) ) ;
 	System.out.println("mail done ");
 

@@ -7,6 +7,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
 import Log.Log;
 import Log.writer.*;
 
@@ -44,6 +45,7 @@ public ArrayList<Destination> validDestinations(){
 
 	public String proccess(String[] details) throws Exception {
 System.out.println( details);
+  checkDetails( details, details[0]);
 		int type = Integer.parseInt(details[0]);
 		Boolean safe = false;
 		String message = "error";
@@ -349,6 +351,11 @@ switch (type) {
 						|| companyName == null)
 					throw new Exception(
 							"Null Values Entered in route adding - strings");
+				
+				if ( DomesticPriorityFailure( destination, origin, priority) )
+					throw new Exception(
+							"Invalid Destination Orgin Priority Match ");
+				
 			} catch (Exception e) {
 				throw new Exception(
 						"Null Values Entered in route adding - ints");
@@ -359,6 +366,9 @@ switch (type) {
 				int ID = Integer.parseInt(values[1]);
 				int costWeight = Integer.parseInt(values[4]);
 				int costVolume = Integer.parseInt(values[5]);
+			
+			
+			
 			} catch (Exception e) {
 				throw new Exception("Error in entering an ID or cost values");
 			}
@@ -381,6 +391,10 @@ switch (type) {
 				if (destination == null || origin == null)
 					throw new Exception(
 							"Null Values Entered in cost adding - strings");
+				
+				if ( DomesticPriorityFailure( destination, origin, priority) )
+						throw new Exception(
+								"Invalid Destination Orgin Priority Match ");
 			} catch (Exception e) {
 				throw new Exception("Null values entered in cost adding - ints");
 			}
@@ -412,6 +426,10 @@ switch (type) {
 				if (destination == null || origin == null || dateFormat == null)
 					throw new Exception(
 							"Null values in mail creation for destination/origin or date");
+				if ( DomesticPriorityFailure( destination, origin, priority) )
+					throw new Exception(
+							"Invalid Destination Orgin Priority Match ");
+				
 			} catch (Exception e) {
 
 				throw new Exception("Error in creating a new mail");
@@ -420,6 +438,19 @@ switch (type) {
 		return true;
 	}
 	
+	private boolean DomesticPriorityFailure(String destination, String origin,int priority) {
+		
+		Boolean originD = mailList.isDomestic(origin);  
+		Boolean destinationD =  mailList.isDomestic(destination);
+		
+		if (originD && destinationD) {if (priority < 3) return true; 
+									else return false;}
+		
+		else if (priority > 2) return true;
+		
+		return false;
+	}
+
 	/**
 	 * Adds in the event based on the type and object assigned
 	 * with it as the current statistics at this stage. Note that

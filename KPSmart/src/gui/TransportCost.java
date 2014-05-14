@@ -256,8 +256,8 @@ public class TransportCost extends JInternalFrame {
 		JButton btnViewID = new JButton("View Routes");	//Tyler's extra button
 		btnViewID.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RouteViewIDWindow x = new RouteViewIDWindow();
-				x.setVisible(true);
+			//	RouteViewIDWindow x = new RouteViewIDWindow();	TODO
+			//	x.setVisible(true);
 			}});
 			
 		JButton btnLoadTestData = new JButton("Load Test Data");
