@@ -41,7 +41,7 @@ public class RouteViewIDWindow extends JFrame {
 				try {
 					ArrayList<Route> test = new ArrayList<Route>();
 					test.add(new Route(1,"Auckland","Wellington",10,15,200,200,1,"Thursday",2,3,"TylerCorp"));
-					test.add(new Route(2,"Auckland","Wellington",10,15,200,200,1,"Thursday",2,3,"TylerCorp"));
+					test.add(new Route(3,"Auckland","Taupo",10,15,200,200,1,"Thursday",2,3,"TylerCorp"));
 					RouteViewIDWindow frame = new RouteViewIDWindow(test);
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -119,7 +119,7 @@ public class RouteViewIDWindow extends JFrame {
 			String Line = "ID: "+r.ID+" Assigned to: "+r.origin+" to "+r.destination;
 			selectableRoutes.put(count,Line);
 			if(count == 0)textArea.setText(Line);
-			if(count != 1)textArea.setText(textArea.getText()+"\n"+Line);
+			if(count != 0)textArea.setText(textArea.getText()+"\n"+Line);
 			count++;
 		}
 	}
