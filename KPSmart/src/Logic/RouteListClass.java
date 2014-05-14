@@ -14,6 +14,7 @@ public class RouteListClass {
 
 	public RouteListClass(){
 		routes = new HashSet<Route>();
+		
 		//routes.addAll(); ADD ALL From data base
 		Route routeTest1 = new Route(1,"Auckland","Wellington",10,15,200,200,1,"Thursday",2,3,"TylerCorp");
 		Route routeTest2 = new Route(2,"Christchurch","Wellington",10,15,200,200,2,"Thursday",2,3,"TylerCorp");

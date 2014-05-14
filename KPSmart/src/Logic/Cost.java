@@ -30,7 +30,7 @@ public class Cost {
 		if ( string.equals("International Standard Priorityr") ) {return 3;}
 		if ( string.equals("International Air") ) {return 4;}
 			
-			return 0;
+		else return Integer.parseInt(string);
 	}
 
 	public Cost(int i, double w, double v, String d, String o, int p){
@@ -44,8 +44,5 @@ public class Cost {
 
 	
 	
-	public Boolean validDomestic(){
-		return null;
-		
-	}
+
 }

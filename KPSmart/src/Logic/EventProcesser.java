@@ -187,6 +187,7 @@ switch (type) {
 			Cost c = new Cost(details);
 			Boolean success = costs.addCost(c);
 			
+			
 			boolean neworigin = ! mailList.allDestinations.contains(c.origin);
 			boolean newdest = ! mailList.allDestinations.contains(c.destination);
 			 
@@ -203,6 +204,7 @@ switch (type) {
 																+ "\n a new destination is avaliable" + c.destination; }
 			
 			else if ( neworigin && success ) {
+				
 				KPEvent e = new KPEvent("Add", c, success , (Statistics)currentStats.clone());
 				events.add(e);
 				mailList.allDestinations.add(new Destination (c.origin,false)); 
