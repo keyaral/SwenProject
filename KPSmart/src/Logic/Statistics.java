@@ -132,6 +132,12 @@ public class Statistics implements Cloneable{
 		return new Statistics(this);
 	}
 
+	public void printAll() {
+		System.out.println ( revenue + " " + expenditure + " " + events);
+		
+		
+	}
+
 
 
 }

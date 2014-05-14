@@ -13,10 +13,22 @@ public class Logic {
 		eventProcessor = new EventProcesser(new Statistics());
 		setupBaseEvents();
 		
+		System.out.print( " CAN HAS TEST");
 		
+		testMethod();
 	}
 	
 	
+	private void testMethod() {
+		// TODO Auto-generated method stub
+		
+		eventProcessor.getStats().printAll();
+		eventProcessor.getMailList().printAll();
+		eventProcessor.getRoutes().printAll();
+		eventProcessor.getCosts().printAll();
+		
+		
+	}
 
 
 	private void setupBaseEvents() {

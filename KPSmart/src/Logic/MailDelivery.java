@@ -154,6 +154,16 @@ public class MailDelivery {
 		m.originD = findOrigin(m.origin);
 		
 	}
+
+
+	public void printAll() {
+		System.out.println (" Mail LIST ");
+		for (Mail m : mails){
+			System.out.println (m.ID +" "+ m.destination +" "+ m.origin+" "+ m.priority);
+			
+		}
+		
+	}
 	
 	
 }

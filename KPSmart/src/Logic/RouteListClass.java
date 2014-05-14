@@ -113,6 +113,15 @@ public class RouteListClass {
 // 	}
 //
 
+	public void printAll() {
+		System.out.println (" Route LIST ");
+		for (Route r : routes){
+			System.out.println (r.ID +" "+ r.destination +" "+ r.origin+" "+ r.priority);
+			
+		}
+		
+	}
+
 
 //	private ArrayList<Route> searchRouteChain(Destination d, ArrayList<Route> currentRoutes, Destination finish) {
 //		//

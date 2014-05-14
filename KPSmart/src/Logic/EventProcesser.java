@@ -15,6 +15,7 @@ import Log.writer.*;
 public class EventProcesser {
 
 	RouteListClass routes = new RouteListClass();
+	
 	CostListClass costs = new CostListClass();;
 	MailDelivery mailList = new MailDelivery();
 	ArrayList<KPEvent> events = new ArrayList<KPEvent>();
@@ -466,6 +467,17 @@ switch (type) {
 	
 	public Statistics getStats() {
 		return currentStats;
+	}
+	public  RouteListClass getRoutes() {
+		return routes;
+	}
+
+	public  CostListClass getCosts() {
+		return costs;
+	}
+
+	public  MailDelivery getMailList() {
+		return mailList;
 	}
 
 }
