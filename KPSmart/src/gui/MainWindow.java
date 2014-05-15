@@ -39,7 +39,7 @@ public class MainWindow extends JFrame{
 	private JMenuItem exit;
 	public JMenuItem mnuItemCostModification;
 	public JDesktopPane desktopPane;
-	private BusinessMonitoring bMonitoring;
+	public static final BusinessMonitoring bMonitoring = new BusinessMonitoring();
 	public static final Logic logic = new Logic();
 	 private final Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 	public MainWindow() {
@@ -49,7 +49,7 @@ public class MainWindow extends JFrame{
 		initComponents();
 		CreateEvent();
 		if (bMonitoring==null || !bMonitoring.isClosable()){
-			bMonitoring= new BusinessMonitoring();
+			eventLogger= new EventLogger();
 			bMonitoring.txtAverageDeliveryTimes.setEnabled(false);
 			bMonitoring.txtRevenue.setEnabled(false);
 			bMonitoring.txtProfit.setEnabled(false);
@@ -58,9 +58,10 @@ public class MainWindow extends JFrame{
 			bMonitoring.txtAverageVolume.setEnabled(false);
 			bMonitoring.txtAverageDeliveryTimes.setEnabled(false);
 			desktopPane.add(bMonitoring);
-			bMonitoring.setLocation(1000,0);
+			bMonitoring.setManager(eventLogger.manager);
+			bMonitoring.updateMonitor();
+			bMonitoring.setLocation(950,0);
 			bMonitoring.setVisible(true);
-			
 		}
 		
 	}
@@ -252,7 +253,6 @@ public class MainWindow extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if (eventLogger==null || eventLogger.isClosable()){ //only one instance to managerWindow
-					eventLogger= new EventLogger();
 					desktopPane.add(eventLogger);
 					eventLogger.update();
 					eventLogger.show();

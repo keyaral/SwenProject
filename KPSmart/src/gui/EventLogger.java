@@ -14,6 +14,7 @@ import java.awt.Color;
 import java.awt.Font;
 
 import Log.event.*;
+import javax.swing.border.BevelBorder;
 
 
 public class EventLogger extends JInternalFrame{
@@ -23,14 +24,10 @@ public class EventLogger extends JInternalFrame{
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
-
-	private EventLogManager manager = new EventLogManager();
 	
-	private JTextArea textLog;
 	private JLabel lblRevenue;
 	private JLabel lblExpenditure;
 	private JLabel lblEventsReported;
-	private JTextField textField;
 	private JButton btnPrevious = new JButton("Previous");
 	private JButton btnNext;
 
@@ -38,42 +35,47 @@ public class EventLogger extends JInternalFrame{
 	private JTextArea averageDeliveryTimesList = new JTextArea();
 	private JTextArea criticalRoutesList = new JTextArea();
 
+	private JTextArea textLog = new JTextArea();
+	private JTextField goTo;
+	
+	public final EventLogManager manager = new EventLogManager();
+
 	public EventLogger() {
 		setTitle("Event Log");
 		setIconifiable(true);
 		setClosable(true);
-		setBounds(0,0,568,337);
+		setBounds(0,0,631,397);
 		setLocation(400,150);
-		JScrollPane scroller = new JScrollPane();
 
 		JPanel bottomLeftPane = new JPanel();
-		bottomLeftPane.setBorder(new LineBorder(Color.LIGHT_GRAY));
+		bottomLeftPane.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 
 		JPanel rightPane = new JPanel();
-		rightPane.setBorder(new LineBorder(Color.LIGHT_GRAY));
-
+		rightPane.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		
 		GroupLayout layout = new GroupLayout(getContentPane());
 		layout.setHorizontalGroup(
 			layout.createParallelGroup(Alignment.CENTER)
 				.addGroup(layout.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(bottomLeftPane, 0, 0, Short.MAX_VALUE)
-						.addComponent(scroller, GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE))
+					.addGroup(layout.createParallelGroup(Alignment.LEADING)
+						.addComponent(textLog, GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
+						.addComponent(bottomLeftPane, GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(rightPane, GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+					.addComponent(rightPane, GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
 					.addContainerGap())
 		);
+		textLog.setEditable(false);
 		layout.setVerticalGroup(
-			layout.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+			layout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(layout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(layout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(rightPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(rightPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
 						.addGroup(layout.createSequentialGroup()
-							.addComponent(scroller, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(bottomLeftPane, GroupLayout.PREFERRED_SIZE, 71, Short.MAX_VALUE)))
+							.addComponent(textLog, GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(bottomLeftPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 
@@ -87,19 +89,19 @@ public class EventLogger extends JInternalFrame{
 		JTabbedPane bussinessPanel = new JTabbedPane(JTabbedPane.TOP);
 		GroupLayout gl_rightPane = new GroupLayout(rightPane);
 		gl_rightPane.setHorizontalGroup(
-			gl_rightPane.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_rightPane.createSequentialGroup()
+			gl_rightPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_rightPane.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_rightPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(bussinessPanel, GroupLayout.PREFERRED_SIZE, 198, Short.MAX_VALUE)
-						.addComponent(btnClose, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE))
+						.addComponent(bussinessPanel, GroupLayout.PREFERRED_SIZE, 250, Short.MAX_VALUE)
+						.addComponent(btnClose, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
 		gl_rightPane.setVerticalGroup(
-			gl_rightPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_rightPane.createSequentialGroup()
+			gl_rightPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_rightPane.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(bussinessPanel, GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+					.addComponent(bussinessPanel, GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(btnClose)
 					.addContainerGap())
@@ -145,10 +147,6 @@ public class EventLogger extends JInternalFrame{
 		bussinessPanel.addTab("Critical Routes", null, criticalRoutesList, null);
 		rightPane.setLayout(gl_rightPane);
 
-		textLog = new JTextArea();
-		textLog.setEditable(false);
-		scroller.setViewportView(textLog);
-
 		btnPrevious.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				manager.previous();
@@ -168,10 +166,11 @@ public class EventLogger extends JInternalFrame{
 		JButton btnGoTo = new JButton("Go To");
 		btnGoTo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String text = textField.getText();
+				String text = goTo.getText();
 				for (int i = 0; i < text.length(); i++) {
 					if(!Character.isDigit(text.charAt(i))) {
 						displayErrorMessage("Only numbers are permitted.");
+						return;
 					}
 				}
 				try {
@@ -182,9 +181,9 @@ public class EventLogger extends JInternalFrame{
 				}
 			}
 		});
-
-		textField = new JTextField();
-		textField.setColumns(10);
+		
+		goTo = new JTextField();
+		goTo.setColumns(10);
 
 		GroupLayout gl_bottomLeftPane = new GroupLayout(bottomLeftPane);
 		gl_bottomLeftPane.setHorizontalGroup(
@@ -194,10 +193,10 @@ public class EventLogger extends JInternalFrame{
 					.addGroup(gl_bottomLeftPane.createParallelGroup(Alignment.LEADING, false)
 						.addComponent(btnNext, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addComponent(btnPrevious, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addPreferredGap(ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
 					.addGroup(gl_bottomLeftPane.createParallelGroup(Alignment.TRAILING, false)
 						.addComponent(btnGoTo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(textField))
+						.addComponent(goTo))
 					.addContainerGap())
 		);
 		gl_bottomLeftPane.setVerticalGroup(
@@ -206,7 +205,7 @@ public class EventLogger extends JInternalFrame{
 					.addGap(5)
 					.addGroup(gl_bottomLeftPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnPrevious)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(goTo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_bottomLeftPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnNext)
