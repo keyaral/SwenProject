@@ -45,7 +45,7 @@ public ArrayList<Destination> validDestinations(){
 
 	public String proccess(String[] details) throws Exception {
 System.out.println( details);
-  checkDetails( details, details[0]);
+//  checkDetails( details, details[0]);
 		int type = Integer.parseInt(details[0]);
 		Boolean safe = false;
 		String message = "error";
@@ -110,13 +110,24 @@ switch (type) {
  */
 
 		private String deliverMail(String[] details) throws CloneNotSupportedException {
+			
+			System.out.println("open cost delivery" );
 			Mail m = new Mail(details);
+			System.out.println("made mail" );
+			
 			mailList.assignDestinations(m);
-
-			Route r = null; // routes.findValidRoute(m);
+			System.out.println("assignRoutes" );
+			
 			Cost c = costs.findValidCost(m);
+			System.out.println(" Costs " + c.ID);
 
-
+			
+			RouteChain r = routes.findValidRoute(m);
+			System.out.println(" Routes " +r.gettotalduration() );
+			
+			
+			
+			
 			if (c==null){ return error(details, "No valid Cost"); }
 			if (r==null){ return error(details, "No valid Route"); }
 
@@ -184,13 +195,15 @@ switch (type) {
 		private String addCost(String[] details) throws CloneNotSupportedException {
 			Cost c = new Cost(details);
 			Boolean success = costs.addCost(c);
-
+			
 
 
 			boolean neworigin = ! mailList.allDestinations.contains(c.origin);
 			boolean newdest = ! mailList.allDestinations.contains(c.destination);
 
 			if (success) {
+				System.out.println(" Added success " + c.ID );	
+				
 				addEvent("Add", success, c);
 				Log.Cost cost  = new Log.Cost();
 				LogCost(cost,c);

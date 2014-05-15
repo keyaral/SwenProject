@@ -7,6 +7,7 @@ public class RouteChain {
 	public String origin;
 	public Destination destination;
 	public ArrayList<Route> routes;
+
 	
 	public RouteChain(ArrayList<Route> r, Destination d, String o){
 		origin = o;
@@ -43,5 +44,17 @@ public class RouteChain {
 		System.out.println("Step "+count+": "+r.originD.getName()+" to: "+r.destinationD.getName());
 		count++;
 		}
+	}
+	
+	
+	public double gettotalduration(){
+  double totalduration = 0;
+		
+		for ( Route r : routes ){
+		
+			totalduration = totalduration + 	r.duration;
+			
+		}
+    return totalduration;
 	}
 }

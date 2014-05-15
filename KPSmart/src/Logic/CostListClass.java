@@ -6,29 +6,29 @@ import java.util.Map.Entry;
 
 public class CostListClass {
 
-	public HashMap<String,Cost> costs;
+	public HashMap<String,Cost> costs = new HashMap<String,Cost>() ;
 	
 	public CostListClass(){
-		costs = new HashMap<String, Cost>();
-		Cost testCost1 = new Cost(1, 10,15,"Auckland","Wellington",2);
-		
-		
-		Cost testCost2 = new Cost(14, 10,15,"Wellington","Auckland",2);
-		Cost testCost3 = new Cost(15, 10,15,"Rotarua","Wellington",2);
-	
-		costs.put("Auckland2Wellington", testCost1);
-		costs.put("Wellington2Auckland", testCost2);
-		costs.put("Rotarua2Wellington", testCost3);
-	
-		Cost testCost11 = new Cost(9, 10,15,"Auckland","Wellington",1);
-		Cost testCost12 = new Cost(12, 10,15,"Wellington","Auckland",1);
-		Cost testCost13 = new Cost(13, 10,15,"Rotarua","Wellington",1);
-		
-		
-		
-		costs.put("Auckland1Wellington", testCost11);
-		costs.put("Wellington1Auckland", testCost12);
-		costs.put("Rotarua1Wellington", testCost13);
+//		costs = new HashMap<String, Cost>();
+//		Cost testCost1 = new Cost(1, 10,15,"Auckland","Wellington",2);
+//		
+//		
+//		Cost testCost2 = new Cost(14, 10,15,"Wellington","Auckland",2);
+//		Cost testCost3 = new Cost(15, 10,15,"Rotarua","Wellington",2);
+//	
+//		costs.put("Auckland2Wellington", testCost1);
+//		costs.put("Wellington2Auckland", testCost2);
+//		costs.put("Rotarua2Wellington", testCost3);
+//	
+//		Cost testCost11 = new Cost(9, 10,15,"Auckland","Wellington",1);
+//		Cost testCost12 = new Cost(12, 10,15,"Wellington","Auckland",1);
+//		Cost testCost13 = new Cost(13, 10,15,"Rotarua","Wellington",1);
+//		
+//		
+//		
+//		costs.put("Auckland1Wellington", testCost11);
+//		costs.put("Wellington1Auckland", testCost12);
+//		costs.put("Rotarua1Wellington", testCost13);
 
 		
 		
@@ -50,7 +50,10 @@ public class CostListClass {
 
 	public Boolean addCost(Cost c){
 		Boolean exists = false;
+		System.out.println( "totl size " + costs.values().size() );
 		for(Cost a : costs.values()){
+			
+			System.out.println(" Exists" + a.ID);
 			if(a.ID == c.ID) exists = true;	
 		}
 		if(exists == true){ System.out.println("Already Exists"); return false;}
@@ -79,8 +82,8 @@ public class CostListClass {
 
 	public Cost findValidCost(Mail m) {
 		String query = m.origin+m.priority+m.destination;
-		System.out.println(" THIS SHOULD WORK~~" + query );	
-		
+		System.out.println(" THIS SHOULD WORK~~ query" + query );	
+		System.out.println(" THIS SHOULD WORK~~ contains query" + costs.containsKey( query ) );	 
 		Cost c = costs.get(query);
 		
 		if (c == null) return null;

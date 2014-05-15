@@ -46,25 +46,34 @@ public class MailDelivery {
 		// TODO Auto-generated constructor stub
 	}
 
-	public boolean deliverMail(Mail m, Route r, Cost c){
-		if ( r ==null || c == null ) return false;
+	public boolean deliverMail(Mail m, RouteChain rchain, Cost c){
+		if ( rchain ==null || c == null ) return false;
 	
 		totalVolume += m.volume;
 		totalWeight += m.weight;
 		totalitems ++;
 		
+		double totalRouteCost = 0;
+		
+		for ( Route r : rchain.routes ){
+		
+			double routeVcost =	m.volume *r.costVolume;
+			double routeWcost = m.volume *r.costWeight;
+			
+			double routeCost = Math.min(routeVcost, routeWcost);
+			totalRouteCost = totalRouteCost + 	routeCost;
+			
+		}
+		
 		
 	double kpVcost =	m.volume *c.volume;
 	double kpWcost=	m.volume *c.volume;
-	double routeVcost =	m.volume *r.costVolume;
-	double routeWcost = m.volume *r.costWeight;
 	
 	
 	double kpCost = Math.max(kpVcost, kpWcost);
-	double routeCost = Math.max(routeVcost, routeWcost);
 	
 	 tRevenue += kpCost;
-	 tExpediture += routeCost;
+	 tExpediture += totalRouteCost;
 
 	 Destination origin = findOrigin(m.origin);
 	 Destination dest = findDestination(m.destination);
@@ -82,7 +91,7 @@ public class MailDelivery {
 	 }
 	 
 	 m.addCost(kpCost);
-	 m.addShipmentTime(r.duration);
+	 m.addShipmentTime(rchain.gettotalduration());
 	 
 	return true;
 	}

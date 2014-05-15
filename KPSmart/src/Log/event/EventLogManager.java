@@ -71,7 +71,7 @@ public class EventLogManager {
 		String[] stats = new String[6];
 		stats[0] = firstStats[0];
 		stats[1] = firstStats[1];
-		stats[2] = String.valueOf(Integer.parseInt(firstStats[0])-Integer.parseInt(firstStats[1]));
+		stats[2] = String.valueOf(Double.parseDouble(firstStats[0])-Double.parseDouble(firstStats[1]));
 		
 		Set<Mail> mails = eventProcesser.getEvents().get(maxIndex).statistics.mails;
 		

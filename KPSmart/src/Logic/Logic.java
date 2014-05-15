@@ -12,13 +12,15 @@ public class Logic {
 	public Logic() {
 		eventProcessor = new EventProcesser(new Statistics());
 	//	setupBaseEvents();
-		
+	
 		System.out.print( " CAN HAS TEST");
-		processform( new String[] {"3","1234","15","20","Auckland", "Wellington","1"} );
-		processform( new String[] {"3","1235","15","20","Wellington", "Auckland","1"} );
+		
+		processform( new String[] {"3","1234","0.5","0.8","Wellington", "Rotarua","2"} );
+		processform( new String[] {"0","21125","Wellington", "Rotarua","0.2","0.5","200","200","2","Tuesday", "1", "2","KpStart"} );
+		
 		System.out.println(" THIS SHOULD WORK~~" + 	processform( new String[] {"5","415126","Wellington", "Rotarua","8","10","2", "10-17-2014"} ) );	
 		
-		testMethod();
+	//	testMethod();
 	}
 	
 	
@@ -37,6 +39,11 @@ public class Logic {
 	private void setupBaseEvents() {
 		//Add Base Costs
 
+	//	Route routeTest1 = new Route(1,"Auckland","Wellington",10,15,200,200,1,"Thursday",2,3,"TylerCorp");
+	//	Route routeTest2 = new Route(2,"Christchurch","Wellington",10,15,200,200,2,"Thursday",2,3,"TylerCorp");
+	//	Route routeTest3 = new Route(3,"Auckland","Wellington",10,15,200,200,1,"Thursday",2,3,"TylerCorp");
+		
+	//	eventProcessor.addRoute(routeTest1)
 		
 		
 		System.out.println("Costs start ");
@@ -212,11 +219,11 @@ public class Logic {
 	
 		
 		
-		processform( new String[] {"0","11125","Auckland", "Rotarua","8","10","200","200","2","Tuesday", "5", "3","KpStart"} );	
-		processform( new String[] {"0","11123","Rotarua", "Auckland","8","10","200","200","2","Tuesday", "5", "3","KpStart"} );	
+		processform( new String[] {"0","11325","Auckland", "Rotarua","8","10","200","200","2","Tuesday", "5", "3","KpStart"} );	
+		processform( new String[] {"0","11323","Rotarua", "Auckland","8","10","200","200","2","Tuesday", "5", "3","KpStart"} );	
 		
-		processform( new String[] {"0","21123","Palmerston North", "Rotarua","8","10","200","200","2","Tuesday", "5", "3","KpStart"} );	
-		processform( new String[] {"0","21125","Rotarua", "Palmerston North","8","10","200","200","2","Tuesday", "5", "3","KpStart"} );	
+		processform( new String[] {"0","21223","Palmerston North", "Rotarua","8","10","200","200","2","Tuesday", "5", "3","KpStart"} );	
+		processform( new String[] {"0","21225","Rotarua", "Palmerston North","8","10","200","200","2","Tuesday", "5", "3","KpStart"} );	
 	
 		
 		processform( new String[] {"0","32126","Auckland", "Hamilton","8","10","200","200","2","Tuesday", "5", "3","KpStart"} );	
@@ -245,20 +252,20 @@ public class Logic {
 		
 		System.out.println("routes done ");
 		
-
-		System.out.println(	processform( new String[] {"5","115126","Rotarua", "Auckland","8","10","1", "10-17-2014"} ) );	
-		System.out.println(	processform( new String[] {"5","125126","Rotarua", "Auckland","8","10","2", "10-17-2014"} ) ) ;
-		
-		System.out.println(	processform( new String[] {"5","215126","Auckland", "Auckland","8","10","1", "10-17-2014"} ) );	
-		System.out.println(	processform( new String[] {"5","225126","Rotarua", "Rotarua","8","10","2", "10-17-2014"} ) ) ;
-		
-		System.out.println(	processform( new String[] {"5","315126","Dunedin", "Auckland","8","10","1", "10-17-2014"} ) );	
-		System.out.println(	processform( new String[] {"5","325126","Rotarua", "Dunedin","8","10","2", "10-17-2014"} ) ) ;
-		
-				
-		System.out.println(" THIS SHOULD WORK~~" + 	processform( new String[] {"5","415126","Wellington", "Auckland","8","10","2", "10-17-2014"} ) );	
-		System.out.println(	processform( new String[] {"5","425126","Auckland", "Dunedin","8","10","2", "10-17-2014"} ) ) ;
-	System.out.println("mail done ");
+//
+//		System.out.println(	processform( new String[] {"5","115126","Rotarua", "Auckland","8","10","1", "10-17-2014"} ) );	
+//		System.out.println(	processform( new String[] {"5","125126","Rotarua", "Auckland","8","10","2", "10-17-2014"} ) ) ;
+//		
+//		System.out.println(	processform( new String[] {"5","215126","Auckland", "Auckland","8","10","1", "10-17-2014"} ) );	
+//		System.out.println(	processform( new String[] {"5","225126","Rotarua", "Rotarua","8","10","2", "10-17-2014"} ) ) ;
+//		
+//		System.out.println(	processform( new String[] {"5","315126","Dunedin", "Auckland","8","10","1", "10-17-2014"} ) );	
+//		System.out.println(	processform( new String[] {"5","325126","Rotarua", "Dunedin","8","10","2", "10-17-2014"} ) ) ;
+//		
+//				
+//		System.out.println(" THIS SHOULD WORK~~" + 	processform( new String[] {"5","415126","Wellington", "Auckland","8","10","2", "10-17-2014"} ) );	
+//		System.out.println(	processform( new String[] {"5","425126","Auckland", "Dunedin","8","10","2", "10-17-2014"} ) ) ;
+//	System.out.println("mail done ");
 
 //		
 		

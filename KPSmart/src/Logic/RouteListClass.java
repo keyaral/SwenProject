@@ -16,12 +16,7 @@ public class RouteListClass {
 		routes = new HashSet<Route>();
 		
 		//routes.addAll(); ADD ALL From data base
-		Route routeTest1 = new Route(1,"Auckland","Wellington",10,15,200,200,1,"Thursday",2,3,"TylerCorp");
-		Route routeTest2 = new Route(2,"Christchurch","Wellington",10,15,200,200,2,"Thursday",2,3,"TylerCorp");
-		Route routeTest3 = new Route(3,"Auckland","Wellington",10,15,200,200,1,"Thursday",2,3,"TylerCorp");
-		routes.add(routeTest1);
-		routes.add(routeTest2);
-		routes.add(routeTest3);
+	
 	}
 	
 	public Boolean addRoute(Route r){
@@ -68,16 +63,30 @@ public class RouteListClass {
 
 
 
-	public RouteChain findValidRoute(Mail m) { 
+	public RouteChain findValidRoute(Mail m ) { 
+		System.out.println(" Routes enter valid" );
 		this.tempPath.clear();
 		for(Route r : this.routes) r.visited = false;
 		ArrayList<Route> origins = new ArrayList<Route>();
 		ArrayList<Route> destinations = new ArrayList<Route>();
 	for(Route r : this.routes){									//Search for routes that are capable of handling the initial criteria
-			if(r.originD.getName().equals(m.origin)) origins.add(r);
-			if(r.destinationD.getName().equals(m.destination)) destinations.add(r);
+			if ( r.priority == m.priority) {
+		System.out.println(" a route r) "+ r.ID );
+		if(r.originD.getName().equals(m.origin)) {  	System.out.println(" a orgin match) " ); origins.add(r); }
+		
+		
+		if(r.destinationD.getName().equals(m.destination)){ System.out.println(" a des match) " ); destinations.add(r); }
+		
+		if(r.destinationD.getName().equals(m.destination) && r.originD.getName().equals(m.origin)) {
+			ArrayList<Route> validr = new ArrayList<Route>() ;
+					validr.add(r);
+			
+			return new RouteChain(validr, m.destinationD, m.origin); }
+			}
 		}
-			if(origins.isEmpty() || destinations.isEmpty()){ return null;}
+	
+	
+			if(origins.isEmpty() || destinations.isEmpty()){ System.out.println(" no matches) " ); return null;}
 
 		HashMap<String,RouteChain> PossibleRoutes = new HashMap<String,RouteChain>();
 		HashMap<String,RouteChain> PreferableRoutes = new HashMap<String,RouteChain>();
@@ -108,7 +117,10 @@ public class RouteListClass {
 				if(Double.valueOf(s) < lowestCost) lowestCost = Double.valueOf(s);
 			}
 		}
-		for(RouteChain r1 : PreferableRoutes.values()){r1.PrintAllRoutes();}
+	//	for(RouteChain r1 : PreferableRoutes.values()){r1.PrintAllRoutes();}
+		
+		System.out.println(" lower cost) "+ Double.toString(lowestCost ) );
+		System.out.println(" lower cost orgin + " + PossibleRoutes.get((Double.toString(lowestCost))).origin  );
 		
 		return PossibleRoutes.get((Double.toString(lowestCost)));
  	}
