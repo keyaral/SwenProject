@@ -19,6 +19,16 @@ private double internationWeight = 0.0;
 
 public ArrayList<Route> routes = new ArrayList<Route>();
 
+
+
+
+public int GeographicalY;
+
+
+
+
+public int GeographicalX;
+
 public Destination(String name, double domesticVolume,
 		double internationVolume, double domesticWeightS,
 		double internationWeight) {

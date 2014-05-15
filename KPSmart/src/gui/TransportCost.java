@@ -41,17 +41,17 @@ public class TransportCost extends JInternalFrame {
 	private JComboBox cmbFrom;
 
 	@SuppressWarnings("rawtypes")
-	private JComboBox cmbType;
-	private JTextField txtCostId;
-	private JFormattedTextField txtFrequency;
-	private JComboBox cmbDay;
-	private JFormattedTextField txtVolumeCost;
-	private JFormattedTextField txtMaxWeight;
-	private JFormattedTextField txtDuration;
-	private JFormattedTextField txtMaxVolume;
-	private JFormattedTextField txtWeightCost_1;
-	private JFormattedTextField txtWeightCosts;
-	private JButton btnClearFields;
+	public JComboBox cmbType;
+	public JTextField txtCostId;
+	public JFormattedTextField txtFrequency;
+	public JComboBox cmbDay;
+	public JFormattedTextField txtVolumeCost;
+	public JFormattedTextField txtMaxWeight;
+	public JFormattedTextField txtDuration;
+	public JFormattedTextField txtMaxVolume;
+	public JFormattedTextField txtWeightCost_1;
+	public JFormattedTextField txtWeightCosts;
+	public JButton btnClearFields;
 
 	private JButton btnSave;
 	//Generate Random ID
