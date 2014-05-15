@@ -18,6 +18,14 @@ public class EventLogManager {
 	}
 
 	public String getDetails() {
+		return getDetails(index);
+	}
+	
+	public String getLatestDetails() {
+		return getDetails(maxIndex);
+	}
+	
+	private String getDetails(int index) {
 		if (eventProcesser.getEvents().isEmpty()) return "No events processed yet.";
 		KPEvent e = eventProcesser.getEvents().get(index);
 		String details = "Event " + index + "/" + maxIndex + "\n\n";
@@ -51,11 +59,40 @@ public class EventLogManager {
 
 		return details;
 	}
-
+	
 	public String[] getStats() {
+		return getStats(index);
+	}
+	
+	public String[] getLatestStats() {
+		if (eventProcesser.getEvents().isEmpty() || eventProcesser.getEvents().get(maxIndex).statistics.mails.isEmpty())
+			return new String[]{"0","0","0","0","0","0"};
+		String[] firstStats = getStats(maxIndex);
+		String[] stats = new String[6];
+		stats[0] = firstStats[0];
+		stats[1] = firstStats[1];
+		stats[2] = String.valueOf(Integer.parseInt(firstStats[0])-Integer.parseInt(firstStats[1]));
+		
+		Set<Mail> mails = eventProcesser.getEvents().get(maxIndex).statistics.mails;
+		
+		double totalTime = 0;
+		double totalWeight = 0;
+		double totalVolume = 0;
+		for (Mail mail: mails) {
+			totalTime += mail.time;
+			totalWeight += mail.weight;
+			totalVolume += mail.volume;
+		}
+		stats[3] = String.valueOf(totalTime/mails.size());
+		stats[4] = String.valueOf(totalWeight/mails.size());
+		stats[5] = String.valueOf(totalVolume/mails.size());
+		
+		return stats;
+	}
+	
+	private String[] getStats(int index) {
 		if (eventProcesser.getEvents().isEmpty()) {
-			String[] stats = {"0", "0", "0"};
-			return stats;
+			return new String[] {"0","0","0"};
 		}
 		Statistics s = eventProcesser.getEvents().get(index).statistics;
 		String[] stats = {String.valueOf(s.revenue()), String.valueOf(s.expenditure()), String.valueOf(s.events())};

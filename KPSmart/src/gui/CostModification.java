@@ -119,18 +119,15 @@ public class CostModification extends JInternalFrame {
 				if(txtRouteNumber.getText().equals("") || origin.equals("") || destination.equals("")
 						|| txtWeightCost.getText().equals("") || txtVolumeCost.getText().equals("") || priority.equals("")){
 					JOptionPane.showMessageDialog(null,"Please enter all details",null, 1);
-					
-				}else{
+				}
+				else{
 					int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to save the changes?","Confirmation",dialogButton);
 					if(dialogResult == JOptionPane.YES_OPTION){
-
-						
-					String[] values={ "4", txtRouteNumber.getText(),txtWeightCost.getText(),
-							txtVolumeCost.getText(),destination,origin,	priority }; 
-					JOptionPane.showMessageDialog(null,MainWindow.logic.processform(values),null, 1);	
-
-
-					}else{
+						String[] values={ "4", txtRouteNumber.getText(),txtWeightCost.getText(),
+						txtVolumeCost.getText(),destination,origin,	priority }; 
+						JOptionPane.showMessageDialog(null,MainWindow.logic.processform(values),null, 1);
+					}
+					else{
 						//Changes are not saved
 						JOptionPane.showMessageDialog(null,"Details not saved.",null, 1);
 					}
@@ -140,7 +137,7 @@ public class CostModification extends JInternalFrame {
 		});
 		
 		JButton btnAdd = new JButton("Add");
-		btnSave.addActionListener(new ActionListener() {
+		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String priority=(String)cmbPriority.getSelectedItem();
 				String origin=(String)cmbOrigin.getSelectedItem();
@@ -210,19 +207,20 @@ public class CostModification extends JInternalFrame {
 				
 			}
 		});
+		
 		GroupLayout gl_btnPanel = new GroupLayout(btnPanel);
 		gl_btnPanel.setHorizontalGroup(
-			gl_btnPanel.createParallelGroup(Alignment.LEADING)
+			gl_btnPanel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_btnPanel.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(btnClearFields)
-					.addGap(10)
+					.addComponent(btnAdd)
+					.addGap(18)
 					.addComponent(btnSave)
-					.addPreferredGap(ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+					.addGap(18)
 					.addComponent(btnLoadTestData, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
-					.addGap(64)
-					//.addComponent(btnAdd)
-				//	.addGap(19) TODO MAKE SURE THIS FITS
+					.addGap(18)
+					.addComponent(btnClearFields)
+					.addPreferredGap(ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
 					.addComponent(btnClose)
 					.addGap(19))
 		);
@@ -231,10 +229,11 @@ public class CostModification extends JInternalFrame {
 				.addGroup(gl_btnPanel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_btnPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnSave)
-						.addComponent(btnClearFields)
 						.addComponent(btnClose)
-						.addComponent(btnLoadTestData))
+						.addComponent(btnAdd)
+						.addComponent(btnSave)
+						.addComponent(btnLoadTestData)
+						.addComponent(btnClearFields))
 					.addContainerGap(14, Short.MAX_VALUE))
 		);
 		btnPanel.setLayout(gl_btnPanel);
