@@ -82,6 +82,118 @@
               </xs:sequence>
             </xs:complexType>
           </xs:element>
+	 <xs:element name="KPEvents">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Event">
+			<xs:complexType>
+				<xs:sequence>
+					<xs:element name="type" type="xs:string" />
+					<xs:choice maxOccurs="1">
+						  <xs:element maxOccurs="unbounded" name="cost">
+						    <xs:complexType>
+						      <xs:sequence>
+							<xs:element name="priority" type="xs:integer" />
+							<xs:element name="destination" type="xs:string" />
+							<xs:element name="origin" type="xs:string" />
+							<xs:element name="id" type="xs:integer" />
+							<xs:element name="weight" type="xs:double" />
+							<xs:element name="volume" type="xs:double" />
+						      </xs:sequence>
+						    </xs:complexType>
+						  </xs:element>
+					  	 <xs:element maxOccurs="unbounded" name="mail">
+						    <xs:complexType>
+						      <xs:sequence>
+							<xs:element name="id" type="xs:integer" />
+							<xs:element name="destination" type="xs:string" />
+							<xs:element name="origin" type="xs:string" />
+							<xs:element name="weight" type="xs:double" />
+							<xs:element name="volume" type="xs:double" />
+							<xs:element name="priority" type="xs:integer" />
+							<xs:element name="date" type="xs:dateTime" />
+							<xs:element name="income" type="xs:double" />
+							<xs:element name="cost" type="xs:double" />
+							<xs:element name="name" type="xs:string" />
+							<xs:element name="time" type="xs:double" />
+						      </xs:sequence>
+						    </xs:complexType>
+					   	</xs:element>
+						<xs:element maxOccurs="unbounded" name="route">
+						    <xs:complexType>
+						      <xs:sequence>
+							<xs:element name="id" type="xs:integer" />
+							<xs:element name="destination" type="xs:string" />
+							<xs:element name="origin" type="xs:string" />
+							<xs:element name="maxWeight" type="xs:double" />
+							<xs:element name="maxVolume" type="xs:double" />
+							<xs:element name="priority" type="xs:integer" />
+							<xs:element name="day" type="xs:string" />
+							<xs:element name="frequency" type="xs:double" />
+							<xs:element name="duration" type="xs:double" />
+							<xs:element name="companyName" type="xs:string" />
+							<xs:element name="costWeight" type="xs:double" />
+							<xs:element name="costVolume" type="xs:double" />
+						      </xs:sequence>
+						    </xs:complexType>
+						  </xs:element>
+					</xs:choice>
+                			
+                			<xs:element name="success" type="xs:boolean" />
+                			<xs:element name="mails" maxOccurs="1">
+					   <xs:complexType>
+					      <xs:sequence>
+						 <xs:element maxOccurs="unbounded" name="mail">
+						    <xs:complexType>
+						      <xs:sequence>
+							<xs:element name="id" type="xs:integer" />
+							<xs:element name="destination" type="xs:string" />
+							<xs:element name="origin" type="xs:string" />
+							<xs:element name="weight" type="xs:double" />
+							<xs:element name="volume" type="xs:double" />
+							<xs:element name="priority" type="xs:integer" />
+							<xs:element name="date" type="xs:dateTime" />
+							<xs:element name="income" type="xs:double" />
+							<xs:element name="cost" type="xs:double" />
+							<xs:element name="name" type="xs:string" />
+							<xs:element name="time" type="xs:double" />
+						      </xs:sequence>
+						    </xs:complexType>
+						  </xs:element>
+					       </xs:sequence>
+				            </xs:complexType>
+
+                			</xs:element>
+                			<xs:element name="routes" maxOccurs="1">
+					   <xs:complexType>
+					      <xs:sequence>
+						<xs:element maxOccurs="unbounded" name="route">
+						    <xs:complexType>
+						      <xs:sequence>
+							<xs:element name="id" type="xs:integer" />
+							<xs:element name="destination" type="xs:string" />
+							<xs:element name="origin" type="xs:string" />
+							<xs:element name="maxWeight" type="xs:double" />
+							<xs:element name="maxVolume" type="xs:double" />
+							<xs:element name="priority" type="xs:integer" />
+							<xs:element name="day" type="xs:string" />
+							<xs:element name="frequency" type="xs:double" />
+							<xs:element name="duration" type="xs:double" />
+							<xs:element name="companyName" type="xs:string" />
+							<xs:element name="costWeight" type="xs:double" />
+							<xs:element name="costVolume" type="xs:double" />
+						      </xs:sequence>
+						    </xs:complexType>
+						  </xs:element>
+					       </xs:sequence>
+				            </xs:complexType>
+                			</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+		</xs:element>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
         </xs:choice>
       </xs:sequence>
     </xs:complexType>
