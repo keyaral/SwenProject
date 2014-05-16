@@ -126,6 +126,7 @@ public class CostModification extends JInternalFrame {
 						String[] values={ "4", txtRouteNumber.getText(),txtWeightCost.getText(),
 						txtVolumeCost.getText(),destination,origin,	priority }; 
 						JOptionPane.showMessageDialog(null,MainWindow.logic.processform(values),null, 1);
+						MainWindow.bMonitoring.updateMonitor();
 					}
 					else{
 						//Changes are not saved
@@ -156,7 +157,8 @@ public class CostModification extends JInternalFrame {
 						
 					String[] values={ "3", txtRouteNumber.getText(),txtWeightCost.getText(),
 							txtVolumeCost.getText(),destination,origin,	priority }; 
-					JOptionPane.showMessageDialog(null,MainWindow.logic.processform(values),null, 1);		
+					JOptionPane.showMessageDialog(null,MainWindow.logic.processform(values),null, 1);
+					MainWindow.bMonitoring.updateMonitor();
 					}else{
 						//Changes are not saved
 						JOptionPane.showMessageDialog(null,"Cost not added.",null, 1);

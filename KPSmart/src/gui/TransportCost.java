@@ -54,6 +54,8 @@ public class TransportCost extends JInternalFrame {
 	public JButton btnClearFields;
 
 	private JButton btnSave;
+	private JButton btnChange;
+	private JButton btnDelete;
 	//Generate Random ID
 	private void generateRandomId(int rnd){
 		Random random=new Random();
@@ -115,7 +117,7 @@ public class TransportCost extends JInternalFrame {
 		super("Transport Cost Update");
 		setTitle("Transport Route");
 		setClosable(true);
-		setBounds(100, 100, 532, 391);
+		setBounds(100, 100, 576, 414);
 		setLocation(400,150);
 		JPanel DataInputPanel = new JPanel();
 
@@ -124,22 +126,20 @@ public class TransportCost extends JInternalFrame {
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(DataInputPanel, GroupLayout.PREFERRED_SIZE, 497, GroupLayout.PREFERRED_SIZE))
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-							.addGap(9)
-							.addComponent(btnPanel, GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)))
-					.addContainerGap())
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+						.addComponent(DataInputPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE))
+					.addContainerGap(27, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
 					.addComponent(DataInputPanel, GroupLayout.PREFERRED_SIZE, 297, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnPanel, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-					.addGap(37))
+					.addGap(26))
 		);
 
 		btnClearFields = new JButton("Clear Fields");
@@ -207,7 +207,10 @@ public class TransportCost extends JInternalFrame {
 					setFields(false);
 
 				JOptionPane.showMessageDialog(null,MainWindow.logic.processform(values),null, 1);
-
+				
+				//Update the business monitor
+				MainWindow.bMonitoring.updateMonitor();
+				
 				//Enable the fields again and clear them
 				setFields(true);
 				clearFields();
@@ -282,6 +285,147 @@ public class TransportCost extends JInternalFrame {
 				System.out.println("Test Data Loaded onto Transport Route Cost Form...");
 			}
 		});
+		
+		btnChange = new JButton("Change");
+		btnChange.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				String company=(String)cmbCompany.getSelectedItem();
+				String to=(String)cmbTo.getSelectedItem().toString();
+				String from=(String)cmbFrom.getSelectedItem().toString();
+				String day=(String)cmbDay.getSelectedItem().toString();
+				String priority=(String)cmbType.getSelectedItem().toString();
+				int dialogButton = JOptionPane.YES_NO_OPTION;
+				if (txtCostId.getText().equals("")
+						||company.equals("")
+						|| to.equals("")
+						||from.equals("")
+						||txtWeightCosts.getText().equals("")
+						|| txtVolumeCost.getText().equals("")
+						||txtMaxWeight.getText().equals("")
+						||txtMaxVolume.getText().equals("")
+						|| txtDuration.getText().equals("")
+						|| txtFrequency.getText().equals("")
+						|| priority.equals("")
+						|| day.equals("")){
+					JOptionPane.showMessageDialog(null,"Please enter all details required !",null, 1);
+
+			}else
+			{
+
+				int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to change the details?","Confirmation",dialogButton);
+				if(dialogResult == JOptionPane.YES_OPTION){
+
+				//	String type=MainWindow.logic.switchEvents(0, "1a");//Case 0: Type "1a"-call route
+					String[] values = { "1",
+						txtCostId.getText(),
+						cmbTo.getSelectedItem().toString(),
+						cmbFrom.getSelectedItem().toString(),
+						txtWeightCosts.getText(),
+						txtVolumeCost.getText(),
+						txtMaxWeight.getText(),
+						txtMaxVolume.getText(),
+						""+cmbType.getSelectedIndex(),
+						cmbDay.getSelectedItem().toString(),
+						txtFrequency.getText(),
+						txtDuration.getText(),
+						cmbCompany.getSelectedItem().toString() };
+					//Disable the save buutton to avoid double entry
+					setFields(false);
+
+				JOptionPane.showMessageDialog(null,MainWindow.logic.processform(values),null, 1);
+				
+				//Update the business monitor
+				MainWindow.bMonitoring.updateMonitor();
+				
+				//Enable the fields again and clear them
+				setFields(true);
+				clearFields();
+
+				//	String type=MainWindow.logic.switchEvents(0, "1a");//Case 0: Type "1a"-call route
+
+				}else{
+					//Details not saved
+					JOptionPane.showMessageDialog(null,"Details not saved !",null, 1);
+
+				}
+			}
+	
+			}
+			
+		});
+		
+		btnDelete = new JButton("Delete");
+		btnDelete.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String company=(String)cmbCompany.getSelectedItem();
+				String to=(String)cmbTo.getSelectedItem().toString();
+				String from=(String)cmbFrom.getSelectedItem().toString();
+				String day=(String)cmbDay.getSelectedItem().toString();
+				String priority=(String)cmbType.getSelectedItem().toString();
+				int dialogButton = JOptionPane.YES_NO_OPTION;
+				if (txtCostId.getText().equals("")
+						||company.equals("")
+						|| to.equals("")
+						||from.equals("")
+						||txtWeightCosts.getText().equals("")
+						|| txtVolumeCost.getText().equals("")
+						||txtMaxWeight.getText().equals("")
+						||txtMaxVolume.getText().equals("")
+						|| txtDuration.getText().equals("")
+						|| txtFrequency.getText().equals("")
+						|| priority.equals("")
+						|| day.equals("")){
+					JOptionPane.showMessageDialog(null,"Please enter all details required !",null, 1);
+
+			}else
+			{
+
+				int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to remove the details?","Confirmation",dialogButton);
+				if(dialogResult == JOptionPane.YES_OPTION){
+
+				//	String type=MainWindow.logic.switchEvents(0, "1a");//Case 0: Type "1a"-call route
+					String[] values = { "2",
+						txtCostId.getText(),
+						cmbTo.getSelectedItem().toString(),
+						cmbFrom.getSelectedItem().toString(),
+						txtWeightCosts.getText(),
+						txtVolumeCost.getText(),
+						txtMaxWeight.getText(),
+						txtMaxVolume.getText(),
+						""+cmbType.getSelectedIndex(),
+						cmbDay.getSelectedItem().toString(),
+						txtFrequency.getText(),
+						txtDuration.getText(),
+						cmbCompany.getSelectedItem().toString() };
+					//Disable the save buutton to avoid double entry
+					setFields(false);
+
+				JOptionPane.showMessageDialog(null,MainWindow.logic.processform(values),null, 1);
+				
+				//Update the business monitor
+				MainWindow.bMonitoring.updateMonitor();
+				
+				//Enable the fields again and clear them
+				setFields(true);
+				clearFields();
+
+				//	String type=MainWindow.logic.switchEvents(0, "1a");//Case 0: Type "1a"-call route
+
+				}else{
+					//Details not saved
+					JOptionPane.showMessageDialog(null,"Details not saved !",null, 1);
+
+				}
+			}
+				
+			}
+			
+		});
+		
 		GroupLayout gl_btnPanel = new GroupLayout(btnPanel);
 		gl_btnPanel.setHorizontalGroup(
 			gl_btnPanel.createParallelGroup(Alignment.LEADING)
@@ -290,11 +434,15 @@ public class TransportCost extends JInternalFrame {
 					.addComponent(btnClearFields)
 					.addGap(10)
 					.addComponent(btnSave)
-					.addPreferredGap(ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
-					.addComponent(btnLoadTestData, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
-					.addGap(28)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnChange)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnDelete, GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnLoadTestData)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnClose)
-					.addGap(43))
+					.addContainerGap())
 		);
 		gl_btnPanel.setVerticalGroup(
 			gl_btnPanel.createParallelGroup(Alignment.LEADING)
@@ -304,7 +452,9 @@ public class TransportCost extends JInternalFrame {
 						.addComponent(btnSave)
 						.addComponent(btnClearFields)
 						.addComponent(btnClose)
-						.addComponent(btnLoadTestData))
+						.addComponent(btnLoadTestData)
+						.addComponent(btnChange)
+						.addComponent(btnDelete))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		btnPanel.setLayout(gl_btnPanel);
@@ -582,6 +732,8 @@ public class TransportCost extends JInternalFrame {
 
 	private void setFields(boolean enabled) {
 		btnSave.setEnabled(enabled);
+		btnChange.setEnabled(enabled);
+		btnDelete.setEnabled(enabled);
 		cmbType.setEnabled(enabled);
 		txtCostId.setEnabled(enabled);
 		txtFrequency.setEnabled(enabled);
@@ -596,5 +748,4 @@ public class TransportCost extends JInternalFrame {
 		btnClearFields.setEnabled(enabled);
 		cmbCompany.setEnabled(enabled);
 	}
-
 }

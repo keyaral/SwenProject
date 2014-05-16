@@ -1,7 +1,5 @@
 package gui;
 
-import java.awt.EventQueue;
-
 import javax.swing.JInternalFrame;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -13,16 +11,15 @@ import java.awt.Font;
 
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.border.LineBorder;
-
-import java.awt.Color;
-
-import javax.swing.JButton;
 import javax.swing.JTextArea;
 
 import Log.event.EventLogManager;
 
 public class BusinessMonitoring extends JInternalFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public JTextField txtRevenue;
 	public JTextField txtProfit;
 	public JTextField txtExpenditure;
@@ -195,8 +192,8 @@ public class BusinessMonitoring extends JInternalFrame {
 	}
 	
 	public void updateMonitor() {
+		manager.update();
 		textArea.setText(manager.getLatestDetails());
-		
 		String[] s = manager.getLatestStats();
 		txtRevenue.setText(s[0]);
 		txtExpenditure.setText(s[1]);

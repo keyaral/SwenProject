@@ -185,7 +185,7 @@ public class MailDelivery extends JInternalFrame {
 											txtVolume.getText(),priority,txtDate.getText()  };
 							
 							JOptionPane.showMessageDialog(null,MainWindow.logic.processform(details),null, 1);
-
+							MainWindow.bMonitoring.updateMonitor();
 		
 
 				//		String type= MainWindow.logic.switchEvents(3,"3a"); //Case 3: Type "3a" Send  Mail
