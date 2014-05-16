@@ -221,6 +221,7 @@ public class EventLogger extends JInternalFrame{
 	 * Updates the log
 	 */
 	public void update() {
+		manager.update();
 		textLog.setText(manager.getDetails());
 
 		String[] statistics = manager.getStats();

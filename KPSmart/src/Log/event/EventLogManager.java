@@ -132,6 +132,10 @@ public class EventLogManager {
 	public boolean atEnd() {
 		return index == maxIndex;
 	}
+	
+	public void update() {
+		maxIndex = eventProcesser.getEvents().size()-1;
+	}
 
 	public void goTo(int num) throws TransitionError {
 		if (num < 0 || num > maxIndex)
