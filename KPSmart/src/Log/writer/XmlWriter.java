@@ -8,10 +8,12 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
 import Log.reader.XmlReader;
+import Logic.KPEvent;
 
 import Log.Log;
 import Log.Log.Cost;
 import Log.Log.Discontinue;
+import Log.Log.KPEvents;
 import Log.Log.Mail;
 import Log.Log.Price;
 import Log.Log.Timelimit;
@@ -140,6 +142,18 @@ public class XmlWriter implements IXmlWriter{
 		XmlReader reader =  new XmlReader(_xmlPath);
 		Log log = reader.FindAll();
 		log.getCostOrPriceOrRoute().add(route);
+		
+		WriteLog(log);
+		
+		return log;
+	}
+
+	@Override
+	public Log InsertKPEvent(KPEvents event) {
+		// TODO Auto-generated method stub
+		XmlReader reader =  new XmlReader(_xmlPath);
+		Log log = reader.FindAll();
+		log.getCostOrPriceOrRoute().add(event);
 		
 		WriteLog(log);
 		

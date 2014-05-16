@@ -1067,6 +1067,13 @@ public class Log {
                 }
                 return this.cost;
             }
+            
+            public void setCost(Log.KPEvents.Event.Cost value) {
+            	if (cost == null) {
+                    cost = new ArrayList<Log.KPEvents.Event.Cost>();
+                }
+                this.cost.add(value);
+            }
 
             /**
              * Gets the value of the mail property.
@@ -1177,6 +1184,8 @@ public class Log {
             public Log.KPEvents.Event.Routes getRoutes() {
                 return routes;
             }
+            
+      
 
             /**
              * Sets the value of the routes property.
@@ -1734,6 +1743,13 @@ public class Log {
                         mail = new ArrayList<Log.KPEvents.Event.Mails.Mail>();
                     }
                     return this.mail;
+                }
+                
+                public void setMails(List<Log.KPEvents.Event.Mails.Mail> value) {
+                	if (mail == null) {
+                        mail = new ArrayList<Log.KPEvents.Event.Mails.Mail>();
+                    }
+                	this.mail.addAll(value);
                 }
 
 
@@ -2415,6 +2431,13 @@ public class Log {
                         route = new ArrayList<Log.KPEvents.Event.Routes.Route>();
                     }
                     return this.route;
+                }
+                
+                public void setRoutes(List<Log.KPEvents.Event.Routes.Route> value) {
+                	if (route == null) {
+                        route = new ArrayList<Log.KPEvents.Event.Routes.Route>();
+                    }
+                   route.addAll(value);
                 }
 
 
