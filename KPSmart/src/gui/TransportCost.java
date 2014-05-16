@@ -334,11 +334,12 @@ public class TransportCost extends JInternalFrame {
 		String[] company={"Test Company"};
 		cmbCompany = new JComboBox(company);
 
-		String[] destinations={"Rome","Sydney","London","New York","Singapore","Japan","Manila","Fiji","Hawaii","Moscow"};
+		String[] destinations   =MainWindow.logic.getDestinations();
+		//TODO ={"Rome","Sydney","London","New York","Singapore","Japan","Manila","Fiji","Hawaii","Moscow"};
 		cmbTo = new JComboBox(destinations);
 		String[] distributionCenters={"Auckland","Hamilton","Rotorua","Palmerston North","Wellington","Christ Church","Dunedin"};
 		cmbFrom = new JComboBox(distributionCenters);
-		String [] priority={"Domestic Air","International Air","Domestic Standard","Internation Standard Priority"};
+		String [] priority={"Domestic Standard","Domestic Air","International Standard Priority", "International Air",};
 		cmbType = new JComboBox(priority);
 
 		txtWeightCost_1=new JFormattedTextField();

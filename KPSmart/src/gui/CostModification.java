@@ -292,11 +292,15 @@ public class CostModification extends JInternalFrame {
 		JLabel lblVolumeCost = new JLabel("Volume Cost");
 		
 		JLabel lblPriority = new JLabel("Priority");
-		String [] mailPriority={"Domestic Air","International Air","Domestic Standard","Internation Standard Priority"};
+		String [] mailPriority={"Domestic Standard","Domestic Air","International Standard Priority", "International Air",};
 		cmbPriority = new JComboBox( mailPriority);
-		String[] destinations={"Rome","Sydney","London","New York","Singapore","Japan","Manila","Fiji","Hawaii","Moscow"};
+		
+		//TODO
+		String[] destinations= MainWindow.logic.getDestinations();
+			//{"Rome","Sydney","London","New York","Singapore","Japan","Manila","Fiji","Hawaii","Moscow"};
 		cmbDestination = new JComboBox(destinations);
-		String[] distributionCenters={"Auckland","Hamilton","Rotorua","Palmerston North","Wellington","Christ Church","Dunedin"};
+		String[] distributionCenters = MainWindow.logic.getNZDestinations();
+		//	{"Auckland","Hamilton","Rotorua","Palmerston North","Wellington","Christ Church","Dunedin"};
 		cmbOrigin = new JComboBox(distributionCenters);
 		
 		GroupLayout gl_DataInputPanel = new GroupLayout(DataInputPanel);

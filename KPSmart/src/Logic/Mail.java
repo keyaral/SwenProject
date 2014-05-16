@@ -80,10 +80,10 @@ public class Mail {
 	
 	private int checkpriority(String string) {
 		// TODO Auto-generated method stub
-	if ( string.equals("Domestic Air") ) {return 1;} 
-	if ( string.equals("Domestic Standard") ) {return 2;}
-	if ( string.equals("International Standard Priorityr") ) {return 3;}
-	if ( string.equals("International Air") ) {return 4;}
+		if ( string.equals("Domestic Standard") ) {return 1;}
+		if ( string.equals("Domestic Air") ) {return 2;} 
+		if ( string.equals("International Standard Priority") ) {return 3;}
+		if ( string.equals("International Air") ) {return 4;}
 		
 	else return Integer.parseInt(string);
 	}

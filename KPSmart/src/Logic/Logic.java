@@ -360,10 +360,20 @@ public class Logic {
 		 
 	 }
 
-
-	public String[] getDestinations() {
+	public String[] getNZDestinations() {
 		// TODO Auto-generated method stub
 		ArrayList<Destination> des_list = eventProcessor.mailList.nzDestinations;
+		String[] desArr = new String[des_list.size()];
+		int i = 0;
+		for(Destination d : des_list) {
+			desArr[i] =d.getName();
+					i++;
+		}
+		return desArr;
+	}
+	public String[] getDestinations() {
+		// TODO Auto-generated method stub
+		ArrayList<Destination> des_list = eventProcessor.mailList.allDestinations;
 		String[] desArr = new String[des_list.size()];
 		int i = 0;
 		for(Destination d : des_list) {

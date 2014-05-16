@@ -268,7 +268,7 @@ public class MailDelivery extends JInternalFrame {
 		JLabel lblPriority = new JLabel("Priority");
 		
 		//Define Distribution Centers
-		String[] distributionCenters={"Auckland","Hamilton","Rotorua","Palmerston North","Wellington","Christ Church","Dunedin"};
+		String[] distributionCenters=MainWindow.logic.getNZDestinations();
 		cmbOrigin = new JComboBox(distributionCenters);
 		cmbOrigin.addItemListener(new ItemListener(){
 
@@ -310,7 +310,7 @@ public class MailDelivery extends JInternalFrame {
 		txtDate.setToolTipText("Enter Date");
 		//Define Mail Priority
 		
-		String [] mailPriority={"Domestic Air","International Air","Domestic Standard","International Standard Priority"};
+		String [] mailPriority={"Domestic Standard","Domestic Air","International Standard Priority", "International Air",};
 		cmbPriority = new JComboBox(mailPriority);
 		
 		JLabel lblDeliveryId = new JLabel("Delivery ID");

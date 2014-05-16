@@ -119,17 +119,19 @@ switch (type) {
 			System.out.println("assignRoutes" );
 			
 			Cost c = costs.findValidCost(m);
+			if (c==null){ return error(details, "No valid Cost"); }
 			System.out.println(" Costs " + c.ID);
 
 			
 			RouteChain r = routes.findValidRoute(m);
+			if (r==null){ return error(details, "No valid Route"); }
 			System.out.println(" Routes " +r.gettotalduration() );
 			
 			
 			
 			
-			if (c==null){ return error(details, "No valid Cost"); }
-			if (r==null){ return error(details, "No valid Route"); }
+		
+		
 
 			Boolean success = mailList.deliverMail(m, r, c);
 			if (success){
@@ -170,6 +172,8 @@ switch (type) {
 		private String changeCost(String[] details) throws CloneNotSupportedException {
 			Cost c = new Cost(details);
 
+			if (! costs.contains(c) ) { return error(details, "Cost does not exist to change. Please consider adding"); }
+			
 			Boolean success = costs.changeCost(c);
 
 			if (success ){
