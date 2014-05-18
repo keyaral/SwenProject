@@ -29,7 +29,8 @@ public class EventProcesser {
 	}
 
 	public EventProcesser(Statistics stats) {
-		currentStats = stats;// TODO Auto-generated constructor stub
+		currentStats = stats;
+		currentStats.setRouteList(routes);
 	}
 
 	public ArrayList<Destination> validOrigin(){
@@ -456,33 +457,20 @@ switch (type) {
 	 * set the objects
 	 *
 	 */
-	private void addEvent(String type, boolean success, Object ... o) throws CloneNotSupportedException{
-		if (o[0] instanceof Mail) {
-			Mail m = (Mail) o[0];
+	private void addEvent(String type, boolean success, Object o) throws CloneNotSupportedException{
+		if (o instanceof Mail) {
+			Mail m = (Mail) o;
 			currentStats.setRevenue(mailList.gettRevenue());
 			currentStats.setExpenditure(mailList.gettExpediture());
 			currentStats.mails.add(m);
 			events.add(new KPEvent(type, m, success, new Statistics((Statistics)currentStats.clone())));
 		}
-		else if (o[0] instanceof Route) {
-			Route r = (Route) o[0];
-			if (type.equals("Add")) {
-				currentStats.routes.add((Route)r.clone());
-				events.add(new KPEvent(type, r, success, new Statistics((Statistics)currentStats.clone())));
-			}
-			else if (type.equals("Changes")) {
-				Route rd = (Route) o[1];
-				currentStats.routes.remove(rd);
-				currentStats.routes.add((Route)r.clone());
-				events.add(new KPEvent(type, r, success, new Statistics((Statistics)currentStats.clone())));
-			}
-			else if (type.equals("Remove")) {
-				currentStats.routes.remove(r);
-				events.add(new KPEvent(type, r, success, new Statistics((Statistics)currentStats.clone())));
-			}
+		else if (o instanceof Route) {
+			Route r = (Route) o;
+			events.add(new KPEvent(type, r, success, new Statistics((Statistics)currentStats.clone())));
 		}
-		else if (o[0] instanceof Cost){
-			Cost c = (Cost) o[0];
+		else if (o instanceof Cost){
+			Cost c = (Cost) o;
 			events.add(new KPEvent(type, c, success, new Statistics((Statistics)currentStats.clone())));
 		}
 		currentStats.incrementEvents();

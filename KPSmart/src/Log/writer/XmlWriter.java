@@ -232,7 +232,8 @@ public class XmlWriter implements IXmlWriter{
 		kPEvent.getMails().add(mails);
 		
 		//populate routes
-		Log.KPEvents.Event.Routes routes = new Log.KPEvents.Event.Routes();
+		//comment out. staticis class has been changed, routes has been removed.
+		/*Log.KPEvents.Event.Routes routes = new Log.KPEvents.Event.Routes();
 		for(Logic.Route logicRoute:event.statistics.routes){
 			KPEvents.Event.Routes.Route route = new KPEvents.Event.Routes.Route();
 			
@@ -254,7 +255,7 @@ public class XmlWriter implements IXmlWriter{
 		}
 		
 		kPEvent.getRoutes().add(routes);
-		
+		*/
 		
 		
 		//Update KPEvents node

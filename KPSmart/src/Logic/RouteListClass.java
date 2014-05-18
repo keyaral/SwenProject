@@ -6,7 +6,7 @@ import java.util.HashSet;
 
 import javax.swing.JOptionPane;
 
-public class RouteListClass {
+public class RouteListClass implements Cloneable{
 
 	public HashSet<Route> routes;
 	public ArrayList<ArrayList<Route>>tempPath = new ArrayList<ArrayList<Route>>();
@@ -17,6 +17,16 @@ public class RouteListClass {
 		
 		//routes.addAll(); ADD ALL From data base
 	
+	}
+	
+	public RouteListClass(HashSet<Route> routes){
+		this.routes = new HashSet<Route>();
+		try {
+			for (Route route: routes)
+				this.routes.add((Route)route.clone());
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public Boolean addRoute(Route r){
@@ -156,7 +166,10 @@ public class RouteListClass {
 		
 	}
 
-	
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
+		return new RouteListClass(routes);
+	}
 
 	
 }
