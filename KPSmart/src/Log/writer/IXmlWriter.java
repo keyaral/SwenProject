@@ -20,7 +20,7 @@ public interface IXmlWriter {
 	Log InsertTimeLimit(Timelimit timeLimit);
 	Log InsertDiscontinue(Discontinue discontinue);
 	Log InsertRoute(Route route);
-	Log InsertKPEvent(KPEvents event);
+	Log InsertKPEvent(KPEvent event);
 	
 
 }

@@ -10,6 +10,7 @@ import javax.xml.bind.Unmarshaller;
 
 import Log.*;
 import Log.Log.Cost;
+import Log.Log.KPEvents.Event;
 import Log.Log.*;
 
 public class XmlReader implements IXmlReader{
@@ -121,6 +122,21 @@ public class XmlReader implements IXmlReader{
 		
 		
 		return mail;
+	}
+	
+	@Override
+	public Log.KPEvents FindKPEvents() {
+		// TODO Auto-generated method stub
+		Log log = FindAll();
+		
+		for(Object o : log.getCostOrPriceOrRoute()){
+			if(o.getClass()==Log.KPEvents.class){
+				return (Log.KPEvents) o;
+			}
+		}
+		
+		return null;
+		
 	}
 
 }

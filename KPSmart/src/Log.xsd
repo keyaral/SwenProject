@@ -85,11 +85,11 @@
 	 <xs:element name="KPEvents">
             <xs:complexType>
               <xs:sequence>
-                <xs:element name="Event">
+                <xs:element name="Event" maxOccurs="unbounded">
 			<xs:complexType>
 				<xs:sequence>
 					<xs:element name="type" type="xs:string" />
-					<xs:choice maxOccurs="1">
+					<xs:choice maxOccurs="unbounded">
 						  <xs:element maxOccurs="unbounded" name="cost">
 						    <xs:complexType>
 						      <xs:sequence>
@@ -140,7 +140,7 @@
 					</xs:choice>
                 			
                 			<xs:element name="success" type="xs:boolean" />
-                			<xs:element name="mails" maxOccurs="1">
+                			<xs:element name="mails" maxOccurs="unbounded">
 					   <xs:complexType>
 					      <xs:sequence>
 						 <xs:element maxOccurs="unbounded" name="mail">
@@ -164,7 +164,7 @@
 				            </xs:complexType>
 
                 			</xs:element>
-                			<xs:element name="routes" maxOccurs="1">
+                			<xs:element name="routes" maxOccurs="unbounded">
 					   <xs:complexType>
 					      <xs:sequence>
 						<xs:element maxOccurs="unbounded" name="route">
