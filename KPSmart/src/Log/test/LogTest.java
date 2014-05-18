@@ -108,10 +108,10 @@ public class LogTest {
 		Logic.Mail mail2 = new Logic.Mail(1, "Palmerston North", "Wellington", 2.0, 3.0, 3, new Date(2014,05,20,0,0));
 		statics.mails.add(mail2);
 		
-		Logic.Route route1 = new Logic.Route(1, "Auckland", "Wellington", 2.0, 2.0, 2.0, 2.0, 1, "test", 3.0, 3.0, "test again");
+		/*Logic.Route route1 = new Logic.Route(1, "Auckland", "Wellington", 2.0, 2.0, 2.0, 2.0, 1, "test", 3.0, 3.0, "test again");
 		statics.routes.add(route1);
 		Logic.Route route2 = new Logic.Route(1, "Palmerston North", "Wellington", 2.0, 2.0, 2.0, 2.0, 1, "test", 3.0, 3.0, "test again");
-		statics.routes.add(route2);
+		statics.routes.add(route2);*/
 		
 		Logic.KPEvent kPEvent = new Logic.KPEvent(type, cost, true, statics);
 		
