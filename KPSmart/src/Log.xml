@@ -1,304 +1,118 @@
-<Log xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="postal.xsd">
-  <cost>
-    <company>Air NZ</company>
-    <to>Rome</to>
-    <from>Wellington</from>
-    <type>Air</type>
-    <weightcost>6</weightcost>
+<Log xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="postal.xsd">
+	<cost>
+		<priority>2</priority>
+		<destination>Wellington</destination>
+		<origin>Rotarua</origin>
+		<id>1234</id>
+		<weight>0.5</weight>
+		<volume>0.8</volume>
+	</cost>
+	<cost>
+		<priority>1</priority>
+		<destination>Auckland</destination>
+		<origin>Rotarua</origin>
+		<id>12</id>
+		<weight>0.5</weight>
+		<volume>0.8</volume>
 
-    <volumecost>6</volumecost>
-    <maxWeight>350</maxWeight>
-    <maxVolume>50</maxVolume>
-    <duration>16</duration>
-    <frequency>36</frequency>
-    <day>Thursday</day>
+	</cost>
 
-  </cost>
-  <cost>
-    <company>Kelburn Airways</company>
-    <to>Sydney</to>
-    <from>Wellington</from>
-    <type>Air</type>
-    <weightcost>2</weightcost>
+	<price>
+		<to>Rome</to>
+		<from>New Zealand</from>
+		<priority>International Air</priority>
+		<weightcost>6</weightcost>
+		<volumecost>8</volumecost>
 
-    <volumecost>0</volumecost>
-    <maxWeight>800</maxWeight>
-    <maxVolume>80</maxVolume>
-    <duration>3</duration>
-    <frequency>12</frequency>
-    <day>Friday</day>
+	</price>
+	<price>
+		<to>Sydney</to>
+		<from>New Zealand</from>
+		<priority>International Air</priority>
+		<weightcost>3</weightcost>
+		<volumecost>2</volumecost>
 
-  </cost>
-  <cost>
-    <company>Qantas</company>
-    <to>Sydney</to>
-    <from>Wellington</from>
-    <type>Air</type>
-    <weightcost>2</weightcost>
+	</price>
+	<price>
+		<to>Suva</to>
+		<from>New Zealand</from>
+		<priority>International Air</priority>
+		<weightcost>4</weightcost>
+		<volumecost>4</volumecost>
 
-    <volumecost>1</volumecost>
-    <maxWeight>700</maxWeight>
-    <maxVolume>60</maxVolume>
-    <duration>3</duration>
-    <frequency>12</frequency>
-    <day>Monday</day>
+	</price>
+	<price>
+		<to>Suva</to>
+		<from>New Zealand</from>
+		<priority>International Standard</priority>
+		<weightcost>3</weightcost>
+		<volumecost>2</volumecost>
 
-  </cost>
-  <cost>
-    <company>Kelburn Freight</company>
-    <to>Wellington</to>
-    <from>Auckland</from>
-    <type>Land</type>
-    <weightcost>0</weightcost>
+	</price>
+	<price>
+		<to>New Zealand</to>
+		<from>New Zealand</from>
+		<priority>Domestic Standard</priority>
+		<weightcost>1</weightcost>
+		<volumecost>1</volumecost>
 
-    <volumecost>1</volumecost>
-    <maxWeight>1200</maxWeight>
-    <maxVolume>120</maxVolume>
-    <duration>14</duration>
-    <frequency>24</frequency>
-    <day>Thursday</day>
+	</price>
+	<price>
+		<to>New Zealand</to>
+		<from>New Zealand</from>
+		<priority>Domestic Air</priority>
+		<weightcost>1</weightcost>
+		<volumecost>2</volumecost>
 
-  </cost>
-  <cost>
-    <company>Kelburn Freight</company>
-    <to>Wellington</to>
-    <from>Hamilton</from>
-    <type>Land</type>
-    <weightcost>0</weightcost>
+	</price>
+	<mail>
+		<id>415126</id>
+		<destination>Wellington</destination>
+		<origin>Rotarua</origin>
+		<weight>8.0</weight>
+		<volume>10.0</volume>
+		<priority>2</priority>
+		<date>1916-12-04T00:00:00+11:30</date>
+		<income>0.0</income>
+		<cost>8.0</cost>
+		<time>2.0</time>
+	</mail>
+	<mail>
+		<id>1234</id>
+		<destination>Auckland</destination>
+		<origin>Rotarua</origin>
+		<weight>8.0</weight>
+		<volume>10.0</volume>
+		<priority>2</priority>
+		<date>1916-12-04T00:00:00+11:30</date>
+		<income>0.0</income>
+		<cost>8.0</cost>
+		<time>2.0</time>
+	</mail>
+	<timelimit>
+		<to>Wellington</to>
+		<from>Rome</from>
 
-    <volumecost>1</volumecost>
-    <maxWeight>1100</maxWeight>
-    <maxVolume>130</maxVolume>
-    <duration>10</duration>
-    <frequency>24</frequency>
-    <day>Tuesday</day>
+		<priority>International Air</priority>
+		<maxDeliveryTime>4</maxDeliveryTime>
+	</timelimit>
 
-  </cost>
-  <cost>
-    <company>Rodney's Longhaul</company>
-    <to>Hamilton</to>
-    <from>Auckland</from>
-    <type>Land</type>
-    <weightcost>0</weightcost>
+	<discontinue>
+		<company>Kelburn Airways</company>
+		<to>Sydney</to>
 
-    <volumecost>1</volumecost>
-    <maxWeight>8000</maxWeight>
-    <maxVolume>260</maxVolume>
-    <duration>2</duration>
-    <frequency>12</frequency>
-    <day>Monday</day>
+		<from>Wellington</from>
+		<type>Air</type>
+	</discontinue>
 
-  </cost>
-  <cost>
-    <company>Roman Air Freight Ltd</company>
-    <to>Rome</to>
-    <from>Sydney</from>
-    <type>Air</type>
-    <weightcost>2</weightcost>
+	<price>
+		<to>Sydney</to>
+		<from>New Zealand</from>
+		<priority>International Air</priority>
 
-    <volumecost>3</volumecost>
-    <maxWeight>120</maxWeight>
-    <maxVolume>140</maxVolume>
-    <duration>12</duration>
-    <frequency>24</frequency>
-    <day>Monday</day>
+		<weightcost>3</weightcost>
+		<volumecost>3</volumecost>
+	</price>
 
-  </cost>
-  <cost>
-    <company>Pacifica Merchants</company>
-    <to>Suva</to>
-    <from>Sydney</from>
-    <type>Sea</type>
-    <weightcost>3</weightcost>
-
-    <volumecost>3</volumecost>
-    <maxWeight>100</maxWeight>
-    <maxVolume>100</maxVolume>
-    <duration>36</duration>
-    <frequency>168</frequency>
-    <day>Monday</day>
-
-  </cost>
-  <cost>
-    <company>Davy Jones Ltd</company>
-    <to>Rome</to>
-    <from>Auckland</from>
-    <type>Sea</type>
-    <weightcost>5</weightcost>
-
-    <volumecost>4</volumecost>
-    <maxWeight>1000</maxWeight>
-    <maxVolume>1000</maxVolume>
-    <duration>36</duration>
-    <frequency>168</frequency>
-    <day>Monday</day>
-
-  </cost>
-  <price>
-    <to>Rome</to>
-    <from>New Zealand</from>
-    <priority>International Air</priority>
-    <weightcost>6</weightcost>
-    <volumecost>8</volumecost>
-
-  </price>
-  <price>
-    <to>Sydney</to>
-    <from>New Zealand</from>
-    <priority>International Air</priority>
-    <weightcost>3</weightcost>
-    <volumecost>2</volumecost>
-
-  </price>
-  <price>
-    <to>Suva</to>
-    <from>New Zealand</from>
-    <priority>International Air</priority>
-    <weightcost>4</weightcost>
-    <volumecost>4</volumecost>
-
-  </price>
-  <price>
-    <to>Suva</to>
-    <from>New Zealand</from>
-    <priority>International Standard</priority>
-    <weightcost>3</weightcost>
-    <volumecost>2</volumecost>
-
-  </price>
-  <price>
-    <to>New Zealand</to>
-    <from>New Zealand</from>
-    <priority>Domestic Standard</priority>
-    <weightcost>1</weightcost>
-    <volumecost>1</volumecost>
-
-  </price>
-  <price>
-    <to>New Zealand</to>
-    <from>New Zealand</from>
-    <priority>Domestic Air</priority>
-    <weightcost>1</weightcost>
-    <volumecost>2</volumecost>
-
-  </price>
-  <mail>
-    <day>Monday</day>
-    <to>Rome</to>
-    <from>Wellington</from>
-    <weight>100</weight>
-    <volume>5</volume>
-
-    <priority>International Air</priority>
-  </mail>
-  <mail>
-    <day>Monday</day>
-    <to>Sydney</to>
-    <from>Wellington</from>
-    <weight>1000</weight>
-
-    <volume>120</volume>
-    <priority>International Air</priority>
-  </mail>
-  <mail>
-    <day>Tuesday</day>
-    <to>Rome</to>
-    <from>Wellington</from>
-
-    <weight>100</weight>
-    <volume>5</volume>
-    <priority>International Air</priority>
-  </mail>
-  <timelimit>
-    <to>Wellington</to>
-    <from>Rome</from>
-
-    <priority>International Air</priority>
-    <maxDeliveryTime>4</maxDeliveryTime>	
-  </timelimit>
-  <mail>
-    <day>Thursday</day>
-    <to>Suva</to>
-    <from>Wellington</from>
-
-    <weight>2000</weight>
-    <volume>120</volume>
-    <priority>International Standard</priority>
-  </mail>
-  <discontinue>
-    <company>Kelburn Airways</company>
-    <to>Sydney</to>
-
-    <from>Wellington</from>
-    <type>Air</type>
-  </discontinue>
-  <cost>
-    <company>Qantas</company>
-    <to>Sydney</to>
-    <from>Wellington</from>
-
-    <type>Air</type>
-    <weightcost>2</weightcost>
-    <volumecost>1</volumecost>
-    <maxWeight>120</maxWeight>
-    <maxVolume>150</maxVolume>
-    <duration>3</duration>
-
-    <frequency>12</frequency>
-    <day>Monday</day>
-  </cost>
-  <price>
-    <to>Sydney</to>
-    <from>New Zealand</from>
-    <priority>International Air</priority>
-
-    <weightcost>3</weightcost>
-    <volumecost>3</volumecost>
-  </price>
-  <mail>
-    <day>Thursday</day>
-    <to>Wellington</to>
-    <from>Auckland</from>
-
-    <weight>100</weight>
-    <volume>3</volume>
-    <priority>Domestic Standard</priority>
-  </mail>
-  <mail>
-    <day>Friday</day>
-    <to>Rome</to>
-
-    <from>Hamilton</from>
-    <weight>400</weight>
-    <volume>50</volume>
-    <priority>International Air</priority>
-  </mail>
-  <mail>
-    <day>Wednesday</day>
-
-    <to>Rome</to>
-    <from>Hamilton</from>
-    <weight>400</weight>
-    <volume>25</volume>
-    <priority>International Standard</priority>
-  </mail>
-
-  <mail>
-    <day>Wednesday</day>
-    <to>Sydney</to>
-    <from>Auckland</from>
-    <weight>100</weight>
-    <volume>5</volume>
-
-    <priority>International Standard</priority>
-  </mail>
-  <mail>
-    <day>Friday</day>
-    <to>Rome</to>
-    <from>Wellington</from>
-    <weight>100</weight>
-
-    <volume>5</volume>
-    <priority>International Air</priority>
-  </mail>
 </Log> 
