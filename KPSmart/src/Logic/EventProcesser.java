@@ -2,13 +2,19 @@ package Logic;//
 
 import gui.MainWindow;
 
+import java.awt.List;
 import java.io.Writer;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 import Log.Log;
+import Log.Log.KPEvents;
+import Log.Log.KPEvents.Event;
+import Log.Log.KPEvents.Event.Routes;
+import Log.reader.XmlReader;
 import Log.writer.*;
 
 
@@ -20,18 +26,50 @@ public class EventProcesser {
 	CostListClass costs = new CostListClass();;
 	MailDelivery mailList = new MailDelivery();
 	ArrayList<KPEvent> events = new ArrayList<KPEvent>();
+	
+	XmlReader xmlR = new XmlReader("file.xml");
+	XmlWriter xmlW = new XmlWriter("file.xml");
 
+	
+	
 	private String _xmlPath = "file.xml";
 
 	Statistics currentStats;
-	public EventProcesser() {
 
-	}
 
 	public EventProcesser(Statistics stats) {
-		currentStats = stats;// TODO Auto-generated constructor stub
+		Log log = xmlR.FindAll();
+		ArrayList<Object> allstuff = (ArrayList<Object>) log.getCostOrPriceOrRoute();
+		KPEvents k = xmlR.FindKPEvents();
+		int i = 0;
+		for(Event a : k.getEvent()){
+			
+			System.out.println(a.getType());
+			for(Routes r : a.getRoutes()) System.out.println("!");
+			
+			i++;
+		}
+	//	for(Event a : k.getEvent()) events.add(a);
+	
+		currentStats = stats;
+		currentStats.setRouteList(routes);
+		
 	}
 
+	
+	//Will read XML File and produce KP EVENTS.
+	
+	public void LoadAllPrevious(){
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	
 	public ArrayList<Destination> validOrigin(){
 
 		return null;
@@ -456,34 +494,28 @@ switch (type) {
 	 * set the objects
 	 *
 	 */
-	private void addEvent(String type, boolean success, Object ... o) throws CloneNotSupportedException{
-		if (o[0] instanceof Mail) {
-			Mail m = (Mail) o[0];
+	private void addEvent(String type, boolean success, Object o) throws CloneNotSupportedException{
+		if (o instanceof Mail) {
+			Mail m = (Mail) o;
 			currentStats.setRevenue(mailList.gettRevenue());
 			currentStats.setExpenditure(mailList.gettExpediture());
 			currentStats.mails.add(m);
-			events.add(new KPEvent(type, m, success, new Statistics((Statistics)currentStats.clone())));
+			KPEvent event = new KPEvent(type, m, success, new Statistics((Statistics)currentStats.clone()));
+			events.add(event);
+			xmlW.InsertKPEvent(event);
+			
 		}
-		else if (o[0] instanceof Route) {
-			Route r = (Route) o[0];
-			if (type.equals("Add")) {
-				currentStats.routes.add((Route)r.clone());
-				events.add(new KPEvent(type, r, success, new Statistics((Statistics)currentStats.clone())));
-			}
-			else if (type.equals("Changes")) {
-				Route rd = (Route) o[1];
-				currentStats.routes.remove(rd);
-				currentStats.routes.add((Route)r.clone());
-				events.add(new KPEvent(type, r, success, new Statistics((Statistics)currentStats.clone())));
-			}
-			else if (type.equals("Remove")) {
-				currentStats.routes.remove(r);
-				events.add(new KPEvent(type, r, success, new Statistics((Statistics)currentStats.clone())));
-			}
+		else if (o instanceof Route) {
+			Route r = (Route) o;
+			KPEvent event = new KPEvent(type, r, success, new Statistics((Statistics)currentStats.clone()));
+			events.add(event);
+			xmlW.InsertKPEvent(event);
 		}
-		else if (o[0] instanceof Cost){
-			Cost c = (Cost) o[0];
-			events.add(new KPEvent(type, c, success, new Statistics((Statistics)currentStats.clone())));
+		else if (o instanceof Cost){
+			Cost c = (Cost) o;
+			KPEvent event = new KPEvent(type, c, success, new Statistics((Statistics)currentStats.clone()));
+			events.add(event);
+			xmlW.InsertKPEvent(event);
 		}
 		currentStats.incrementEvents();
 	}

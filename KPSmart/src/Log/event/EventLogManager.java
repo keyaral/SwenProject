@@ -98,15 +98,51 @@ public class EventLogManager {
 		String[] stats = {String.valueOf(s.revenue()), String.valueOf(s.expenditure()), String.valueOf(s.events())};
 		return stats;
 	}
+	
+	public List<List<String[]>> processMailAmounts(List<String[]> list) {
+		if (list == null) return null;
+		List<List<String[]>> amounts = new ArrayList<List<String[]>>();
+		for (String[] s: list) {
+			boolean found = false;
+			if (amounts.isEmpty()) {
+				List<String[]> newList = new ArrayList<String[]>();
+				newList.add(new String[]{s[1],s[2],s[3],s[4]});
+				newList.add(new String[]{s[0],s[2],s[3],s[4]});
+				amounts.add(newList);
+			}
+			else {
+				for (List<String[]> amount: amounts) {
+					if (s[1].equals(amount.get(0)[1])) {
+						found = true;
+						amount.add(new String[]{s[0],s[2],s[3],s[4]});
+						amount.set(0, new String[]{s[1],
+								String.valueOf(Double.parseDouble(s[2])+Double.parseDouble(amount.get(0)[2])),
+								String.valueOf(Double.parseDouble(s[3])+Double.parseDouble(amount.get(0)[3])),
+								String.valueOf(Integer.parseInt(s[4])+Integer.parseInt(amount.get(0)[4]))});
+					}
+				}
+				if (!found) {
+					List<String[]> newList = new ArrayList<String[]>();
+					newList.add(new String[]{s[1],s[2],s[3],s[4]});
+					newList.add(new String[]{s[0],s[2],s[3],s[4]});
+					amounts.add(newList);
+				}
+			}
+		}
+		return amounts;
+	}
 
-	public List<String> getList(List<String[]> list) {
+	public List<String> getTriplesList(List<String[]> list) {
 		if (list==null) return null;
 		List<String> processedList = new ArrayList<String>();
 		for (String[] string: list) {
-			String s = "";
+			String s = "(";
 			for (int i = 0; i < string.length; i++) {
-				if (i == string.length) s += string[i];
-				else s += string[i] + "";
+				if (i < 3) {
+					if (i == 2) s += string[i] + ")";
+					else s += string[i] + ", ";
+				}
+				else s += " - " + string[i];
 			}
 			processedList.add(s);
 		}
@@ -127,6 +163,10 @@ public class EventLogManager {
 
 	public boolean atStart() {
 		return index == 0;
+	}
+	
+	public boolean hasNoEvents() {
+		return eventProcesser.getEvents().isEmpty();
 	}
 
 	public boolean atEnd() {

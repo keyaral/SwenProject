@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Log>
     <cost>
+        <priority>0</priority>
+        <id>0</id>
         <weight>0.0</weight>
         <volume>0.0</volume>
     </cost>
@@ -18,4 +20,76 @@
         <weightcost>10</weightcost>
         <volumecost>10</volumecost>
     </price>
+    <KPEvents>
+        <Event>
+            <type>addCost</type>
+            <cost>
+                <priority>1</priority>
+                <destination>Auckland</destination>
+                <origin>Wellington</origin>
+                <id>1</id>
+                <weight>2.0</weight>
+                <volume>3.0</volume>
+            </cost>
+            <success>true</success>
+            <mails>
+                <mail>
+                    <id>1</id>
+                    <destination>Auckland</destination>
+                    <origin>Wellington</origin>
+                    <weight>2.0</weight>
+                    <volume>3.0</volume>
+                    <priority>3</priority>
+                    <date>3914-06-20T00:00:00+12:00</date>
+                    <income>0.0</income>
+                    <cost>0.0</cost>
+                    <name>Wellington</name>
+                    <time>0.0</time>
+                </mail>
+                <mail>
+                    <id>1</id>
+                    <destination>Palmerston North</destination>
+                    <origin>Wellington</origin>
+                    <weight>2.0</weight>
+                    <volume>3.0</volume>
+                    <priority>3</priority>
+                    <date>3914-06-20T00:00:00+12:00</date>
+                    <income>0.0</income>
+                    <cost>0.0</cost>
+                    <name>Wellington</name>
+                    <time>0.0</time>
+                </mail>
+            </mails>
+            <routes>
+                <route>
+                    <id>1</id>
+                    <destination>Auckland</destination>
+                    <origin>Wellington</origin>
+                    <maxWeight>2.0</maxWeight>
+                    <maxVolume>2.0</maxVolume>
+                    <priority>1</priority>
+                    <day>test</day>
+                    <frequency>3.0</frequency>
+                    <duration>3.0</duration>
+                    <companyName>test again</companyName>
+                    <costWeight>2.0</costWeight>
+                    <costVolume>2.0</costVolume>
+                </route>
+                <route>
+                    <id>1</id>
+                    <destination>Palmerston North</destination>
+                    <origin>Wellington</origin>
+                    <maxWeight>2.0</maxWeight>
+                    <maxVolume>2.0</maxVolume>
+                    <priority>1</priority>
+                    <day>test</day>
+                    <frequency>3.0</frequency>
+                    <duration>3.0</duration>
+                    <companyName>test again</companyName>
+                    <costWeight>2.0</costWeight>
+                    <costVolume>2.0</costVolume>
+                </route>
+            </routes>
+        </Event>
+    </KPEvents>
 </Log>

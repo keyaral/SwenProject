@@ -7,11 +7,10 @@ public class Statistics implements Cloneable{
 	private double expenditure = 0;
 	private int events = 0;
 	public final Set<Mail> mails;
-	public final Set<Route> routes;
+	private RouteListClass routes;
 
 	public Statistics() {
 		mails = new HashSet<Mail>();
-		routes = new HashSet<Route>();
 	}
 
 	public Statistics(Statistics s) {
@@ -19,7 +18,12 @@ public class Statistics implements Cloneable{
 		expenditure = s.expenditure;
 		events = s.events;
 		mails = s.mails;
-		routes = s.routes;
+		try {
+			routes = (RouteListClass) s.routes.clone();
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	public double revenue() {
@@ -44,6 +48,10 @@ public class Statistics implements Cloneable{
 
 	public void incrementEvents() {
 		events++;
+	}
+	
+	public void setRouteList(RouteListClass rlc) {
+		routes = rlc;
 	}
 
 	public List<String[]> getMailAmounts() {
@@ -86,7 +94,7 @@ public class Statistics implements Cloneable{
 		for (Mail mail: mails) {
 			boolean found = false;
 			if (times.isEmpty()) {
-				String[] s = {mail.origin, mail.destination, String.valueOf(mail.priority), ""};
+				String[] s = {String.valueOf(mail.priority), mail.origin, mail.destination, ""};
 				double[] d = {mail.time, 1};
 				times.add(s);
 				data.add(d);
@@ -103,7 +111,7 @@ public class Statistics implements Cloneable{
 					}
 				}
 				if (!found) {
-					String[] s = {mail.origin, mail.destination, String.valueOf(mail.priority), ""};
+					String[] s = {String.valueOf(mail.priority), mail.origin, mail.destination, ""};
 					double[] d = {mail.time, 1};
 					times.add(s);
 					data.add(d);
@@ -117,10 +125,16 @@ public class Statistics implements Cloneable{
 		return times;
 	}
 
-	public List<String> getCriticalRoutes() {
-		if (mails.isEmpty() || routes.isEmpty()) return null;
-		List<String> routes = new ArrayList<String>();
-		// TODO
+	public List<String[]> getCriticalRoutes() {
+		double total = 0;
+		for (Mail mail: mails) {
+			total += mail.cost;
+		}
+		ArrayList<Route> criticalRoutes = routes.findCriticalRoutes(total/mails.size());
+		List<String[]> routes = new ArrayList<String[]>();
+		for (Route cr: criticalRoutes) {
+			routes.add(new String[] {cr.destination, cr.origin, String.valueOf(cr.priority)});
+		}
 		return routes;
 	}
 

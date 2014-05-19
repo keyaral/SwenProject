@@ -11,7 +11,9 @@ public class Logic {
 
 	public Logic() {
 		eventProcessor = new EventProcesser(new Statistics());
-	setupBaseEvents();
+		
+		
+	//setupBaseEvents();
 	
 		System.out.print( " CAN HAS TEST");
 		

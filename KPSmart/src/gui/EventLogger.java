@@ -53,31 +53,34 @@ public class EventLogger extends JInternalFrame{
 		JPanel rightPane = new JPanel();
 		rightPane.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		
+		JScrollPane scroller = new JScrollPane();
+		
 		GroupLayout layout = new GroupLayout(getContentPane());
 		layout.setHorizontalGroup(
 			layout.createParallelGroup(Alignment.CENTER)
 				.addGroup(layout.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(layout.createParallelGroup(Alignment.LEADING)
-						.addComponent(textLog, GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE)
-						.addComponent(bottomLeftPane, GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE))
+					.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(bottomLeftPane, 0, 0, Short.MAX_VALUE)
+						.addComponent(scroller, GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(rightPane, GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+					.addComponent(rightPane, GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
 					.addContainerGap())
 		);
-		textLog.setEditable(false);
 		layout.setVerticalGroup(
-			layout.createParallelGroup(Alignment.TRAILING)
+			layout.createParallelGroup(Alignment.LEADING)
 				.addGroup(layout.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(layout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(rightPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
+					.addGroup(layout.createParallelGroup(Alignment.LEADING)
+						.addComponent(rightPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
 						.addGroup(layout.createSequentialGroup()
-							.addComponent(textLog, GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+							.addComponent(scroller, GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(bottomLeftPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
+		scroller.setViewportView(textLog);
+		textLog.setEditable(false);
 
 		JButton btnClose = new JButton("Close");
 		btnClose.addActionListener(new ActionListener() {
@@ -138,13 +141,21 @@ public class EventLogger extends JInternalFrame{
 					.addContainerGap(138, Short.MAX_VALUE))
 		);
 		statsPanel.setLayout(gl_statsPanel);
-		amountOfMailList.setEditable(false);
 		
-		bussinessPanel.addTab("Amount Of Mail", null, amountOfMailList, null);
-		averageDeliveryTimesList.setEditable(false);
-		bussinessPanel.addTab("Average Delivery Times", null, averageDeliveryTimesList, null);
+		JScrollPane CRScroller = new JScrollPane();
+		bussinessPanel.addTab("Critical Routes", null, CRScroller, null);
+		CRScroller.setViewportView(criticalRoutesList);
 		criticalRoutesList.setEditable(false);
-		bussinessPanel.addTab("Critical Routes", null, criticalRoutesList, null);
+		
+		JScrollPane ADTScroller = new JScrollPane();
+		bussinessPanel.addTab("Average Delivery Times", null, ADTScroller, null);
+		ADTScroller.setViewportView(averageDeliveryTimesList);
+		averageDeliveryTimesList.setEditable(false);
+		
+		JScrollPane AMScroller = new JScrollPane();
+		bussinessPanel.addTab("Amount Of Mail", null, AMScroller, null);
+		AMScroller.setViewportView(amountOfMailList);
+		amountOfMailList.setEditable(false);
 		rightPane.setLayout(gl_rightPane);
 
 		btnPrevious.addActionListener(new ActionListener() {
@@ -193,11 +204,11 @@ public class EventLogger extends JInternalFrame{
 					.addGroup(gl_bottomLeftPane.createParallelGroup(Alignment.LEADING, false)
 						.addComponent(btnNext, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addComponent(btnPrevious, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addPreferredGap(ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-					.addGroup(gl_bottomLeftPane.createParallelGroup(Alignment.TRAILING, false)
-						.addComponent(btnGoTo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(goTo))
-					.addContainerGap())
+					.addPreferredGap(ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+					.addGroup(gl_bottomLeftPane.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(goTo, 0, 0, Short.MAX_VALUE)
+						.addComponent(btnGoTo, GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE))
+					.addGap(23))
 		);
 		gl_bottomLeftPane.setVerticalGroup(
 			gl_bottomLeftPane.createParallelGroup(Alignment.TRAILING)
@@ -235,18 +246,42 @@ public class EventLogger extends JInternalFrame{
 		if (manager.atEnd()) btnNext.setEnabled(false);
 		else btnNext.setEnabled(true);
 		
-		amountOfMailList.setText("Key: Origin-Destination-Volume-Weight-Num");
-		averageDeliveryTimesList.setText("Key: Origin-Destination-Priority-AverageTime");
-		criticalRoutesList.setText("No mail or route has been created yet.");
-		
-		updateList(manager.getList(manager.getEvent().statistics.getMailAmounts()), amountOfMailList,
-				"No mail has been sent yet.");
-		updateList(manager.getList(manager.getEvent().statistics.getDeliveryTimes()), averageDeliveryTimesList,
-				"No mail has been sent yet.");
+		if (manager.hasNoEvents()) {
+			amountOfMailList.setText("There are no events processed yet.");
+			averageDeliveryTimesList.setText("There are no events processed yet.");
+			criticalRoutesList.setText("There are no events processed yet.");
+		}
+		else {
+			amountOfMailList.setText("");
+			averageDeliveryTimesList.setText("Key: (Priority, Origin, Destination) - AverageTime");
+			criticalRoutesList.setText("Key: (Destination, Origin, Priority)");
+			
+			updateListOfLists(manager.processMailAmounts(manager.getEvent().statistics.getMailAmounts()), amountOfMailList,
+					"No mail has been sent yet.");
+			updateList(manager.getTriplesList(manager.getEvent().statistics.getDeliveryTimes()), averageDeliveryTimesList,
+					"No mail has been sent yet.");
+			updateList(manager.getTriplesList(manager.getEvent().statistics.getCriticalRoutes()), criticalRoutesList,
+					"There are no critical routes.");
+		}
+	}
+	
+	private void updateListOfLists(List<List<String[]>> sss, JTextArea list, String emptyMessage) {
+		if (sss == null || sss.isEmpty()) list.setText(emptyMessage);
+		else {
+			for (List<String[]> ss: sss) {
+				list.append("To " + ss.get(0)[0] + " - Volume: " + ss.get(0)[1] +
+						"/Weight: " + ss.get(0)[2] + "/Items: " + ss.get(0)[3] + "\n");
+				for (int j = 1; j < ss.size(); j++) {
+					list.append("  From " + ss.get(j)[0] + " - Volume: " + ss.get(j)[1] +
+							"/Weight: " + ss.get(j)[2] + "/Items: " + ss.get(j)[3] + "\n");
+				}
+				
+			}
+		}
 	}
 	
 	private void updateList(List<String> ss, JTextArea list, String emptyMessage) {
-		if (ss == null) list.setText(emptyMessage);
+		if (ss == null || ss.isEmpty()) list.setText(emptyMessage);
 		else {
 			for (String s: ss) {
 				list.append("\n" + s);

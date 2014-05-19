@@ -1,6 +1,7 @@
 package Log.test;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -8,6 +9,7 @@ import org.junit.Test;
 import Log.reader.*;
 import Log.writer.XmlWriter;
 import Log.Log;
+import Log.Log.KPEvents;
 import Log.reader.XmlReader;
 
 public class LogTest {
@@ -97,50 +99,33 @@ public class LogTest {
 		
 		XmlWriter writer = new XmlWriter("src/LogXmlTest.xml");
 		//Construct a KPEvent object
+		String type = "addCost";
+		Logic.Cost cost = new Logic.Cost(1, 2.0, 3.0, "Auckland", "Wellington", 1);
 		
-		Log.KPEvents kPEvent = new Log.KPEvents();
-		Log.KPEvents.Event event = new Log.KPEvents.Event();
+		Logic.Statistics statics = new Logic.Statistics();
+		Logic.Mail mail1 = new Logic.Mail(1, "Auckland", "Wellington", 2.0, 3.0, 3, new Date(2014,05,20,0,0));
+		statics.mails.add(mail1);
+		Logic.Mail mail2 = new Logic.Mail(1, "Palmerston North", "Wellington", 2.0, 3.0, 3, new Date(2014,05,20,0,0));
+		statics.mails.add(mail2);
 		
-		event.setSuccess(true);
-		event.setType("Test");
-		//Construct cost;
-		Log.KPEvents.Event.Cost cost = new Log.KPEvents.Event.Cost();
-		cost.setId(0);
-		cost.setOrigin("Welly");
-		cost.setDestination("Auckland");
-		cost.setPriority(1);
-		cost.setVolume(3.0);
-		cost.setWeight(2.0);
-		//add cost to event
-		event.setCost(cost);
-		//Construct mails
-		Log.KPEvents.Event.Mails mails = new Log.KPEvents.Event.Mails();
-		Log.KPEvents.Event.Mails.Mail mail1 = new Log.KPEvents.Event.Mails.Mail();
-		mail1.setId(1);
-		Log.KPEvents.Event.Mails.Mail mail2 = new Log.KPEvents.Event.Mails.Mail();
-		mail2.setId(2);
-		List<Log.KPEvents.Event.Mails.Mail> mails1 = new ArrayList<Log.KPEvents.Event.Mails.Mail>();
-		mails1.add(mail1);
-		mails1.add(mail2);
-		mails.setMails(mails1);
-		event.setMails(mails);
-		//Construct routes
-		Log.KPEvents.Event.Routes routes = new Log.KPEvents.Event.Routes();
-		Log.KPEvents.Event.Routes.Route route1 = new Log.KPEvents.Event.Routes.Route();
-		mail1.setId(1);
-		Log.KPEvents.Event.Routes.Route route2 = new Log.KPEvents.Event.Routes.Route();
-		mail2.setId(2);
-		List<Log.KPEvents.Event.Routes.Route> routes1 = new ArrayList<Log.KPEvents.Event.Routes.Route>();
-		routes1.add(route1);
-		routes1.add(route2);
-		routes.setRoutes(routes1);
-		event.setRoutes(routes);	
-		//finally construct a KPEvent
-		kPEvent.setEvent(event);
-
-		Log log =  writer.InsertKPEvent(kPEvent);
+		/*Logic.Route route1 = new Logic.Route(1, "Auckland", "Wellington", 2.0, 2.0, 2.0, 2.0, 1, "test", 3.0, 3.0, "test again");
+		statics.routes.add(route1);
+		Logic.Route route2 = new Logic.Route(1, "Palmerston North", "Wellington", 2.0, 2.0, 2.0, 2.0, 1, "test", 3.0, 3.0, "test again");
+		statics.routes.add(route2);*/
 		
-		assert(log.getCostOrPriceOrRoute() != null);
+		Logic.KPEvent kPEvent = new Logic.KPEvent(type, cost, true, statics);
+		
+		Log log = writer.InsertKPEvent(kPEvent);
+		
+		boolean found = false;
+		for(Object o : log.getCostOrPriceOrRoute() ){
+			if (o.getClass() == Log.KPEvents.class){
+				found = true;
+			}
+		}
+		
+		assert(found);
+		
 		
  	}
 	
