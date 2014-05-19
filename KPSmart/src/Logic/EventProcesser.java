@@ -472,10 +472,14 @@ switch (type) {
 		else if (o instanceof Route) {
 			Route r = (Route) o;
 			events.add(new KPEvent(type, r, success, new Statistics((Statistics)currentStats.clone())));
+			XmlWriter writer = new XmlWriter("file.xml");
+			writer.InsertKPEvent(new KPEvent(type, r, success, new Statistics((Statistics)currentStats.clone())));
 		}
 		else if (o instanceof Cost){
 			Cost c = (Cost) o;
 			events.add(new KPEvent(type, c, success, new Statistics((Statistics)currentStats.clone())));
+			XmlWriter writer = new XmlWriter("file.xml");
+			writer.InsertKPEvent(new KPEvent(type, c, success, new Statistics((Statistics)currentStats.clone())));
 		}
 		currentStats.incrementEvents();
 	}
