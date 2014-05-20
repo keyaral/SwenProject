@@ -142,7 +142,10 @@ public class MailDelivery extends JInternalFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				clearFields();
+<<<<<<< HEAD
 				
+=======
+>>>>>>> refs/remotes/origin/master
 			}
 			
 		});
@@ -168,6 +171,10 @@ public class MailDelivery extends JInternalFrame {
 					int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to send this mail item?","Confirmation",dialogButton);
 					if(dialogResult == JOptionPane.YES_OPTION){
 						setFields(false);
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/master
 							
 							String[]  details ={ "5",txtMailId.getText(), destination ,
 											origin, txtWeight.getText(),
@@ -175,9 +182,15 @@ public class MailDelivery extends JInternalFrame {
 							
 							JOptionPane.showMessageDialog(null,MainWindow.logic.processform(details),null, 1);
 							MainWindow.bMonitoring.updateMonitor();
+<<<<<<< HEAD
 		
 							setFields(true);
 							clearFields();
+=======
+							setFields(true);
+							clearFields();
+
+>>>>>>> refs/remotes/origin/master
 				//		String type= MainWindow.logic.switchEvents(3,"3a"); //Case 3: Type "3a" Send  Mail
 						
 					
@@ -424,6 +437,7 @@ public class MailDelivery extends JInternalFrame {
 		cmbPriority.setSelectedIndex(-1);
 
 	}
+<<<<<<< HEAD
 		
 	 	private void clearFields() {
 	 		txtMailId.setText("");
@@ -452,4 +466,34 @@ public class MailDelivery extends JInternalFrame {
 	 		txtMailId.setEnabled(b);
 	 	}
 	 
+=======
+	
+	private void clearFields() {
+		txtMailId.setText("");
+		txtWeight.setText("");
+		txtVolume.setText("");
+		txtDate.setText("");
+		cmbDay.setSelectedIndex(-1);
+		cmbDestination.setSelectedIndex(-1);
+		cmbOrigin.setSelectedIndex(-1);
+		cmbPriority.setSelectedIndex(-1);
+		btnSave.setEnabled(true);
+		btnClearFields.setEnabled(false);
+	}
+	
+	private void setFields(boolean b) {
+		btnClose.setEnabled(b);
+		btnClearFields.setEnabled(b);
+		btnSave.setEnabled(b);
+		txtVolume.setEnabled(b);
+		txtWeight.setEnabled(b);
+		txtDate.setEnabled(b);
+		cmbOrigin.setEnabled(b);
+		cmbDestination.setEnabled(b);
+		cmbDay.setEnabled(b);
+		cmbPriority.setEnabled(b);
+		txtMailId.setEnabled(b);
+	}
+	
+>>>>>>> refs/remotes/origin/master
 }

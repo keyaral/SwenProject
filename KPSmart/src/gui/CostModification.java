@@ -169,6 +169,7 @@ public class CostModification extends JInternalFrame {
 							txtVolumeCost.getText(),destination,origin,	priority }; 
 					JOptionPane.showMessageDialog(null,MainWindow.logic.processform(values),null, 1);
 					MainWindow.bMonitoring.updateMonitor();
+					updateList();
 					}else{
 						//Changes are not saved
 						JOptionPane.showMessageDialog(null,"Cost not added.",null, 1);
