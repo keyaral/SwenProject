@@ -20,6 +20,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.Caret;
@@ -27,10 +28,11 @@ import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 
 import Logic.Destination;
+import Logic.Logic;
 import Logic.Route;
 
 public class RouteViewIDWindow extends JFrame {
-	public ArrayList<Route> routes = new ArrayList<Route>();
+	public HashSet<Route> routes = new HashSet<Route>();
 	public HashMap<Integer,String> selectableRoutes = new HashMap<Integer,String>();
 	public ArrayList<Destination> destinations = new ArrayList<Destination>();
 	public JTextArea textArea;
@@ -77,9 +79,9 @@ public class RouteViewIDWindow extends JFrame {
 					test2.add(D4);
 					test.add(routeTest1);
 					test.add(routeTest2);
-					RouteViewIDWindow frame = new RouteViewIDWindow(test,null);
-					frame.destinations = test2;
-					frame.setVisible(true);
+					//RouteViewIDWindow frame = new RouteViewIDWindow(test,null);
+//					frame.destinations = test2;
+//					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -87,9 +89,10 @@ public class RouteViewIDWindow extends JFrame {
 		});
 	}
 
-	public RouteViewIDWindow(ArrayList<Route> routes, TransportCost tc) {
+	public RouteViewIDWindow(Logic l, TransportCost tc) {
 		this.TC = tc;
-		this.routes = routes;
+		this.routes = l.eventProcessor.getRoutes().routes;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		MainPanel = new JPanel();

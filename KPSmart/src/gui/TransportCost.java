@@ -29,7 +29,7 @@ public class TransportCost extends JInternalFrame {
 	/**
 	 *
 	 */
-
+	public Logic l;
 	private static final long serialVersionUID = 1L;
 	@SuppressWarnings("rawtypes")
 	private JComboBox cmbCompany;
@@ -113,8 +113,9 @@ public class TransportCost extends JInternalFrame {
 	 * Create the frame.
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public TransportCost() {
+	public TransportCost(Logic l) {
 		super("Transport Cost Update");
+		this.l = l;
 		setTitle("Transport Route");
 		setClosable(true);
 		setBounds(100, 100, 576, 414);
@@ -238,8 +239,8 @@ public class TransportCost extends JInternalFrame {
 		JButton btnViewID = new JButton("View Routes");	//Tyler's extra button
 		btnViewID.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			//	RouteViewIDWindow x = new RouteViewIDWindow();	TODO
-			//	x.setVisible(true);
+			RouteViewIDWindow x = createRouteWindow(); 
+				x.setVisible(true);
 			}});
 
 		JButton btnLoadTestData = new JButton("Load Test Data");
@@ -715,6 +716,9 @@ public class TransportCost extends JInternalFrame {
 
 	}
 
+	protected RouteViewIDWindow createRouteWindow() {
+		 return new RouteViewIDWindow(this.l,this);
+	}
 	private void clearFields() {
 		txtCostId.setText("");
 		txtWeightCosts.setText("");
