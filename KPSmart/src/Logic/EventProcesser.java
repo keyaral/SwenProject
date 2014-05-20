@@ -27,10 +27,9 @@ public class EventProcesser {
 	MailDelivery mailList = new MailDelivery();
 	ArrayList<KPEvent> events = new ArrayList<KPEvent>();
 	
-	XmlReader xmlR = new XmlReader("file.xml");
-	XmlWriter xmlW = new XmlWriter("file.xml");
 
-	
+
+
 	
 	private String _xmlPath = "file.xml";
 
@@ -38,17 +37,10 @@ public class EventProcesser {
 
 
 	public EventProcesser(Statistics stats) {
-		Log log = xmlR.FindAll();
-		ArrayList<Object> allstuff = (ArrayList<Object>) log.getCostOrPriceOrRoute();
-		KPEvents k = xmlR.FindKPEvents();
-		int i = 0;
-		for(Event a : k.getEvent()){
+	
+	
+				
 			
-			System.out.println(a.getType());
-			for(Routes r : a.getRoutes()) System.out.println("!");
-			
-			i++;
-		}
 	//	for(Event a : k.getEvent()) events.add(a);
 	
 		currentStats = stats;
@@ -59,12 +51,6 @@ public class EventProcesser {
 	
 	//Will read XML File and produce KP EVENTS.
 	
-	public void LoadAllPrevious(){
-		
-		
-		
-		
-	}
 	
 	
 	
@@ -502,20 +488,24 @@ switch (type) {
 			currentStats.mails.add(m);
 			KPEvent event = new KPEvent(type, m, success, new Statistics((Statistics)currentStats.clone()));
 			events.add(event);
-			xmlW.InsertKPEvent(event);
+			
+			
+			XmlWriter writer = new XmlWriter("file.xml");
+			writer.InsertKPEvent(new KPEvent(type, m, success, new Statistics((Statistics)currentStats.clone())));
+			
 			
 		}
 		else if (o instanceof Route) {
 			Route r = (Route) o;
-			KPEvent event = new KPEvent(type, r, success, new Statistics((Statistics)currentStats.clone()));
-			events.add(event);
-			xmlW.InsertKPEvent(event);
+			events.add(new KPEvent(type, r, success, new Statistics((Statistics)currentStats.clone())));
+			XmlWriter writer = new XmlWriter("file.xml");
+			writer.InsertKPEvent(new KPEvent(type, r, success, new Statistics((Statistics)currentStats.clone())));
 		}
 		else if (o instanceof Cost){
 			Cost c = (Cost) o;
-			KPEvent event = new KPEvent(type, c, success, new Statistics((Statistics)currentStats.clone()));
-			events.add(event);
-			xmlW.InsertKPEvent(event);
+			events.add(new KPEvent(type, c, success, new Statistics((Statistics)currentStats.clone())));
+			XmlWriter writer = new XmlWriter("file.xml");
+			writer.InsertKPEvent(new KPEvent(type, c, success, new Statistics((Statistics)currentStats.clone())));
 		}
 		currentStats.incrementEvents();
 	}
