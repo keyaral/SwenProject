@@ -11,6 +11,11 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.DefaultListModel;
+import javax.swing.ListSelectionModel;
+
+import java.util.*;
+
 
 import Logic.Cost;
 
@@ -18,9 +23,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Random;
 
 import javax.swing.JComboBox;
+import javax.swing.JScrollPane;
 
 public class CostModification extends JInternalFrame {
 
@@ -31,6 +39,7 @@ public class CostModification extends JInternalFrame {
 	private JComboBox cmbPriority;
 	private JComboBox cmbDestination;
 	private JComboBox cmbOrigin;
+	private JList<String> listOfExistingRoutes = new JList();
 	//Generate Random ID
 	
 	private void generateRandomId(int rnd){
@@ -127,6 +136,7 @@ public class CostModification extends JInternalFrame {
 						txtVolumeCost.getText(),destination,origin,	priority }; 
 						JOptionPane.showMessageDialog(null,MainWindow.logic.processform(values),null, 1);
 						MainWindow.bMonitoring.updateMonitor();
+						updateList();
 					}
 					else{
 						//Changes are not saved
@@ -260,7 +270,7 @@ public class CostModification extends JInternalFrame {
 		
 		JLabel lblDestinationPort = new JLabel("Destination Port");
 		
-		JList listOfExistingRoutes = new JList();
+		
 		
 		txtWeightCost = new JFormattedTextField();
 		//Allow text box to accept digits only
@@ -304,6 +314,7 @@ public class CostModification extends JInternalFrame {
 		String[] distributionCenters = MainWindow.logic.getNZDestinations();
 		//	{"Auckland","Hamilton","Rotorua","Palmerston North","Wellington","Christ Church","Dunedin"};
 		cmbOrigin = new JComboBox(distributionCenters);
+		JScrollPane scrollPane = new JScrollPane();
 		
 		GroupLayout gl_DataInputPanel = new GroupLayout(DataInputPanel);
 		gl_DataInputPanel.setHorizontalGroup(
@@ -326,17 +337,17 @@ public class CostModification extends JInternalFrame {
 						.addGroup(gl_DataInputPanel.createSequentialGroup()
 							.addComponent(lblPriority)
 							.addGap(61)))
-					.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.TRAILING)
 						.addComponent(cmbOrigin, 0, 138, Short.MAX_VALUE)
 						.addComponent(cmbDestination, 0, 138, Short.MAX_VALUE)
-						.addComponent(cmbPriority, 0, 164, Short.MAX_VALUE)
-						.addGroup(Alignment.TRAILING, gl_DataInputPanel.createParallelGroup(Alignment.TRAILING, false)
+						.addComponent(cmbPriority, 0, 138, Short.MAX_VALUE)
+ 				.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.TRAILING, false)
 							.addComponent(txtVolumeCost, Alignment.LEADING)
 							.addComponent(txtWeightCost, Alignment.LEADING)
 							.addComponent(txtRouteNumber, Alignment.LEADING)))
-					.addGap(27)
-					.addComponent(listOfExistingRoutes, GroupLayout.PREFERRED_SIZE, 211, GroupLayout.PREFERRED_SIZE)
-					.addGap(33))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 251, GroupLayout.PREFERRED_SIZE)
+							 .addContainerGap())
 		);
 		gl_DataInputPanel.setVerticalGroup(
 			gl_DataInputPanel.createParallelGroup(Alignment.LEADING)
@@ -367,13 +378,50 @@ public class CostModification extends JInternalFrame {
 							.addGroup(gl_DataInputPanel.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblPriority)
 								.addComponent(cmbPriority, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(gl_DataInputPanel.createSequentialGroup()
-							.addGap(19)
-							.addComponent(listOfExistingRoutes, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(35, Short.MAX_VALUE))
+								.addGroup(Alignment.TRAILING, gl_DataInputPanel.createSequentialGroup()
+								.addContainerGap()
+								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)))
+								.addContainerGap())
 		);
+		
+		listOfExistingRoutes.setLayoutOrientation(JList.VERTICAL);
+		 		listOfExistingRoutes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		 		listOfExistingRoutes.addMouseListener(new MouseAdapter() {
+		 
+		 			@Override
+		 			public void mouseClicked(MouseEvent arg0) {
+		 				if (listOfExistingRoutes.getSelectedValue() != null) {
+		 					Cost selected = null;
+		 					int ID = Integer.parseInt(listOfExistingRoutes.getSelectedValue().split(" ")[0]);
+		 					Map<String, Cost> costList = MainWindow.logic.eventProcessor.getCosts().costs;
+		 					for (Cost c: costList.values()) {
+		 						if (c.ID == ID) {
+		 							selected = c;
+		 							break;
+		 						}
+		 					}
+		 					if (selected != null) {
+		 						txtRouteNumber.setText(String.valueOf(selected.ID));
+		 						txtWeightCost.setText(String.valueOf(selected.weight));
+		 						txtVolumeCost.setText(String.valueOf(selected.volume));
+		 					}
+		 				}
+		 			}
+		 			
+		 		});
+		 		scrollPane.setViewportView(listOfExistingRoutes);
 		DataInputPanel.setLayout(gl_DataInputPanel);
 		getContentPane().setLayout(groupLayout);
+				updateList();
+		 	}
+		 	
+		 	private void updateList() {
+		 		DefaultListModel<String> list = new DefaultListModel<String>();
+		 		listOfExistingRoutes.setModel(list);
+		 		Map<String, Cost> costList = MainWindow.logic.eventProcessor.getCosts().costs;
+		 		for (Cost c: costList.values()) {
+		 			list.addElement(c.ID + " / From " + c.origin + " To " + c.destination);
+		 		}
 
 	}
 }

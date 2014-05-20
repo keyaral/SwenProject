@@ -28,8 +28,8 @@ public class EventLogManager {
 	private String getDetails(int index) {
 		if (eventProcesser.getEvents().isEmpty()) return "No events processed yet.";
 		KPEvent e = eventProcesser.getEvents().get(index);
-		String details = "Event " + index + "/" + maxIndex + "\n\n";
-
+		String details = "Event " + (index+1) + "/" + (maxIndex+1) + "\n\n";
+		
 		if (e.object instanceof Route) {
 			Route r = (Route)(e.object);
 			details += "Route no. " + r.ID + " ";

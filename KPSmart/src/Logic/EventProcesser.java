@@ -488,8 +488,6 @@ switch (type) {
 			currentStats.mails.add(m);
 			KPEvent event = new KPEvent(type, m, success, new Statistics((Statistics)currentStats.clone()));
 			events.add(event);
-			
-			
 			XmlWriter writer = new XmlWriter("file.xml");
 			writer.InsertKPEvent(new KPEvent(type, m, success, new Statistics((Statistics)currentStats.clone())));
 			
