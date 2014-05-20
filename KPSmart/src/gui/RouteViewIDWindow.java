@@ -193,6 +193,10 @@ public class RouteViewIDWindow extends JFrame {
 	//
 	private void fillTransportCost() {
 		if(currentRoute != null){
+		this.TC.cmbFrom.setSelectedIndex(TC.getDistributionCenIndex(currentRoute.origin));
+		this.TC.cmbTo.setSelectedIndex(TC.getDestinationIndex(currentRoute.destination));
+		this.TC.cmbCompany.setSelectedIndex(TC.getCompanyIndex(currentRoute.companyName ));
+		this.TC.cmbType.setSelectedIndex(currentRoute.priority);
 		this.TC.cmbDay.setSelectedItem(currentRoute.day);
 		this.TC.txtCostId.setText(Integer.toString(currentRoute.ID));
 		this.TC.txtDuration.setText(Double.toString(currentRoute.duration));
@@ -200,8 +204,8 @@ public class RouteViewIDWindow extends JFrame {
 		this.TC.txtMaxVolume.setText(Double.toString(currentRoute.maxVolume));
 		this.TC.txtMaxWeight.setText(Double.toString(currentRoute.maxWeight));
 		this.TC.txtVolumeCost.setText(Double.toString(currentRoute.costVolume));
-		this.TC.txtWeightCost_1.setText(Double.toString(currentRoute.costWeight));
-	//	this.TC.txtWeightCosts.setText(Double.toString(currentRoute.?));	TODO
+		//this.TC.txtWeightCost_1.setText(Double.toString(currentRoute.costWeight));
+		this.TC.txtWeightCosts.setText(Double.toString(currentRoute.costWeight));	
 		}
 	}
 	

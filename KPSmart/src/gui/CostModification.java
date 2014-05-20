@@ -116,6 +116,14 @@ public class CostModification extends JInternalFrame {
 		JButton btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if (cmbPriority.getSelectedItem() == null ||   
+						cmbOrigin.getSelectedItem() == null ||
+								cmbDestination.getSelectedItem() == null  )
+		{
+			JOptionPane.showMessageDialog(null,"Please enter all details required !",null, 1);
+		}
+				
+				
 				String priority=(String)cmbPriority.getSelectedItem();
 				String origin=(String)cmbOrigin.getSelectedItem();
 				String destination=(String)cmbDestination.getSelectedItem();
@@ -150,6 +158,14 @@ public class CostModification extends JInternalFrame {
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
+				if (cmbPriority.getSelectedItem() == null ||   
+								cmbOrigin.getSelectedItem() == null ||
+										cmbDestination.getSelectedItem() == null  )
+				{
+					JOptionPane.showMessageDialog(null,"Please enter all details required !",null, 1);
+				}
 				String priority=(String)cmbPriority.getSelectedItem();
 				String origin=(String)cmbOrigin.getSelectedItem();
 				String destination=(String)cmbDestination.getSelectedItem();
@@ -200,7 +216,7 @@ public class CostModification extends JInternalFrame {
 				
 				}else{
 					randomDestinationSelection(cmbDestination.getItemCount());
-					System.out.println("Test Data Loaded...");
+				//	System.out.println("Test Data Loaded...");
 				}
 				if (cmbOrigin.getItemCount()==0){
 					cmbOrigin.setSelectedIndex(-1);

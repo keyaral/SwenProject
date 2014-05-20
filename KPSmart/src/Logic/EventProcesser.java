@@ -26,9 +26,11 @@ public class EventProcesser {
 	CostListClass costs = new CostListClass();;
 	MailDelivery mailList = new MailDelivery();
 	ArrayList<KPEvent> events = new ArrayList<KPEvent>();
+	String fail = "";
 	
-
-
+	Cost tempCost = null;
+	Route tempRoute = null;
+	Mail tempMail = null;
 
 	
 	private String _xmlPath = "file.xml";
@@ -38,24 +40,64 @@ public class EventProcesser {
 
 	public EventProcesser(Statistics stats) {
 	
-	
-				
-			
-	//	for(Event a : k.getEvent()) events.add(a);
-	
 		currentStats = stats;
 		currentStats.setRouteList(routes);
 		
+		LoadpreviousEvents();
+		
+		
+	}
+	
+	
+	private void LoadpreviousEvents() {
+		
+		/**
+		 TODO Auto-generated method stub
+		
+		OPEN XML READER
+		
+		Get next event out reader. 
+		
+		String type = event.type() 
+		Object ob = event.object
+	    String[] tempArray = new String[] {""} ;
+		 
+		
+		if (o instanceof Route) {
+		tempRoute = (Route) ob;
+		if (type.equals("add") { addRoute(tempArray)   }
+		
+		elseif (type.equals("change") { changeRoute(tempArray)   }
+		
+		elseif (type.equals("delete") { discontineRoute(tempArray)   }
+		
+		else System.out.print("ROUTE EVENT FAIL"):
+		tempRoute =null;
+		}
+			
+			if (o instanceof Cost) {
+		tempCost = (Cost) ob;
+		if (type.equals("add") { addCost(tempArray)   }
+		
+		else if (type.equals("change") { changeCost(tempArray)   }
+		
+		else System.out.print("COST EVENT FAIL"):
+	    
+	    tempCost = null;
+	}
+				if (o instanceof Mail) {
+		tempMail = (Mail) ob;
+		if (type.equals("Send") { DeliverMail(tempArray)   }
+		
+		tempMail=null;
+		}
+		
+		
+		
+	*/	
 	}
 
-	
-	//Will read XML File and produce KP EVENTS.
-	
-	
-	
-	
-	
-	
+
 	public ArrayList<Destination> validOrigin(){
 
 		return null;
@@ -134,19 +176,22 @@ switch (type) {
  */
 
 		private String deliverMail(String[] details) throws CloneNotSupportedException {
+			Mail m;
 			
-		
-			Mail m = new Mail(details);
-		
+			if ( details.length == 0 ){
+				if (tempMail == null){ System.out.print( " no temp"); }
+				m = tempMail; }
+			
+			else  m = new Mail(details);
+			
+			
+			
+			if ( DomesticPriorityFailure(m.destination, m.origin, m.priority) )
+				return "Invalid Destination Orgin Priority Match ";
 			
 			mailList.assignDestinations(m);
-		
-			
 			Cost c = costs.findValidCost(m);
 			if (c==null){ return error(details, "No valid Cost"); }
-			
-
-			
 			RouteChain r = routes.findValidRoute(m);
 			if (r==null){ return error(details, "No valid Route"); }
 		
@@ -194,13 +239,23 @@ switch (type) {
 
 
 		private String changeCost(String[] details) throws CloneNotSupportedException {
-			Cost c = new Cost(details);
-
+		Cost c;
+			
+			if ( details.length == 0 ){
+				if (tempCost == null){ System.out.print( " no temp"); }
+				c = tempCost; }
+			
+			else  c = new Cost(details);
+			
 			if (! costs.contains(c) ) { return error(details, "Cost does not exist to change. Please consider adding"); }
 			
 			Boolean success = costs.changeCost(c);
 
 			if (success ){
+				if ( DomesticPriorityFailure(c.destination, c.origin, c.priority) )
+					return "Invalid Destination Orgin Priority Match ";	
+				
+				
 			addEvent("Change", success, c);
 			Log.Cost cost  = new Log.Cost();
 			LogCost(cost,c);
@@ -221,13 +276,25 @@ switch (type) {
 
 
 		private String addCost(String[] details) throws CloneNotSupportedException {
-			Cost c = new Cost(details);
+			Cost c;
+			
+			if ( details.length == 0 ){
+				if (tempCost == null){ System.out.print( " no temp"); }
+				c = tempCost; }
+			
+			
+			
+			c = new Cost(details);
+			
+			if ( DomesticPriorityFailure(c.destination, c.origin, c.priority) )
+				return "Invalid Destination Orgin Priority Match ";
 			Boolean success = costs.addCost(c);
 			
 
-
-			boolean neworigin = ! mailList.allDestinations.contains(c.origin);
-			boolean newdest = ! mailList.allDestinations.contains(c.destination);
+			System.out.println( mailList.containsDesString(c.origin));
+			System.out.println( mailList.containsDesString(c.destination));
+			boolean neworigin = ! mailList.containsDesString(c.origin);
+			boolean newdest = ! mailList.containsDesString(c.destination);
 
 			if (success) {
 				
@@ -278,13 +345,23 @@ switch (type) {
 
 
 		private String discontineRoute(String[] details) throws CloneNotSupportedException {
-			Route r = new Route(details);
+			Route r;
+			if (details.length == 0){
+				if (tempRoute == null){ System.out.print( " no temp"); }
+				r = tempRoute; }
+			else r = new Route(details);
+			
+			
+			
 			mailList.assignDestinations(r);
 			Boolean success = routes.deleteRoute(r);
 
 
 
 			if(success)	{
+				if ( DomesticPriorityFailure(r.destination, r.origin, r.priority) )
+					return "Invalid Destination Orgin Priority Match ";
+				
 				addEvent("Remove", success, r);
 				Log.Route route = new Log.Route();
 				LogRoute(route,r);
@@ -294,12 +371,21 @@ switch (type) {
 	}
 
 		private String changeRoute(String[] details) throws CloneNotSupportedException {
-
-			Route r = new Route(details);
+			Route r;
+			if (details.length == 0){ 
+				if (tempRoute == null){ System.out.print( " no temp"); }
+				r = tempRoute; }
+			else r = new Route(details);
+			
+			
 			mailList.assignDestinations(r);
 			Boolean success = routes.changeRoute(r);
 
 			if(success)	{
+				
+				if ( DomesticPriorityFailure(r.destination, r.origin, r.priority) )
+					return "Invalid Destination Orgin Priority Match ";
+				
 				addEvent("Change", success, r);
 				Log.Route route = new Log.Route();
 				LogRoute(route,r);
@@ -312,7 +398,15 @@ switch (type) {
 	}
 
 		private String addRoute(String[] details) throws CloneNotSupportedException {
-			Route r = new Route(details);
+			Route r;
+			if (details.length == 0){
+				if (tempRoute == null){ System.out.print( " no temp"); }
+				r = tempRoute; }
+			else r = new Route(details);
+			
+			if ( DomesticPriorityFailure(r.destination, r.origin, r.priority) )
+				return "Invalid Destination Orgin Priority Match ";
+			
 			mailList.assignDestinations(r);
 			Boolean success = routes.addRoute(r);
 
@@ -356,7 +450,7 @@ switch (type) {
 	private boolean checkDetails(String[] values, String type) throws Exception {
 
 		if (type.equals("0")) {
-			try {
+		
 				int ID = Integer.parseInt(values[1]);
 				String destination = (values[2]);
 				String origin = (values[3]);
@@ -370,18 +464,13 @@ switch (type) {
 				int duration = Integer.parseInt(values[11]);
 				String companyName = (values[12]);
 				if (destination == null || origin == null || day == null
-						|| companyName == null)
-					throw new Exception(
-							"Null Values Entered in route adding - strings");
+						|| companyName == null) { 
+					fail = " Null Values Entered in route adding - strings"; }
 
 				if ( DomesticPriorityFailure( destination, origin, priority) )
-					throw new Exception(
-							"Invalid Destination Orgin Priority Match ");
+					fail ="Invalid Destination Orgin Priority Match ";
 
-			} catch (Exception e) {
-				throw new Exception(
-						"Null Values Entered in route adding - ints");
-			}
+			
 		}
 		if (type.equals("1")) {
 			try {

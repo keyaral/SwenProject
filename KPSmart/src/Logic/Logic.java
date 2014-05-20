@@ -13,7 +13,7 @@ public class Logic {
 		eventProcessor = new EventProcesser(new Statistics());
 		
 		
-	setupBaseEvents();
+	//setupBaseEvents();
 	
 		
 		
@@ -21,7 +21,7 @@ public class Logic {
 	//	processform( new String[] {"0","21125","Wellington", "Rotarua","0.2","0.5","200","200","2","Tuesday", "1", "2","KpStart"} );
 		
 		
-		testMethod();
+	//	testMethod();
 	}
 	
 	

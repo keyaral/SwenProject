@@ -9400,6 +9400,224 @@
             <success>true</success>
             <mails/>
         </Event>
+        <Event>
+            <type>Add</type>
+            <cost>
+                <priority>4</priority>
+                <destination>Palmerston North</destination>
+                <origin>Hamilton</origin>
+                <id>139</id>
+                <weight>83.0</weight>
+                <volume>42.0</volume>
+            </cost>
+            <success>true</success>
+            <mails/>
+        </Event>
+        <Event>
+            <type>Add</type>
+            <cost>
+                <priority>2</priority>
+                <destination>Rotarua</destination>
+                <origin>Dunedin</origin>
+                <id>883</id>
+                <weight>14.0</weight>
+                <volume>7.0</volume>
+            </cost>
+            <success>true</success>
+            <mails/>
+        </Event>
+        <Event>
+            <type>Add</type>
+            <cost>
+                <priority>1</priority>
+                <destination>Palmerston North</destination>
+                <origin>Dunedin</origin>
+                <id>988</id>
+                <weight>55.0</weight>
+                <volume>27.0</volume>
+            </cost>
+            <success>true</success>
+            <mails/>
+        </Event>
+        <Event>
+            <type>Add</type>
+            <cost>
+                <priority>1</priority>
+                <destination>Palmerston North</destination>
+                <origin>Dunedin</origin>
+                <id>584</id>
+                <weight>86.0</weight>
+                <volume>43.0</volume>
+            </cost>
+            <success>true</success>
+            <mails/>
+        </Event>
+        <Event>
+            <type>Add</type>
+            <route>
+                <id>38</id>
+                <destination>Hamilton</destination>
+                <origin>Auckland</origin>
+                <maxWeight>78.0</maxWeight>
+                <maxVolume>156.0</maxVolume>
+                <priority>0</priority>
+                <day>Monday</day>
+                <frequency>108.0</frequency>
+                <duration>54.0</duration>
+                <companyName>Test Company</companyName>
+                <costWeight>38.0</costWeight>
+                <costVolume>76.0</costVolume>
+            </route>
+            <success>true</success>
+            <mails/>
+        </Event>
+        <Event>
+            <type>Add</type>
+            <route>
+                <id>43</id>
+                <destination>Palmerston North</destination>
+                <origin>Christ Church</origin>
+                <maxWeight>82.0</maxWeight>
+                <maxVolume>164.0</maxVolume>
+                <priority>0</priority>
+                <day>Saturday</day>
+                <frequency>188.0</frequency>
+                <duration>94.0</duration>
+                <companyName>Test Company</companyName>
+                <costWeight>55.0</costWeight>
+                <costVolume>110.0</costVolume>
+            </route>
+            <success>true</success>
+            <mails/>
+        </Event>
+        <Event>
+            <type>Add</type>
+            <cost>
+                <priority>4</priority>
+                <destination>Christchuch</destination>
+                <origin>Dunedin</origin>
+                <id>388</id>
+                <weight>4.0</weight>
+                <volume>2.0</volume>
+            </cost>
+            <success>true</success>
+            <mails/>
+        </Event>
+        <Event>
+            <type>Add</type>
+            <route>
+                <id>70</id>
+                <destination>Rotarua</destination>
+                <origin>Wellington</origin>
+                <maxWeight>84.0</maxWeight>
+                <maxVolume>168.0</maxVolume>
+                <priority>0</priority>
+                <day>Thursday</day>
+                <frequency>140.0</frequency>
+                <duration>70.0</duration>
+                <companyName>Test Company</companyName>
+                <costWeight>35.0</costWeight>
+                <costVolume>70.0</costVolume>
+            </route>
+            <success>true</success>
+            <mails/>
+        </Event>
+        <Event>
+            <type>Add</type>
+            <cost>
+                <priority>1</priority>
+                <destination>Rotarua</destination>
+                <origin>Wellington</origin>
+                <id>720</id>
+                <weight>61.0</weight>
+                <volume>31.0</volume>
+            </cost>
+            <success>true</success>
+            <mails/>
+        </Event>
+        <Event>
+            <type>Add</type>
+            <route>
+                <id>35</id>
+                <destination>Palmerston North</destination>
+                <origin>Rotorua</origin>
+                <maxWeight>23.0</maxWeight>
+                <maxVolume>46.0</maxVolume>
+                <priority>2</priority>
+                <day>Friday</day>
+                <frequency>72.0</frequency>
+                <duration>36.0</duration>
+                <companyName>Test Company</companyName>
+                <costWeight>89.0</costWeight>
+                <costVolume>178.0</costVolume>
+            </route>
+            <success>true</success>
+            <mails/>
+        </Event>
+        <Event>
+            <type>Add</type>
+            <route>
+                <id>62</id>
+                <destination>Dunedin</destination>
+                <origin>Palmerston North</origin>
+                <maxWeight>1.0</maxWeight>
+                <maxVolume>2.0</maxVolume>
+                <priority>0</priority>
+                <day>Tuesday</day>
+                <frequency>188.0</frequency>
+                <duration>94.0</duration>
+                <companyName>Test Company</companyName>
+                <costWeight>96.0</costWeight>
+                <costVolume>192.0</costVolume>
+            </route>
+            <success>true</success>
+            <mails/>
+        </Event>
+        <Event>
+            <type>Change</type>
+            <route>
+                <id>62</id>
+                <destination>Dunedin</destination>
+                <origin>Palmerston North</origin>
+                <maxWeight>1.0</maxWeight>
+                <maxVolume>2.0</maxVolume>
+                <priority>0</priority>
+                <day>Tuesday</day>
+                <frequency>188.0</frequency>
+                <duration>94.0</duration>
+                <companyName>Test Company</companyName>
+                <costWeight>96.0</costWeight>
+                <costVolume>192.0</costVolume>
+            </route>
+            <success>true</success>
+            <mails/>
+        </Event>
+        <Event>
+            <type>Add</type>
+            <cost>
+                <priority>2</priority>
+                <destination>Auckland</destination>
+                <origin>Wellington</origin>
+                <id>893</id>
+                <weight>50.0</weight>
+                <volume>25.0</volume>
+            </cost>
+            <success>true</success>
+            <mails/>
+        </Event>
+        <Event>
+            <type>Change</type>
+            <cost>
+                <priority>2</priority>
+                <destination>Auckland</destination>
+                <origin>Wellington</origin>
+                <id>893</id>
+                <weight>50.0</weight>
+                <volume>25.0</volume>
+            </cost>
+            <success>true</success>
+            <mails/>
+        </Event>
     </KPEvents>
     <cost>
         <priority>1</priority>
@@ -15767,4 +15985,152 @@
         <costWeight>6.0</costWeight>
         <costVolume>0.4</costVolume>
     </route>
+    <cost>
+        <priority>4</priority>
+        <destination>Palmerston North</destination>
+        <origin>Hamilton</origin>
+        <id>139</id>
+        <weight>83.0</weight>
+        <volume>42.0</volume>
+    </cost>
+    <cost>
+        <priority>2</priority>
+        <destination>Rotarua</destination>
+        <origin>Dunedin</origin>
+        <id>883</id>
+        <weight>14.0</weight>
+        <volume>7.0</volume>
+    </cost>
+    <cost>
+        <priority>1</priority>
+        <destination>Palmerston North</destination>
+        <origin>Dunedin</origin>
+        <id>988</id>
+        <weight>55.0</weight>
+        <volume>27.0</volume>
+    </cost>
+    <cost>
+        <priority>1</priority>
+        <destination>Palmerston North</destination>
+        <origin>Dunedin</origin>
+        <id>584</id>
+        <weight>86.0</weight>
+        <volume>43.0</volume>
+    </cost>
+    <route>
+        <id>38</id>
+        <destination>Hamilton</destination>
+        <origin>Auckland</origin>
+        <maxWeight>78.0</maxWeight>
+        <maxVolume>156.0</maxVolume>
+        <priority>0</priority>
+        <day>Monday</day>
+        <frequency>108.0</frequency>
+        <duration>54.0</duration>
+        <companyName>Test Company</companyName>
+        <costWeight>38.0</costWeight>
+        <costVolume>76.0</costVolume>
+    </route>
+    <route>
+        <id>43</id>
+        <destination>Palmerston North</destination>
+        <origin>Christ Church</origin>
+        <maxWeight>82.0</maxWeight>
+        <maxVolume>164.0</maxVolume>
+        <priority>0</priority>
+        <day>Saturday</day>
+        <frequency>188.0</frequency>
+        <duration>94.0</duration>
+        <companyName>Test Company</companyName>
+        <costWeight>55.0</costWeight>
+        <costVolume>110.0</costVolume>
+    </route>
+    <cost>
+        <priority>4</priority>
+        <destination>Christchuch</destination>
+        <origin>Dunedin</origin>
+        <id>388</id>
+        <weight>4.0</weight>
+        <volume>2.0</volume>
+    </cost>
+    <route>
+        <id>70</id>
+        <destination>Rotarua</destination>
+        <origin>Wellington</origin>
+        <maxWeight>84.0</maxWeight>
+        <maxVolume>168.0</maxVolume>
+        <priority>0</priority>
+        <day>Thursday</day>
+        <frequency>140.0</frequency>
+        <duration>70.0</duration>
+        <companyName>Test Company</companyName>
+        <costWeight>35.0</costWeight>
+        <costVolume>70.0</costVolume>
+    </route>
+    <cost>
+        <priority>1</priority>
+        <destination>Rotarua</destination>
+        <origin>Wellington</origin>
+        <id>720</id>
+        <weight>61.0</weight>
+        <volume>31.0</volume>
+    </cost>
+    <route>
+        <id>35</id>
+        <destination>Palmerston North</destination>
+        <origin>Rotorua</origin>
+        <maxWeight>23.0</maxWeight>
+        <maxVolume>46.0</maxVolume>
+        <priority>2</priority>
+        <day>Friday</day>
+        <frequency>72.0</frequency>
+        <duration>36.0</duration>
+        <companyName>Test Company</companyName>
+        <costWeight>89.0</costWeight>
+        <costVolume>178.0</costVolume>
+    </route>
+    <route>
+        <id>62</id>
+        <destination>Dunedin</destination>
+        <origin>Palmerston North</origin>
+        <maxWeight>1.0</maxWeight>
+        <maxVolume>2.0</maxVolume>
+        <priority>0</priority>
+        <day>Tuesday</day>
+        <frequency>188.0</frequency>
+        <duration>94.0</duration>
+        <companyName>Test Company</companyName>
+        <costWeight>96.0</costWeight>
+        <costVolume>192.0</costVolume>
+    </route>
+    <route>
+        <id>62</id>
+        <destination>Dunedin</destination>
+        <origin>Palmerston North</origin>
+        <maxWeight>1.0</maxWeight>
+        <maxVolume>2.0</maxVolume>
+        <priority>0</priority>
+        <day>Tuesday</day>
+        <frequency>188.0</frequency>
+        <duration>94.0</duration>
+        <companyName>Test Company</companyName>
+        <costWeight>96.0</costWeight>
+        <costVolume>192.0</costVolume>
+    </route>
+    <cost>
+        <priority>2</priority>
+        <destination>Auckland</destination>
+        <origin>Wellington</origin>
+        <id>893</id>
+        <weight>50.0</weight>
+        <volume>25.0</volume>
+    </cost>
+    <cost>
+        <priority>2</priority>
+        <destination>Auckland</destination>
+        <origin>Wellington</origin>
+        <id>893</id>
+        <weight>50.0</weight>
+        <volume>25.0</volume>
+    </cost>
 </Log>

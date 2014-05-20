@@ -41,7 +41,10 @@ public class MailDelivery {
 		
 		allDestinations.addAll(nzDestinations);
 		
-		
+		for (Destination d : allDestinations ){
+			
+			System.out.print(d.getName());
+		}
 		
 		// TODO Auto-generated constructor stub
 	}
@@ -167,6 +170,15 @@ public class MailDelivery {
 		
 	}
 
+
+	public Boolean containsDesString(String des) {
+		Boolean dom = false;
+		for (Destination d :allDestinations ) {
+			if ( des.equals(d.getName()) ) {
+				return true;  }
+	}
+	return false;
+	}
 
 
 	

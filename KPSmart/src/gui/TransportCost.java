@@ -32,13 +32,13 @@ public class TransportCost extends JInternalFrame {
 	public Logic l;
 	private static final long serialVersionUID = 1L;
 	@SuppressWarnings("rawtypes")
-	private JComboBox cmbCompany;
+	public JComboBox cmbCompany;
 
 	@SuppressWarnings("rawtypes")
-	private JComboBox cmbTo;
+	public JComboBox cmbTo;
 
 	@SuppressWarnings("rawtypes")
-	private JComboBox cmbFrom;
+	public JComboBox cmbFrom;
 
 	@SuppressWarnings("rawtypes")
 	public JComboBox cmbType;
@@ -56,6 +56,11 @@ public class TransportCost extends JInternalFrame {
 	private JButton btnSave;
 	private JButton btnChange;
 	private JButton btnDelete;
+	
+	String[] companyA={"Test Company"};
+	String[] destinations= {"new"};
+	String[] distributionCenters={"Auckland","Hamilton","Rotorua","Palmerston North","Wellington","Christ Church","Dunedin"};
+	
 	//Generate Random ID
 	private void generateRandomId(int rnd){
 		Random random=new Random();
@@ -164,6 +169,16 @@ public class TransportCost extends JInternalFrame {
 		btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				if (cmbCompany.getSelectedItem() == null ||   
+						cmbTo.getSelectedItem().toString()==null ||	
+								cmbFrom.getSelectedItem().toString() == null ||
+								cmbDay.getSelectedItem().toString() == null ||
+										cmbType.getSelectedItem().toString() == null  )
+				{
+					JOptionPane.showMessageDialog(null,"Please enter all details required !",null, 1);
+				}
+				
 				String company=(String)cmbCompany.getSelectedItem();
 				String to=(String)cmbTo.getSelectedItem().toString();
 				String from=(String)cmbFrom.getSelectedItem().toString();
@@ -292,12 +307,22 @@ public class TransportCost extends JInternalFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				int dialogButton = JOptionPane.YES_NO_OPTION;
+				
+				if (cmbCompany.getSelectedItem() == null ||   
+						cmbTo.getSelectedItem().toString()==null ||	
+								cmbFrom.getSelectedItem().toString() == null ||
+								cmbDay.getSelectedItem().toString() == null ||
+										cmbType.getSelectedItem().toString() == null  )
+				{
+					JOptionPane.showMessageDialog(null,"Please enter all details required !",null, 1);
+				}
 				String company=(String)cmbCompany.getSelectedItem();
 				String to=(String)cmbTo.getSelectedItem().toString();
 				String from=(String)cmbFrom.getSelectedItem().toString();
 				String day=(String)cmbDay.getSelectedItem().toString();
 				String priority=(String)cmbType.getSelectedItem().toString();
-				int dialogButton = JOptionPane.YES_NO_OPTION;
+				
 				if (txtCostId.getText().equals("")
 						||company.equals("")
 						|| to.equals("")
@@ -362,6 +387,16 @@ public class TransportCost extends JInternalFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				if (cmbCompany.getSelectedItem() == null ||   
+						cmbTo.getSelectedItem().toString()==null ||	
+								cmbFrom.getSelectedItem().toString() == null ||
+								cmbDay.getSelectedItem().toString() == null ||
+										cmbType.getSelectedItem().toString() == null  )
+				{
+					JOptionPane.showMessageDialog(null,"Please enter all details required !",null, 1);
+				}
+				
 				String company=(String)cmbCompany.getSelectedItem();
 				String to=(String)cmbTo.getSelectedItem().toString();
 				String from=(String)cmbFrom.getSelectedItem().toString();
@@ -482,14 +517,13 @@ public class TransportCost extends JInternalFrame {
 
 		JLabel lblDay = new JLabel("Day");
 
-		String[] company={"Test Company"};
-		cmbCompany = new JComboBox(company);
+		
+		cmbCompany = new JComboBox(companyA);
 
-		String[] destinations   =MainWindow.logic.getDestinations();
+		destinations   =MainWindow.logic.getDestinations();
 		//TODO ={"Rome","Sydney","London","New York","Singapore","Japan","Manila","Fiji","Hawaii","Moscow"};
 		cmbTo = new JComboBox(destinations);
-		String[] distributionCenters={"Auckland","Hamilton","Rotorua","Palmerston North","Wellington","Christ Church","Dunedin"};
-		cmbFrom = new JComboBox(distributionCenters);
+			cmbFrom = new JComboBox(distributionCenters);
 		String [] priority={"Domestic Standard","Domestic Air","International Standard Priority", "International Air",};
 		cmbType = new JComboBox(priority);
 
@@ -752,4 +786,34 @@ public class TransportCost extends JInternalFrame {
 		btnClearFields.setEnabled(enabled);
 		cmbCompany.setEnabled(enabled);
 	}
+	
+	public int getDestinationIndex(String des){
+		for (int i =0; i < destinations.length; i++) {
+			if ( destinations[i].equals(des)){
+				return i;
+			}
+		}
+		 return -1;
+		
+	}
+	public int getDistributionCenIndex(String des){
+		for (int i =0; i < distributionCenters.length; i++) {
+			if ( distributionCenters[i].equals(des)){
+				return i;
+			}
+		}
+		 return -1;
+		
+	}
+	
+	public int getCompanyIndex(String companyName) {
+		// TODO Auto-generated method stub
+	
+		for (int i =0; i < companyA.length; i++)
+			if ( companyA[i].equals(companyName)){
+				return i;
+			}
+		return -1;
+	}
+	
 }
