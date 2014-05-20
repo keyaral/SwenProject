@@ -68,7 +68,7 @@ public ArrayList<Destination> validDestinations(){
 
 
 	public String proccess(String[] details) throws Exception {
-System.out.println( details);
+
 //  checkDetails( details, details[0]);
 		int type = Integer.parseInt(details[0]);
 		Boolean safe = false;
@@ -135,21 +135,21 @@ switch (type) {
 
 		private String deliverMail(String[] details) throws CloneNotSupportedException {
 			
-			System.out.println("open cost delivery" );
+		
 			Mail m = new Mail(details);
-			System.out.println("made mail" );
+		
 			
 			mailList.assignDestinations(m);
-			System.out.println("assignRoutes" );
+		
 			
 			Cost c = costs.findValidCost(m);
 			if (c==null){ return error(details, "No valid Cost"); }
-			System.out.println(" Costs " + c.ID);
+			
 
 			
 			RouteChain r = routes.findValidRoute(m);
 			if (r==null){ return error(details, "No valid Route"); }
-			System.out.println(" Routes " +r.gettotalduration() );
+		
 			
 			
 			
@@ -230,7 +230,7 @@ switch (type) {
 			boolean newdest = ! mailList.allDestinations.contains(c.destination);
 
 			if (success) {
-				System.out.println(" Added success " + c.ID );	
+				
 				
 				addEvent("Add", success, c);
 				Log.Cost cost  = new Log.Cost();
@@ -386,13 +386,29 @@ switch (type) {
 		if (type.equals("1")) {
 			try {
 				int ID = Integer.parseInt(values[1]);
+				String destination = (values[2]);
+				String origin = (values[3]);
 				int costWeight = Integer.parseInt(values[4]);
 				int costVolume = Integer.parseInt(values[5]);
+				int maxWeight = Integer.parseInt(values[6]);
+				int maxVolume = Integer.parseInt(values[7]);
+				int priority = Integer.parseInt(values[8]);
+				String day = (values[9]);
+				int frequency = Integer.parseInt(values[10]);
+				int duration = Integer.parseInt(values[11]);
+				String companyName = (values[12]);
+				if (destination == null || origin == null || day == null
+						|| companyName == null)
+					throw new Exception(
+							"Null Values Entered in route adding - strings");
 
-
+				if ( DomesticPriorityFailure( destination, origin, priority) )
+					throw new Exception(
+							"Invalid Destination Orgin Priority Match ");
 
 			} catch (Exception e) {
-				throw new Exception("Error in entering an ID or cost values");
+				throw new Exception(
+						"Null Values Entered in route adding - ints");
 			}
 		}
 		if (type.equals("2")) {

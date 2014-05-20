@@ -61,7 +61,7 @@ public class Mail {
 
 	@SuppressWarnings("deprecation")
 	public Mail(String[] values) {
-	System.out.println(values[6]);
+
 		this.ID = Integer.parseInt(values[1]);
 		this.destination = (values[2]);
 		this.origin = (values[3]);

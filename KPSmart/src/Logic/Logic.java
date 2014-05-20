@@ -13,26 +13,20 @@ public class Logic {
 		eventProcessor = new EventProcesser(new Statistics());
 		
 		
-	//setupBaseEvents();
+	setupBaseEvents();
 	
-		System.out.print( " CAN HAS TEST");
+		
 		
 		//processform( new String[] {"3","1234","0.3","0.5","Wellington", "Rotarua","2"} );
 	//	processform( new String[] {"0","21125","Wellington", "Rotarua","0.2","0.5","200","200","2","Tuesday", "1", "2","KpStart"} );
 		
-		System.out.println(" THIS SHOULD WORK~~" + 	processform( new String[] {"5","415126","Wellington", "Rotarua","8","10","1", "10-17-2014"} ) );	
 		
 		testMethod();
 	}
 	
 	
 	private void testMethod() {
-		// TODO Auto-generated method stub
 		
-		eventProcessor.getStats().printAll();
-	eventProcessor.getMailList().printAll();
-	eventProcessor.getRoutes().printAll();
-	eventProcessor.getCosts().printAll();
 		
 		
 	}
@@ -48,7 +42,7 @@ public class Logic {
 	//	eventProcessor.addRoute(routeTest1)
 		
 		
-		System.out.println("Costs start ");
+		
 		processform( new String[] {"3","1234","0.3","0.5","Wellington", "Auckland","1"} );
 		processform( new String[] {"3","1235","0.3","0.5","Wellington", "Dunedin","1"} );
 		processform( new String[] {"3","1236","0.3","0.5","Wellington", "Rotarua","1"} );
@@ -155,7 +149,6 @@ public class Logic {
 		processform( new String[] {"3","217238","0.3","0.5","Hamilton", "Christchuch","2"} );
 		processform( new String[] {"3","217240","0.3","0.5","Hamilton", "Palmerston North","2"} );
 		
-		System.out.println("Costs done ");
 		
 
 		
@@ -252,7 +245,7 @@ public class Logic {
 		
 		
 		
-		System.out.println("routes done ");
+		
 		
 //
 //		System.out.println(	processform( new String[] {"5","115126","Rotarua", "Auckland","8","10","1", "10-17-2014"} ) );	

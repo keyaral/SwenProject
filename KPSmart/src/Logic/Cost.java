@@ -12,7 +12,7 @@ public class Cost {
 	
 	
 	public Cost(String[] values) {
-		System.out.println(values[6]);
+		
 		this.ID = Integer.parseInt(values[1]);
 		this.weight = Double.parseDouble(values[2]);
 		this.volume = Double.parseDouble(values[3]);

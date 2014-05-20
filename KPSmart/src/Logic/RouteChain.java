@@ -37,15 +37,7 @@ public class RouteChain {
 		else return false;
 	}
 	
-	public void PrintAllRoutes(){		//Testing Purposes
-		System.out.println("Route Option");
-		int count = 1;
-		for(Route r : routes){
-		System.out.println("Step "+count+": "+r.originD.getName()+" to: "+r.destinationD.getName());
-		count++;
-		}
-	}
-	
+
 	
 	public double gettotalduration(){
   double totalduration = 0;

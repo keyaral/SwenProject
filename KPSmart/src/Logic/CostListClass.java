@@ -50,13 +50,13 @@ public class CostListClass {
 
 	public Boolean addCost(Cost c){
 		Boolean exists = false;
-		System.out.println( "totl size " + costs.values().size() );
+		
 		for(Cost a : costs.values()){
 			
-			System.out.println(" Exists" + a.ID);
+		
 			if(a.ID == c.ID) exists = true;	
 		}
-		if(exists == true){ System.out.println("Already Exists"); return false;}
+		if(exists == true){ return false;}
 		else{
 			String name = c.origin+c.priority+c.destination;
 			costs.put(name, c); return true;}
@@ -82,8 +82,7 @@ public class CostListClass {
 
 	public Cost findValidCost(Mail m) {
 		String query = m.origin+m.priority+m.destination;
-		System.out.println(" THIS SHOULD WORK~~ query" + query );	
-		System.out.println(" THIS SHOULD WORK~~ contains query" + costs.containsKey( query ) );	 
+		 
 		Cost c = costs.get(query);
 		
 		if (c == null) return null;
@@ -98,20 +97,6 @@ public class CostListClass {
 
 
 
-	public void printAll() {
-		
-		
-		
-		System.out.println (" Cost LIST ");
-		Cost c;
-		for (String s : costs.keySet() ){
-			 c = costs.get(s);
-			 if (c == null) {System.out.println (s + " Print cost ERROR  ");}
-				
-			 else 	System.out.println (s+" "+ c.destination +" "+ c.origin +" "+ c.priority);
-			
-		}	// TODO Auto-generated method stub
-		
-	}
+
 	
 }

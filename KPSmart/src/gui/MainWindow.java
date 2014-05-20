@@ -230,7 +230,7 @@ public class MainWindow extends JFrame{
 				TransportCost t = createTransportCostUpdate(); 
 				desktopPane.add(t);
 				t.show();
-			}
+			}	
 				
 			}
 			
