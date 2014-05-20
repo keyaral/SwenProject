@@ -43,6 +43,7 @@ public class MainWindow extends JFrame{
 	public static final BusinessMonitoring bMonitoring = new BusinessMonitoring();
 	public static final Logic logic = new Logic();
 	 private final Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+	 
 	public MainWindow() {
 		super("KPSmart");
 		this.setExtendedState(MAXIMIZED_BOTH);
@@ -226,9 +227,9 @@ public class MainWindow extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 			if (transportCostUpdate==null || transportCostUpdate.isClosable()){ //only one instance to managerWindow
-				transportCostUpdate= new TransportCost();
-				desktopPane.add(transportCostUpdate);
-				transportCostUpdate.show();
+				TransportCost t = createTransportCostUpdate(); 
+				desktopPane.add(t);
+				t.show();
 			}
 				
 			}
@@ -280,6 +281,10 @@ public class MainWindow extends JFrame{
 		
 					
 	}
+	protected TransportCost createTransportCostUpdate() {
+		return new TransportCost(this.logic);
+	}
+
 	public static void main (String[] args) {
 		new MainWindow();
 		
