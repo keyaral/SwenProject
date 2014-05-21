@@ -150,10 +150,11 @@ public class RouteListClass implements Cloneable{
 		return currentRoutes;
 	}	
 	
-	public ArrayList<Route> findCriticalRoutes(double averageCost){
-		ArrayList<Route> criticalRoutes = new ArrayList<Route>();
+	public HashMap<Route, Double> findCriticalRoutes(ArrayList<Cost> customerCosts){
+		HashMap<Route,Double> criticalRoutes = new HashMap<Route,Double>();
 		for(Route r : this.routes){
-			if( r.isCritical(averageCost)) criticalRoutes.add(r);
+			for(Cost c: customerCosts){
+			if(c.origin.equals(r.origin) && c.destination.equals(r.destination))if( r.isCritical(c)) {criticalRoutes.put(r, (r.costVolume*r.costWeight)-(c.volume*c.weight));}}
 		}
 		return criticalRoutes;
 	}

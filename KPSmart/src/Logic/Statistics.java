@@ -130,12 +130,15 @@ public class Statistics implements Cloneable{
 		for (Mail mail: mails) {
 			total += mail.cost;
 		}
-		ArrayList<Route> criticalRoutes = routes.findCriticalRoutes(total/mails.size());
-		List<String[]> routes = new ArrayList<String[]>();
-		for (Route cr: criticalRoutes) {
-			routes.add(new String[] {cr.destination, cr.origin, String.valueOf(cr.priority)});
+		double average = total/mails.size();
+		ArrayList<Cost> costs = null;	//TODO
+		HashMap<Route,Double> criticalRoutes = routes.findCriticalRoutes(costs);
+		List<String[]> finalRoutes = new ArrayList<String[]>();
+		for (Route cr: criticalRoutes.keySet()) {
+			finalRoutes.add(new String[] {cr.destination, cr.origin, String.valueOf(cr.priority)});
+		
 		}
-		return routes;
+		return finalRoutes;
 	}
 
 	/* (non-Javadoc)

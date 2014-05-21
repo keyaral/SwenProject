@@ -33,7 +33,7 @@ public class RouteChain {
 	
 	public Boolean isCritical(Mail m){
 		double cost = calculateCost(m);
-		if(cost >= (m.cost*3)) return true;
+		if(cost >= (m.cost)) return true;
 		else return false;
 	}
 	
