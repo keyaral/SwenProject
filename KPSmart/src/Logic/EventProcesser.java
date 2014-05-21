@@ -62,9 +62,9 @@ public class EventProcesser {
 			Boolean isSuccess = e.isSuccess();
 			Object obj = e.getCostOrMailOrRoute().get(0);
 			
-			addXMLevent(type, obj);
-		//	KPEvent kpe = new KPEvent(type,obj,isSuccess,null);
-		//	events.add(kpe);
+		//	addXMLevent(type, obj);
+			KPEvent kpe = new KPEvent(type,obj,isSuccess,null);
+			events.add(kpe);
 		}
 		
 	}
@@ -83,12 +83,12 @@ public class EventProcesser {
 		
 		if (ob instanceof Cost) {
 		tempCost = (Cost) ob;
-		if (type.equals("add") ) { 
+		if (type.equals("Add") ) { 
 			addCost(tempArray);
 		}
 		
 		
-		else if (type.equals("change") ) { changeCost(tempArray);   }
+		else if (type.equals("Change") ) { changeCost(tempArray);   }
 		
 		else System.out.print("COST EVENT FAIL");
 	    
@@ -106,7 +106,7 @@ public class EventProcesser {
 		
 		if (ob instanceof Route) {
 			tempRoute = (Route) ob;
-			if (type.equals("add") ) { 
+			if (type.equals("Add") ) { 
 				addRoute(tempArray);
 			}
 			

@@ -95,7 +95,6 @@ public class EventLogManager {
 			return new String[] {"0","0","0"};
 		}
 		Statistics s = eventProcesser.getEvents().get(index).statistics;
-		System.out.println(eventProcesser.getEvents().get(index) );
 		String[] stats = {String.valueOf(s.revenue()), String.valueOf(s.expenditure()), String.valueOf(s.events())};
 		return stats;
 	}
