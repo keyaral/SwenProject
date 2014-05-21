@@ -28,13 +28,13 @@ public class Logic {
 	
 	private void setupDestinationXY(ArrayList<Destination> allDestinations) {
 		for(Destination d: allDestinations){
-			if(d.getName().equals("Auckland")){d.GeographicalX = 200; d.GeographicalY = 200;}
-			if(d.getName().equals("Wellington")){d.GeographicalX = 160; d.GeographicalY = 400;}
-			if(d.getName().equals("Dunedin")){d.GeographicalX = 230; d.GeographicalY = 650;}
-			if(d.getName().equals("Rotarua")){d.GeographicalX = 180; d.GeographicalY = 300;}
-			if(d.getName().equals("Palmerston North")){d.GeographicalX = 190; d.GeographicalY = 350;}
-			if(d.getName().equals("Christchuch")){d.GeographicalX = 240; d.GeographicalY = 600;}		//TODO fix spelling of CCH and RotoRua
-			if(d.getName().equals("Hamilton")){d.GeographicalX = 190; d.GeographicalY = 250;}
+			if(d.getName().equals("Auckland")){d.GeographicalX = 200; d.GeographicalY = 100;}
+			if(d.getName().equals("Wellington")){d.GeographicalX = 160; d.GeographicalY = 200;}
+			if(d.getName().equals("Dunedin")){d.GeographicalX = 230; d.GeographicalY = 400;}
+			if(d.getName().equals("Rotarua")){d.GeographicalX = 180; d.GeographicalY = 150;}
+			if(d.getName().equals("Palmerston North")){d.GeographicalX = 190; d.GeographicalY = 180;}
+			if(d.getName().equals("Christchuch")){d.GeographicalX = 240; d.GeographicalY = 350;}		//TODO fix spelling of CCH and RotoRua
+			if(d.getName().equals("Hamilton")){d.GeographicalX = 190; d.GeographicalY = 120;}
 				//TODOD figure out international destinations
 		}
 		

@@ -111,7 +111,8 @@ public class RouteViewIDWindow extends JFrame {
 		textField.setBounds(10, 400, 450, 20);
 		scrollPanel.add(textField);
 		textField.setColumns(10);
-	
+		textField.setEditable(false);
+		
 		this.canvas = new Canvas(){
 		@Override
 		public void paint(Graphics g){
@@ -142,6 +143,7 @@ public class RouteViewIDWindow extends JFrame {
 		scrollPanel.add(canvas);
 		
 		populateTextArea(textArea);
+		textArea.setEditable(false);
 	}
 
 	private void updateCurrent(String text) {
@@ -172,7 +174,7 @@ public class RouteViewIDWindow extends JFrame {
 	private void populateTextArea(JTextArea textArea) {
 		int count = 0;
 		for(Route r : routes){
-			String Line = "ID: "+r.ID+" Assigned to: "+r.origin+" to "+r.destination;
+			String Line = "ID: "+r.ID+" Assigned to: "+r.origin+" to "+r.destination+" - Priority: "+r.priority;
 			selectableRoutes.put(count,Line);
 			if(count == 0)textArea.setText(Line);
 			if(count != 0)textArea.setText(textArea.getText()+"\n"+Line);
