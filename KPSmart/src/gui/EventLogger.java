@@ -178,6 +178,10 @@ public class EventLogger extends JInternalFrame{
 		btnGoTo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String text = goTo.getText();
+				if (text.equals("0")) {
+					displayErrorMessage("Event index destination cannot be 0.");
+					return;
+				}
 				for (int i = 0; i < text.length(); i++) {
 					if(!Character.isDigit(text.charAt(i))) {
 						displayErrorMessage("Only numbers are permitted.");

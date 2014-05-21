@@ -178,10 +178,10 @@ public class EventLogManager {
 	}
 
 	public void goTo(int num) throws TransitionError {
-		if (num < 0 || num > maxIndex)
+		if (num < 1 || num > maxIndex+1)
 			throw new TransitionError("Target index out of bounds!");
 		else {
-			index = num;
+			index = num-1;
 		}
 	}
 }
