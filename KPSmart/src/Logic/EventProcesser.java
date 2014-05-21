@@ -55,11 +55,16 @@ public class EventProcesser {
 		 TODO Auto-generated method stub
 		
 		OPEN XML READER
+		Log logger = XMLR.FindAll 
+		Event e = logger.KPEvents.get(0)
+		
 		
 		Get next event out reader. 
 		
 		String type = event.type() 
 		Object ob = event.object
+	?? Turn string [] into route/cost/mail
+	
 	String[] tempArray = new String[] {""} ;
 		 
 		

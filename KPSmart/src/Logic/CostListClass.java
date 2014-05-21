@@ -70,15 +70,7 @@ public class CostListClass {
 		if(found == true){ return true;}
 		else return false; 
 	}
-	
-	public Boolean deleteCost(Cost c){
-		Boolean found = false;
-		for(Cost a : costs.values()){
-			if(a.ID == c.ID) {found = true;	costs.remove(a);}	
-		}
-		if(found == true){ return true;}
-		else return false; 
-	}
+
 
 	public Cost findValidCost(Mail m) {
 		String query = m.origin+m.priority+m.destination;
