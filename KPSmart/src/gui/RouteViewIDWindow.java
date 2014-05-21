@@ -128,9 +128,10 @@ public class RouteViewIDWindow extends JFrame {
 			
 			for(Point x : p){
 				if((count % 2) == 0) {
-					if(prior == currentPoint && currentPoint != null) g.setColor(Color.GREEN);
-					else g.setColor(Color.black);
+					if(prior == currentPoint && currentPoint != null)g.setColor(Color.GREEN);
+					else g.setColor(Color.BLACK);
 					g.drawLine(x.x, x.y,prior.x, prior.y);
+					if(g.getColor().equals(Color.GREEN))break;
 				}
 				prior = x;
 				count++;
@@ -185,10 +186,10 @@ public class RouteViewIDWindow extends JFrame {
 		ArrayList<Point> points = new ArrayList<Point>();
 		for(Route r : routes){
 			Point o = new Point(r.originD.GeographicalX,r.originD.GeographicalY);
-			points.add(o);
-			if(r.equals(currentRoute))currentPoint = o;
 			Point d = new Point(r.destinationD.GeographicalX,r.destinationD.GeographicalY);
+			points.add(o);
 			points.add(d);
+			if(r.equals(currentRoute))currentPoint = o;
 		}
 		return points;
 	}
