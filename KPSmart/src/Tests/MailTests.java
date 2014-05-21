@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public class MailTests {
 	
-	private Logic.Mail mail = new Logic.Mail(1, "Auck", "Welly", 2.0, 3.0, 1, new Date(2014,05,20));
+	private Logic.Mail mail = new Logic.Mail(1, "Auck", "Welly", 2.0, 3.0, 1, new Date(2014,05,20),13.0);
 	
 	@Test
 	public void getDestinationDTest(){

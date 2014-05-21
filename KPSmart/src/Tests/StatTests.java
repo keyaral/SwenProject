@@ -10,8 +10,8 @@ public class StatTests {
 	@Test
 	public void testGetAmountOfMail1() {
 		Statistics stat = new Statistics();
-		stat.mails.add(new Mail(1,"dest1","org1",10,10,3,new Date()));
-		stat.mails.add(new Mail(2,"dest1","org1",10,10,3,new Date()));
+		stat.mails.add(new Mail(1,"dest1","org1",10,10,3,new Date(),13.0));
+		stat.mails.add(new Mail(2,"dest1","org1",10,10,3,new Date(),13.0));
 		List<String[]> result = stat.getMailAmounts();
 		assert(result.size() == 1);
 		assert(Double.parseDouble(result.get(0)[2]) == 20
@@ -22,8 +22,8 @@ public class StatTests {
 	@Test
 	public void testGetAmountOfMail2() {
 		Statistics stat = new Statistics();
-		stat.mails.add(new Mail(1,"dest1","org1",10,10,3,new Date()));
-		stat.mails.add(new Mail(2,"dest1","org2",10,10,3,new Date()));
+		stat.mails.add(new Mail(1,"dest1","org1",10,10,3,new Date(),13.0));
+		stat.mails.add(new Mail(2,"dest1","org2",10,10,3,new Date(),13.0));
 		List<String[]> result = stat.getMailAmounts();
 		assert(result.size() == 2);
 		assert(Double.parseDouble(result.get(0)[2]) == 10
@@ -37,8 +37,8 @@ public class StatTests {
 	@Test
 	public void testGetAverageDeliveryTimes1() {
 		Statistics stat = new Statistics();
-		Mail m1 = new Mail(1,"dest1","org1",10,10,3,new Date());
-		Mail m2 = new Mail(1,"dest1","org1",10,10,3,new Date());
+		Mail m1 = new Mail(1,"dest1","org1",10,10,3,new Date(),13.0);
+		Mail m2 = new Mail(1,"dest1","org1",10,10,3,new Date(),13.0);
 		m1.addShipmentTime(10);
 		m2.addShipmentTime(18);
 		stat.mails.add(m1);
@@ -51,8 +51,8 @@ public class StatTests {
 	@Test
 	public void testGetAverageDeliveryTimes2() {
 		Statistics stat = new Statistics();
-		Mail m1 = new Mail(1,"dest1","org1",10,10,3,new Date());
-		Mail m2 = new Mail(1,"dest1","org2",10,10,3,new Date());
+		Mail m1 = new Mail(1,"dest1","org1",10,10,3,new Date(),13.0);
+		Mail m2 = new Mail(1,"dest1","org2",10,10,3,new Date(),13.0);
 		m1.addShipmentTime(10);
 		m2.addShipmentTime(18);
 		stat.mails.add(m1);

@@ -45,7 +45,7 @@ public class Mail {
 	public Destination originD;
 	
 	
-	public Mail(int i, String de, String o, double w, double v, int p, Date da){
+	public Mail(int i, String de, String o, double w, double v, int p, Date da, Double t){
 		this.ID = i;
 		this.name = o;
 		this.destination = de;
@@ -54,6 +54,7 @@ public class Mail {
 		this.volume = v;
 		this.priority = p;
 		this.date = da;
+		this.time= t;
 	}
 
 

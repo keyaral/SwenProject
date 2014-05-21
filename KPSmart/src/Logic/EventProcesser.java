@@ -63,10 +63,10 @@ public class EventProcesser {
 			Boolean isSuccess = e.isSuccess();
 			Object obj = e.getCostOrMailOrRoute().get(0);		
 		
-			
-			//	addXMLevent(type, obj);
-			KPEvent kpe = new KPEvent(type,obj,isSuccess,null);
-			events.add(kpe);
+			System.out.print(" 11 ");
+			addXMLevent(type, obj);
+			//KPEvent kpe = new KPEvent(type,obj,isSuccess,null);
+		//	events.add(kpe);
 
 
 		
@@ -81,22 +81,28 @@ public class EventProcesser {
 	public void addXMLevent( String t, Object object) {
 		try {
 	String[] tempArray = new String[] {""};
-
+	System.out.print(" 12 ");
 		String type = t;
 		Object ob = object;
-
-
-		if (ob instanceof Cost) {
-		tempCost = (Cost) ob;
-
+		
+		if(ob.getClass().toString().equals("class Log.Log$KPEvents$Event$Cost")){
+		
+		
+	 Log.KPEvents.Event.Cost c = ( Log.KPEvents.Event.Cost) ob;
+	  tempCost = new Cost(c.getId(), c.getWeight(),c.getVolume(),c.getDestination(),c.getOrigin(),c.getPriority());
+	
+	  System.out.print(" 1 COST ");
+		
 		if (type.equals("Add") ) {
-
+			System.out.print(" 1 cost add ");
 			addCost(tempArray);
 		}
 
 		
 		
-		else if (type.equals("Change") ) { changeCost(tempArray);   }
+		else if (type.equals("Change") ) { 
+			System.out.print(" 1 cost change ");
+			changeCost(tempArray);   }
 		
 
 		else System.out.print("COST EVENT FAIL");
@@ -104,8 +110,19 @@ public class EventProcesser {
 	    tempCost = null;
 	}
 
-		if (ob instanceof Mail) {
-		tempMail = (Mail) ob;
+		
+		if(ob.getClass().toString().equals("class Log.Log$KPEvents$Event$Mail")){
+			
+			
+			 Log.KPEvents.Event.Mail m = ( Log.KPEvents.Event.Mail) ob;
+			  tempMail = new Mail( m.getId(),m.getDestination(),m.getOrigin(),
+					  m.getWeight(),m.getVolume(),m.getPriority(), m.getDate(), m.getTime()  );
+			
+			
+		
+		
+			System.out.print(" 1 mail ");
+		
 		if (type.equals("Send") ) { deliverMail(tempArray);   }
 
 		tempMail=null;
@@ -113,14 +130,25 @@ public class EventProcesser {
 		}
 
 
-		if (ob instanceof Route) {
-			tempRoute = (Route) ob;
+		if(ob.getClass().toString().equals("class Log.Log$KPEvents$Event$Route")){
+			
+			
+			 Log.KPEvents.Event.Route r = ( Log.KPEvents.Event.Route) ob;
+			  tempRoute = new Route(r.getId(), r.getDestination(),r.getOrigin(),r.getCostWeight(), r.getCostVolume(),
+					 r.getMaxWeight(), r.getMaxVolume(), r.getPriority(), 
+					 r.getDay(), r.getFrequency(), r.getDuration(), r.getCompanyName() );
+			
+			  
+			
+			  
 			if (type.equals("Add") ) { 
+				System.out.print(" 2 route Add ");
 
 				addRoute(tempArray);
 			}
 
 			if (type.equals("Change") ) {
+				System.out.print(" 2 route change ");
 				changeRoute(tempArray);
 			}
 
@@ -128,7 +156,7 @@ public class EventProcesser {
 				discontineRoute(tempArray);
 			}
 
-
+			
 		}
 
 		} catch (CloneNotSupportedException e) {
@@ -223,7 +251,7 @@ switch (type) {
 		private String deliverMail(String[] details) throws CloneNotSupportedException {
 			Mail m;
 
-			if ( details.length == 0 ){
+			if ( details.length < 4 ){
 				if (tempMail == null){ System.out.print( " no temp"); }
 				m = tempMail; }
 
@@ -280,8 +308,10 @@ switch (type) {
 
 		private String changeCost(String[] details) throws CloneNotSupportedException {
 		Cost c;
+		
+		System.out.print(" 3 cost  change ");
 
-			if ( details.length == 0 ){
+			if ( details.length < 4  ){
 				if (tempCost == null){ System.out.print( " no temp"); }
 				c = tempCost; }
 
@@ -319,14 +349,12 @@ switch (type) {
 
 		private String addCost(String[] details) throws CloneNotSupportedException {
 			Cost c;
-
-			if ( details.length == 0 ){
+		
+			if ( details.length < 4 ){
 				if (tempCost == null){ System.out.print( " no temp"); }
 				c = tempCost; }
 
-
-
-			c = new Cost(details);
+			else c = new Cost(details);
 
 			if ( DomesticPriorityFailure(c.destination, c.origin, c.priority) )
 				return "Invalid Destination Orgin Priority Match ";
@@ -387,7 +415,7 @@ switch (type) {
 
 		private String discontineRoute(String[] details) throws CloneNotSupportedException {
 			Route r;
-			if (details.length == 0){
+			if (details.length < 4){
 				if (tempRoute == null){ System.out.print( " no temp"); }
 				r = tempRoute; }
 			else r = new Route(details);
@@ -419,7 +447,9 @@ switch (type) {
 
 		private String changeRoute(String[] details) throws CloneNotSupportedException {
 			Route r;
-			if (details.length == 0){
+			
+			System.out.print(" 3 Route  change ");
+			if (details.length < 4){
 				if (tempRoute == null){ System.out.print( " no temp"); }
 				r = tempRoute; }
 			else r = new Route(details);
@@ -451,7 +481,9 @@ switch (type) {
 
 		private String addRoute(String[] details) throws CloneNotSupportedException {
 			Route r;
-			if (details.length == 0){
+			
+			System.out.print(" 3 Route add  ");
+			if (details.length < 4){
 				if (tempRoute == null){ System.out.print( " no temp"); }
 				r = tempRoute; }
 			else r = new Route(details);

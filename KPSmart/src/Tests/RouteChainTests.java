@@ -31,7 +31,7 @@ public class RouteChainTests {
 		
 		RouteChain rc = new RouteChain(routes, d, "origin");
 		
-		Logic.Mail mail = new Logic.Mail(1, "Auck", "Welly", 2.0, 3.0, 1, new Date(2014,05,20));
+		Logic.Mail mail = new Logic.Mail(1, "Auck", "Welly", 2.0, 3.0, 1, new Date(2014,05,20),13.0);
 		
 		assert(rc.calculateCost(mail) == 3.0);
 	}
@@ -51,7 +51,7 @@ public class RouteChainTests {
 		
 		RouteChain rc = new RouteChain(routes, d, "origin");
 		
-		Logic.Mail mail = new Logic.Mail(1, "Auck", "Welly", 2.0, 3.0, 1, new Date(2014,05,20));
+		Logic.Mail mail = new Logic.Mail(1, "Auck", "Welly", 2.0, 3.0, 1, new Date(2014,05,20),13.0);
 		
 		assert(rc.checkViable(mail));
 	}
@@ -71,7 +71,7 @@ public class RouteChainTests {
 		
 		RouteChain rc = new RouteChain(routes, d, "origin");
 		
-		Logic.Mail mail = new Logic.Mail(1, "Auck", "Welly", 2.0, 1.0, 1, new Date(2014,05,20));
+		Logic.Mail mail = new Logic.Mail(1, "Auck", "Welly", 2.0, 1.0, 1, new Date(2014,05,20),13.0);
 		
 		rc.isCritical(mail);
 	}
@@ -91,7 +91,7 @@ public class RouteChainTests {
 		
 		RouteChain rc = new RouteChain(routes, d, "origin");
 		
-		Logic.Mail mail = new Logic.Mail(1, "Auck", "Welly", 2.0, 1.0, 1, new Date(2014,05,20));
+		Logic.Mail mail = new Logic.Mail(1, "Auck", "Welly", 2.0, 1.0, 1, new Date(2014,05,20),13.0);
 		
 		assert(rc.gettotalduration()==3);
 	}

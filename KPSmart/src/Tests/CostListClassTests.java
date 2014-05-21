@@ -46,7 +46,7 @@ public class CostListClassTests {
 		clc.costs.put(cost.origin+cost.priority+cost.destination, cost);
 		
 		//Construct mail
-		Logic.Mail mail = new Logic.Mail(1, "Auckland", "Wellington", 1.0, 2.0, 1, new Date(2014,05,19));
+		Logic.Mail mail = new Logic.Mail(1, "Auckland", "Wellington", 1.0, 2.0, 1, new Date(2014,05,19),13.0);
 		
 		assert(clc.findValidCost(mail) != null);
 	}

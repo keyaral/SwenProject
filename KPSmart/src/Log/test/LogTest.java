@@ -103,9 +103,9 @@ public class LogTest {
 		Logic.Cost cost = new Logic.Cost(1, 2.0, 3.0, "Auckland", "Wellington", 1);
 		
 		Logic.Statistics statics = new Logic.Statistics();
-		Logic.Mail mail1 = new Logic.Mail(1, "Auckland", "Wellington", 2.0, 3.0, 3, new Date(2014,05,20,0,0));
+		Logic.Mail mail1 = new Logic.Mail(1, "Auckland", "Wellington", 2.0, 3.0, 3, new Date(2014,05,20,0,0),13.0);
 		statics.mails.add(mail1);
-		Logic.Mail mail2 = new Logic.Mail(1, "Palmerston North", "Wellington", 2.0, 3.0, 3, new Date(2014,05,20,0,0));
+		Logic.Mail mail2 = new Logic.Mail(1, "Palmerston North", "Wellington", 2.0, 3.0, 3, new Date(2014,05,20,0,0),13.0);
 		statics.mails.add(mail2);
 		
 		/*Logic.Route route1 = new Logic.Route(1, "Auckland", "Wellington", 2.0, 2.0, 2.0, 2.0, 1, "test", 3.0, 3.0, "test again");

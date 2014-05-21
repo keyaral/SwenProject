@@ -19,7 +19,7 @@ public class MailDeliveryTests {
 	
 	@Test
 	public void deliverMailTest() {
-		Mail mail = new Mail(1, "Auckland", "Wellington", 2.0, 3.0, 1, new Date(2014,05,20));
+		Mail mail = new Mail(1, "Auckland", "Wellington", 2.0, 3.0, 1, new Date(2014,05,20),13.0);
 		Cost cost = new Cost(1, 1.0, 2.0, "Auckland", "Wellington", 1);
 		Route route = new Route(1, "Auckland", "Wellington", 1.0, 2.0, 3.0, 4.0, 1, "today", 1.0, 1.0, "TestCompany1");
 		ArrayList<Route> routeList = new ArrayList<Route>();
@@ -37,7 +37,7 @@ public class MailDeliveryTests {
 	
 	@Test
 	public void assignDestinationsTest1() {
-		Mail mail = new Mail(1, "Auckland", "Wellington", 2.0, 3.0, 1, new Date(2014,05,20));
+		Mail mail = new Mail(1, "Auckland", "Wellington", 2.0, 3.0, 1, new Date(2014,05,20),13.0);
 		mailDeliverer.assignDestinations(mail);
 		assert(mail.destination.equals("Auckland") && mail.origin.equals("Wellington"));
 	}
