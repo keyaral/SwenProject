@@ -64,8 +64,13 @@ public class CostListClass {
 	
 	public Boolean changeCost(Cost c){
 		Boolean found = false;
-		for(Cost a : costs.values()){
-			if(a.ID == c.ID) {found = true;	a = c;}	
+		for(String a : costs.keySet() ) {
+			if(costs.get(a).ID == c.ID) {found = true;	
+			
+		
+			costs.remove(a);
+			costs.put(a, c);
+			}	
 		}
 		if(found == true){ return true;}
 		else return false; 

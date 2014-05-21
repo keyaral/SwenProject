@@ -4785,5 +4785,68 @@
             <success>true</success>
             <mails/>
         </Event>
-         </KPEvents>
+        <Event>
+            <type>Add</type>
+            <cost>
+                <priority>1</priority>
+                <destination>Dunedin</destination>
+                <origin>Rotorua</origin>
+                <id>588</id>
+                <weight>27.0</weight>
+                <volume>13.0</volume>
+            </cost>
+            <success>true</success>
+            <mails/>
+        </Event>
+        <Event>
+            <type>Add</type>
+            <cost>
+                <priority>1</priority>
+                <destination>Dunedin</destination>
+                <origin>Palmerston North</origin>
+                <id>550</id>
+                <weight>32.0</weight>
+                <volume>16.0</volume>
+            </cost>
+            <success>true</success>
+            <mails/>
+        </Event>
+        <Event>
+            <type>Change</type>
+            <cost>
+                <priority>1</priority>
+                <destination>Dunedin</destination>
+                <origin>Palmerston North</origin>
+                <id>550</id>
+                <weight>32.0</weight>
+                <volume>30.0</volume>
+            </cost>
+            <success>true</success>
+            <mails/>
+        </Event>
+    </KPEvents>
+    <cost>
+        <priority>1</priority>
+        <destination>Dunedin</destination>
+        <origin>Rotorua</origin>
+        <id>588</id>
+        <weight>27.0</weight>
+        <volume>13.0</volume>
+    </cost>
+    <cost>
+        <priority>1</priority>
+        <destination>Dunedin</destination>
+        <origin>Palmerston North</origin>
+        <id>550</id>
+        <weight>32.0</weight>
+        <volume>16.0</volume>
+    </cost>
+    <cost>
+        <priority>1</priority>
+        <destination>Dunedin</destination>
+        <origin>Palmerston North</origin>
+        <id>550</id>
+        <weight>32.0</weight>
+        <volume>30.0</volume>
+    </cost>
 </Log>

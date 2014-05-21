@@ -62,61 +62,75 @@ public class EventProcesser {
 			Boolean isSuccess = e.isSuccess();
 			Object obj = e.getCostOrMailOrRoute().get(0);
 			
-			KPEvent kpe = new KPEvent(type,obj,isSuccess,null);
-			events.add(kpe);
+			addXMLevent(type, obj);
+		//	KPEvent kpe = new KPEvent(type,obj,isSuccess,null);
+		//	events.add(kpe);
 		}
 		
-		
-		/**
-		 TODO Auto-generated method stub
-		
-		OPEN XML READER
-		Log logger = XMLR.FindAll 
-		Event e = logger.KPEvents.get(0)
+	}
 		
 		
-		Get next event out reader. 
 		
-		String type = event.type() 
-		Object ob = event.object
-	?? Turn string [] into route/cost/mail
 	
-	String[] tempArray = new String[] {""} ;
+	
+	public void addXMLevent( String t, Object object) { 
+		try {	 
+	String[] tempArray = new String[] {""};
 		 
+		String type = t;
+		Object ob = object;
+	
 		
-		if (o instanceof Route) {
-		tempRoute = (Route) ob;
-		if (type.equals("add") { addRoute(tempArray)   }
-		
-		elseif (type.equals("change") { changeRoute(tempArray)   }
-		
-		elseif (type.equals("delete") { discontineRoute(tempArray)   }
-		
-		else System.out.print("ROUTE EVENT FAIL"):
-		tempRoute =null;
-		}
-			
-			if (o instanceof Cost) {
+		if (ob instanceof Cost) {
 		tempCost = (Cost) ob;
-		if (type.equals("add") { addCost(tempArray)   }
+		if (type.equals("add") ) { 
+			addCost(tempArray);
+		}
 		
-		else if (type.equals("change") { changeCost(tempArray)   }
 		
-		else System.out.print("COST EVENT FAIL"):
+		else if (type.equals("change") ) { changeCost(tempArray);   }
+		
+		else System.out.print("COST EVENT FAIL");
 	    
 	    tempCost = null;
 	}
-				if (o instanceof Mail) {
+	
+		if (ob instanceof Mail) {
 		tempMail = (Mail) ob;
-		if (type.equals("Send") { DeliverMail(tempArray)   }
+		if (type.equals("Send") ) { deliverMail(tempArray);   }
 		
 		tempMail=null;
+		
 		}
 		
 		
+		if (ob instanceof Route) {
+			tempRoute = (Route) ob;
+			if (type.equals("add") ) { 
+				addRoute(tempArray);
+			}
+			
+			if (type.equals("Change") ) { 
+				changeRoute(tempArray);
+			}
+			
+			if (type.equals("Remove") ) { 
+				discontineRoute(tempArray);
+			}
+			
+			
+		}
+			
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}   
 		
-	*/	
-	}
+		}
+		
+		
+	
+	
 
 
 	public ArrayList<Destination> validOrigin(){
