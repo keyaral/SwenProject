@@ -196,7 +196,7 @@ public class RouteViewIDWindow extends JFrame {
 		this.TC.cmbFrom.setSelectedIndex(TC.getDistributionCenIndex(currentRoute.origin));
 		this.TC.cmbTo.setSelectedIndex(TC.getDestinationIndex(currentRoute.destination));
 		this.TC.cmbCompany.setSelectedIndex(TC.getCompanyIndex(currentRoute.companyName ));
-		this.TC.cmbType.setSelectedIndex(currentRoute.priority);
+		this.TC.cmbType.setSelectedIndex(currentRoute.priority-1);
 		this.TC.cmbDay.setSelectedItem(currentRoute.day);
 		this.TC.txtCostId.setText(Integer.toString(currentRoute.ID));
 		this.TC.txtDuration.setText(Double.toString(currentRoute.duration));

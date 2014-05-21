@@ -288,8 +288,7 @@ switch (type) {
 			Boolean success = costs.addCost(c);
 			
 
-			System.out.println( mailList.containsDesString(c.origin));
-			System.out.println( mailList.containsDesString(c.destination));
+			
 			boolean neworigin = ! mailList.containsDesString(c.origin);
 			boolean newdest = ! mailList.containsDesString(c.destination);
 
@@ -382,6 +381,7 @@ switch (type) {
 			
 			
 			mailList.assignDestinations(r);
+		
 			if (! routes.contains(r) ) { return error(details, "Route does not exist to change. Please consider adding"); }
 			
 			if ( DomesticPriorityFailure(r.destination, r.origin, r.priority) )

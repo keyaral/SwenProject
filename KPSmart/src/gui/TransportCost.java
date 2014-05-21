@@ -309,19 +309,31 @@ public class TransportCost extends JInternalFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				int dialogButton = JOptionPane.YES_NO_OPTION;
 				
+				String company=" ";
+				String to=" ";
+				String from=" ";
+				String day=" ";
+				String priority=" ";
+				
 				if (cmbCompany.getSelectedItem() == null ||   
 						cmbTo.getSelectedItem().toString()==null ||	
 								cmbFrom.getSelectedItem().toString() == null ||
 								cmbDay.getSelectedItem().toString() == null ||
 										cmbType.getSelectedItem().toString() == null  )
 				{
-					JOptionPane.showMessageDialog(null,"Please enter all details required !",null, 1);
+					//JOptionPane.showMessageDialog(null,"Please enter all details required !",null, 1);
+					
 				}
-				String company=(String)cmbCompany.getSelectedItem();
-				String to=(String)cmbTo.getSelectedItem().toString();
-				String from=(String)cmbFrom.getSelectedItem().toString();
-				String day=(String)cmbDay.getSelectedItem().toString();
-				String priority=(String)cmbType.getSelectedItem().toString();
+				
+				else {
+					 company=(String)cmbCompany.getSelectedItem();
+					 to=(String)cmbTo.getSelectedItem().toString();
+					 from=(String)cmbFrom.getSelectedItem().toString();
+					 day=(String)cmbDay.getSelectedItem().toString();
+					 priority=(String)cmbType.getSelectedItem().toString();
+					
+				}
+			
 				
 				if (txtCostId.getText().equals("")
 						||company.equals("")

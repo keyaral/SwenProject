@@ -172,8 +172,12 @@ public class RouteListClass implements Cloneable{
 	}
 
 	public boolean contains(Route r) {
-		if (routes.contains(r) ) { return true;}
-		return false;
+		Boolean found = false;
+		for(Route a : routes){
+			if(a.ID == r.ID) {found = true;	}	//Can change to names instead of ID's
+		}
+		if(found == true){ return true;}
+		else return false; 
 	}
 
 	

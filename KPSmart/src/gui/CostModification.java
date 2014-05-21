@@ -420,7 +420,7 @@ public class CostModification extends JInternalFrame {
 		 						txtRouteNumber.setText(String.valueOf(selected.ID));
 		 						txtWeightCost.setText(String.valueOf(selected.weight));
 		 						txtVolumeCost.setText(String.valueOf(selected.volume));
-		 						cmbPriority.setSelectedIndex( selected.priority ); //TODO
+		 						cmbPriority.setSelectedIndex( selected.priority-1 ); //TODO
 		 					    cmbDestination.setSelectedIndex(  getDestinationIndex(selected.destination) );
 		 					    cmbOrigin.setSelectedIndex( getDistributionCenIndex(selected.origin) );
 		 					}
