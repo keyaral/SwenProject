@@ -17,8 +17,8 @@ public class Logic {
 	
 		
 		
-		//processform( new String[] {"3","1234","0.3","0.5","Wellington", "Rotarua","2"} );
-	//	processform( new String[] {"0","21125","Wellington", "Rotarua","0.2","0.5","200","200","2","Tuesday", "1", "2","KpStart"} );
+		processform( new String[] {"3","1234","0.3","0.5","Wellington", "Rotarua","2"} );
+	processform( new String[] {"0","21125","Wellington", "Rotarua","0.2","0.5","200","200","2","Tuesday", "1", "2","KpStart"} );
 		
 		
 	//	testMethod();

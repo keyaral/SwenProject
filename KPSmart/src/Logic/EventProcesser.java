@@ -60,7 +60,7 @@ public class EventProcesser {
 		
 		String type = event.type() 
 		Object ob = event.object
-	    String[] tempArray = new String[] {""} ;
+	String[] tempArray = new String[] {""} ;
 		 
 		
 		if (o instanceof Route) {
@@ -195,12 +195,7 @@ switch (type) {
 			RouteChain r = routes.findValidRoute(m);
 			if (r==null){ return error(details, "No valid Route"); }
 		
-			
-			
-			
-			
-		
-		
+
 
 			Boolean success = mailList.deliverMail(m, r, c);
 			if (success){
@@ -249,11 +244,13 @@ switch (type) {
 			
 			if (! costs.contains(c) ) { return error(details, "Cost does not exist to change. Please consider adding"); }
 			
+			if ( DomesticPriorityFailure(c.destination, c.origin, c.priority) )
+				return "Invalid Destination Orgin Priority Match ";	
+			
 			Boolean success = costs.changeCost(c);
 
 			if (success ){
-				if ( DomesticPriorityFailure(c.destination, c.origin, c.priority) )
-					return "Invalid Destination Orgin Priority Match ";	
+			
 				
 				
 			addEvent("Change", success, c);
@@ -354,13 +351,19 @@ switch (type) {
 			
 			
 			mailList.assignDestinations(r);
+			
+			if (! routes.contains(r) ) { return error(details, "Route does not exist to change. Please consider adding"); }
+			
+			if ( DomesticPriorityFailure(r.destination, r.origin, r.priority) )
+				return "Invalid Destination Orgin Priority Match ";
+			
+			
 			Boolean success = routes.deleteRoute(r);
 
 
 
 			if(success)	{
-				if ( DomesticPriorityFailure(r.destination, r.origin, r.priority) )
-					return "Invalid Destination Orgin Priority Match ";
+				
 				
 				addEvent("Remove", success, r);
 				Log.Route route = new Log.Route();
@@ -379,12 +382,16 @@ switch (type) {
 			
 			
 			mailList.assignDestinations(r);
+			if (! routes.contains(r) ) { return error(details, "Route does not exist to change. Please consider adding"); }
+			
+			if ( DomesticPriorityFailure(r.destination, r.origin, r.priority) )
+				return "Invalid Destination Orgin Priority Match ";
+			
 			Boolean success = routes.changeRoute(r);
 
 			if(success)	{
 				
-				if ( DomesticPriorityFailure(r.destination, r.origin, r.priority) )
-					return "Invalid Destination Orgin Priority Match ";
+				
 				
 				addEvent("Change", success, r);
 				Log.Route route = new Log.Route();
@@ -418,7 +425,7 @@ switch (type) {
 				return "Route: " + r.ID + " was successfully added ";
 			}
 
-			else { return error(details, "Route was not added"); }
+			else { return error(details, "Route was not added - it already exists"); }
 
 
 		}
@@ -591,8 +598,9 @@ switch (type) {
 			currentStats.setRevenue(mailList.gettRevenue());
 			currentStats.setExpenditure(mailList.gettExpediture());
 			currentStats.mails.add(m);
+			
 			KPEvent event = new KPEvent(type, m, success, new Statistics((Statistics)currentStats.clone()));
-			events.add(event);
+			events.add(new KPEvent(type, m, success, new Statistics((Statistics)currentStats.clone())));
 			XmlWriter writer = new XmlWriter("file.xml");
 			writer.InsertKPEvent(new KPEvent(type, m, success, new Statistics((Statistics)currentStats.clone())));
 			

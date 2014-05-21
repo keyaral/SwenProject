@@ -44,7 +44,7 @@ public class XmlWriter implements IXmlWriter{
 		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
  
 		jaxbMarshaller.marshal(log, file);
-	//	jaxbMarshaller.marshal(log, System.out);
+	//	jaxbMarshaller.marshal(log, System.out); //TODO
 		
 		 } catch (JAXBException e) {
 				e.printStackTrace();

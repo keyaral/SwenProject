@@ -174,7 +174,7 @@ public class MailDelivery extends JInternalFrame {
 											txtVolume.getText(),priority,txtDate.getText()  };
 							
 							JOptionPane.showMessageDialog(null,MainWindow.logic.processform(details),null, 1);
-
+							MainWindow.bMonitoring.updateMonitor();
 		
 							setFields(true);
 							clearFields();

@@ -16,7 +16,6 @@ import javax.swing.ListSelectionModel;
 
 import java.util.*;
 
-
 import Logic.Cost;
 
 import java.awt.event.ActionListener;
@@ -421,6 +420,9 @@ public class CostModification extends JInternalFrame {
 		 						txtRouteNumber.setText(String.valueOf(selected.ID));
 		 						txtWeightCost.setText(String.valueOf(selected.weight));
 		 						txtVolumeCost.setText(String.valueOf(selected.volume));
+		 						cmbPriority.setSelectedIndex( selected.priority ); //TODO
+		 					    cmbDestination.setSelectedIndex(  getDestinationIndex(selected.destination) );
+		 					    cmbOrigin.setSelectedIndex( getDistributionCenIndex(selected.origin) );
 		 					}
 		 				}
 		 			}
@@ -441,4 +443,28 @@ public class CostModification extends JInternalFrame {
 		 		}
 
 	}
+		 	
+		 	
+			public int getDestinationIndex(String des){
+				String[] destinations= MainWindow.logic.getDestinations();
+				for (int i =0; i < destinations.length; i++) {
+					if ( destinations[i].equals(des)){
+						return i;
+					}
+				}
+				 return -1;
+				
+			}
+			public int getDistributionCenIndex(String des){
+				String[] distributionCenters = MainWindow.logic.getNZDestinations();
+				for (int i =0; i < distributionCenters.length; i++) {
+					if ( distributionCenters[i].equals(des)){
+						return i;
+					}
+				}
+				 return -1;
+				
+			}
+			
+	
 }

@@ -37,8 +37,8 @@ public class RouteListClass implements Cloneable{
 
 		
 		if(exists == true){ 
-						JOptionPane.showMessageDialog(null,r.ID + " Already Exists",null, 1);
-						System.out.println("Already Exists"); return false;}
+						//JOptionPane.showMessageDialog(null,r.ID + " Already Exists",null, 1);
+					return false;}
 		
 	//	if(exists == true){ System.out.println("Already Exists"); return false;}
 
@@ -169,6 +169,11 @@ public class RouteListClass implements Cloneable{
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
 		return new RouteListClass(routes);
+	}
+
+	public boolean contains(Route r) {
+		if (routes.contains(r) ) { return true;}
+		return false;
 	}
 
 	
