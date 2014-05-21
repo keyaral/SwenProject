@@ -27,110 +27,111 @@ public class EventProcesser {
 	MailDelivery mailList = new MailDelivery();
 	ArrayList<KPEvent> events = new ArrayList<KPEvent>();
 	String fail = "";
-	
+
 	Cost tempCost = null;
 	Route tempRoute = null;
 	Mail tempMail = null;
 
-	
+
 	private String _xmlPath = "file.xml";
 
 	Statistics currentStats;
 
 
 	public EventProcesser(Statistics stats) {
-	
+
 		currentStats = stats;
 		currentStats.setRouteList(routes);
-		
+		currentStats.setCostList(costs);
+
 		LoadpreviousEvents();
-		
-		
+
+
 	}
-	
-	
+
+
 	private void LoadpreviousEvents() {
-		
+
 		//Read all KPEvents from file.xml
 		XmlReader reader = new XmlReader(_xmlPath);
 		Log.KPEvents loKPEvents = reader.FindKPEvents();
-		
+
 		//Convert Log.KPEvents to Logic.KPEvents and save in events collection
-		
+
 		for(Log.KPEvents.Event e : loKPEvents.getEvent()){
 			String type = e.getType();
 			Boolean isSuccess = e.isSuccess();
 			Object obj = e.getCostOrMailOrRoute().get(0);
-			
+
 			addXMLevent(type, obj);
 		//	KPEvent kpe = new KPEvent(type,obj,isSuccess,null);
 		//	events.add(kpe);
 		}
-		
+
 	}
-		
-		
-		
-	
-	
-	public void addXMLevent( String t, Object object) { 
-		try {	 
+
+
+
+
+
+	public void addXMLevent( String t, Object object) {
+		try {
 	String[] tempArray = new String[] {""};
-		 
+
 		String type = t;
 		Object ob = object;
-	
-		
+
+
 		if (ob instanceof Cost) {
 		tempCost = (Cost) ob;
-		if (type.equals("add") ) { 
+		if (type.equals("add") ) {
 			addCost(tempArray);
 		}
-		
-		
+
+
 		else if (type.equals("change") ) { changeCost(tempArray);   }
-		
+
 		else System.out.print("COST EVENT FAIL");
-	    
+
 	    tempCost = null;
 	}
-	
+
 		if (ob instanceof Mail) {
 		tempMail = (Mail) ob;
 		if (type.equals("Send") ) { deliverMail(tempArray);   }
-		
+
 		tempMail=null;
-		
+
 		}
-		
-		
+
+
 		if (ob instanceof Route) {
 			tempRoute = (Route) ob;
-			if (type.equals("add") ) { 
+			if (type.equals("add") ) {
 				addRoute(tempArray);
 			}
-			
-			if (type.equals("Change") ) { 
+
+			if (type.equals("Change") ) {
 				changeRoute(tempArray);
 			}
-			
-			if (type.equals("Remove") ) { 
+
+			if (type.equals("Remove") ) {
 				discontineRoute(tempArray);
 			}
-			
-			
+
+
 		}
-			
+
 		} catch (CloneNotSupportedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}   
-		
 		}
-		
-		
-	
-	
+
+		}
+
+
+
+
 
 
 	public ArrayList<Destination> validOrigin(){
@@ -212,24 +213,24 @@ switch (type) {
 
 		private String deliverMail(String[] details) throws CloneNotSupportedException {
 			Mail m;
-			
+
 			if ( details.length == 0 ){
 				if (tempMail == null){ System.out.print( " no temp"); }
 				m = tempMail; }
-			
+
 			else  m = new Mail(details);
-			
-			
-			
+
+
+
 			if ( DomesticPriorityFailure(m.destination, m.origin, m.priority) )
 				return "Invalid Destination Orgin Priority Match ";
-			
+
 			mailList.assignDestinations(m);
 			Cost c = costs.findValidCost(m);
 			if (c==null){ return error(details, "No valid Cost"); }
 			RouteChain r = routes.findValidRoute(m);
 			if (r==null){ return error(details, "No valid Route"); }
-		
+
 
 
 			Boolean success = mailList.deliverMail(m, r, c);
@@ -270,24 +271,24 @@ switch (type) {
 
 		private String changeCost(String[] details) throws CloneNotSupportedException {
 		Cost c;
-			
+
 			if ( details.length == 0 ){
 				if (tempCost == null){ System.out.print( " no temp"); }
 				c = tempCost; }
-			
+
 			else  c = new Cost(details);
-			
+
 			if (! costs.contains(c) ) { return error(details, "Cost does not exist to change. Please consider adding"); }
-			
+
 			if ( DomesticPriorityFailure(c.destination, c.origin, c.priority) )
-				return "Invalid Destination Orgin Priority Match ";	
-			
+				return "Invalid Destination Orgin Priority Match ";
+
 			Boolean success = costs.changeCost(c);
 
 			if (success ){
-			
-				
-				
+
+
+
 			addEvent("Change", success, c);
 			Log.Cost cost  = new Log.Cost();
 			LogCost(cost,c);
@@ -309,33 +310,33 @@ switch (type) {
 
 		private String addCost(String[] details) throws CloneNotSupportedException {
 			Cost c;
-			
+
 			if ( details.length == 0 ){
 				if (tempCost == null){ System.out.print( " no temp"); }
 				c = tempCost; }
-			
-			
-			
+
+
+
 			c = new Cost(details);
-			
+
 			if ( DomesticPriorityFailure(c.destination, c.origin, c.priority) )
 				return "Invalid Destination Orgin Priority Match ";
 			Boolean success = costs.addCost(c);
-			
 
-			
+
+
 			boolean neworigin = ! mailList.containsDesString(c.origin);
 			boolean newdest = ! mailList.containsDesString(c.destination);
 
 			if (success) {
-				
-				
+
+
 				addEvent("Add", success, c);
 				Log.Cost cost  = new Log.Cost();
 				LogCost(cost,c);
 
-			
- 			
+
+
 
 				String result = "Cost: " + c.ID + " was successfully added";
 				if (neworigin) {
@@ -381,24 +382,24 @@ switch (type) {
 				if (tempRoute == null){ System.out.print( " no temp"); }
 				r = tempRoute; }
 			else r = new Route(details);
-			
-			
-			
+
+
+
 			mailList.assignDestinations(r);
-			
+
 			if (! routes.contains(r) ) { return error(details, "Route does not exist to change. Please consider adding"); }
-			
+
 			if ( DomesticPriorityFailure(r.destination, r.origin, r.priority) )
 				return "Invalid Destination Orgin Priority Match ";
-			
-			
+
+
 			Boolean success = routes.deleteRoute(r);
 
 
 
 			if(success)	{
-				
-				
+
+
 				addEvent("Remove", success, r);
 				Log.Route route = new Log.Route();
 				LogRoute(route,r);
@@ -409,25 +410,25 @@ switch (type) {
 
 		private String changeRoute(String[] details) throws CloneNotSupportedException {
 			Route r;
-			if (details.length == 0){ 
+			if (details.length == 0){
 				if (tempRoute == null){ System.out.print( " no temp"); }
 				r = tempRoute; }
 			else r = new Route(details);
-			
-			
+
+
 			mailList.assignDestinations(r);
-		
+
 			if (! routes.contains(r) ) { return error(details, "Route does not exist to change. Please consider adding"); }
-			
+
 			if ( DomesticPriorityFailure(r.destination, r.origin, r.priority) )
 				return "Invalid Destination Orgin Priority Match ";
-			
+
 			Boolean success = routes.changeRoute(r);
 
 			if(success)	{
-				
-				
-				
+
+
+
 				addEvent("Change", success, r);
 				Log.Route route = new Log.Route();
 				LogRoute(route,r);
@@ -445,10 +446,10 @@ switch (type) {
 				if (tempRoute == null){ System.out.print( " no temp"); }
 				r = tempRoute; }
 			else r = new Route(details);
-			
+
 			if ( DomesticPriorityFailure(r.destination, r.origin, r.priority) )
 				return "Invalid Destination Orgin Priority Match ";
-			
+
 			mailList.assignDestinations(r);
 			Boolean success = routes.addRoute(r);
 
@@ -492,7 +493,7 @@ switch (type) {
 	private boolean checkDetails(String[] values, String type) throws Exception {
 
 		if (type.equals("0")) {
-		
+
 				int ID = Integer.parseInt(values[1]);
 				String destination = (values[2]);
 				String origin = (values[3]);
@@ -506,13 +507,13 @@ switch (type) {
 				int duration = Integer.parseInt(values[11]);
 				String companyName = (values[12]);
 				if (destination == null || origin == null || day == null
-						|| companyName == null) { 
+						|| companyName == null) {
 					fail = " Null Values Entered in route adding - strings"; }
 
 				if ( DomesticPriorityFailure( destination, origin, priority) )
 					fail ="Invalid Destination Orgin Priority Match ";
 
-			
+
 		}
 		if (type.equals("1")) {
 			try {
@@ -633,13 +634,13 @@ switch (type) {
 			currentStats.setRevenue(mailList.gettRevenue());
 			currentStats.setExpenditure(mailList.gettExpediture());
 			currentStats.mails.add(m);
-			
+
 			KPEvent event = new KPEvent(type, m, success, new Statistics((Statistics)currentStats.clone()));
 			events.add(new KPEvent(type, m, success, new Statistics((Statistics)currentStats.clone())));
 			XmlWriter writer = new XmlWriter("file.xml");
 			writer.InsertKPEvent(new KPEvent(type, m, success, new Statistics((Statistics)currentStats.clone())));
-			
-			
+
+
 		}
 		else if (o instanceof Route) {
 			Route r = (Route) o;

@@ -4824,6 +4824,44 @@
             <success>true</success>
             <mails/>
         </Event>
+        <Event>
+            <type>Add</type>
+            <route>
+                <id>36</id>
+                <destination>Palmerston North</destination>
+                <origin>Christchurch</origin>
+                <maxWeight>91.0</maxWeight>
+                <maxVolume>182.0</maxVolume>
+                <priority>2</priority>
+                <day>Monday</day>
+                <frequency>118.0</frequency>
+                <duration>59.0</duration>
+                <companyName>Test Company</companyName>
+                <costWeight>29.0</costWeight>
+                <costVolume>58.0</costVolume>
+            </route>
+            <success>true</success>
+            <mails/>
+        </Event>
+        <Event>
+            <type>Add</type>
+            <route>
+                <id>46</id>
+                <destination>Wellington</destination>
+                <origin>Hamilton</origin>
+                <maxWeight>45.0</maxWeight>
+                <maxVolume>90.0</maxVolume>
+                <priority>1</priority>
+                <day>Tuesday</day>
+                <frequency>4.0</frequency>
+                <duration>2.0</duration>
+                <companyName>Test Company</companyName>
+                <costWeight>26.0</costWeight>
+                <costVolume>52.0</costVolume>
+            </route>
+            <success>true</success>
+            <mails/>
+        </Event>
     </KPEvents>
     <cost>
         <priority>1</priority>
@@ -4849,4 +4887,32 @@
         <weight>32.0</weight>
         <volume>30.0</volume>
     </cost>
+    <route>
+        <id>36</id>
+        <destination>Palmerston North</destination>
+        <origin>Christchurch</origin>
+        <maxWeight>91.0</maxWeight>
+        <maxVolume>182.0</maxVolume>
+        <priority>2</priority>
+        <day>Monday</day>
+        <frequency>118.0</frequency>
+        <duration>59.0</duration>
+        <companyName>Test Company</companyName>
+        <costWeight>29.0</costWeight>
+        <costVolume>58.0</costVolume>
+    </route>
+    <route>
+        <id>46</id>
+        <destination>Wellington</destination>
+        <origin>Hamilton</origin>
+        <maxWeight>45.0</maxWeight>
+        <maxVolume>90.0</maxVolume>
+        <priority>1</priority>
+        <day>Tuesday</day>
+        <frequency>4.0</frequency>
+        <duration>2.0</duration>
+        <companyName>Test Company</companyName>
+        <costWeight>26.0</costWeight>
+        <costVolume>52.0</costVolume>
+    </route>
 </Log>
