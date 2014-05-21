@@ -8,6 +8,7 @@ public class Statistics implements Cloneable{
 	private int events = 0;
 	public final Set<Mail> mails;
 	private RouteListClass routes;
+	private CostListClass costs;
 
 	public Statistics() {
 		mails = new HashSet<Mail>();
@@ -20,10 +21,11 @@ public class Statistics implements Cloneable{
 		mails = s.mails;
 		try {
 			routes = (RouteListClass) s.routes.clone();
+			costs = (CostListClass) s.costs.clone();
 		} catch (CloneNotSupportedException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	public double revenue() {
@@ -37,11 +39,11 @@ public class Statistics implements Cloneable{
 	public int events() {
 		return events;
 	}
-	
+
 	public void setRevenue(double r) {
 		revenue = r;
  	}
-	
+
 	public void setExpenditure(double e) {
 		expenditure = e;
 	}
@@ -49,9 +51,13 @@ public class Statistics implements Cloneable{
 	public void incrementEvents() {
 		events++;
 	}
-	
+
 	public void setRouteList(RouteListClass rlc) {
 		routes = rlc;
+	}
+
+	public void setCostList(CostListClass clc) {
+		costs = clc;
 	}
 
 	public List<String[]> getMailAmounts() {
@@ -131,12 +137,12 @@ public class Statistics implements Cloneable{
 			total += mail.cost;
 		}
 		double average = total/mails.size();
-		ArrayList<Cost> costs = null;	//TODO
+		ArrayList<Cost> costs = new ArrayList<Cost>(this.costs.costs.values());
 		HashMap<Route,Double> criticalRoutes = routes.findCriticalRoutes(costs);
 		List<String[]> finalRoutes = new ArrayList<String[]>();
 		for (Route cr: criticalRoutes.keySet()) {
 			finalRoutes.add(new String[] {cr.destination, cr.origin, String.valueOf(cr.priority)});
-		
+
 		}
 		return finalRoutes;
 	}
@@ -151,8 +157,8 @@ public class Statistics implements Cloneable{
 
 	public void printAll() {
 		System.out.println ( revenue + " " + expenditure + " " + events);
-		
-		
+
+
 	}
 
 
