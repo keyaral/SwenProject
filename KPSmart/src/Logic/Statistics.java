@@ -12,7 +12,7 @@ public class Statistics implements Cloneable{
 	public Statistics() {
 		mails = new HashSet<Mail>();
 	}
-
+//
 	public Statistics(Statistics s) {
 		revenue = s.revenue;
 		expenditure = s.expenditure;

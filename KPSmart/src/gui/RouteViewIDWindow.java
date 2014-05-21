@@ -168,7 +168,7 @@ public class RouteViewIDWindow extends JFrame {
 		this.TC.txtWeightCosts.setText(Double.toString(currentRoute.costWeight));	
 		}
 	}
-	
+	//
 	private void populateTextArea(JTextArea textArea) {
 		int count = 0;
 		for(Route r : routes){
