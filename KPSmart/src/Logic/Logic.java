@@ -17,8 +17,8 @@ public class Logic {
 	
 		
 		
-		processform( new String[] {"3","1234","0.3","0.5","Wellington", "Rotarua","2"} );
-	processform( new String[] {"0","21125","Wellington", "Rotarua","0.2","0.5","200","200","2","Tuesday", "1", "2","KpStart"} );
+		processform( new String[] {"3","1234","0.3","0.5","Wellington", "Rotorua","2"} );
+	processform( new String[] {"0","21125","Wellington", "Rotorua","0.2","0.5","200","200","2","Tuesday", "1", "2","KpStart"} );
 		
 	setupDestinationXY(eventProcessor.mailList.allDestinations);
 		
@@ -28,13 +28,13 @@ public class Logic {
 	
 	private void setupDestinationXY(ArrayList<Destination> allDestinations) {
 		for(Destination d: allDestinations){
-			if(d.getName().equals("Auckland")){d.GeographicalX = 200; d.GeographicalY = 200;}
-			if(d.getName().equals("Wellington")){d.GeographicalX = 160; d.GeographicalY = 400;}
-			if(d.getName().equals("Dunedin")){d.GeographicalX = 230; d.GeographicalY = 650;}
-			if(d.getName().equals("Rotarua")){d.GeographicalX = 180; d.GeographicalY = 300;}
-			if(d.getName().equals("Palmerston North")){d.GeographicalX = 190; d.GeographicalY = 350;}
-			if(d.getName().equals("Christchuch")){d.GeographicalX = 240; d.GeographicalY = 600;}		//TODO fix spelling of CCH and RotoRua
-			if(d.getName().equals("Hamilton")){d.GeographicalX = 190; d.GeographicalY = 250;}
+			if(d.getName().equals("Auckland")){d.GeographicalX = 200; d.GeographicalY = 100;}
+			if(d.getName().equals("Wellington")){d.GeographicalX = 160; d.GeographicalY = 200;}
+			if(d.getName().equals("Dunedin")){d.GeographicalX = 230; d.GeographicalY = 400;}
+			if(d.getName().equals("Rotorua")){d.GeographicalX = 180; d.GeographicalY = 150;}
+			if(d.getName().equals("Palmerston North")){d.GeographicalX = 190; d.GeographicalY = 180;}
+			if(d.getName().equals("Christchurch")){d.GeographicalX = 240; d.GeographicalY = 350;}		//TODO fix spelling of CCH and RotoRua
+			if(d.getName().equals("Hamilton")){d.GeographicalX = 190; d.GeographicalY = 120;}
 				//TODOD figure out international destinations
 		}
 		
@@ -61,108 +61,108 @@ public class Logic {
 		
 		processform( new String[] {"3","1234","0.3","0.5","Wellington", "Auckland","1"} );
 		processform( new String[] {"3","1235","0.3","0.5","Wellington", "Dunedin","1"} );
-		processform( new String[] {"3","1236","0.3","0.5","Wellington", "Rotarua","1"} );
+		processform( new String[] {"3","1236","0.3","0.5","Wellington", "Rotorua","1"} );
 		processform( new String[] {"3","1237","0.3","0.5","Wellington", "Palmerston North","1"} );
-		processform( new String[] {"3","1238","0.3","0.5","Wellington", "Christchuch","1"} );
+		processform( new String[] {"3","1238","0.3","0.5","Wellington", "Christchurch","1"} );
 		processform( new String[] {"3","1240","0.3","0.5","Wellington", "Hamilton","1"} );
 		
 		processform( new String[] {"3","2234","0.3","0.5","Auckland", "Wellington","1"} );
 		processform( new String[] {"3","2235","0.3","0.5","Auckland", "Dunedin","1"} );
-		processform( new String[] {"3","2236","0.3","0.5","Auckland", "Rotarua","1"} );
+		processform( new String[] {"3","2236","0.3","0.5","Auckland", "Rotorua","1"} );
 		processform( new String[] {"3","2237","0.3","0.5","Auckland", "Palmerston North","1"} );
-		processform( new String[] {"3","2238","0.3","0.5","Auckland", "Christchuch","1"} );
+		processform( new String[] {"3","2238","0.3","0.5","Auckland", "Christchurch","1"} );
 		processform( new String[] {"3","2240","0.3","0.5","Auckland", "Hamilton","1"} );
 		
 		processform( new String[] {"3","3234","0.3","0.5","Dunedin", "Wellington","1"} );
 		processform( new String[] {"3","3235","0.3","0.5","Dunedin", "Auckland","1"} );
-		processform( new String[] {"3","3236","0.3","0.5","Dunedin", "Rotarua","1"} );
+		processform( new String[] {"3","3236","0.3","0.5","Dunedin", "Rotorua","1"} );
 		processform( new String[] {"3","3237","0.3","0.5","Dunedin", "Palmerston North","1"} );
-		processform( new String[] {"3","3238","0.3","0.5","Dunedin", "Christchuch","1"} );
+		processform( new String[] {"3","3238","0.3","0.5","Dunedin", "Christchurch","1"} );
 		processform( new String[] {"3","3240","0.3","0.5","Dunedin", "Hamilton","1"} );
 		
 		
-		processform( new String[] {"3","4234","0.3","0.5","Rotarua", "Wellington","1"} );
-		processform( new String[] {"3","4235","0.3","0.5","Rotarua", "Auckland","1"} );
-		processform( new String[] {"3","4236","0.3","0.5","Rotarua", "Dunedin","1"} );
-		processform( new String[] {"3","4237","0.3","0.5","Rotarua", "Palmerston North","1"} );
-		processform( new String[] {"3","4238","0.3","0.5","Rotarua", "Christchuch","1"} );
-		processform( new String[] {"3","4240","0.3","0.5","Rotarua", "Hamilton","1"} );
+		processform( new String[] {"3","4234","0.3","0.5","Rotorua", "Wellington","1"} );
+		processform( new String[] {"3","4235","0.3","0.5","Rotorua", "Auckland","1"} );
+		processform( new String[] {"3","4236","0.3","0.5","Rotorua", "Dunedin","1"} );
+		processform( new String[] {"3","4237","0.3","0.5","Rotorua", "Palmerston North","1"} );
+		processform( new String[] {"3","4238","0.3","0.5","Rotorua", "Christchurch","1"} );
+		processform( new String[] {"3","4240","0.3","0.5","Rotorua", "Hamilton","1"} );
 		
 	
 		processform( new String[] {"3","5234","0.3","0.5","Palmerston North", "Wellington","1"} );
 		processform( new String[] {"3","5235","0.3","0.5","Palmerston North", "Auckland","1"} );
-		processform( new String[] {"3","5236","0.3","0.5","Palmerston North", "Rotarua","1"} );
+		processform( new String[] {"3","5236","0.3","0.5","Palmerston North", "Rotorua","1"} );
 		processform( new String[] {"3","5237","0.3","0.5","Palmerston North", "Dunedin","1"} );
-		processform( new String[] {"3","5238","0.3","0.5","Palmerston North", "Christchuch","1"} );
+		processform( new String[] {"3","5238","0.3","0.5","Palmerston North", "Christchurch","1"} );
 		processform( new String[] {"3","5240","0.3","0.5","Palmerston North", "Hamilton","1"} );
 
-		processform( new String[] {"3","6234","0.3","0.5","Christchuch", "Wellington","1"} );
-		processform( new String[] {"3","6235","0.3","0.5","Christchuch", "Auckland","1"} );
-		processform( new String[] {"3","6236","0.3","0.5","Christchuch", "Rotarua","1"} );
-		processform( new String[] {"3","6237","0.3","0.5","Christchuch", "Dunedin","1"} );
-		processform( new String[] {"3","6238","0.3","0.5","Christchuch", "Palmerston North","1"} );
-		processform( new String[] {"3","6240","0.3","0.5","Christchuch", "Hamilton","1"} );
+		processform( new String[] {"3","6234","0.3","0.5","Christchurch", "Wellington","1"} );
+		processform( new String[] {"3","6235","0.3","0.5","Christchurch", "Auckland","1"} );
+		processform( new String[] {"3","6236","0.3","0.5","Christchurch", "Rotorua","1"} );
+		processform( new String[] {"3","6237","0.3","0.5","Christchurch", "Dunedin","1"} );
+		processform( new String[] {"3","6238","0.3","0.5","Christchurch", "Palmerston North","1"} );
+		processform( new String[] {"3","6240","0.3","0.5","Christchurch", "Hamilton","1"} );
 		
 		
 		processform( new String[] {"3","7234","0.3","0.5","Hamilton", "Wellington","1"} );
 		processform( new String[] {"3","7235","0.3","0.5","Hamilton", "Auckland","1"} );
-		processform( new String[] {"3","7236","0.3","0.5","Hamilton", "Rotarua","1"} );
+		processform( new String[] {"3","7236","0.3","0.5","Hamilton", "Rotorua","1"} );
 		processform( new String[] {"3","7237","0.3","0.5","Hamilton", "Dunedin","1"} );
-		processform( new String[] {"3","7238","0.3","0.5","Hamilton", "Christchuch","1"} );
+		processform( new String[] {"3","7238","0.3","0.5","Hamilton", "Christchurch","1"} );
 		processform( new String[] {"3","7240","0.3","0.5","Hamilton", "Palmerston North","1"} );
 		
 	///////////////////////////////////////////////////////////////////////////////////////////////
 
 		processform( new String[] {"3","211234","0.3","0.5","Wellington", "Auckland","2"} );
 		processform( new String[] {"3","211235","0.3","0.5","Wellington", "Dunedin","2"} );
-		processform( new String[] {"3","211236","0.3","0.5","Wellington", "Rotarua","2"} );
+		processform( new String[] {"3","211236","0.3","0.5","Wellington", "Rotorua","2"} );
 		processform( new String[] {"3","211237","0.3","0.5","Wellington", "Palmerston North","2"} );
-		processform( new String[] {"3","211238","0.3","0.5","Wellington", "Christchuch","2"} );
+		processform( new String[] {"3","211238","0.3","0.5","Wellington", "Christchurch","2"} );
 		processform( new String[] {"3","211240","0.3","0.5","Wellington", "Hamilton","2"} );
 		
 		processform( new String[] {"3","212234","0.3","0.5","Auckland", "Wellington","2"} );
 		processform( new String[] {"3","212235","0.3","0.5","Auckland", "Dunedin","2"} );
-		processform( new String[] {"3","212236","0.3","0.5","Auckland", "Rotarua","2"} );
+		processform( new String[] {"3","212236","0.3","0.5","Auckland", "Rotorua","2"} );
 		processform( new String[] {"3","212237","0.3","0.5","Auckland", "Palmerston North","2"} );
-		processform( new String[] {"3","212238","0.3","0.5","Auckland", "Christchuch","2"} );
+		processform( new String[] {"3","212238","0.3","0.5","Auckland", "Christchurch","2"} );
 		processform( new String[] {"3","212240","0.3","0.5","Auckland", "Hamilton","2"} );
 		
 		processform( new String[] {"3","213234","0.3","0.5","Dunedin", "Wellington","2"} );
 		processform( new String[] {"3","213235","0.3","0.5","Dunedin", "Auckland","2"} );
-		processform( new String[] {"3","213236","0.3","0.5","Dunedin", "Rotarua","2"} );
+		processform( new String[] {"3","213236","0.3","0.5","Dunedin", "Rotorua","2"} );
 		processform( new String[] {"3","213237","0.3","0.5","Dunedin", "Palmerston North","2"} );
-		processform( new String[] {"3","213238","0.3","0.5","Dunedin", "Christchuch","2"} );
+		processform( new String[] {"3","213238","0.3","0.5","Dunedin", "Christchurch","2"} );
 		processform( new String[] {"3","213240","0.3","0.5","Dunedin", "Hamilton","2"} );
 		
 		
-		processform( new String[] {"3","214234","0.3","0.5","Rotarua", "Wellington","2"} );
-		processform( new String[] {"3","214235","0.3","0.5","Rotarua", "Auckland","2"} );
-		processform( new String[] {"3","214236","0.3","0.5","Rotarua", "Dunedin","2"} );
-		processform( new String[] {"3","214237","0.3","0.5","Rotarua", "Palmerston North","2"} );
-		processform( new String[] {"3","214238","0.3","0.5","Rotarua", "Christchuch","2"} );
-		processform( new String[] {"3","214240","0.3","0.5","Rotarua", "Hamilton","2"} );
+		processform( new String[] {"3","214234","0.3","0.5","Rotorua", "Wellington","2"} );
+		processform( new String[] {"3","214235","0.3","0.5","Rotorua", "Auckland","2"} );
+		processform( new String[] {"3","214236","0.3","0.5","Rotorua", "Dunedin","2"} );
+		processform( new String[] {"3","214237","0.3","0.5","Rotorua", "Palmerston North","2"} );
+		processform( new String[] {"3","214238","0.3","0.5","Rotorua", "Christchurch","2"} );
+		processform( new String[] {"3","214240","0.3","0.5","Rotorua", "Hamilton","2"} );
 		
 	
 		processform( new String[] {"3","215234","0.3","0.5","Palmerston North", "Wellington","2"} );
 		processform( new String[] {"3","215235","0.3","0.5","Palmerston North", "Auckland","2"} );
-		processform( new String[] {"3","215236","0.3","0.5","Palmerston North", "Rotarua","2"} );
+		processform( new String[] {"3","215236","0.3","0.5","Palmerston North", "Rotorua","2"} );
 		processform( new String[] {"3","215237","0.3","0.5","Palmerston North", "Dunedin","2"} );
-		processform( new String[] {"3","215238","0.3","0.5","Palmerston North", "Christchuch","2"} );
+		processform( new String[] {"3","215238","0.3","0.5","Palmerston North", "Christchurch","2"} );
 		processform( new String[] {"3","215240","0.3","0.5","Palmerston North", "Hamilton","2"} );
 
-		processform( new String[] {"3","216234","0.3","0.5","Christchuch", "Wellington","2"} );
-		processform( new String[] {"3","216235","0.3","0.5","Christchuch", "Auckland","2"} );
-		processform( new String[] {"3","216236","0.3","0.5","Christchuch", "Rotarua","2"} );
-		processform( new String[] {"3","216237","0.3","0.5","Christchuch", "Dunedin","2"} );
-		processform( new String[] {"3","216238","0.3","0.5","Christchuch", "Palmerston North","2"} );
-		processform( new String[] {"3","216240","0.3","0.5","Christchuch", "Hamilton","2"} );
+		processform( new String[] {"3","216234","0.3","0.5","Christchurch", "Wellington","2"} );
+		processform( new String[] {"3","216235","0.3","0.5","Christchurch", "Auckland","2"} );
+		processform( new String[] {"3","216236","0.3","0.5","Christchurch", "Rotorua","2"} );
+		processform( new String[] {"3","216237","0.3","0.5","Christchurch", "Dunedin","2"} );
+		processform( new String[] {"3","216238","0.3","0.5","Christchurch", "Palmerston North","2"} );
+		processform( new String[] {"3","216240","0.3","0.5","Christchurch", "Hamilton","2"} );
 		
 		
 		processform( new String[] {"3","217234","0.3","0.5","Hamilton", "Wellington","2"} );
 		processform( new String[] {"3","217235","0.3","0.5","Hamilton", "Auckland","2"} );
-		processform( new String[] {"3","217236","0.3","0.5","Hamilton", "Rotarua","2"} );
+		processform( new String[] {"3","217236","0.3","0.5","Hamilton", "Rotorua","2"} );
 		processform( new String[] {"3","217237","0.3","0.5","Hamilton", "Dunedin","2"} );
-		processform( new String[] {"3","217238","0.3","0.5","Hamilton", "Christchuch","2"} );
+		processform( new String[] {"3","217238","0.3","0.5","Hamilton", "Christchurch","2"} );
 		processform( new String[] {"3","217240","0.3","0.5","Hamilton", "Palmerston North","2"} );
 		
 		
@@ -171,70 +171,70 @@ public class Logic {
 		
 		processform( new String[] {"0","11121","Auckland", "Wellington","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );	
 		processform( new String[] {"0","11122","Auckland", "Dunedin","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
-		processform( new String[] {"0","11123","Auckland", "Rotarua","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
+		processform( new String[] {"0","11123","Auckland", "Rotorua","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
 		processform( new String[] {"0","11124","Auckland", "Palmerston North","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
-		processform( new String[] {"0","11125","Auckland", "Rotarua","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
-		processform( new String[] {"0","11126","Auckland", "Christchuch","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
+		processform( new String[] {"0","11125","Auckland", "Rotorua","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
+		processform( new String[] {"0","11126","Auckland", "Christchurch","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
 		processform( new String[] {"0","11127","Auckland", "Hamilton","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
 		
 		processform( new String[] {"0","21121","Wellington", "Auckland","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );	
 		processform( new String[] {"0","21122","Wellington", "Dunedin","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
-		processform( new String[] {"0","21123","Wellington", "Rotarua","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
+		processform( new String[] {"0","21123","Wellington", "Rotorua","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
 		processform( new String[] {"0","21124","Wellington", "Palmerston North","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
-		processform( new String[] {"0","21125","Wellington", "Rotarua","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
-		processform( new String[] {"0","21126","Wellington", "Christchuch","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
+		processform( new String[] {"0","21125","Wellington", "Rotorua","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
+		processform( new String[] {"0","21126","Wellington", "Christchurch","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
 		processform( new String[] {"0","21127","Wellington", "Hamilton","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
 		
 		
-		processform( new String[] {"0","31121","Christchuch", "Wellington","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );	
-		processform( new String[] {"0","31122","Christchuch", "Dunedin","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
-		processform( new String[] {"0","31123","Christchuch", "Rotarua","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
-		processform( new String[] {"0","31124","Christchuch", "Palmerston North","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
-		processform( new String[] {"0","31125","Christchuch", "Rotarua","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
-		processform( new String[] {"0","31126","Christchuch", "Auckland","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
-		processform( new String[] {"0","31127","Christchuch", "Hamilton","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
+		processform( new String[] {"0","31121","Christchurch", "Wellington","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );	
+		processform( new String[] {"0","31122","Christchurch", "Dunedin","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
+		processform( new String[] {"0","31123","Christchurch", "Rotorua","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
+		processform( new String[] {"0","31124","Christchurch", "Palmerston North","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
+		processform( new String[] {"0","31125","Christchurch", "Rotorua","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
+		processform( new String[] {"0","31126","Christchurch", "Auckland","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
+		processform( new String[] {"0","31127","Christchurch", "Hamilton","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
 		
 		
-		processform( new String[] {"0","41126","Rotarua", "Wellington","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );	
-		processform( new String[] {"0","41127","Rotarua", "Dunedin","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
-		processform( new String[] {"0","41128","Rotarua", "Auckland","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
-		processform( new String[] {"0","41129","Rotarua", "Palmerston North","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
-		processform( new String[] {"0","41125","Rotarua", "Rotarua","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
-		processform( new String[] {"0","41124","Rotarua", "Christchuch","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
-		processform( new String[] {"0","41123","Rotarua", "Hamilton","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
+		processform( new String[] {"0","41126","Rotorua", "Wellington","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );	
+		processform( new String[] {"0","41127","Rotorua", "Dunedin","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
+		processform( new String[] {"0","41128","Rotorua", "Auckland","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
+		processform( new String[] {"0","41129","Rotorua", "Palmerston North","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
+		processform( new String[] {"0","41125","Rotorua", "Rotorua","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
+		processform( new String[] {"0","41124","Rotorua", "Christchurch","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
+		processform( new String[] {"0","41123","Rotorua", "Hamilton","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
 		
 		processform( new String[] {"0","51121","Palmerston North", "Wellington","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );	
 		processform( new String[] {"0","51122","Palmerston North", "Dunedin","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
-		processform( new String[] {"0","51123","Palmerston North", "Rotarua","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
+		processform( new String[] {"0","51123","Palmerston North", "Rotorua","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
 		processform( new String[] {"0","51124","Palmerston North", "Auckland","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
-		processform( new String[] {"0","51125","Palmerston North", "Rotarua","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
-		processform( new String[] {"0","51126","Palmerston North", "Christchuch","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
+		processform( new String[] {"0","51125","Palmerston North", "Rotorua","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
+		processform( new String[] {"0","51126","Palmerston North", "Christchurch","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
 		processform( new String[] {"0","51127","Palmerston North", "Hamilton","0.2","0.4","200","200","2","Tuesday", "5", "3","KpStart"} );
 		
 		processform( new String[] {"0","61121","Hamilton", "Wellington","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );	
 		processform( new String[] {"0","61122","Hamilton", "Dunedin","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
-		processform( new String[] {"0","61123","Hamilton", "Rotarua","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
+		processform( new String[] {"0","61123","Hamilton", "Rotorua","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
 		processform( new String[] {"0","61124","Hamilton", "Palmerston North","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
-		processform( new String[] {"0","61125","Hamilton", "Rotarua","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
-		processform( new String[] {"0","61126","Hamilton", "Christchuch","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
+		processform( new String[] {"0","61125","Hamilton", "Rotorua","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
+		processform( new String[] {"0","61126","Hamilton", "Christchurch","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
 		processform( new String[] {"0","61127","Hamilton", "Auckland","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
 		
 		processform( new String[] {"0","71121","Dunedin", "Wellington","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );	
 		processform( new String[] {"0","71122","Dunedin", "Hamilton","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
-		processform( new String[] {"0","71123","Dunedin", "Rotarua","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
+		processform( new String[] {"0","71123","Dunedin", "Rotorua","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
 		processform( new String[] {"0","71124","Dunedin", "Palmerston North","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
-		processform( new String[] {"0","71125","Dunedin", "Rotarua","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
-		processform( new String[] {"0","71126","Dunedin", "Christchuch","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
+		processform( new String[] {"0","71125","Dunedin", "Rotorua","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
+		processform( new String[] {"0","71126","Dunedin", "Christchurch","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
 		processform( new String[] {"0","71127","Dunedin", "Auckland","0.2","0.4","200","200","1","Tuesday", "5", "3","KpStart"} );
 		
 	
 		
 		
-		processform( new String[] {"0","11325","Auckland", "Rotarua","0.2","0.4","200","200","2","Tuesday", "5", "3","KpStart"} );	
-		processform( new String[] {"0","11323","Rotarua", "Auckland","0.2","0.4","200","200","2","Tuesday", "5", "3","KpStart"} );	
+		processform( new String[] {"0","11325","Auckland", "Rotorua","0.2","0.4","200","200","2","Tuesday", "5", "3","KpStart"} );	
+		processform( new String[] {"0","11323","Rotorua", "Auckland","0.2","0.4","200","200","2","Tuesday", "5", "3","KpStart"} );	
 		
-		processform( new String[] {"0","21223","Palmerston North", "Rotarua","0.2","0.4","200","200","2","Tuesday", "5", "3","KpStart"} );	
-		processform( new String[] {"0","21225","Rotarua", "Palmerston North","0.2","0.4","200","200","2","Tuesday", "5", "3","KpStart"} );	
+		processform( new String[] {"0","21223","Palmerston North", "Rotorua","0.2","0.4","200","200","2","Tuesday", "5", "3","KpStart"} );	
+		processform( new String[] {"0","21225","Rotorua", "Palmerston North","0.2","0.4","200","200","2","Tuesday", "5", "3","KpStart"} );	
 	
 		
 		processform( new String[] {"0","32126","Auckland", "Hamilton","0.2","0.4","200","200","2","Tuesday", "5", "3","KpStart"} );	
@@ -244,14 +244,14 @@ public class Logic {
 		processform( new String[] {"0","42124","Hamilton", "Palmerston North","0.2","0.4","200","200","2","Tuesday", "5", "3","KpStart"} );	
 		
 		
-		processform( new String[] {"0","53126","Palmerston North", "Rotarua","0.2","0.4","200","200","2","Tuesday", "5", "3","KpStart"} );	
-		processform( new String[] {"0","53124","Rotarua", "Palmerston North","0.2","0.4","200","200","2","Tuesday", "5", "3","KpStart"} );	
+		processform( new String[] {"0","53126","Palmerston North", "Rotorua","0.2","0.4","200","200","2","Tuesday", "5", "3","KpStart"} );	
+		processform( new String[] {"0","53124","Rotorua", "Palmerston North","0.2","0.4","200","200","2","Tuesday", "5", "3","KpStart"} );	
 	
 		processform( new String[] {"0","644126","Palmerston North", "Wellington","0.2","0.4","200","200","2","Tuesday", "5", "3","KpStart"} );	
 		processform( new String[] {"0","644124","Wellington", "Palmerston North","0.2","0.4","200","200","2","Tuesday", "5", "3","KpStart"} );
 		
-		processform( new String[] {"0","754127","Christchuch", "Wellington","0.2","0.4","200","200","2","Tuesday", "5", "3","KpStart"} );	
-		processform( new String[] {"0","75126","Wellington", "Christchuch","0.2","0.4","200","200","2","Tuesday", "5", "3","KpStart"} );	
+		processform( new String[] {"0","754127","Christchurch", "Wellington","0.2","0.4","200","200","2","Tuesday", "5", "3","KpStart"} );	
+		processform( new String[] {"0","75126","Wellington", "Christchurch","0.2","0.4","200","200","2","Tuesday", "5", "3","KpStart"} );	
 		
 		processform( new String[] {"0","86127","Dunedin", "Wellington","0.2","0.4","200","200","2","Tuesday", "5", "3","KpStart"} );	
 		processform( new String[] {"0","86126","Wellington", "Dunedin","0.2","0.4","200","200","2","Tuesday", "5", "3","KpStart"} );	

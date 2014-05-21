@@ -12,7 +12,7 @@ public class RouteListClassTests {
 	private HashSet<Route> routes;
 	private RouteListClass rc;
 	
-	
+	//
 	private void GenerateTestRoutes(){
 		Route r1 = new Route(1, "des1", "origin1", 1.0, 2.0, 3.0, 4.0, 1, "today", 1.0, 1.0, "TestCompany1");
 		Route r2 = new Route(2, "des2", "origin2", 1.0, 2.0, 3.0, 4.0, 1, "today", 1.0, 1.0, "TestCompany2");

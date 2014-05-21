@@ -38,7 +38,7 @@ public class CostModification extends JInternalFrame {
 	private JComboBox cmbPriority;
 	private JComboBox cmbDestination;
 	private JComboBox cmbOrigin;
-	private JList<String> listOfExistingRoutes = new JList();
+	private JList listOfExistingRoutes = new JList();
 	//Generate Random ID
 	
 	private void generateRandomId(int rnd){
@@ -408,7 +408,7 @@ public class CostModification extends JInternalFrame {
 		 			public void mouseClicked(MouseEvent arg0) {
 		 				if (listOfExistingRoutes.getSelectedValue() != null) {
 		 					Cost selected = null;
-		 					int ID = Integer.parseInt(listOfExistingRoutes.getSelectedValue().split(" ")[0]);
+		 					int ID = Integer.parseInt(((String) listOfExistingRoutes.getSelectedValue()).split(" ")[0]);
 		 					Map<String, Cost> costList = MainWindow.logic.eventProcessor.getCosts().costs;
 		 					for (Cost c: costList.values()) {
 		 						if (c.ID == ID) {
@@ -435,7 +435,7 @@ public class CostModification extends JInternalFrame {
 		 	}
 		 	
 		 	private void updateList() {
-		 		DefaultListModel<String> list = new DefaultListModel<String>();
+		 		DefaultListModel list = new DefaultListModel();
 		 		listOfExistingRoutes.setModel(list);
 		 		Map<String, Cost> costList = MainWindow.logic.eventProcessor.getCosts().costs;
 		 		for (Cost c: costList.values()) {

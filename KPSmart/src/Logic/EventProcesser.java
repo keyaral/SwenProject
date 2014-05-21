@@ -51,6 +51,22 @@ public class EventProcesser {
 	
 	private void LoadpreviousEvents() {
 		
+		//Read all KPEvents from file.xml
+		XmlReader reader = new XmlReader(_xmlPath);
+		Log.KPEvents loKPEvents = reader.FindKPEvents();
+		
+		//Convert Log.KPEvents to Logic.KPEvents and save in events collection
+		
+		for(Log.KPEvents.Event e : loKPEvents.getEvent()){
+			String type = e.getType();
+			Boolean isSuccess = e.isSuccess();
+			Object obj = e.getCostOrMailOrRoute().get(0);
+			
+			KPEvent kpe = new KPEvent(type,obj,isSuccess,null);
+			events.add(kpe);
+		}
+		
+		
 		/**
 		 TODO Auto-generated method stub
 		

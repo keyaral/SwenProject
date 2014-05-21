@@ -39,62 +39,22 @@ public class RouteViewIDWindow extends JFrame {
 	public int LineNumber;
 	public JTextField textField;
 	public Route currentRoute = null;
+	public Point currentPoint = null;
 	public TransportCost TC;
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 715315804648325836L;
 	private JPanel MainPanel;
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ArrayList<Route> test = new ArrayList<Route>();
-					ArrayList<Destination> test2 = new ArrayList<Destination>();
-					Destination D1 = new Destination("Auckland", true);
-					Destination D2 = new Destination("Rotorua", true);
-					Destination D3 = new Destination("Wellington", true);
-					Destination D4 = new Destination("Tailand", false);
-					Route routeTest1 = new Route(1,"Wellington","Rotorua",10,15,200,200,1,"Thursday",2,3,"TylerCorp");
-					Route routeTest2 = new Route(3,"Rotorua","Auckland",10,15,200,200,1,"Thursday",2,3,"TylerCorp");
-			      	D1.GeographicalY = 100;
-					D1.GeographicalX = 120;
-					D2.GeographicalY = 150;
-					D2.GeographicalX = 110;
-					D3.GeographicalY = 180;
-					D3.GeographicalX = 70;
-					D4.GeographicalX = 20;
-					D4.GeographicalY = 30;
-					D1.routes.add(routeTest2);
-					D2.routes.add(routeTest1);
-					D2.routes.add(routeTest2);
-					routeTest1.originD = D3;
-					routeTest2.originD = D2;
-					routeTest1.destinationD = D2;
-					routeTest2.destinationD = D1;
-					test2.add(D1);
-					test2.add(D2);
-					test2.add(D3);
-					test2.add(D4);
-					test.add(routeTest1);
-					test.add(routeTest2);
-					//RouteViewIDWindow frame = new RouteViewIDWindow(test,null);
-//					frame.destinations = test2;
-//					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	public Canvas canvas;
+	
+	@SuppressWarnings("serial")
 	public RouteViewIDWindow(Logic l, TransportCost tc) {
 		this.TC = tc;
 		this.routes = l.eventProcessor.getRoutes().routes;
-		
+		for(Route r : this.routes) {if(!(this.destinations.contains(r.originD))) this.destinations.add(r.originD);if(!(this.destinations.contains(r.destinationD))) this.destinations.add(r.destinationD);}
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(300, 100,800, 500);
 		MainPanel = new JPanel();
 		MainPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		MainPanel.setLayout(new BorderLayout(0, 0));
@@ -122,12 +82,9 @@ public class RouteViewIDWindow extends JFrame {
 		JPanel scrollPanel = new JPanel();
 		MainPanel.add(scrollPanel, BorderLayout.CENTER);
 		scrollPanel.setLayout(null);
-		
-		
 
-		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 10, 250, 185);
+		scrollPane.setBounds(10, 10, 450, 385);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPanel.add(scrollPane);
@@ -144,23 +101,21 @@ public class RouteViewIDWindow extends JFrame {
 				String[] textArray = text.split("\\s");
 				text = textArray[0];
 				updateCurrent(text);
-				textField.setText("Selected Route ID = "+currentRoute.ID);
+				textField.setText("Selected Route ID = "+currentRoute.ID+" Priority: "+currentRoute.priority);
 				}
 			}
-
-			
 		});
 		scrollPane.setViewportView(textArea);
 		
 		textField = new JTextField();
-		textField.setBounds(10, 200, 250, 20);
+		textField.setBounds(10, 400, 450, 20);
 		scrollPanel.add(textField);
 		textField.setColumns(10);
-	
-		Canvas canvas = new Canvas(){
+		textField.setEditable(false);
+		
+		this.canvas = new Canvas(){
 		@Override
 		public void paint(Graphics g){
-			
 			for(Destination d : destinations){
 				if(d.isDomestic())g.setColor(Color.red);	
 				else g.setColor(Color.BLUE); ;
@@ -170,8 +125,13 @@ public class RouteViewIDWindow extends JFrame {
 			ArrayList<Point> p = getPoints();
 			int count = 1;
 			Point prior = null;
+			
 			for(Point x : p){
-				if((count % 2) == 0) g.drawLine(x.x, x.y,prior.x, prior.y);
+				if((count % 2) == 0) {
+					if(prior == currentPoint && currentPoint != null) g.setColor(Color.GREEN);
+					else g.setColor(Color.black);
+					g.drawLine(x.x, x.y,prior.x, prior.y);
+				}
 				prior = x;
 				count++;
 			}
@@ -179,16 +139,18 @@ public class RouteViewIDWindow extends JFrame {
 
 		};
 		canvas.setBackground(Color.WHITE);
-		canvas.setBounds(280, 10, 200, 500);
+		canvas.setBounds(480, 10, 400, 500);
 		scrollPanel.add(canvas);
 		
 		populateTextArea(textArea);
+		textArea.setEditable(false);
 	}
 
 	private void updateCurrent(String text) {
 		for(Route r : routes){
 			if(r.ID == Integer.parseInt(text)) currentRoute = r;
 		}
+		this.canvas.repaint();
 	}
 	//
 	private void fillTransportCost() {
@@ -208,11 +170,11 @@ public class RouteViewIDWindow extends JFrame {
 		this.TC.txtWeightCosts.setText(Double.toString(currentRoute.costWeight));	
 		}
 	}
-	
+	//
 	private void populateTextArea(JTextArea textArea) {
 		int count = 0;
 		for(Route r : routes){
-			String Line = "ID: "+r.ID+" Assigned to: "+r.origin+" to "+r.destination;
+			String Line = "ID: "+r.ID+" Assigned to: "+r.origin+" to "+r.destination+" - Priority: "+r.priority;
 			selectableRoutes.put(count,Line);
 			if(count == 0)textArea.setText(Line);
 			if(count != 0)textArea.setText(textArea.getText()+"\n"+Line);
@@ -224,6 +186,7 @@ public class RouteViewIDWindow extends JFrame {
 		for(Route r : routes){
 			Point o = new Point(r.originD.GeographicalX,r.originD.GeographicalY);
 			points.add(o);
+			if(r.equals(currentRoute))currentPoint = o;
 			Point d = new Point(r.destinationD.GeographicalX,r.destinationD.GeographicalY);
 			points.add(d);
 		}

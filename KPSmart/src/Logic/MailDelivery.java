@@ -34,9 +34,9 @@ public class MailDelivery {
 		nzDestinations.add(new Destination("Wellington", true) );
 		nzDestinations.add(new Destination("Auckland", true) );
 		nzDestinations.add(new Destination("Dunedin", true) );
-		nzDestinations.add(new Destination("Rotarua", true) );
+		nzDestinations.add(new Destination("Rotorua", true) );
 		nzDestinations.add(new Destination("Palmerston North", true) );
-		nzDestinations.add(new Destination("Christchuch", true) );
+		nzDestinations.add(new Destination("Christchurch", true) );
 		nzDestinations.add(new Destination("Hamilton", true) );
 		
 		allDestinations.addAll(nzDestinations);
