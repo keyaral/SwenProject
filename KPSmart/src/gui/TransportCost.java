@@ -59,7 +59,7 @@ public class TransportCost extends JInternalFrame {
 	
 	String[] companyA={"Test Company"};
 	String[] destinations= {"new"};
-	String[] distributionCenters={"Auckland","Hamilton","Rotorua","Palmerston North","Wellington","Christ Church","Dunedin"};
+	String[] distributionCenters={"Auckland","Hamilton","Rotorua","Palmerston North","Wellington","Christchurch","Dunedin"};
 	
 	//Generate Random ID
 	private void generateRandomId(int rnd){
