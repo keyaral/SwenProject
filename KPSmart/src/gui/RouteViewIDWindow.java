@@ -185,10 +185,12 @@ public class RouteViewIDWindow extends JFrame {
 		ArrayList<Point> points = new ArrayList<Point>();
 		for(Route r : routes){
 			Point o = new Point(r.originD.GeographicalX,r.originD.GeographicalY);
-			points.add(o);
-			if(r.equals(currentRoute))currentPoint = o;
 			Point d = new Point(r.destinationD.GeographicalX,r.destinationD.GeographicalY);
+			points.add(o);
 			points.add(d);
+			
+			if(r.equals(currentRoute))currentPoint = o;
+		
 		}
 		return points;
 	}
