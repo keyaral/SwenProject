@@ -20,11 +20,27 @@ public class Logic {
 		processform( new String[] {"3","1234","0.3","0.5","Wellington", "Rotarua","2"} );
 	processform( new String[] {"0","21125","Wellington", "Rotarua","0.2","0.5","200","200","2","Tuesday", "1", "2","KpStart"} );
 		
+	setupDestinationXY(eventProcessor.mailList.allDestinations);
 		
 	//	testMethod();
 	}
 	
 	
+	private void setupDestinationXY(ArrayList<Destination> allDestinations) {
+		for(Destination d: allDestinations){
+			if(d.getName().equals("Auckland")){d.GeographicalX = 200; d.GeographicalY = 200;}
+			if(d.getName().equals("Wellington")){d.GeographicalX = 160; d.GeographicalY = 400;}
+			if(d.getName().equals("Dunedin")){d.GeographicalX = 230; d.GeographicalY = 650;}
+			if(d.getName().equals("Rotarua")){d.GeographicalX = 180; d.GeographicalY = 300;}
+			if(d.getName().equals("Palmerston North")){d.GeographicalX = 190; d.GeographicalY = 350;}
+			if(d.getName().equals("Christchuch")){d.GeographicalX = 240; d.GeographicalY = 600;}		//TODO fix spelling of CCH and RotoRua
+			if(d.getName().equals("Hamilton")){d.GeographicalX = 190; d.GeographicalY = 250;}
+				//TODOD figure out international destinations
+		}
+		
+	}
+
+
 	private void testMethod() {
 		
 		
