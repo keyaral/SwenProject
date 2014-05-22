@@ -39,7 +39,7 @@ public class RouteViewIDWindow extends JFrame {
 	public int LineNumber;
 	public JTextField textField;
 	public Route currentRoute = null;
-	public Point currentPoint = null;
+	public ArrayList<Point> currentPoints = new ArrayList<Point>();
 	public TransportCost TC;
 	/**
 	 * 
@@ -128,10 +128,9 @@ public class RouteViewIDWindow extends JFrame {
 			
 			for(Point x : p){
 				if((count % 2) == 0) {
-					if(prior == currentPoint && currentPoint != null)g.setColor(Color.GREEN);
+					if(currentPoints.contains(prior)&& currentPoints.contains(x)&&currentPoints.size()>0){g.setColor(Color.GREEN);}
 					else g.setColor(Color.BLACK);
 					g.drawLine(x.x, x.y,prior.x, prior.y);
-					if(g.getColor().equals(Color.GREEN))break;
 				}
 				prior = x;
 				count++;
@@ -184,12 +183,13 @@ public class RouteViewIDWindow extends JFrame {
 		
 	private ArrayList<Point> getPoints() {
 		ArrayList<Point> points = new ArrayList<Point>();
+		currentPoints.clear();
 		for(Route r : routes){
 			Point o = new Point(r.originD.GeographicalX,r.originD.GeographicalY);
 			Point d = new Point(r.destinationD.GeographicalX,r.destinationD.GeographicalY);
 			points.add(o);
 			points.add(d);
-			if(r.equals(currentRoute))currentPoint = o;
+			if(r.equals(currentRoute)){currentPoints.add(o);currentPoints.add(d);}
 		}
 		return points;
 	}
