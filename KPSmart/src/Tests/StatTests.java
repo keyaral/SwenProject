@@ -69,6 +69,7 @@ public class StatTests {
 		assert(stat.getMailAmounts() == null);
 		assert(stat.getDeliveryTimes() == null);
 	}
+
 	
 	@Test
 	public void testGetCriticalRoutes1() {
@@ -94,5 +95,6 @@ public class StatTests {
 		assert(stat.getCriticalRoutes().size() == 0);
 	}
 	
+
 	
 }

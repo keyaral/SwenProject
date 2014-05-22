@@ -1,17 +1,20 @@
 package Tests;
 
+
 import static org.junit.Assert.*;
+
 
 import org.junit.Test;
 
+
 import Logic.*;
+
 
 public class EventProcesserTests {
 	
+
 	EventProcesser eventProcesser = new EventProcesser(new Statistics());
-	
-	// ROUTES
-	
+
 	@Test
 	public void testProcessAddRouteEvent() {
 		try {
