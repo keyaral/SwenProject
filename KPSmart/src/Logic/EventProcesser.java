@@ -263,7 +263,7 @@ switch (type) {
 			mailList.assignDestinations(m);
 			Cost c = costs.findValidCost(m);
 			if (c==null){ return error(details, "No valid Cost"); }
-			RouteChain r = routes.findValidRoute(m);
+			RouteChain r = routes.findValidRoute(m,this);
 			if (r==null){ return error(details, "No valid Route"); }
 
 
