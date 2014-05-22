@@ -1,5 +1,5 @@
 package Logic;
-
+import java.util.Comparator;
 public class QueueObject {
 
 	public QueueObject from;
@@ -13,4 +13,11 @@ public class QueueObject {
 		weight = w;
 		maxEstimate += estimate;
 	}
+	 public static Comparator<QueueObject> desComparator = new Comparator<QueueObject>(){
+		 	        @Override
+		 	        public int compare(QueueObject a, QueueObject b) {
+		 	            if(a.destination.GeographicalY > b.destination.GeographicalY) return 1;
+		 	            else return 0;
+		 	        }
+		 	    };
 }

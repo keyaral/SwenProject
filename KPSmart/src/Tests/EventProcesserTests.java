@@ -1,17 +1,26 @@
 package Tests;
 
+<<<<<<< HEAD
 
 import static org.junit.Assert.*;
 
+=======
+import static org.junit.Assert.*;
+>>>>>>> refs/remotes/origin/master
 
 import org.junit.Test;
 
+<<<<<<< HEAD
 
 import Logic.*;
 
+=======
+import Logic.*;
+>>>>>>> refs/remotes/origin/master
 
 public class EventProcesserTests {
 	
+<<<<<<< HEAD
 
 	EventProcesser eventProcesser = new EventProcesser(new Statistics());
 
@@ -26,7 +35,27 @@ public class EventProcesserTests {
 			fail("An error occurred while trying to process an Add Route Event");
 		}
 	}
+=======
+	EventProcesser eventProcesser = new EventProcesser(new Statistics());
+>>>>>>> refs/remotes/origin/master
 	
+<<<<<<< HEAD
+=======
+	// ROUTES
+	
+	@Test
+	public void testProcessAddRouteEvent() {
+		try {
+			String result = eventProcesser.proccess(new String[]{"0", "1", "Auckland", "Wellington",
+					"1.0", "2.0", "3.0", "4.0", "3", "today", "1.0", "1.0", "TestCompany1"});
+			assert(result.equals("Route: 1 was successfully added"));
+			assert(eventProcesser.getRoutes().routes.size() > 0);
+		} catch (Exception e) {
+			fail("An error occurred while trying to process an Add Route Event");
+		}
+	}
+	
+>>>>>>> refs/remotes/origin/master
 	@Test
 	public void testProcessInvalidAddRouteEventError1() {
 		try {

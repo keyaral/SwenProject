@@ -62,6 +62,7 @@ public class Statistics implements Cloneable{
 
 	public List<String[]> getMailAmounts() {
 		if (mails.isEmpty()) return null;
+
 		List<String[]> amounts = new ArrayList<String[]>();
 		for (Mail mail: mails) {
 			if (amounts.isEmpty()) {

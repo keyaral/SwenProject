@@ -148,12 +148,13 @@ public class RouteListClass implements Cloneable{
 		int count = 0;
 		while(count < finalDestList.size()-1){
 		for(Route r:this.routes){
-			if(before != null && r.priority == PendingMailToSend.priority&&  (r.origin.equals(finalDestList.get(count+1).getName()) && r.destination.equals(finalDestList.get(count).getName()))){if(r.cost<before.cost){makeAChain.remove(before); makeAChain.add(r);}}
-			if(r.priority == PendingMailToSend.priority &&  r.origin.equals(finalDestList.get(count+1).getName()) && r.destination.equals(finalDestList.get(count).getName())){makeAChain.add(r); before = r; System.out.println("X");}
+			if(before != null &&  (r.origin.equals(finalDestList.get(count+1).getName()) && r.destination.equals(finalDestList.get(count).getName()))){if(r.cost<before.cost){makeAChain.remove(before); makeAChain.add(r);}}
+			if(r.origin.equals(finalDestList.get(count+1).getName()) && r.destination.equals(finalDestList.get(count).getName())){makeAChain.add(r); before = r; System.out.println("X");}
 			}
 		before = null;
 		count++;
 		}
+		System.out.println(		finalDestList.size());
 		return new RouteChain(makeAChain,makeAChain.get(makeAChain.size()-1).destinationD,makeAChain.get(0).origin);
 	}
 

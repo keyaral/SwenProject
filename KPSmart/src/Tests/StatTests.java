@@ -64,6 +64,30 @@ public class StatTests {
 	}
 	
 	@Test
+	public void testGetCriticalRoutes1() {
+		Statistics stat = new Statistics();
+		RouteListClass rlc = new RouteListClass();
+		CostListClass clc = new CostListClass();
+		rlc.addRoute(new Route(1, "Auckland", "Wellington", 5.0, 5.0, 3.0, 4.0, 1, "today", 1.0, 1.0, "TestCompany1"));
+		clc.addCost(new Cost(1, 1.0, 2.0, "Auckland", "Wellington", 1));
+		stat.setCostList(clc);
+		stat.setRouteList(rlc);
+		assert(stat.getCriticalRoutes().size() > 0);
+	}
+	
+	@Test
+	public void testGetCriticalRoutes2() {
+		Statistics stat = new Statistics();
+		RouteListClass rlc = new RouteListClass();
+		CostListClass clc = new CostListClass();
+		rlc.addRoute(new Route(1, "Auckland", "Wellington", 1.0, 2.0, 3.0, 4.0, 1, "today", 1.0, 1.0, "TestCompany1"));
+		clc.addCost(new Cost(1, 1.0, 2.0, "Auckland", "Wellington", 1));
+		stat.setCostList(clc);
+		stat.setRouteList(rlc);
+		assert(stat.getCriticalRoutes().size() == 0);
+	}
+	
+	@Test
 	public void testEmptyMailListHandling() {
 		Statistics stat = new Statistics();
 		assert(stat.getMailAmounts() == null);
