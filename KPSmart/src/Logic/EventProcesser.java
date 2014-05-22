@@ -267,7 +267,7 @@ switch (type) {
 			RouteChain r = routes.findValidRoute(m,this);
 			if (r==null){ return error(details, "No valid Route"); }
 			Cost c = costs.findValidCost(m);
-			if(r.routes.size()>2) c = new Cost(r);
+			if(r.routes.size()>1 && r!= null) c = new Cost(r);
 			if (c==null){ return error(details, "No valid Cost"); }
 
 
