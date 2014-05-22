@@ -30,17 +30,17 @@ public class EventLogManager {
 		KPEvent e = eventProcesser.getEvents().get(index);
 		String details = "Event " + (index+1) + "/" + (maxIndex+1) + "\n\n";
 
-		if (e.object instanceof Route) {
-			Route r = (Route)(e.object);
-			details += "Route no. " + r.ID + " ";
+		if (e.object instanceof Log.Log.KPEvents.Event.Route) {
+			Log.Log.KPEvents.Event.Route r = (Log.Log.KPEvents.Event.Route)(e.object);
+			details += "Route no. " + r.getId() + " ";
 		}
-		else if (e.object instanceof Cost) {
-			Cost c = (Cost)(e.object);
-			details += "Cost no. " + c.ID + " ";
+		else if (e.object instanceof Log.Log.KPEvents.Event.Cost) {
+			Log.Log.KPEvents.Event.Cost c = (Log.Log.KPEvents.Event.Cost)(e.object);
+			details += "Cost no. " + c.getId() + " ";
 		}
-		else if (e.object instanceof Mail) {
-			Mail m = (Mail)(e.object);
-			details += "Mail no. " + m.ID + " ";
+		else if (e.object instanceof Log.Log.KPEvents.Event.Mail) {
+			Log.Log.KPEvents.Event.Mail m = (Log.Log.KPEvents.Event.Mail)(e.object);
+			details += "Mail no. " + m.getId() + " ";
 		}
 
 		if (e.type.equals("Add")) {
