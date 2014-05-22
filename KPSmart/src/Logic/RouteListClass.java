@@ -79,7 +79,7 @@ public class RouteListClass implements Cloneable{
 	public RouteChain findValidRoute(Mail m , EventProcesser eventProccessor) { 
 		PendingMailToSend = m;
 		this.fringe = new PriorityQueue<QueueObject>(this.routes.size(),RouteListClass.desComparator);
-		
+		//
 		assignDestination(eventProccessor);
 		System.out.println("Searching for valid Route");
 		Destination start = m.getOriginD();
