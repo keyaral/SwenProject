@@ -57,7 +57,7 @@ public class EventProcesser {
 		Log.KPEvents loKPEvents = reader.FindKPEvents();
 
 		//Convert Log.KPEvents to Logic.KPEvents and save in events collection
-
+    
 		for(Log.KPEvents.Event e : loKPEvents.getEvent()){
 			String type = e.getType();
 			Boolean isSuccess = e.isSuccess();
