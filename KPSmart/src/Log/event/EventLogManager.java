@@ -41,6 +41,15 @@ public class EventLogManager {
 		else if (e.object instanceof Log.Log.KPEvents.Event.Mail) {
 			Log.Log.KPEvents.Event.Mail m = (Log.Log.KPEvents.Event.Mail)(e.object);
 			details += "Mail no. " + m.getId() + " ";
+		}else if (e.object instanceof Cost) {
+			Cost c = (Cost)(e.object);
+			details += "Cost no. " + c.ID + " ";
+		}else if (e.object instanceof Route) {
+			Route r = (Route)(e.object);
+			details += "Route no. " + r.ID + " ";
+		}else if (e.object instanceof Mail) {
+			Mail m = (Mail)(e.object);
+			details += "Mail no. " + m.ID + " ";
 		}
 
 		if (e.type.equals("Add")) {
