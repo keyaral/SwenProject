@@ -459,8 +459,8 @@ switch (type) {
 
 			mailList.assignDestinations(r);
 
-			if (! routes.contains(r) ) { return error(details, "Route does not exist to remove"); }
-			
+			if (! routes.contains(r) ) { return error(details, "Route does not exist to change. Please consider adding"); }
+
 			if ( DomesticPriorityFailure(r.destination, r.origin, r.priority) )
 				return "Invalid Destination Orgin Priority Match ";
 
