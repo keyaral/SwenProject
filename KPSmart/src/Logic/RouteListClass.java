@@ -105,7 +105,6 @@ public class RouteListClass implements Cloneable{
 			    		double estTotal = costToNeigh + r.destinationD.GeographicalY-current.destination.GeographicalY;
 			    		fringe.add(new QueueObject(r.destinationD,current,costToNeigh,estTotal));
 			    	}
-			    	
 			    }
 				
 			}
