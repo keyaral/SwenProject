@@ -29,6 +29,11 @@ public int GeographicalY;
 
 public int GeographicalX;
 
+
+
+
+public boolean visited = false;
+
 public Destination(String name, double domesticVolume,
 		double internationVolume, double domesticWeightS,
 		double internationWeight) {
