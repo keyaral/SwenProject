@@ -19,7 +19,7 @@ public class QueueObject {
 	 public static Comparator<QueueObject> desComparator = new Comparator<QueueObject>(){
 		 	        @Override
 		 	        public int compare(QueueObject a, QueueObject b) {
-		 	            if(a.destination.GeographicalY < b.destination.GeographicalY) return 1;
+		 	            if(a.destination.GeographicalY > b.destination.GeographicalY) return 1;
 		 	            else return 0;
 		 	        }
 		 	    };
