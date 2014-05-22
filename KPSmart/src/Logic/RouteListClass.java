@@ -1,6 +1,7 @@
 package Logic;
 //
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.PriorityQueue;
@@ -12,7 +13,7 @@ public class RouteListClass implements Cloneable{
 
 	public HashSet<Route> routes;
 	public ArrayList<ArrayList<Route>>tempPath = new ArrayList<ArrayList<Route>>();
-	public PriorityQueue<QueueObject> fringe = new PriorityQueue<QueueObject>();
+	public PriorityQueue<QueueObject> fringe;
 	public Mail PendingMailToSend;
 
 	public RouteListClass(){
@@ -77,7 +78,8 @@ public class RouteListClass implements Cloneable{
 
 	public RouteChain findValidRoute(Mail m , EventProcesser eventProccessor) { 
 		PendingMailToSend = m;
-		this.fringe.clear();
+		this.fringe = new PriorityQueue<QueueObject>(this.routes.size(),RouteListClass.desComparator);
+		//
 		assignDestination(eventProccessor);
 		System.out.println("Searching for valid Route");
 		Destination start = m.getOriginD();
@@ -154,7 +156,7 @@ public class RouteListClass implements Cloneable{
 		before = null;
 		count++;
 		}
-		System.out.println(		finalDestList.size());
+		System.out.println(makeAChain.get(makeAChain.size()-1).destinationD+" "+makeAChain.get(0).origin);
 		return new RouteChain(makeAChain,makeAChain.get(makeAChain.size()-1).destinationD,makeAChain.get(0).origin);
 	}
 
@@ -265,6 +267,13 @@ public class RouteListClass implements Cloneable{
 		if(found == true){ return true;}
 		else return false; 
 	}
-
+	
+	 public static Comparator<QueueObject> desComparator = new Comparator<QueueObject>(){
+	        @Override
+	        public int compare(QueueObject a, QueueObject b) {
+	            if(a.destination.GeographicalY > b.destination.GeographicalY) return 1;
+	            else return 0;
+	        }
+	    };
 	
 }
