@@ -264,10 +264,11 @@ switch (type) {
 				return "Invalid Destination Orgin Priority Match ";
 
 			mailList.assignDestinations(m);
-			Cost c = costs.findValidCost(m);
-			if (c==null){ return error(details, "No valid Cost"); }
 			RouteChain r = routes.findValidRoute(m,this);
 			if (r==null){ return error(details, "No valid Route"); }
+			Cost c = costs.findValidCost(m);
+			if(r.routes.size()>2) c = new Cost(r);
+			if (c==null){ return error(details, "No valid Cost"); }
 
 
 

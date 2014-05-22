@@ -15,6 +15,7 @@ public class RouteListClass implements Cloneable{
 	public ArrayList<ArrayList<Route>>tempPath = new ArrayList<ArrayList<Route>>();
 	public PriorityQueue<QueueObject> fringe;
 	public Mail PendingMailToSend;
+	private boolean swapped;
 
 	public RouteListClass(){
 		routes = new HashSet<Route>();
@@ -78,13 +79,13 @@ public class RouteListClass implements Cloneable{
 
 	public RouteChain findValidRoute(Mail m , EventProcesser eventProccessor) { 
 		PendingMailToSend = m;
-		this.fringe = new PriorityQueue<QueueObject>(this.routes.size(),RouteListClass.desComparator);
+		this.fringe = new PriorityQueue<QueueObject>(2000,RouteListClass.desComparator);
 		//
 		assignDestination(eventProccessor);
 		System.out.println("Searching for valid Route");
 		Destination start = m.getOriginD();
 		Destination goal = m.getDestinationD();
-		if(start.GeographicalY < goal.GeographicalY) {System.out.println("Swapping dem");Destination temp = start; start = goal; goal = temp;} //Swap since one is going down
+		if(start.GeographicalY < goal.GeographicalY) {Destination temp = start; start = goal; goal = temp; this.swapped = true;} //Swap since one is going down
 		for(Destination d : eventProccessor.mailList.allDestinations){ d.visited = false;}
 		fringe.add(new QueueObject(start,null,0,start.GeographicalY-goal.GeographicalY));
 		
@@ -92,18 +93,18 @@ public class RouteListClass implements Cloneable{
 		double costToHere = 0;
 		
 		while(fringe.size() > 0 && Found == false){
+			System.out.println("Searching");
 			QueueObject current = fringe.remove();
 			if(current.destination.visited == false){
 				current.destination.visited = true;
 				costToHere+=current.weight;
 				if(current.destination == goal) {Found = true; return buildFinalPath(current);}
 			    for(Route r : current.destination.routes){
-					if(r.originD.visited == false){
+					if(r.destinationD.visited == false){
 			    		double costToNeigh = costToHere + r.cost;
-			    		double estTotal = costToNeigh + r.originD.GeographicalY-current.destination.GeographicalY;
-			    		fringe.add(new QueueObject(r.originD,current,costToNeigh,estTotal));
+			    		double estTotal = costToNeigh + r.destinationD.GeographicalY-current.destination.GeographicalY;
+			    		fringe.add(new QueueObject(r.destinationD,current,costToNeigh,estTotal));
 			    	}
-			    	
 			    }
 				
 			}
@@ -150,13 +151,27 @@ public class RouteListClass implements Cloneable{
 		int count = 0;
 		while(count < finalDestList.size()-1){
 		for(Route r:this.routes){
-			if(before != null &&  (r.origin.equals(finalDestList.get(count+1).getName()) && r.destination.equals(finalDestList.get(count).getName()))){if(r.cost<before.cost){makeAChain.remove(before); makeAChain.add(r);}}
-			if(r.origin.equals(finalDestList.get(count+1).getName()) && r.destination.equals(finalDestList.get(count).getName())){makeAChain.add(r); before = r; System.out.println("X");}
-			}
+			if(r.priority == this.PendingMailToSend.priority && this.swapped == false && before != null &&  (r.origin.equals(finalDestList.get(count).getName()) && r.destination.equals(finalDestList.get(count+1).getName()))){if(r.cost<before.cost){makeAChain.remove(before); makeAChain.add(r);}}
+			else if(before != null &&  r.priority == this.PendingMailToSend.priority &&(r.origin.equals(finalDestList.get(count+1).getName()) && r.destination.equals(finalDestList.get(count).getName()))){if(r.cost<before.cost){makeAChain.remove(before); makeAChain.add(r);}}
+			if(r.priority == this.PendingMailToSend.priority &&this.swapped == false && r.origin.equals(finalDestList.get(count).getName()) && r.destination.equals(finalDestList.get(count+1).getName())){makeAChain.add(r); before = r;}
+			if(r.priority == this.PendingMailToSend.priority && r.origin.equals(finalDestList.get(count+1).getName()) && r.destination.equals(finalDestList.get(count).getName())){makeAChain.add(r); before = r; System.out.println("X");}
+		}
 		before = null;
 		count++;
 		}
-		System.out.println(makeAChain.get(makeAChain.size()-1).destinationD+" "+makeAChain.get(0).origin);
+		if(makeAChain.size() == 0){
+			count = 0;
+			while(count < finalDestList.size()-1){
+			for(Route r:this.routes){
+				if(this.swapped == false && before != null &&  (r.origin.equals(finalDestList.get(count).getName()) && r.destination.equals(finalDestList.get(count+1).getName()))){if(r.cost<before.cost){makeAChain.remove(before); makeAChain.add(r);}}
+				else if(before != null &&  (r.origin.equals(finalDestList.get(count+1).getName()) && r.destination.equals(finalDestList.get(count).getName()))){if(r.cost<before.cost){makeAChain.remove(before); makeAChain.add(r);}}
+				if(this.swapped == false && r.origin.equals(finalDestList.get(count).getName()) && r.destination.equals(finalDestList.get(count+1).getName())){makeAChain.add(r); before = r;}
+				if(r.origin.equals(finalDestList.get(count+1).getName()) && r.destination.equals(finalDestList.get(count).getName())){makeAChain.add(r); before = r; System.out.println("X");}
+			}
+		before = null;
+		count++;}
+		}
+		
 		return new RouteChain(makeAChain,makeAChain.get(makeAChain.size()-1).destinationD,makeAChain.get(0).origin);
 	}
 
