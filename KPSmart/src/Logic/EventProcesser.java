@@ -250,7 +250,6 @@ switch (type) {
 			Mail m;
 
 			if ( details.length < 4 ){
-				if (tempMail == null){ System.out.print( " no temp"); }
 				m = tempMail; }
 
 			else  m = new Mail(details);
@@ -306,11 +305,8 @@ switch (type) {
 
 		private String changeCost(String[] details) throws CloneNotSupportedException {
 		Cost c;
-		
-		System.out.print(" 3 cost  change ");
 
 			if ( details.length < 4  ){
-				if (tempCost == null){}
 				c = tempCost; }
 
 			else  c = new Cost(details);
@@ -349,7 +345,6 @@ switch (type) {
 			Cost c;
 		
 			if ( details.length < 4 ){
-				if (tempCost == null){}
 				c = tempCost; }
 
 			else c = new Cost(details);
@@ -414,7 +409,6 @@ switch (type) {
 		private String discontineRoute(String[] details) throws CloneNotSupportedException {
 			Route r;
 			if (details.length < 4){
-				if (tempRoute == null){}
 				r = tempRoute; 
 				
 				 System.out.print( " no routes error"+ routes.routes.size() );
@@ -426,7 +420,7 @@ switch (type) {
 
 			mailList.assignDestinations(r);
 
-			if (! routes.contains(r) ) { return error(details, "Route does not exist to change. Please consider adding"); }
+			if (! routes.contains(r) ) { return error(details, "Route does not exist to remove"); }
 
 			if ( DomesticPriorityFailure(r.destination, r.origin, r.priority) )
 				return "Invalid Destination Orgin Priority Match ";
@@ -449,10 +443,7 @@ switch (type) {
 
 		private String changeRoute(String[] details) throws CloneNotSupportedException {
 			Route r;
-			
-			System.out.print(" 3 Route  change ");
 			if (details.length < 4){
-				if (tempRoute == null){}
 				r = tempRoute; }
 			else r = new Route(details);
 
@@ -473,7 +464,7 @@ switch (type) {
 				addEvent("Change", success, r);
 				Log.Route route = new Log.Route();
 				LogRoute(route,r);
-				return "Route: " + r.ID + " was successfully changed ";
+				return "Route: " + r.ID + " was successfully changed";
 			}
 
 			else return error(details, "Route was not changed");
@@ -485,7 +476,6 @@ switch (type) {
 			Route r;
 			
 			if (details.length < 4){
-				if (tempRoute == null){}
 				r = tempRoute; }
 			else r = new Route(details);
 
