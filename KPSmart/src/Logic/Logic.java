@@ -19,7 +19,7 @@ public class Logic {
 		
 	//	processform( new String[] {"3","1234","0.3","0.5","Wellington", "Rotorua","2"} );
 //	processform( new String[] {"0","21125","Wellington", "Rotorua","0.2","0.5","200","200","2","Tuesday", "1", "2","KpStart"} );
-		
+		System.out.print(" finsihed process stuff");
 	setupDestinationXY(eventProcessor.mailList.allDestinations);
 		
 	//	testMethod();
@@ -291,7 +291,7 @@ public class Logic {
 
 
 	public String processform(String[] details) {
-		System.out.println("call evnent");
+		
 				try {
 					return eventProcessor.proccess(details);
 				} catch (Exception e) {

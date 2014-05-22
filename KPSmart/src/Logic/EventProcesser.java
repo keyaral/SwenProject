@@ -44,7 +44,7 @@ public class EventProcesser {
 		currentStats.setRouteList(routes);
 		currentStats.setCostList(costs);
 
-		LoadpreviousEvents();
+	  LoadpreviousEvents();
 
 
 	}
@@ -63,7 +63,7 @@ public class EventProcesser {
 			Boolean isSuccess = e.isSuccess();
 			Object obj = e.getCostOrMailOrRoute().get(0);		
 		
-			System.out.print(" 11 ");
+			
 			addXMLevent(type, obj);
 			//KPEvent kpe = new KPEvent(type,obj,isSuccess,null);
 		//	events.add(kpe);
@@ -81,7 +81,7 @@ public class EventProcesser {
 	public void addXMLevent( String t, Object object) {
 		try {
 	String[] tempArray = new String[] {""};
-	System.out.print(" 12 ");
+	
 		String type = t;
 		Object ob = object;
 		
@@ -91,21 +91,20 @@ public class EventProcesser {
 	 Log.KPEvents.Event.Cost c = ( Log.KPEvents.Event.Cost) ob;
 	  tempCost = new Cost(c.getId(), c.getWeight(),c.getVolume(),c.getDestination(),c.getOrigin(),c.getPriority());
 	
-	  System.out.print(" 1 COST ");
+	 
 		
 		if (type.equals("Add") ) {
-			System.out.print(" 1 cost add ");
+		
 			addCost(tempArray);
 		}
 
 		
 		
 		else if (type.equals("Change") ) { 
-			System.out.print(" 1 cost change ");
+		
 			changeCost(tempArray);   }
 		
 
-		else System.out.print("COST EVENT FAIL");
 
 	    tempCost = null;
 	}
@@ -121,7 +120,7 @@ public class EventProcesser {
 			
 		
 		
-			System.out.print(" 1 mail ");
+		
 		
 		if (type.equals("Send") ) { deliverMail(tempArray);   }
 
@@ -142,13 +141,12 @@ public class EventProcesser {
 			
 			  
 			if (type.equals("Add") ) { 
-				System.out.print(" 2 route Add ");
-
+				
 				addRoute(tempArray);
 			}
 
 			if (type.equals("Change") ) {
-				System.out.print(" 2 route change ");
+				
 				changeRoute(tempArray);
 			}
 
@@ -417,7 +415,11 @@ switch (type) {
 			Route r;
 			if (details.length < 4){
 				if (tempRoute == null){ System.out.print( " no temp"); }
-				r = tempRoute; }
+				r = tempRoute; 
+				
+				 System.out.print( " no routes error"+ routes.routes.size() );
+			if (routes == null) {} 	
+			}
 			else r = new Route(details);
 
 

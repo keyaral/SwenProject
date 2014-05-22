@@ -101,7 +101,7 @@ public class RouteViewIDWindow extends JFrame {
 				String[] textArray = text.split("\\s");
 				text = textArray[0];
 				updateCurrent(text);
-				textField.setText("Selected Route ID = "+currentRoute.ID+" Priority: "+currentRoute.priority);
+				textField.setText("Selected Route ID = "+currentRoute.ID+" Priority: "+ currentRoute.priority );
 				}
 			}
 		});
@@ -159,7 +159,7 @@ public class RouteViewIDWindow extends JFrame {
 		this.TC.cmbFrom.setSelectedIndex(TC.getDistributionCenIndex(currentRoute.origin));
 		this.TC.cmbTo.setSelectedIndex(TC.getDestinationIndex(currentRoute.destination));
 		this.TC.cmbCompany.setSelectedIndex(TC.getCompanyIndex(currentRoute.companyName ));
-		this.TC.cmbType.setSelectedIndex(currentRoute.priority-1);
+		this.TC.cmbType.setSelectedIndex(currentRoute.priority);
 		this.TC.cmbDay.setSelectedItem(currentRoute.day);
 		this.TC.txtCostId.setText(Integer.toString(currentRoute.ID));
 		this.TC.txtDuration.setText(Double.toString(currentRoute.duration));
