@@ -157,6 +157,8 @@ public class RouteListClass implements Cloneable{
 			if(r.priority == this.PendingMailToSend.priority &&this.swapped == false && r.origin.equals(finalDestList.get(count).getName()) && r.destination.equals(finalDestList.get(count+1).getName())){makeAChain.add(r); before = r;}
 			if(r.priority == this.PendingMailToSend.priority && r.origin.equals(finalDestList.get(count+1).getName()) && r.destination.equals(finalDestList.get(count).getName())){makeAChain.add(r); before = r; System.out.println("X");}
 		}
+		before = null;
+		count++;
 		}
 		if(makeAChain.size() == 0){
 			count = 0;
