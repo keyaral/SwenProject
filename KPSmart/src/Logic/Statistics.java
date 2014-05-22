@@ -62,6 +62,7 @@ public class Statistics implements Cloneable{
 
 	public List<String[]> getMailAmounts() {
 		if (mails.isEmpty()) return null;
+
 		List<String[]> amounts = new ArrayList<String[]>();
 		for (Mail mail: mails) {
 			if (amounts.isEmpty()) {
@@ -132,11 +133,7 @@ public class Statistics implements Cloneable{
 	}
 
 	public List<String[]> getCriticalRoutes() {
-		double total = 0;
-		for (Mail mail: mails) {
-			total += mail.cost;
-		}
-		double average = total/mails.size();
+		if(costs.costs.isEmpty()) return null;
 		ArrayList<Cost> costs = new ArrayList<Cost>(this.costs.costs.values());
 		HashMap<Route,Double> criticalRoutes = routes.findCriticalRoutes(costs);
 		List<String[]> finalRoutes = new ArrayList<String[]>();

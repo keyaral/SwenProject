@@ -310,7 +310,7 @@ switch (type) {
 		System.out.print(" 3 cost  change ");
 
 			if ( details.length < 4  ){
-				if (tempCost == null){ System.out.print( " no temp"); }
+				if (tempCost == null){}
 				c = tempCost; }
 
 			else  c = new Cost(details);
@@ -349,7 +349,7 @@ switch (type) {
 			Cost c;
 		
 			if ( details.length < 4 ){
-				if (tempCost == null){ System.out.print( " no temp"); }
+				if (tempCost == null){}
 				c = tempCost; }
 
 			else c = new Cost(details);
@@ -414,7 +414,7 @@ switch (type) {
 		private String discontineRoute(String[] details) throws CloneNotSupportedException {
 			Route r;
 			if (details.length < 4){
-				if (tempRoute == null){ System.out.print( " no temp"); }
+				if (tempRoute == null){}
 				r = tempRoute; 
 				
 				 System.out.print( " no routes error"+ routes.routes.size() );
@@ -452,7 +452,7 @@ switch (type) {
 			
 			System.out.print(" 3 Route  change ");
 			if (details.length < 4){
-				if (tempRoute == null){ System.out.print( " no temp"); }
+				if (tempRoute == null){}
 				r = tempRoute; }
 			else r = new Route(details);
 
@@ -484,14 +484,13 @@ switch (type) {
 		private String addRoute(String[] details) throws CloneNotSupportedException {
 			Route r;
 			
-			System.out.print(" 3 Route add  ");
 			if (details.length < 4){
-				if (tempRoute == null){ System.out.print( " no temp"); }
+				if (tempRoute == null){}
 				r = tempRoute; }
 			else r = new Route(details);
 
 			if ( DomesticPriorityFailure(r.destination, r.origin, r.priority) )
-				return "Invalid Destination Orgin Priority Match ";
+				return "Invalid Destination Orgin Priority Match";
 
 			mailList.assignDestinations(r);
 			Boolean success = routes.addRoute(r);
@@ -501,7 +500,7 @@ switch (type) {
 				//log add route
 				Log.Route route = new Log.Route();
 				LogRoute(route,r);
-				return "Route: " + r.ID + " was successfully added ";
+				return "Route: " + r.ID + " was successfully added";
 			}
 
 			else { return error(details, "Route was not added - it already exists"); }
