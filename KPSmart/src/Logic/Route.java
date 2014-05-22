@@ -86,7 +86,7 @@ public class Route implements Cloneable{
 	}
 
 	public Boolean isCritical( Cost c){
-		if(this.costVolume*this.costWeight > (c.volume*c.weight) ) return true;
+		if(this.costVolume*this.costWeight < (c.volume*c.weight) ) return true;
 		else return false;
 	}
 	
