@@ -93,6 +93,7 @@ public class RouteListClass implements Cloneable{
 		double costToHere = 0;
 		
 		while(fringe.size() > 0 && Found == false){
+			System.out.println("Searching");
 			QueueObject current = fringe.remove();
 			if(current.destination.visited == false){
 				current.destination.visited = true;
@@ -166,9 +167,8 @@ public class RouteListClass implements Cloneable{
 				if(this.swapped == false && r.origin.equals(finalDestList.get(count).getName()) && r.destination.equals(finalDestList.get(count+1).getName())){makeAChain.add(r); before = r;}
 				if(r.origin.equals(finalDestList.get(count+1).getName()) && r.destination.equals(finalDestList.get(count).getName())){makeAChain.add(r); before = r; System.out.println("X");}
 			}
-		}
 		before = null;
-		count++;
+		count++;}
 		}
 		
 		return new RouteChain(makeAChain,makeAChain.get(makeAChain.size()-1).destinationD,makeAChain.get(0).origin);
