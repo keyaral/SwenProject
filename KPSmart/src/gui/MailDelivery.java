@@ -28,7 +28,14 @@ import javax.swing.JTextField;
 
 import Logic.Logic;
 
-
+/**
+ * This window enables user to send mail from one location to another by
+ * entering in the fields for the volume, weight, date and id and selecting
+ * the origin, destination, priority and day.
+ * 
+ * @author Busy Bees
+ *
+ */
 public class MailDelivery extends JInternalFrame {
 	
 	private static final long serialVersionUID = 1L;

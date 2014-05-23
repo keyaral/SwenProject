@@ -15,6 +15,11 @@ import Log.reader.*;
 import Log.Log;
 import Log.writer.*;
 
+/**
+ * 
+ * @author Busy Bees
+ *
+ */
 public class ManagerWindow extends JInternalFrame {
 
 	/**

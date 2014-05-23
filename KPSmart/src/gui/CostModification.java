@@ -29,6 +29,16 @@ import java.util.Random;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 
+/**
+ * This window allows users to create and modify costs by entering in the
+ * route number, weight cost and volume cost and selecting the priority,
+ * origin and destination. It also displays the list of existing cost which
+ * the user can select to fill in the fields and combo boxes according to
+ * the cost selected for easy modifying.
+ * 
+ * @author Busy Bees
+ *
+ */
 public class CostModification extends JInternalFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -67,6 +77,10 @@ public class CostModification extends JInternalFrame {
 		txtWeightCost.setText(Double.toString(Math.round(number*100)));
 		txtVolumeCost.setText(Double.toString(Math.round(number*50)));
 	}
+	
+	/**
+	 * Create the frame for the cost modifier.
+	 */
 	@SuppressWarnings("rawtypes")
 	public CostModification() {
 		setClosable(true);

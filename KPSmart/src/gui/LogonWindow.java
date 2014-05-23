@@ -19,7 +19,13 @@ import javax.swing.ImageIcon;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
-
+/**
+ * This window capable of identifying users by entering their user name and
+ * password before validating and authenticating them into the system.
+ * 
+ * @author Busy Bees
+ *
+ */
 public class LogonWindow extends JFrame {
 	/**
 	 * 

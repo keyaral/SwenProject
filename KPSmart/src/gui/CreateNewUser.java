@@ -13,6 +13,13 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * This window allows users the create and modify users for the system by
+ * entering in the desired user name and password.
+ * 
+ * @author Busy Bees
+ *
+ */
 public class CreateNewUser extends JInternalFrame {
 	/**
 	 * 

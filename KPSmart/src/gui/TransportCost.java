@@ -24,6 +24,16 @@ import javax.swing.JTextField;
 
 import Logic.Logic;
 
+/**
+ * This windows allows users to create, modify and remove routes by
+ * entering in the frequency, volume cost, weight cost, maximum weight,
+ * maximum volume, duration and id and selecting the company, origin,
+ * destination, type and day.
+ * 
+ * 
+ * @author Busy Bees
+ *
+ */
 public class TransportCost extends JInternalFrame {
 
 	/**

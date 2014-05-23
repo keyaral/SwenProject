@@ -19,6 +19,15 @@ import java.awt.Font;
 
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+/**
+ * The main window of the system where users can access other windows via
+ * menu located at the top of the window. The Business Monitor is displayed
+ * on this window as well. For more info on the Business Monitor, see the
+ * BusinessMonitoring class.
+ * 
+ * @author Busy Bees
+ *
+ */
 public class MainWindow extends JFrame{
 
 	/**
@@ -44,6 +53,9 @@ public class MainWindow extends JFrame{
 	public static final Logic logic = new Logic();
 	 private final Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
 	 
+	 /**
+	  * Create the frame of the main window.
+	  */
 	public MainWindow() {
 		super("KPSmart");
 		this.setExtendedState(MAXIMIZED_BOTH);
