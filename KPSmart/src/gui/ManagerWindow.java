@@ -16,7 +16,9 @@ import Log.Log;
 import Log.writer.*;
 
 /**
+ * This window handles log for different types of users
  * 
+ * Clerk and Manager
  * @author Busy Bees
  *
  */
