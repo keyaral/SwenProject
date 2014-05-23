@@ -139,6 +139,8 @@ public class Statistics implements Cloneable{
 		ArrayList<Cost> costs = new ArrayList<Cost>(this.costs.costs.values());
 		HashMap<Route,Double> criticalRoutes = routes.findCriticalRoutes(costs);
 		List<String[]> finalRoutes = new ArrayList<String[]>();
+		String[] initial = new String[] {"Critical" , "Route", "Search"};
+		finalRoutes.add(initial);
 		for (Route cr: criticalRoutes.keySet()) {
 			finalRoutes.add(new String[] {cr.destination, cr.origin, String.valueOf(cr.priority)});
 
