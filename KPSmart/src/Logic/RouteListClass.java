@@ -92,15 +92,21 @@ public class RouteListClass implements Cloneable{
 		
 		while(fringe.size() > 0 && Found == false){
 			QueueObject current = fringe.remove();
+			
 			if(current.destination.visited == false){
 				current.destination.visited = true;
 				costToHere+=current.weight;
 				if(current.destination == goal) {Found = true; return buildFinalPath(current);}
 			    for(Route r : current.destination.routes){
-					if(r.destinationD.visited == false){
+					if(r.destinationD.visited == false && this.swapped == false){
 			    		double costToNeigh = costToHere + r.cost;
 			    		double estTotal = costToNeigh + r.destinationD.GeographicalY-current.destination.GeographicalY;
 			    		fringe.add(new QueueObject(r.destinationD,current,costToNeigh,estTotal));
+			    	}
+					else if(r.originD.visited == false && this.swapped == true){
+			    		double costToNeigh = costToHere + r.cost;
+			    		double estTotal = costToNeigh + r.originD.GeographicalY-current.destination.GeographicalY;
+			    		fringe.add(new QueueObject(r.originD,current,costToNeigh,estTotal));
 			    	}
 			    }
 				
