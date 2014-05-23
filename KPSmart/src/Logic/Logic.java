@@ -4,8 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 
- * @author Marian Clements
+ *  @author BusyBees
  *
  *The logic class is the gateway for GUI commands. 
  *

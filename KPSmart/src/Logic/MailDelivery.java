@@ -5,8 +5,7 @@ import java.util.HashSet;
 
 /**
  * 
- * @author Marian Clements
- * 
+ *  @author BusyBees
  *         Class for handling all the mail objects. It also keeps track of
  *         system statistic like revenue and expenditure.
  * 

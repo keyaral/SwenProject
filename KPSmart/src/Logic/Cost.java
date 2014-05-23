@@ -3,7 +3,7 @@ package Logic;
 
 
 /**
- * 
+ *  @author BusyBees
  * Cost is an object the represents a Cost given by the system on how much to charge customers. 
  * 
  * Destinations are the where the mail is traveling to/from
