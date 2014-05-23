@@ -31,9 +31,14 @@ import Logic.Destination;
 import Logic.Logic;
 import Logic.Route;
 
+/**
+ * This window is capable of displaying a geographical representation of destinations and routes, and 
+ * can also be used to find details of all the current routes in the system.
+ * @author Busy Bees
+ */
 public class RouteViewIDWindow extends JFrame {
 	public HashSet<Route> routes = new HashSet<Route>();
-	public HashMap<Integer,String> selectableRoutes = new HashMap<Integer,String>();
+	public HashMap<Integer,String> selectableRoutes = new HashMap<Integer,String>();	
 	public ArrayList<Destination> destinations = new ArrayList<Destination>();
 	public JTextArea textArea;
 	public int LineNumber;
@@ -41,9 +46,7 @@ public class RouteViewIDWindow extends JFrame {
 	public Route currentRoute = null;
 	public ArrayList<Point> currentPoints = new ArrayList<Point>();
 	public TransportCost TC;
-	/**
-	 * 
-	 */
+ 
 	private static final long serialVersionUID = 715315804648325836L;
 	private JPanel MainPanel;
 	public Canvas canvas;
@@ -115,7 +118,7 @@ public class RouteViewIDWindow extends JFrame {
 		
 		this.canvas = new Canvas(){
 		@Override
-		public void paint(Graphics g){
+		public void paint(Graphics g){	//This function causes the image to refresh and display the appropriate routes.
 			for(Destination d : destinations){
 				if(d.isDomestic())g.setColor(Color.red);	
 				else g.setColor(Color.BLUE); ;
@@ -152,7 +155,7 @@ public class RouteViewIDWindow extends JFrame {
 		}
 		this.canvas.repaint();
 	}
-	//
+	
 	private void fillTransportCost() {
 		if(currentRoute != null){
 		this.TC.cmbFrom.setSelectedIndex(TC.getDistributionCenIndex(currentRoute.origin));
@@ -166,11 +169,10 @@ public class RouteViewIDWindow extends JFrame {
 		this.TC.txtMaxVolume.setText(Double.toString(currentRoute.maxVolume));
 		this.TC.txtMaxWeight.setText(Double.toString(currentRoute.maxWeight));
 		this.TC.txtVolumeCost.setText(Double.toString(currentRoute.costVolume));
-		//this.TC.txtWeightCost_1.setText(Double.toString(currentRoute.costWeight));
 		this.TC.txtWeightCosts.setText(Double.toString(currentRoute.costWeight));	
 		}
 	}
-	//
+	
 	private void populateTextArea(JTextArea textArea) {
 		int count = 0;
 		for(Route r : routes){

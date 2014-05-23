@@ -57,26 +57,6 @@ public class RouteChainTests {
 	}
 	
 	@Test
-	public void isCriticalTest(){
-		Route r1 = new Route(1, "des1", "origin1", 1.0, 2.0, 3.0, 4.0, 1, "today", 1.0, 1.0, "TestCompany1");
-		Route r2 = new Route(2, "des2", "origin2", 1.0, 2.0, 3.0, 4.0, 1, "today", 1.0, 1.0, "TestCompany2");
-		Route r3 = new Route(3, "des3", "origin3", 1.0, 2.0, 3.0, 4.0, 1, "today", 1.0, 1.0, "TestCompany3");
-		
-		routes.add(r1);
-		routes.add(r2);
-		routes.add(r3);
-		
-		Destination d = new Destination("Dest1", 1.0,
-				2.0, 3.0,4.0);
-		
-		RouteChain rc = new RouteChain(routes, d, "origin");
-		
-		Logic.Mail mail = new Logic.Mail(1, "Auck", "Welly", 2.0, 1.0, 1, new Date(2014,05,20),13.0);
-		
-		rc.isCritical(mail);
-	}
-	
-	@Test
 	public void gettotaldurationTest(){
 		Route r1 = new Route(1, "des1", "origin1", 1.0, 2.0, 3.0, 4.0, 1, "today", 1.0, 1.0, "TestCompany1");
 		Route r2 = new Route(2, "des2", "origin2", 1.0, 2.0, 3.0, 4.0, 1, "today", 1.0, 1.0, "TestCompany2");

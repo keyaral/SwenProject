@@ -2,16 +2,26 @@ package Logic;
 
 import java.util.ArrayList;
 
+
+/**
+ * The destination class, used to represent a geographical location/Mail Delivery Destination
+ * @author BusyBees
+ *
+ */
+
 public class Destination {
 
-	private String name;
 
-	private boolean domestic;
 
 	private double domesticVolume = 0.0;
 	private double internationVolume = 0.0;
 	private double domesticWeightS = 0.0;
 	private double internationWeight = 0.0;
+
+private String name;	
+	
+private boolean domestic; 
+
 
 	public ArrayList<Route> routes = new ArrayList<Route>();
 
@@ -71,6 +81,8 @@ public class Destination {
 	public double getInternationWeight() {
 		return internationWeight;
 	}
+
+
 
 	public boolean isDomestic() {
 		return domestic;
