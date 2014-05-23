@@ -57,6 +57,17 @@ public class Cost {
 		this.priority = p;
 	}
 
+	public Cost(RouteChain r) {
+		this.ID = 0;
+		for(Route a:r.routes){
+		this.weight += a.costWeight;
+		this.volume += a.costVolume;
+		}
+		this.destination = r.destination.getName();
+		this.origin = r.origin;
+		this.priority = 1;
+	}
+
 	
 	
 

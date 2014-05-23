@@ -262,15 +262,14 @@ public class EventProcesser {
 			throws CloneNotSupportedException {
 		Mail m;
 
+
 		if (details.length < 4) {
 			if (tempMail == null) {
 				System.out.print(" no temp");
-			}
+				}
 			m = tempMail;
 		}
-
-		else
-			m = new Mail(details);
+		else  m = new Mail(details);
 
 		if (DomesticPriorityFailure(m.destination, m.origin, m.priority))
 			return "Invalid Destination Orgin Priority Match ";
@@ -508,6 +507,10 @@ public class EventProcesser {
 
 	}
 
+	
+	
+	
+	
 	private String addRoute(String[] details) throws CloneNotSupportedException {
 		Route r;
 
