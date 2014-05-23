@@ -5,31 +5,62 @@ import Logic.*;
 
 import java.util.*;
 
+/**
+ * The logic part for the Event Logger and Business Monitor. It updates and
+ * displays events and business figures on the Event Logger and Business
+ * Monitor.
+ * @author BusyBees
+ *
+ */
 public class EventLogManager {
 
 	private int index;
 	private int maxIndex;
 	private EventProcesser eventProcesser;
 
+	/**
+	 * Creates a new Event Log Manager.
+	 */
 	public EventLogManager() {
 		eventProcesser = MainWindow.logic.eventProcessor;
 		index = 0;
 		maxIndex = eventProcesser.getEvents().size()-1;
 	}
 
+	/**
+	 * Get details from the event depending on what index the user is at.
+	 * @return Resulting details of the event
+	 */
 	public String getDetails() {
 		return getDetails(index);
 	}
 	
+	/**
+	 * Get details from the latest event.
+	 * @return Resulting details of the latest event
+	 */
 	public String getLatestDetails() {
 		return getDetails(maxIndex);
 	}
 	
+	/**
+	 * Returns the details of event based on what the type of object
+	 * involved and the event's type.
+	 * 
+	 * @param The specified index of the event
+	 * @return A string of details of the event
+	 */
 	private String getDetails(int index) {
+		// If no events have processed. A message is returned
 		if (eventProcesser.getEvents().isEmpty()) return "No events processed yet.";
+		
+		// Get the event
 		KPEvent e = eventProcesser.getEvents().get(index);
+		
+		// The first line of details shows what index the user is currently at over how many event have been processed so far.
 		String details = "Event " + (index+1) + "/" + (maxIndex+1) + "\n\n";
-
+		
+		// The first part of the event's description is the type of object involved in this event plus it's ID
 		if (e.object instanceof Log.Log.KPEvents.Event.Route) {
 			Log.Log.KPEvents.Event.Route r = (Log.Log.KPEvents.Event.Route)(e.object);
 			details += "Route no. " + r.getId() + " ";
@@ -51,7 +82,8 @@ public class EventLogManager {
 			Mail m = (Mail)(e.object);
 			details += "Mail no. " + m.ID + " ";
 		}
-
+		
+		// The second part is the event action with the object.
 		if (e.type.equals("Add")) {
 			details += "was added.";
 		}
@@ -69,10 +101,20 @@ public class EventLogManager {
 		return details;
 	}
 	
+	/**
+	 * Get statistics from the event depending on what index the user is at.
+	 * @return A string array of stats: {Revenue, Expenditure, Events}
+	 */
 	public String[] getStats() {
 		return getStats(index);
 	}
 	
+	
+	/**
+	 * Get statistics from the latest event.
+	 * @return A string array of stats: {Revenue, Expenditure, Profit,
+	 * 		   Average Time, Average Weight, Average Volume}
+	 */
 	public String[] getLatestStats() {
 		if (eventProcesser.getEvents().isEmpty() || eventProcesser.getEvents().get(maxIndex).statistics.mails.isEmpty())
 			return new String[]{"0","0","0","0","0","0"};
@@ -99,6 +141,12 @@ public class EventLogManager {
 		return stats;
 	}
 	
+	/**
+	 * Get statistics from the event at the specified index
+	 * 
+	 * @param The specified index of the event
+	 * @return A string array: {Revenue, Expenditure, Events}
+	 */
 	private String[] getStats(int index) {
 		if (eventProcesser.getEvents().isEmpty()) {
 			return new String[] {"0","0","0"};
@@ -108,22 +156,40 @@ public class EventLogManager {
 		return stats;
 	}
 	
+	/**
+	 * Sorts the list of amounts by destination. Note that for each list
+	 * of string arrays in the list, the first array is how much mail that
+	 * destination received while the others by origin represent how much
+	 * mail came from that origin. The amount of mail is determined by
+	 * weight, volume and quantity.
+	 * 
+	 * @param The list of amounts to be processed.
+	 * @return Lists of String arrays lists or null if the list is null
+	 */
 	public List<List<String[]>> processMailAmounts(List<String[]> list) {
+		// If the list provided is null, return null.
 		if (list == null) return null;
+		
 		List<List<String[]>> amounts = new ArrayList<List<String[]>>();
+		
+		// Look at each string array in the list
 		for (String[] s: list) {
 			boolean found = false;
 			if (amounts.isEmpty()) {
+				// No processed list of amounts by destination is added yet so add a new list in
 				List<String[]> newList = new ArrayList<String[]>();
-				newList.add(new String[]{s[1],s[2],s[3],s[4]});
-				newList.add(new String[]{s[0],s[2],s[3],s[4]});
+				newList.add(new String[]{s[1],s[2],s[3],s[4]}); // First array
+				newList.add(new String[]{s[0],s[2],s[3],s[4]}); // Other array
 				amounts.add(newList);
 			}
 			else {
 				for (List<String[]> amount: amounts) {
+					// Attempt to find the list where the first array's destination matches the amount's destination
 					if (s[1].equals(amount.get(0)[1])) {
 						found = true;
+						// Add in the array
 						amount.add(new String[]{s[0],s[2],s[3],s[4]});
+						// Update the first array's totals
 						amount.set(0, new String[]{s[1],
 								String.valueOf(Double.parseDouble(s[2])+Double.parseDouble(amount.get(0)[2])),
 								String.valueOf(Double.parseDouble(s[3])+Double.parseDouble(amount.get(0)[3])),
@@ -131,16 +197,25 @@ public class EventLogManager {
 					}
 				}
 				if (!found) {
+					// No list found so add in a new list
 					List<String[]> newList = new ArrayList<String[]>();
-					newList.add(new String[]{s[1],s[2],s[3],s[4]});
-					newList.add(new String[]{s[0],s[2],s[3],s[4]});
+					newList.add(new String[]{s[1],s[2],s[3],s[4]}); // First array
+					newList.add(new String[]{s[0],s[2],s[3],s[4]}); // Other array
 					amounts.add(newList);
 				}
 			}
 		}
 		return amounts;
 	}
-
+	
+	/**
+	 * Processes the list of string arrays into triples. The first 3
+	 * strings of the array will be inside parentheses separated by a comma
+	 * while the rest are separated by a dash.
+	 * 
+	 * @param The list to process
+	 * @return The processed list of Triples
+	 */
 	public List<String> getTriplesList(List<String[]> list) {
 		if (list==null) return null;
 		List<String> processedList = new ArrayList<String>();
@@ -157,35 +232,67 @@ public class EventLogManager {
 		}
 		return processedList;
 	}
-
+	
+	/**
+	 * Returns the event at the current index.
+	 * @return An event
+	 */
 	public KPEvent getEvent() {
 		return eventProcesser.getEvents().get(index);
 	}
-
+	
+	/**
+	 * Increments the current index by 1.
+	 */
 	public void next()  {
 		index++;
 	}
 
+	/**
+	 * Decrements the current index by 1.
+	 */
 	public void previous() {
 		index--;
 	}
-
+	
+	/**
+	 * Checks if the index is at 0.
+	 * @return True if it is at 0. False otherwise.
+	 */
 	public boolean atStart() {
 		return index == 0;
 	}
 	
+	/**
+	 * Checks if no events are processed yet.
+	 * @return True if no events are processed yet. Flase otherwise.
+	 */
 	public boolean hasNoEvents() {
 		return eventProcesser.getEvents().isEmpty();
 	}
-
+	
+	/**
+	 * Check if the index is at the end.
+	 * @return True if the index is at the end. False otherwise
+	 */
 	public boolean atEnd() {
 		return index == maxIndex;
 	}
 	
+	/**
+	 * Updates the event counter.
+	 */
 	public void update() {
 		maxIndex = eventProcesser.getEvents().size()-1;
 	}
-
+	
+	/**
+	 * Sets the current index to the index specified.
+	 * 
+	 * @param The index to go to.
+	 * @throws TransitionError if the index is outside the index boundaries
+	 * 		   which is 1 and the max index.
+	 */
 	public void goTo(int num) throws TransitionError {
 		if (num < 1 || num > maxIndex+1)
 			throw new TransitionError("Target index out of bounds!");
