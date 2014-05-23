@@ -316,8 +316,13 @@ public class EventProcesser {
 	 * 
 	 * Makes a new cost, and then tries to change it.
 	 * 
-	 * If successful a confimtion message is returned, else an error message
+	 * If successful a confirmation message is returned, else an error message
+	 * 
+	 *
+	 * Finally addevent() is called with a new event and the current statistics
 	 */
+
+	
 
 	private String changeCost(String[] details)
 			throws CloneNotSupportedException {
@@ -366,6 +371,8 @@ public class EventProcesser {
 	 * 
 	 * If new Destinations are created by the KpCost, then they are added and it
 	 * is reported
+	 * 
+	 * Finally addevent is called to create a new event and adds current statistics
 	 */
 
 	private String addCost(String[] details) throws CloneNotSupportedException {
@@ -424,12 +431,17 @@ public class EventProcesser {
 	}
 
 	/**
-	 * Method for handling adding Costs events
+	 * Uses either an xml object ( tempRoute ) or creates a route from the given arrayList
 	 * 
-	 * Makes a new cost, and then tries to add it.
+	 * It assigns the correct destination objects and checks the 
+	 * priority is correct.
+	 * Then attempts to call delete.
 	 * 
-	 * If successful a confimtion message is returned, else an error message
-	 */
+	 * If it is not successfull added an error message is returned,
+	 * 
+	 * else add event is called to add the new event and the current system statistics.
+	 * 
+	 * 	 */
 
 	private String discontineRoute(String[] details)
 			throws CloneNotSupportedException {
@@ -469,6 +481,18 @@ public class EventProcesser {
 		return error(details, "Route was not deleted ");
 	}
 
+	/**
+	 * Uses either an xml object ( tempRoute ) or creates a route from the given arrayList
+	 * 
+	 * It then assigns the correct destination objects and attempts to call add.
+	 * 
+	 * If it is not successful added an error message is returned,
+	 * 
+	 * else add event is called to add the new event and the current system statistics.
+	 * 
+	 * 	 */
+	
+	
 	private String changeRoute(String[] details)
 			throws CloneNotSupportedException {
 		Route r;
@@ -507,7 +531,18 @@ public class EventProcesser {
 
 	}
 
-	
+	/**
+	 * Uses either an xml object ( tempRoute ) or creates a route from the given arrayList
+	 * 
+	 * It assigns the correct destination objects and checks the 
+	 * priority is correct.
+	 * Then attempts to call add.
+	 * 
+	 * If it is not successfull added an error message is returned,
+	 * 
+	 * else add event is called to add the new event and the current system statistics.
+	 * 
+	 * 	 */
 	
 	
 	
@@ -561,7 +596,14 @@ public class EventProcesser {
 		writer.InsertRoute(route);
 	}
 
-	
+	/**
+	 * Takes two strings and resolve if their corresponding destination are either domestic
+	 * or international.
+	 * 
+	 * it then checks if the priority given is appropriate. 
+	 * 
+	 * Two domestic destinations must use domestic services.
+	 */
 
 	private boolean DomesticPriorityFailure(String destination, String origin,
 			int priority) {
