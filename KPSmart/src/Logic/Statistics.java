@@ -1,19 +1,34 @@
 package Logic;
 import java.util.*;
 
+/**
+ * Keeps track of all the business figures to see how the system is doing
+ * so far. This is updated each time an event is processed and it is used
+ * in events for referencing the changes when an event is fired.
+ * @author BusyBees
+ * 
+ */
 public class Statistics implements Cloneable{
-
+	
+	
 	private double revenue = 0;
 	private double expenditure = 0;
 	private int events = 0;
 	public final Set<Mail> mails;
 	private RouteListClass routes;
 	private CostListClass costs;
-
+	
+	/**
+	 * Creates a new Statistics object .
+	 */
 	public Statistics() {
 		mails = new HashSet<Mail>();
 	}
-//
+	
+	/**
+	 * Creates a new Statistics object from an existing Statistics object.
+	 * @param The existing Statistics object to be created from
+	 */
 	public Statistics(Statistics s) {
 		revenue = s.revenue;
 		expenditure = s.expenditure;
@@ -28,38 +43,79 @@ public class Statistics implements Cloneable{
 
 	}
 
+	/**
+	 * Returns the revenue.
+	 * @return Revenue
+	 */
 	public double revenue() {
 		return revenue;
 	}
 
+	/**
+	 * Returns the expenditure.
+	 * @return Expenditure
+	 */
 	public double expenditure() {
 		return expenditure;
 	}
-
+	
+	/**
+	 * Returns the number of events that are processed.
+	 * @return Number of events processed
+	 */
 	public int events() {
 		return events;
 	}
-
+	
+	/**
+	 * Sets the revenue to field the new value for the Revenue.
+	 * @param New value for the Revenue
+	 */
 	public void setRevenue(double r) {
 		revenue = r;
  	}
-
+	
+	/**
+	 * Sets the expenditure field to the new value for the expenditure.
+	 * @param New value for the Expenditure
+	 */
 	public void setExpenditure(double e) {
 		expenditure = e;
 	}
-
+	
+	/**
+	 * Increments the number of events processed by 1.
+	 */
 	public void incrementEvents() {
 		events++;
 	}
-
+	
+	/**
+	 * Assigns the given Route List Class(RLC) to the RLC field.
+	 * @param The RLC to be assigned
+	 */
 	public void setRouteList(RouteListClass rlc) {
 		routes = rlc;
 	}
-
+	
+	/**
+	 * Assigns the given Cost List Class(CLC) to the CLC field.
+	 * @param The CLC to be assigned
+	 */
 	public void setCostList(CostListClass clc) {
 		costs = clc;
 	}
-
+	
+	/**
+	 * Returns a list of string arrays that represent how much mail has
+	 * been sent from each origin to each destination by volume, weight
+	 * and quantity. If no mail has been sent, a null object will be
+	 * returned.
+	 * 
+	 * String array: {Origin, Destination, Volume, Weight, Quantity}
+	 * 
+	 * @return A list of string arrays or null if no mail is sent yet
+	 */
 	public List<String[]> getMailAmounts() {
 		if (mails.isEmpty()) return null;
 
@@ -93,7 +149,16 @@ public class Statistics implements Cloneable{
 		}
 		return amounts;
 	}
-
+	
+	/**
+	 * Return a list of string arrays representing the average time taken
+	 * to deliver mail for each type (Priority, Origin, Destination) of
+	 * mail. Should there be mail sent, null will be returned.
+	 * 
+	 * String array: {Priority, Origin, Destination, Average Duration}
+	 * 
+	 * @return A list of string arrays or null if no mail is sent yet
+	 */
 	public List<String[]> getDeliveryTimes() {
 		if (mails.isEmpty()) return null;
 		List<String[]> times = new ArrayList<String[]>();
@@ -131,11 +196,18 @@ public class Statistics implements Cloneable{
 		}
 		return times;
 	}
-
+	
+	/**
+	 * Return a list of string arrays that represent routes by triples
+	 * (Destination, Origin, Priority) which are critical. If there are no
+	 * costs created yet, null will be returned.
+	 * 
+	 * String array: {Destination, Origin, Priority}
+	 * 
+	 * @return A list of string array or null is the list of costs is empty
+	 */
 	public List<String[]> getCriticalRoutes() {
-		
 		if(costs == null) return new ArrayList<String[]>();
-
 		ArrayList<Cost> costs = new ArrayList<Cost>(this.costs.costs.values());
 		HashMap<Route,Double> criticalRoutes = routes.findCriticalRoutes(costs);
 		List<String[]> finalRoutes = new ArrayList<String[]>();
@@ -155,7 +227,11 @@ public class Statistics implements Cloneable{
 	protected Object clone() throws CloneNotSupportedException {
 		return new Statistics(this);
 	}
-
+	
+	/**
+	 * Prints out the statistics's revenue, expenditure and number of
+	 * events.
+	 */
 	public void printAll() {
 		System.out.println ( revenue + " " + expenditure + " " + events);
 
