@@ -30,11 +30,13 @@ public class Statistics implements Cloneable{
 	 * @param The existing Statistics object to be created from
 	 */
 	public Statistics(Statistics s) {
+		// Copy the fields from the object into the new one
 		revenue = s.revenue;
 		expenditure = s.expenditure;
 		events = s.events;
 		mails = s.mails;
 		try {
+			// Clone the Route List and Cost List Objects
 			routes = (RouteListClass) s.routes.clone();
 			costs = (CostListClass) s.costs.clone();
 		} catch (CloneNotSupportedException e) {
@@ -117,18 +119,23 @@ public class Statistics implements Cloneable{
 	 * @return A list of string arrays or null if no mail is sent yet
 	 */
 	public List<String[]> getMailAmounts() {
-		if (mails.isEmpty()) return null;
-
+		if (mails.isEmpty()) // No mail has been sent yet
+			return null;
+		
 		List<String[]> amounts = new ArrayList<String[]>();
-		for (Mail mail: mails) {
+		// Look through each mail
+		for (Mail mail: mails) { 
 			if (amounts.isEmpty()) {
+				// No amounts have been added in the list yet so add a new one in
 				String[] string = {mail.origin, mail.destination, String.valueOf(mail.volume), String.valueOf(mail.weight), "1"};
 				amounts.add(string);
 			}
 			else {
 				boolean found = false;
+				// Attempt to find the amount in the list that matches the mail's origin and destination
 				for (String[] a: amounts) {
 					if (a[0].equals(mail.origin) && a[1].equals(mail.destination)) {
+						// Amount found, add the mail's volume and weight to that amount and increment it's quantity
 						a[2] = String.valueOf(Double.parseDouble(a[2]) + mail.volume);
 
 						a[2] = String.valueOf(Double.parseDouble(a[3]) + mail.weight);
@@ -142,6 +149,7 @@ public class Statistics implements Cloneable{
 					}
 				}
 				if (!found) {
+					// Amount doesn't exist in the list so add a new one in
 					String[] string = {mail.origin, mail.destination, String.valueOf(mail.volume), String.valueOf(mail.weight), "1"};
 					amounts.add(string);
 				}
@@ -160,22 +168,27 @@ public class Statistics implements Cloneable{
 	 * @return A list of string arrays or null if no mail is sent yet
 	 */
 	public List<String[]> getDeliveryTimes() {
-		if (mails.isEmpty()) return null;
+		if (mails.isEmpty()) // No mail has been sent yet
+			return null;
+		// Create lists for the string of triples (destination, origin and priority ) and data pairs (total time, quantity)
 		List<String[]> times = new ArrayList<String[]>();
 		List<double[]> data = new ArrayList<double[]>();
 		for (Mail mail: mails) {
 			boolean found = false;
 			if (times.isEmpty()) {
+				// List of average times is empty, add in a new triple and data pair
 				String[] s = {String.valueOf(mail.priority), mail.origin, mail.destination, ""};
 				double[] d = {mail.time, 1};
 				times.add(s);
 				data.add(d);
 			}
 			else {
+				// Attempt to find the triple that matches the mail's destination, origin and priority
 				for (int i = 0; i < times.size(); i++) {
 					if (mail.origin.equals(times.get(i)[0]) &&
 							mail.destination.equals(times.get(i)[1]) &&
 							mail.priority == Integer.parseInt(times.get(i)[2])) {
+						// Triple found, update the data pair associated with the triple
 						data.get(i)[0] += mail.time;
 						data.get(i)[1]++;
 						found = true;
@@ -183,6 +196,7 @@ public class Statistics implements Cloneable{
 					}
 				}
 				if (!found) {
+					// No triple found, add a new one in and data pair
 					String[] s = {String.valueOf(mail.priority), mail.origin, mail.destination, ""};
 					double[] d = {mail.time, 1};
 					times.add(s);
@@ -191,6 +205,7 @@ public class Statistics implements Cloneable{
 			}
 
 		}
+		// Use the data pairs to find the average delivery time for each triple
 		for (int i = 0; i < times.size(); i++) {
 			times.get(i)[3] = String.valueOf(data.get(i)[0]/data.get(i)[1]);
 		}
