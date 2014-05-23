@@ -22,7 +22,7 @@ import Log.writer.*;
 
 /**
  * 
- * @author Marian Clements
+ * @author BusyBees
  *
  *Class for processing user requests and creating the KPEvent List.
  *

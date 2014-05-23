@@ -4,7 +4,7 @@ import java.util.Date;
 /**
  * 
  * 
- * @author Marian Clements
+ * @author BusyBees
  *
  *
  *Mail class represents a mail event.
