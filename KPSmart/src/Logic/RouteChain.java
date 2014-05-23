@@ -1,7 +1,12 @@
 package Logic;
 import java.util.ArrayList;
 
-
+/**
+ * A chain of routes. This is used to calculate whether or not a route is able to send mail from 
+ * one destination to a remote one via multiple routes.
+ * @author BusyBees
+ *
+ */
 public class RouteChain {
 
 	public String origin;
@@ -28,13 +33,6 @@ public class RouteChain {
 			if(r.priority != m.priority) return false; 
 		}
 		return true;
-	}
-	
-	
-	public Boolean isCritical(Mail m){
-		double cost = calculateCost(m);
-		if(cost >= (m.cost)) return true;
-		else return false;
 	}
 	
 

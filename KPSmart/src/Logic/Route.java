@@ -1,5 +1,10 @@
 package Logic;
-//
+
+/**
+ * A route object that represents a route to deliver mail in the KPS System
+ * @author BusyBees
+ *
+ */
 public class Route implements Cloneable{
 
 	public int ID;
@@ -43,7 +48,11 @@ public class Route implements Cloneable{
 	this.companyName = (values[12]);
 }
 
-
+/**
+ * Checks what type of mail it is.
+ * @param string
+ * @return
+ */
 	private int checkPriority(String string) {
 		
 		// TODO Auto-generated method stub
@@ -85,6 +94,11 @@ public class Route implements Cloneable{
 		}
 	}
 
+	/**
+	 * Establishes whether or not the route is critical depending on whether or not the KPS is losing money
+	 * @param c
+	 * @return
+	 */
 	public Boolean isCritical( Cost c){
 		if(this.costVolume*this.costWeight < (c.volume*c.weight) ) return true;
 		else return false;
