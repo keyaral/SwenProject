@@ -809,6 +809,12 @@ public class TransportCost extends JInternalFrame {
 		cmbCompany.setEnabled(enabled);
 	}
 	
+	/**
+	 * Get the index of the destination.
+	 * 
+	 * @param Name of the destination
+	 * @return The index of the destination
+	 */
 	public int getDestinationIndex(String des){
 		for (int i =0; i < destinations.length; i++) {
 			if ( destinations[i].equals(des)){
@@ -818,6 +824,13 @@ public class TransportCost extends JInternalFrame {
 		 return -1;
 		
 	}
+	
+	/**
+	 * Get the index of the distribution center.
+	 * 
+	 * @param Name of the distribution center
+	 * @return The index of the distribution center
+	 */
 	public int getDistributionCenIndex(String des){
 		for (int i =0; i < distributionCenters.length; i++) {
 			if ( distributionCenters[i].equals(des)){
@@ -828,6 +841,12 @@ public class TransportCost extends JInternalFrame {
 		
 	}
 	
+	/**
+	 * Get the index of the company name.
+	 * 
+	 * @param Name of the company name
+	 * @return The index of the company name
+	 */
 	public int getCompanyIndex(String companyName) {
 		// TODO Auto-generated method stub
 	

@@ -459,6 +459,12 @@ public class CostModification extends JInternalFrame {
 	}
 		 	
 		 	
+		 	/**
+			 * Get the index of the destination.
+			 * 
+			 * @param Name of the destination
+			 * @return The index of the destination
+			 */
 			public int getDestinationIndex(String des){
 				String[] destinations= MainWindow.logic.getDestinations();
 				for (int i =0; i < destinations.length; i++) {
@@ -469,6 +475,13 @@ public class CostModification extends JInternalFrame {
 				 return -1;
 				
 			}
+			
+			/**
+			 * Get the index of the distribution center.
+			 * 
+			 * @param Name of the distribution center
+			 * @return The index of the distribution center
+			 */
 			public int getDistributionCenIndex(String des){
 				String[] distributionCenters = MainWindow.logic.getNZDestinations();
 				for (int i =0; i < distributionCenters.length; i++) {
