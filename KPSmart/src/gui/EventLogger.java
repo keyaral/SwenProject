@@ -16,7 +16,14 @@ import java.awt.Font;
 import Log.event.*;
 import javax.swing.border.BevelBorder;
 
-
+/**
+ * This window displays the details the events that were processed and the
+ * statistics as of this event. It also shows the lists of average delivery
+ * times for each kind of mail, amount of mail delivered to each
+ * destination from each origin and critical routes.
+ * @author Busy Bees
+ *
+ */
 public class EventLogger extends JInternalFrame{
 
 
@@ -39,7 +46,10 @@ public class EventLogger extends JInternalFrame{
 	private JTextField goTo;
 	
 	public final EventLogManager manager = new EventLogManager();
-
+	
+	/**
+	 * Creates the frame
+	 */
 	public EventLogger() {
 		setTitle("Event Log");
 		setIconifiable(true);

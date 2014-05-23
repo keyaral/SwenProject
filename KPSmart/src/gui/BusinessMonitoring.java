@@ -15,6 +15,14 @@ import javax.swing.JTextArea;
 
 import Log.event.EventLogManager;
 
+/**
+ * This window keeps track of the current business figures displayed on the
+ * window as well as displaying the detail of the latest event. When an
+ * event is processed, the business figure will update reflect the changes
+ * as of this event.
+ * @author Busy Bees
+ *
+ */
 public class BusinessMonitoring extends JInternalFrame {
 	/**
 	 * 
@@ -191,6 +199,9 @@ public class BusinessMonitoring extends JInternalFrame {
 
 	}
 	
+	/**
+	 * Updates the Monitor
+	 */
 	public void updateMonitor() {
 		manager.update();
 		textArea.setText(manager.getLatestDetails());
@@ -203,6 +214,11 @@ public class BusinessMonitoring extends JInternalFrame {
 		txtAverageVolume.setText(s[5]);
 	}
 	
+	/**
+	 * Assigns a manager to the Monitor.
+	 * 
+	 * @param The Manager to assigned to
+	 */
 	public void setManager(EventLogManager m) {
 		manager = m;
 	}

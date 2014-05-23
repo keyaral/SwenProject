@@ -9,7 +9,7 @@ import java.util.*;
  * The logic part for the Event Logger and Business Monitor. It updates and
  * displays events and business figures on the Event Logger and Business
  * Monitor.
- * @author BusyBees
+ * @author Busy Bees
  *
  */
 public class EventLogManager {

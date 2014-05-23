@@ -5,7 +5,7 @@ import java.util.*;
  * Keeps track of all the business figures to see how the system is doing
  * so far. This is updated each time an event is processed and it is used
  * in events for referencing the changes when an event is fired.
- * @author BusyBees
+ * @author Busy Bees
  * 
  */
 public class Statistics implements Cloneable{
