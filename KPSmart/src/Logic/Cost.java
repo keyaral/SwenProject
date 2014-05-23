@@ -1,5 +1,19 @@
 package Logic;
 
+
+
+/**
+ * 
+ * Cost is an object the represents a Cost given by the system on how much to charge customers. 
+ * 
+ * Destinations are the where the mail is traveling to/from
+ * Priority is the delivery type
+ * Weight/Volume used to calculate the rate / kg that the customer is charged
+ * 
+ * 
+ * Can keep track of priority using an int - string conversion.
+ *
+ */
 public class Cost {
 
 	public int ID;

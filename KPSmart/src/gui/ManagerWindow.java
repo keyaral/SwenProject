@@ -69,7 +69,7 @@ public class ManagerWindow extends JInternalFrame {
 		JButton btnCreateNewShipment = new JButton("Create New Shipment");
 		btnCreateNewShipment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null,"New Shipment Window !" + MainWindow.logic.getdetails(),null, 1);
+				JOptionPane.showMessageDialog(null,"New Shipment Window !",null, 1);
 				Log.Cost cost = new Log.Cost();
 				XmlReader reader = new XmlReader("file.xml");
 				reader.FindAll();
@@ -83,14 +83,14 @@ public class ManagerWindow extends JInternalFrame {
 		JButton btnCheckExistingShipment = new JButton("Check Existing Shipment");
 		btnCheckExistingShipment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null,"Existing Shipment Window !" + MainWindow.logic.getdetails(),null, 1);
+				JOptionPane.showMessageDialog(null,"Existing Shipment Window !" ,null, 1);
 			}
 		});
 		
 		JButton btnRouteModification = new JButton("Route Modification");
 		btnRouteModification.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null,"Route Modification Window !" + MainWindow.logic.getdetails(),null, 1);
+				JOptionPane.showMessageDialog(null,"Route Modification Window !" ,null, 1);
 			}
 		});
 
@@ -99,7 +99,7 @@ public class ManagerWindow extends JInternalFrame {
 		JButton btnViewEventLog = new JButton("View Event Log");
 		btnViewEventLog.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(null,"Log View Window !" + MainWindow.logic.getdetails(),null, 1);
+				JOptionPane.showMessageDialog(null,"Log View Window !" ,null, 1);
 			}
 		});
 		GroupLayout gl_btnPanel = new GroupLayout(btnPanel);
